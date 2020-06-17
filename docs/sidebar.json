@@ -1,0 +1,8 @@
+{
+  "fastrl": {
+    "Overview": "/",
+    "module name here": "/core",
+    "Data Block": "/data_block",
+    "General Notes": "/notes"
+  }
+}
