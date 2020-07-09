@@ -31,5 +31,6 @@ dependencies:
       - pygifsicle
       - jupyterlab
       - nbdev
-#      - jupyter
+      - jupyter
       - jupyterthemes
+      - fastscore

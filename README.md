@@ -18,12 +18,12 @@ As we have learned how to support as many RL agents as possible, we found that `
 For cpu execution
 ```bash
 docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project fastrl /bin/bash
+docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl /bin/bash
 ```
 
 ```bash
 docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
-docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project fastrl_cuda /bin/bash
+docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl_cuda /bin/bash
 ```
 
 ## Contributing

@@ -4,19 +4,34 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"PixelObservationWrapper": "01_wrappers.ipynb",
          "STATE_KEY": "01_wrappers.ipynb",
-         "AgentLearner": "02_basic_train.ipynb",
-         "fix_s": "04_data_block.ipynb",
-         "Experience": "04_data_block.ipynb",
-         "ExperienceSourceDataset": "04_data_block.ipynb",
-         "FirstLastExperienceSourceDataset": "04_data_block.ipynb",
-         "AsyncExperienceSourceCallback": "04_data_block.ipynb",
-         "grad_fitter": "04_data_block.ipynb",
-         "AsyncGradExperienceSourceDataset": "04_data_block.ipynb",
-         "DatasetDisplayWrapper": "04_data_block.ipynb"}
+         "ActionSelector": "03_basic_agents.ipynb",
+         "ArgmaxActionSelector": "03_basic_agents.ipynb",
+         "EpsilonGreedyActionSelector": "03_basic_agents.ipynb",
+         "ProbabilityActionSelector": "03_basic_agents.ipynb",
+         "default_states_preprocessor": "03_basic_agents.ipynb",
+         "float32_preprocessor": "03_basic_agents.ipynb",
+         "BaseAgent": "03_basic_agents.ipynb",
+         "TestAgent": "03_basic_agents.ipynb",
+         "DQNAgent": "03_basic_agents.ipynb",
+         "fix_s": "05_data_block.ipynb",
+         "Experience": "05_data_block.ipynb",
+         "ExperienceSourceDataset": "05_data_block.ipynb",
+         "FirstLastExperienceSourceDataset": "05_data_block.ipynb",
+         "AsyncExperienceSourceCallback": "05_data_block.ipynb",
+         "AsyncGradExperienceSourceCallback": "05_data_block.ipynb",
+         "AsyncDataExperienceSourceCallback": "05_data_block.ipynb",
+         "grad_fitter": "05_data_block.ipynb",
+         "data_fitter": "05_data_block.ipynb",
+         "AsyncGradExperienceSourceDataset": "05_data_block.ipynb",
+         "AsyncDataExperienceSourceDataset": "05_data_block.ipynb",
+         "DatasetDisplayWrapper": "05_data_block.ipynb",
+         "AgentLearner": "06_basic_train.ipynb"}
 
 modules = ["wrappers.py",
-           "basic_train.py",
-           "data_block.py"]
+           "callbacks.py",
+           "basic_agents.py",
+           "data_block.py",
+           "basic_train.py"]
 
 doc_url = "https://josiahls.github.io/fastrl/"
 

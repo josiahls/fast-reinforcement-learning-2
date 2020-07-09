@@ -28,7 +28,8 @@ RUN echo '# Install Ruby Gems to ~/.gems' >> ~/.bashrc
 RUN echo 'export GEM_HOME="$HOME/.gems"' >> ~/.bashrc
 RUN echo 'export PATH="$HOME/.gems/bin:$PATH"' >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
-RUN gem install jekyll bundler
+RUN gem install jekyll
+RUN gem i bundler -v 2.0.2
 
 RUN chown $CONTAINER_USER /opt/project/
 WORKDIR /opt/project/fastrl/docs
@@ -44,21 +45,23 @@ ENV PATH /opt/conda/envs/fastrl/bin:$PATH
 ENV CONDA_DEFAULT_ENV fastrl
 ENV FONTCONFIG_FILE $CONDA_PREFIX/etc/fonts/fonts.conf
 ENV FONTCONFIG_PATH $CONDA_PREFIX/etc/fonts/
-WORKDIR /opt/project/
+WORKDIR /opt/project/fastrl
 
 USER root
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP fastrl fastrl
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP settings.ini settings.ini
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP README.md README.md
 RUN /bin/bash -c "source activate fastrl && jt -t grade3 -cellw=90% -fs=20 -tfs=20 -ofs=20"
-COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+#COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP entrypoint.sh /usr/local/bin/
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP entrypoint.sh entrypoint.sh
+#RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x entrypoint.sh
 RUN mkdir /home/fastrl/.gem && \
         chown $CONTAINER_USER -R /home/$CONTAINER_USER/.gem && \
         chown $CONTAINER_USER -R /opt/project
 
-WORKDIR /opt/project/
-
+#WORKDIR /opt/project/
+1
 #RUN chown -R $CONTAINER_USER /opt/conda/envs/fastrl && chmod -R 777 /opt/conda/envs/fastrl
 
 RUN apt-get install -y python-opengl

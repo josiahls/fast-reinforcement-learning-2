@@ -8,7 +8,7 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
@@ -42,10 +42,11 @@ RUN echo 'export PATH="$HOME/.gems/bin:$PATH"' >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
 RUN gem install jekyll bundler
 
-RUN chown $CONTAINER_USER /opt/project/
 WORKDIR /opt/project/fastrl/docs
+RUN chown $CONTAINER_USER /opt/project/
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP docs/Gemfile Gemfile
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP docs/Gemfile.lock Gemfile.lock
+RUN gem i bundler -v 2.0.2
 RUN bundle install
 WORKDIR /opt/project/fastrl/
 
@@ -54,4 +55,13 @@ COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP environment.yaml environment.yaml
 RUN conda env create -f environment.yaml
 RUN chown -R $CONTAINER_USER /opt/conda/envs/fastrl/ && chmod -R 777 /opt/conda/envs/fastrl/
 RUN /bin/bash -c "source activate fastrl && conda install -c conda-forge nodejs ptvsd"
+RUN apt-get install -y python-opengl xvfb
+
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
+#RUN chmod +x ./entrypoint.sh
+RUN ["chmod", "+x", "entrypoint.sh"]
+USER $CONTAINER_USER
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["/bin/bash","-c"]
+RUN /bin/bash -c "source activate fastrl && python setup.py develop"
 
