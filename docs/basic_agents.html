@@ -68,7 +68,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActionSelector" class="doc_header"><code>class</code> <code>ActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L21" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionSelector</code>()</p>
+<h2 id="ActionSelector" class="doc_header"><code>class</code> <code>ActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L24" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionSelector</code>()</p>
 </blockquote>
 <p>Abstract class which converts scores to the actions.</p>
 
@@ -93,7 +93,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ArgmaxActionSelector" class="doc_header"><code>class</code> <code>ArgmaxActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ArgmaxActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="ArgmaxActionSelector" class="doc_header"><code>class</code> <code>ArgmaxActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L28" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ArgmaxActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
 <p>Selects actions using argmax.</p>
 
@@ -118,9 +118,9 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7fbdc3e91e10&gt;</code></em>) :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L35" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f14b1c59710&gt;</code></em>) :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
-<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7fbdc3e91e10&gt;)</p>
+<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f14b1c59710&gt;)</p>
 
 </div>
 
@@ -143,7 +143,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ProbabilityActionSelector" class="doc_header"><code>class</code> <code>ProbabilityActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L45" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProbabilityActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="ProbabilityActionSelector" class="doc_header"><code>class</code> <code>ProbabilityActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L48" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProbabilityActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
 <p>Converts probabilities of actions into action by sampling them.</p>
 
@@ -201,7 +201,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="default_states_preprocessor" class="doc_header"><code>default_states_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_states_preprocessor</code>(<strong><code>s</code></strong>, <strong><code>dtype</code></strong>=<em><code>'float32'</code></em>)</p>
+<h4 id="default_states_preprocessor" class="doc_header"><code>default_states_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L56" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_states_preprocessor</code>(<strong><code>s</code></strong>, <strong><code>dtype</code></strong>=<em><code>'float32'</code></em>)</p>
 </blockquote>
 <p>Convert list of states into the form suitable for model. By default we assume Variable.</p>
 
@@ -226,7 +226,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="float32_preprocessor" class="doc_header"><code>float32_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>float32_preprocessor</code>(<strong><code>s</code></strong>)</p>
+<h4 id="float32_preprocessor" class="doc_header"><code>float32_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>float32_preprocessor</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -257,7 +257,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L64" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>)</p>
+<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>BaseAgent(model: torch.nn.modules.module.Module = None)</p>
 
@@ -282,7 +282,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L75" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L78" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>TestAgent(model: torch.nn.modules.module.Module = None, env: object = None)</p>
 
@@ -357,7 +357,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAGu0lEQVR4nO3dwY3TUBRAUYKmCeoIZVCHXZNdB2WQOigjLEYKowAhUuD/wD1nFdlS9DbW1fuKnMP5fH4HAFXvZw8AADMJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghA2svsAaDotK+vH47LNncSQAhhpksR31JHGMnRKABpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhDCaKd9nT0C8J0QwnM5LtvsEaBFCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhhKFO+3rj7nHZhk0CvBJCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQhhnNO+3rh7XLZhkwAXQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQgiDnPb1xt3jsg2bBHhLCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhhBFO+3rj7nHZhk0CXBFCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IYR7HR4w65uB3xJCANKEEIC0l9kDQMjnr8vVlU8f9imTABc2Qhjkxwr+6iIwkhDCCIIHT0sIAUgTQpjMsghzCSFM5vcyMJcQwl/3ZbPzwfMSQhjhxtr3cbURwkxCCIP8tIXORWG6w/l8nj0D/Bv+1Is9r05KH9wIPcLwICGEez3nG649wvAgR6MAAABVjkbhXo5G4b/kaBSANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANP8+AUCajRCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDSvgHRJEWJg5nSNwAAAABJRU5ErkJggg==
 "
 >
 </div>
@@ -388,7 +388,32 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L84" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7fbd59649d50&gt;</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="DiscreteAgent" class="doc_header"><code>class</code> <code>DiscreteAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L87" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DiscreteAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
+</blockquote>
+<p>DQNAgent is a memoryless DQN agent which calculates Q values from the observations and  converts them into the actions using a_selector.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L112" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#DiscreteAgent"><code>DiscreteAgent</code></a></p>
 </blockquote>
 <p>DQNAgent is a memoryless DQN agent which calculates Q values from the observations and  converts them into the actions using a_selector.</p>
 
@@ -410,7 +435,8 @@ description: "Methods of exploratively selecting actions based on a model state 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_docs</span><span class="p">(</span><span class="n">DQNAgent</span><span class="p">,</span><span class="fm">__call__</span><span class="o">=</span><span class="s1">&#39;DQNAgents will likely never have `asl` passed and used. This is however here for novel DQN implimentations.&#39;</span><span class="p">,</span>
-         <span class="n">safe_unbatch</span><span class="o">=</span><span class="s1">&#39;Will remove the batch dim from `o` if `o` represents a single item.&#39;</span><span class="p">)</span>
+         <span class="n">safe_unbatch</span><span class="o">=</span><span class="s1">&#39;Will remove the batch dim from `o` if `o` represents a single item.&#39;</span><span class="p">,</span>
+         <span class="n">split_v</span><span class="o">=</span><span class="s1">&#39;In the event that `v` is a tuple, then there is multle ouputs from the `model`. Primarly used for A2C.&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -455,13 +481,57 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAGmElEQVR4nO3d22njUBRA0fGQJlKHU8bUIdck15Ey4jqmDOUjkIQ8TECJrsJe68tIYM6P2NyDsA/LsvwBgKq/owcAgJGEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQg7Wb0AFB3OZ+ePx+neeAk0CSEsCOvo/hEGuGnWY0CkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQggjXc6nK3eP07zZJJAlhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhDDM5Xy6cvc4zZtNAmVCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoSwymGFUd8MvCaEAKQJIQBpN6MHgLr7/9ObK/9uz0MmgSYnQhjpfQU/uwj8ECGEYQQP9kAIAUgTQtgjh0XYjBDCHnlfBjYjhACkCSGM8TBPV459dycnQtiIEMJIH7bQXhS2dFiWZfQM8It94w97PswvL8isPBF6ruHrhBBW2ecvXHuu4eusRgEAAKqsRmEVq1H47axGAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUjz7xMApDkRApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQNojhtY8iW9+cLYAAAAASUVORK5CYII=
 "
 >
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TargetNet</span><span class="p">:</span>
+    <span class="s2">&quot;Wrapper around model which provides copy of it instead of trained weights.&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sync</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="bp">self</span><span class="o">.</span><span class="n">target_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">alpha_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+        <span class="s2">&quot;Blend params of target net with params from the model.&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="mf">0.0</span><span class="o">&lt;</span><span class="n">alpha</span><span class="o">&lt;=</span><span class="mf">1.0</span>
+        <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+        <span class="n">tgt_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">tgt_state</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">tgt_state</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">alpha</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">tgt_state</span><span class="p">)</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">PolicyAgent</span><span class="p">(</span><span class="n">DiscreteAgent</span><span class="p">):</span>
+    <span class="s2">&quot;Policy agent gets action probabilities from the model and samples actions from it.&quot;</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a_selector</span><span class="o">=</span><span class="n">ifnone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a_selector</span><span class="p">,</span><span class="n">ProbabilityActionSelector</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply_softmax</span><span class="o">=</span><span class="kc">True</span>
+
+<span class="k">class</span> <span class="nc">ActorCriticAgent</span><span class="p">(</span><span class="n">PolicyAgent</span><span class="p">):</span>
+    <span class="s2">&quot;Policy agent which returns policy and value tensors from observations. Value are stored in agent&#39;s state </span><span class="se">\</span>
+<span class="s2">     and could be reused for rollouts calculations by ExperienceSource.&quot;</span>
+    <span class="k">def</span> <span class="nf">split_v</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">asl</span><span class="p">):</span><span class="k">return</span> <span class="n">v</span><span class="p">,</span><span class="n">v</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
