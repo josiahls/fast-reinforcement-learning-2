@@ -4,7 +4,8 @@ __all__ = ['fix_s', 'Experience', 'ExperienceSourceCallback', 'ExperienceSourceD
            'FirstLastExperienceSourceDataset', 'AsyncExperienceSourceCallback', 'AsyncGradExperienceSourceCallback',
            'AsyncDataExperienceSourceCallback', 'safe_fit', 'grad_fitter', 'data_fitter',
            'AsyncGradExperienceSourceDataset', 'AsyncDataExperienceSourceDataset', 'DatasetDisplayWrapper',
-           'ExperienceSourceDataBunch', 'AsyncExperienceSourceDataBunch']
+           'ExperienceSourceDataBunch', 'AsyncExperienceSourceDataBunch', 'dqn_fitter', 'dqn_grad_fitter',
+           'buggy_dqn_fitter']
 
 # Cell
 from fastai.basic_data import *
@@ -156,8 +157,9 @@ class AsyncExperienceSourceCallback(LearnerCallback):
         for ds in [self.learn.data.train_ds,None if self.learn.data.empty_val else self.learn.data.valid_ds]:
             if ds is None: continue
             ds.cancel_event.set()
-            self.empty_queues()
-            for proc in ds.data_proc_list: proc.join()
+            for _ in range(5):
+                self.empty_queues()
+            for proc in ds.data_proc_list: proc.join(timeout=5)
 
 class AsyncGradExperienceSourceCallback(AsyncExperienceSourceCallback):
     def load_process(self):
@@ -196,28 +198,35 @@ def safe_fit(f):
             return None
     return wrap
 
+@safe_fit
 def grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_queue:mp.JoinableQueue,
                 loss_queue:mp.JoinableQueue,pause_event:mp.Event,cancel_event:mp.Event):
     "Updates a `train_queue` with `model.parameters()` and `loss_queue` with the loss. Note that this is only an example grad_fitter."
     while not cancel_event.is_set(): # We are expecting the  grad_fitter to loop unless cancel_event is set
+        cancel_event.wait(0.1)
         grad_queue.put(None)         # Adding `None` to `train_queue` will trigger an eventual ending of training
         loss_queue.put(None)
         if pause_event.is_set():     # There needs to be the ability for the grad_fitter to pause e.g. if waiting for validation to end.
             cancel_event.wait(0.1)   # Using cancel_event to wait allows the main process to end this Process.
+        break
 
+@safe_fit
 def data_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
                 pause_event:mp.Event,cancel_event:mp.Event):
     _logger.warning('Using the `test_fitter` function. Make sure your `AgentLearner` has a `grad_fitter` to actually run/train.')
     while not cancel_event.is_set(): # We are expecting the  grad_fitter to loop unless cancel_event is set
+        cancel_event.wait(0.1)
         data_queue.put(None)         # Adding `None` to `train_queue` will trigger an eventual ending of training
         if pause_event.is_set():     # There needs to be the ability for the grad_fitter to pause e.g. if waiting for validation to end.
             cancel_event.wait(0.1)   # Using cancel_event to wait allows the main process to end this Process.
+        break
 
 def _soft_queue_get(q:mp.Queue,e:mp.Event):
     entry=None
-    while entry is None and not e.is_set():
+    while not e.is_set():
         try:
             entry=q.get_nowait()
+            break
         except Empty:pass
     return entry
 
@@ -326,15 +335,15 @@ class ExperienceSourceDataBunch(DataBunch):
     @classmethod
     def from_env(cls,env:str,n_envs=1,firstlast=False,display=False,max_steps=None,skip_step=1,path:PathOrStr='.',add_valid=True,
                  cols=1,rows=1,max_w=800):
-        def create_ds():
+        def create_ds(make_empty=False):
             _ds_cls=FirstLastExperienceSourceDataset if firstlast else ExperienceSourceDataset
             make_env = lambda: gym.make(env)
             envs=[make_env() for _ in range(n_envs)]
-            _ds=_ds_cls(envs,max_episode_step=max_steps,steps=skip_step)
+            _ds=_ds_cls(envs,max_episode_step=0 if make_empty else max_steps,steps=skip_step)
             if display:_ds=DatasetDisplayWrapper(_ds,cols=cols,rows=rows,max_w=max_w)
             return _ds
 
-        dss=(create_ds(),create_ds() if add_valid else None)
+        dss=(create_ds(),create_ds(not add_valid))
         return cls.create(*dss,bs=n_envs,num_workers=0)
 
     @classmethod
@@ -353,13 +362,50 @@ class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
     @classmethod
     def from_env(cls,env:str,n_envs=1,data_exp=True,firstlast=False,display=False,max_steps=None,skip_step=1,path:PathOrStr='.',add_valid=True,
                  cols=1,rows=1,max_w=800,n_processes=1):
-        def create_ds():
+        def create_ds(make_empty=False):
             _sub_ds_cls=FirstLastExperienceSourceDataset if firstlast else ExperienceSourceDataset
-            _sub_ds_cls=partial(_sub_ds_cls,env=env,n_envs=1,max_episode_step=max_steps,steps=skip_step)
+            _sub_ds_cls=partial(_sub_ds_cls,env=env,n_envs=1,max_episode_step=0 if make_empty else max_steps,steps=skip_step)
             _ds_cls=AsyncDataExperienceSourceDataset if data_exp else AsyncGradExperienceSourceDataset
-            _ds=_ds_cls(env,max_episode_step=max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes)
+            _ds=_ds_cls(env,max_episode_step=0 if make_empty else max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes)
             if display:_ds=DatasetDisplayWrapper(_ds,cols=cols,rows=rows,max_w=max_w)
             return _ds
 
-        dss=(create_ds(),create_ds() if add_valid else None)
-        return cls.create(*dss,bs=n_envs,num_workers=0)
+#         dss=(create_ds(),create_ds() if add_valid else None)
+        return cls.create(create_ds(),create_ds(not add_valid),bs=n_envs,num_workers=0)
+
+# Cell
+@safe_fit
+def dqn_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
+                pause_event:mp.Event,cancel_event:mp.Event):
+    dataset=ds()
+    while not cancel_event.is_set():
+        for xb,yb in dataset:
+            data_queue.put(yb)
+            if pause_event.is_set():cancel_event.wait(0.1)
+            if cancel_event.is_set():break
+        if cancel_event.is_set():break
+
+@safe_fit
+def dqn_grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_queue:mp.JoinableQueue,loss_queue:mp.JoinableQueue,
+                    pause_event:mp.Event,cancel_event:mp.Event):
+    dataset=ds()
+    while not cancel_event.is_set():
+        for xb,yb in dataset:
+            sys.stdout.flush()
+            grad_queue.put(xb)
+            loss_queue.put(0.5)
+            if pause_event.is_set():cancel_event.wait(0.1)
+            if cancel_event.is_set():break
+        if cancel_event.is_set():break
+
+@safe_fit
+def buggy_dqn_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
+                pause_event:mp.Event,cancel_event:mp.Event):
+    dataset=ds()
+    while not cancel_event.is_set():
+        for xb,yb in dataset:
+            data_queue.put(yb)
+            if pause_event.is_set():cancel_event.wait(0.1)
+            if cancel_event.is_set():break
+            raise Exception('Crashing on purpose')
+        if cancel_event.is_set():break
