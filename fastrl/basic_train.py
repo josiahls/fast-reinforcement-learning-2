@@ -22,7 +22,8 @@ class FloatifyCallback(LearnerCallback):
 class FakeRunCallback(LearnerCallback):
     def on_backward_begin(self,*args,**kwargs): return {'skip_bwd':True,'skip_validate':True}
 
-def fake_loss(xb,yb): return tensor(0.5)
+def fake_loss(xb,yb):
+    return tensor(0.5)
 
 # Cell
 @dataclass

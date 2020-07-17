@@ -2,9 +2,9 @@
 
 __all__ = ['fix_s', 'Experience', 'ExperienceSourceCallback', 'ExperienceSourceDataset',
            'FirstLastExperienceSourceDataset', 'AsyncExperienceSourceCallback', 'AsyncGradExperienceSourceCallback',
-           'AsyncDataExperienceSourceCallback', 'grad_fitter', 'data_fitter', 'AsyncGradExperienceSourceDataset',
-           'AsyncDataExperienceSourceDataset', 'DatasetDisplayWrapper', 'ExperienceSourceDataBunch',
-           'AsyncExperienceSourceDataBunch']
+           'AsyncDataExperienceSourceCallback', 'safe_fit', 'grad_fitter', 'data_fitter',
+           'AsyncGradExperienceSourceDataset', 'AsyncDataExperienceSourceDataset', 'DatasetDisplayWrapper',
+           'ExperienceSourceDataBunch', 'AsyncExperienceSourceDataBunch']
 
 # Cell
 from fastai.basic_data import *
@@ -58,8 +58,14 @@ class ExperienceSourceCallback(LearnerCallback):
 
 class ExperienceSourceDataset(Dataset):
     "Similar to fastai's `LabelList`, iters in-order samples from `1->len(envs)` `envs`."
-    def __init__(self,envs,steps=1,max_episode_step=None):
-        self.envs=listify(envs)
+    def __init__(self,env:str,n_envs=1,steps=1,max_episode_step=None,pixels=False):
+        def make_env():
+            env=gym.make("CartPole-v1")
+            if pixels:env.reset()
+            return env
+
+        self.envs=[make_env() for _ in range(n_envs)]
+        if pixels:self.envs=[PixelObservationWrapper(e) for e in self.envs]
         self.steps=steps
         self.max_episode_step=max_episode_step
         self.d=np.zeros((len(self.envs),))+1
@@ -132,6 +138,7 @@ class AsyncExperienceSourceCallback(LearnerCallback):
                 _logger.warning('Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.')
 
             for proc_idx in range(ds.n_processes):
+                _logger.info('Starting Process')
                 data_proc=self.load_process()
                 data_proc.start()
                 ds.data_proc_list.append(data_proc)
@@ -157,8 +164,8 @@ class AsyncGradExperienceSourceCallback(AsyncExperienceSourceCallback):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
         return mp.Process(target=getattr(self.learn,'fitter',grad_fitter),
-                          args=(self.learn.model,self.learn.agent,ds.ds_cls,
-                                ds.grad_queue,ds.loss_queue,ds.pause_event,ds.cancel_event))
+                          args=(self.learn.model,self.learn.agent,ds.ds_cls),
+                          kwargs={'grad_queue':ds.grad_queue,'loss_queue':ds.loss_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event})
     def empty_queues(self):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
@@ -170,14 +177,25 @@ class AsyncDataExperienceSourceCallback(AsyncExperienceSourceCallback):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
         return mp.Process(target=getattr(self.learn,'fitter',data_fitter),
-                          args=(self.learn.model,self.learn.agent,ds.ds_cls,
-                                ds.data_queue,ds.pause_event,ds.cancel_event))
+                          args=(self.learn.model,self.learn.agent,ds.ds_cls),
+                          kwargs={'data_queue':ds.data_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event})
     def empty_queues(self):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
         while not ds.data_queue.empty():ds.data_queue.get()
 
 # Cell
+def safe_fit(f):
+    def wrap(*args,cancel_event,**kwargs):
+        try:
+            return f(*args,cancel_event=cancel_event,**kwargs)
+        finally:
+            cancel_event.set()
+            for k,v in kwargs.items():
+                if k.__contains__('queue'):v.put(None)
+            return None
+    return wrap
+
 def grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_queue:mp.JoinableQueue,
                 loss_queue:mp.JoinableQueue,pause_event:mp.Event,cancel_event:mp.Event):
     "Updates a `train_queue` with `model.parameters()` and `loss_queue` with the loss. Note that this is only an example grad_fitter."
@@ -197,7 +215,7 @@ def data_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_
 
 def _soft_queue_get(q:mp.Queue,e:mp.Event):
     entry=None
-    while entry is None and e.is_set():
+    while entry is None and not e.is_set():
         try:
             entry=q.get_nowait()
         except Empty:pass
@@ -249,7 +267,6 @@ class AsyncDataExperienceSourceDataset(ExperienceSourceDataset):
 
     def __len__(self): return ifnone(self.max_episode_step,self._env.spec.max_episode_steps)*self.n_envs
 
-
     def __getitem__(self,idx):
         if len(self.data_proc_list)==0: raise StopIteration()
         train_entry=_soft_queue_get(self.data_queue,self.cancel_event)
@@ -257,7 +274,7 @@ class AsyncDataExperienceSourceDataset(ExperienceSourceDataset):
         if train_entry is None:
             raise StopIteration()
 
-        return [s for s in train_entry.s],[asdict(e) for e in train_loss_entry]
+        return [e['s'] for e in train_entry],train_entry
 
 # Cell
 if IN_NOTEBOOK:
@@ -335,12 +352,12 @@ class ExperienceSourceDataBunch(DataBunch):
 class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
     @classmethod
     def from_env(cls,env:str,n_envs=1,data_exp=True,firstlast=False,display=False,max_steps=None,skip_step=1,path:PathOrStr='.',add_valid=True,
-                 cols=1,rows=1,max_w=800):
+                 cols=1,rows=1,max_w=800,n_processes=1):
         def create_ds():
             _sub_ds_cls=FirstLastExperienceSourceDataset if firstlast else ExperienceSourceDataset
-            _sub_ds_cls=partial(_sub_ds_cls,n_envs=1,firstlast=firstlast,max_steps=max_steps,skip_step=skip_step)
+            _sub_ds_cls=partial(_sub_ds_cls,env=env,n_envs=1,max_episode_step=max_steps,steps=skip_step)
             _ds_cls=AsyncDataExperienceSourceDataset if data_exp else AsyncGradExperienceSourceDataset
-            _ds=_ds_cls(env,max_episode_step=max_steps,steps=skip_step,ds_cls=_sub_ds_cls)
+            _ds=_ds_cls(env,max_episode_step=max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes)
             if display:_ds=DatasetDisplayWrapper(_ds,cols=cols,rows=rows,max_w=max_w)
             return _ds
 
