@@ -70,7 +70,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_s" class="doc_header"><code>fix_s</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_s</code>(<strong><code>x</code></strong>)</p>
+<h4 id="fix_s" class="doc_header"><code>fix_s</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_s</code>(<strong><code>x</code></strong>)</p>
 </blockquote>
 <p>Flatten <code>x</code> to <code>(1,-1)</code> where <code>1</code> is the batch dim (B) unless <strong>seems</strong> to be an image e.g. has 3 dims (W,H,C), then it will attempt (B,W,H,C).</p>
 
@@ -95,7 +95,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Experience" class="doc_header"><code>class</code> <code>Experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Experience</code>(<strong><code>s</code></strong>:<code>array</code>, <strong><code>sp</code></strong>:<code>array</code>, <strong><code>a</code></strong>:<code>array</code>, <strong><code>r</code></strong>:<code>array</code>, <strong><code>d</code></strong>:<code>array</code>, <strong><code>agent_s</code></strong>:<code>array</code>)</p>
+<h2 id="Experience" class="doc_header"><code>class</code> <code>Experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L41" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Experience</code>(<strong><code>s</code></strong>:<code>array</code>, <strong><code>sp</code></strong>:<code>array</code>, <strong><code>a</code></strong>:<code>array</code>, <strong><code>r</code></strong>:<code>array</code>, <strong><code>d</code></strong>:<code>array</code>, <strong><code>agent_s</code></strong>:<code>array</code>)</p>
 </blockquote>
 <p>Experience(s: <built-in function array>, sp: <built-in function array>, a: <built-in function array>, r: <built-in function array>, d: <built-in function array>, agent_s: <built-in function array>)</p>
 
@@ -137,24 +137,24 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;s&#39;: array([[2, 2, 2, 1, 1],
-        [2, 1, 1, 2, 1],
-        [1, 1, 2, 1, 1],
+<pre>{&#39;s&#39;: array([[1, 1, 2, 1, 2],
         [2, 1, 1, 1, 1],
-        [1, 2, 1, 1, 1]]),
- &#39;sp&#39;: array([[2, 2, 1, 2, 1],
-        [2, 2, 2, 1, 2],
-        [1, 2, 1, 1, 1],
-        [1, 2, 2, 2, 2],
-        [2, 1, 2, 1, 1]]),
- &#39;a&#39;: array([[1, 2]]),
- &#39;r&#39;: array([[2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1]]),
+        [1, 2, 2, 2, 1],
+        [2, 2, 2, 2, 2],
+        [2, 1, 1, 1, 2]]),
+ &#39;sp&#39;: array([[1, 2, 2, 1, 2],
+        [1, 1, 1, 1, 2],
+        [1, 1, 1, 2, 1],
+        [2, 1, 1, 2, 1],
+        [1, 1, 2, 2, 2]]),
+ &#39;a&#39;: array([[1, 1]]),
+ &#39;r&#39;: array([[1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2]]),
  &#39;d&#39;: array([[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]]),
- &#39;agent_s&#39;: array([[4, 5, 0, 0, 4]])}</pre>
+ &#39;agent_s&#39;: array([[2, 5, 4, 3, 4]])}</pre>
 </div>
 
 </div>
@@ -189,7 +189,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L55" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L56" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -214,7 +214,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L61" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <code>Dataset</code></p>
+<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L62" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <code>Dataset</code></p>
 </blockquote>
 <p>Similar to fastai's <code>LabelList</code>, iters in-order samples from <code>1-&gt;len(envs)</code> <code>envs</code>.</p>
 
@@ -239,10 +239,13 @@ description: "Primary handlers for interfacing the openai gym envs"
 <span class="c1"># make_env = lambda: gym.make(&quot;Acrobot-v1&quot;)</span>
 <span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">max_episode_step</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dones</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
+    <span class="n">dones</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">o</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">yb</span><span class="p">])</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;xb: </span><span class="si">%s</span><span class="s1">, yb: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5</span><span class="o">*</span><span class="mi">3</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="k">assert</span><span class="p">(</span><span class="nb">any</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dones</span><span class="p">]))</span>
     
 <span class="c1"># make_env = lambda: gym.make(&quot;Acrobot-v1&quot;)</span>
 <span class="n">make_env</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">)</span>
@@ -253,6 +256,10 @@ description: "Primary handlers for interfacing the openai gym envs"
     <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;xb: </span><span class="si">%s</span><span class="s1">, yb: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5</span><span class="o">*</span><span class="mi">5</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    
+<span class="n">lsr</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">pop_total_r</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lsr</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">4</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">lsr</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">15</span>
 </pre></div>
 
     </div>
@@ -265,15 +272,108 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 20:14:31] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 20:14:31] p260 line:6 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:6 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:6 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 20:14:31] p260 line:16 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:16 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:16 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:31] p260 line:16 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-18 21:53:41] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -297,6 +397,10 @@ description: "Primary handlers for interfacing the openai gym envs"
     <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;xb: </span><span class="si">%s</span><span class="s1">, yb: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5</span><span class="o">*</span><span class="mi">3</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">ls_r_iter</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">pop_r_interations</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ls_r_iter</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">([</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ls_r_iter</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">10</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ls_r_iter</span><span class="p">])),</span><span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ls_r_iter</span><span class="p">])))</span>
 </pre></div>
 
     </div>
@@ -309,10 +413,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 20:14:32] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 20:14:32] p260 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:32] p260 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:32] p260 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-18 19:54:08] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -341,7 +445,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L134" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong>*<code>args</code></strong>, <strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Similar to <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a> but only keeps the first and last parts of a step. Can be seen as frame skipping.</p>
 
@@ -382,10 +486,11 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 20:14:32] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 20:14:32] p260 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:32] p260 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-17 20:14:32] p260 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-18 19:54:08] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -414,7 +519,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L155" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -439,7 +544,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L165" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
+<h2 id="AsyncGradExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L190" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -464,7 +569,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncDataExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L178" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
+<h2 id="AsyncDataExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L204" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -496,7 +601,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit" class="doc_header"><code>safe_fit</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit</code>(<strong><code>f</code></strong>)</p>
+<h4 id="safe_fit" class="doc_header"><code>safe_fit</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L218" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit</code>(<strong><code>f</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -520,7 +625,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="grad_fitter" class="doc_header"><code>grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L203" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+<h4 id="grad_fitter" class="doc_header"><code>grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L230" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Updates a <code>train_queue</code> with <code>model.parameters()</code> and <code>loss_queue</code> with the loss. Note that this is only an example grad_fitter.</p>
 
@@ -545,7 +650,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_fitter" class="doc_header"><code>data_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+<h4 id="data_fitter" class="doc_header"><code>data_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L242" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -569,7 +674,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L234" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L261" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong><code>queue_sz</code></strong>=<em><code>None</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Contains dataloaders of multiple sub-datasets and executes them using <code>n_processes</code>. <code>xb</code> is the gradients from the agents, <code>yb</code> is the loss.</p>
 
@@ -594,7 +699,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncDataExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L263" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="AsyncDataExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L292" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong><code>queue_sz</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Contains dataloaders of multiple sub-datasets and executes them using <code>n_processes</code>. <code>xb</code> is the gradients from the agents, <code>yb</code> is the loss.</p>
 
@@ -676,7 +781,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L295" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
+<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L326" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
 </blockquote>
 
 </div>
@@ -713,7 +818,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L337" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
+<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L368" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -750,7 +855,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 23:07:47] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:09] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -784,7 +889,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 23:07:47] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:09] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -813,7 +918,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L364" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
+<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L395" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -845,7 +950,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dqn_fitter" class="doc_header"><code>dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L380" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+<h4 id="dqn_fitter" class="doc_header"><code>dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L411" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -869,7 +974,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dqn_grad_fitter" class="doc_header"><code>dqn_grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L391" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+<h4 id="dqn_grad_fitter" class="doc_header"><code>dqn_grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L423" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -893,7 +998,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="buggy_dqn_fitter" class="doc_header"><code>buggy_dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L404" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>buggy_dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+<h4 id="buggy_dqn_fitter" class="doc_header"><code>buggy_dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L437" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>buggy_dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -914,6 +1019,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastrl.basic_train</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
 </pre></div>
 
     </div>
@@ -930,6 +1036,205 @@ description: "Primary handlers for interfacing the openai gym envs"
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FakeRunCallback2</span><span class="p">(</span><span class="n">LearnerCallback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_backward_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;skip_bwd&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;skip_validate&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+<span class="c1">#     def on_batch_begin(self,last_target,**kwargs):</span>
+<span class="c1">#         print([o[&#39;d&#39;] for o in last_target])</span>
+<span class="c1">#         sys.stdout.flush()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">data_exp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback2</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_fitter</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[07-18 21:53:53] p3996 line:15 INFO - Starting Process
+[07-18 21:53:53] p12403 line:35 WARNING - `self.learn` is None. will use random actions instead.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[1.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+[0.0]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1011,9 +1316,9 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 23:07:49] p260 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
-[07-17 23:07:49] p260 line:15 INFO - Starting Process
-[07-17 23:07:49] p2466 line:28 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `grad_fitter` to actually run/train.
+<pre>[07-18 21:42:51] p3996 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
+[07-18 21:42:51] p3996 line:15 INFO - Starting Process
+[07-18 21:42:51] p10715 line:29 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `data_fitter` to actually run/train.
 </pre>
 </div>
 </div>
@@ -1075,10 +1380,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 23:07:55] p260 line:15 INFO - Starting Process
-[07-17 23:07:55] p260 line:15 INFO - Starting Process
-[07-17 23:07:55] p2470 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 23:07:55] p2473 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p4072 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 19:54:09] p4075 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1140,10 +1445,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 22:14:22] p260 line:15 INFO - Starting Process
-[07-17 22:14:22] p260 line:15 INFO - Starting Process
-[07-17 22:14:22] p2150 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 22:14:22] p2153 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p4082 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 19:54:09] p4085 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1237,9 +1542,9 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 22:14:23] p260 line:15 INFO - Starting Process
-[07-17 22:14:23] p260 line:15 INFO - Starting Process
-[07-17 22:14:23] p2158 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p3996 line:15 INFO - Starting Process
+[07-18 19:54:09] p4090 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1301,10 +1606,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 22:14:24] p260 line:15 INFO - Starting Process
-[07-17 22:14:24] p260 line:15 INFO - Starting Process
-[07-17 22:14:24] p2164 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 22:14:24] p2167 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-18 19:54:10] p3996 line:15 INFO - Starting Process
+[07-18 19:54:10] p3996 line:15 INFO - Starting Process
+[07-18 19:54:10] p4096 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-18 19:54:10] p4099 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>

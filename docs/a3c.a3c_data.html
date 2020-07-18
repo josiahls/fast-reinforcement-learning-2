@@ -37,29 +37,134 @@ description: "A decoupled actor critic agent which trains on data collected from
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="a3c_data_fitter" class="doc_header"><code>a3c_data_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>a3c_data_fitter</code>(<strong><code>model</code></strong>, <strong><code>agent</code></strong>, <strong><code>ds</code></strong>, <strong><code>data_queue</code></strong>, <strong><code>pause_event</code></strong>, <strong><code>cancel_event</code></strong>, <strong><code>metric_queue</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L45" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>data</code></strong>:<code>DataBunch</code>, <strong><code>model</code></strong>:<code>Module</code>, <strong><code>opt_func</code></strong>:<code>Callable</code>=<em><code>'Adam'</code></em>, <strong><code>loss_func</code></strong>:<code>Callable</code>=<em><code>None</code></em>, <strong><code>metrics</code></strong>:<code>Collection</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>true_wd</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>bn_wd</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>wd</code></strong>:<code>Union</code>[<code>float</code>, <code>Collection</code>[<code>float</code>]]=<em><code>0.01</code></em>, <strong><code>train_bn</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>path</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'models'</code></em>, <strong><code>callback_fns</code></strong>:<code>Collection</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>callbacks</code></strong>:<code>Collection</code>[<code>Callback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>layer_groups</code></strong>:<code>Collection</code>[<code>Module</code>]=<em><code>None</code></em>, <strong><code>add_time</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>silent</code></strong>:<code>bool</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>training</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>fitter</code></strong>:<code>Callable</code>=<em><code>'a3c_data_fitter'</code></em>, <strong><code>batch_sz</code></strong>:<code>int</code>=<em><code>100</code></em>) :: <a href="/fastrl/basic_train#AgentLearner"><code>AgentLearner</code></a></p>
+</blockquote>
+<p>A3CLearner(data: fastai.basic_data.DataBunch, model: torch.nn.modules.module.Module, opt_func: Callable = functools.partial(&lt;class 'torch.optim.adam.Adam'&gt;, betas=(0.9, 0.99)), loss_func: Callable = None, metrics: Collection[Callable] = None, true_wd: bool = True, bn_wd: bool = True, wd: Union[float, Collection[float]] = 0.01, train_bn: bool = True, path: str = None, model_dir: Union[pathlib.Path, str] = 'models', callback_fns: Collection[Callable] = None, callbacks: Collection[fastai.callback.Callback] = <factory>, layer_groups: Collection[torch.nn.modules.module.Module] = None, add_time: bool = True, silent: bool = None, agent: fastrl.basic_agents.BaseAgent = BaseAgent(model=None), training: bool = False, fitter: Callable = &lt;function a3c_data_fitter at 0x7fece946a680&gt;, batch_sz: int = 100)</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@safe_fit</span>
-<span class="k">def</span> <span class="nf">a3c_data_fitter</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">ds</span><span class="p">,</span><span class="n">data_queue</span><span class="p">,</span><span class="n">pause_event</span><span class="p">,</span>
-                    <span class="n">cancel_event</span><span class="p">):</span>
-    <span class="n">dataset</span><span class="o">=</span><span class="n">ds</span><span class="p">()</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
-            <span class="n">data_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">yb</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">pause_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="n">cancel_event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
-        <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batch</span><span class="o">=</span><span class="p">[</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0285</span><span class="p">,</span>  <span class="mf">0.1640</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0033</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3421</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0285</span><span class="p">,</span>  <span class="mf">0.1640</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0033</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3421</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]])),</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0252</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0311</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0101</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0504</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0252</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0311</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0101</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0504</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]])),</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0258</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2261</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0111</span><span class="p">,</span>  <span class="mf">0.2391</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0258</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2261</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0111</span><span class="p">,</span>  <span class="mf">0.2391</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]])),</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0517</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2260</span><span class="p">,</span>  <span class="mf">0.0195</span><span class="p">,</span>  <span class="mf">0.2377</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0517</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2260</span><span class="p">,</span>  <span class="mf">0.0195</span><span class="p">,</span>  <span class="mf">0.2377</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]])),</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0562</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4214</span><span class="p">,</span>  <span class="mf">0.0242</span><span class="p">,</span>  <span class="mf">0.5365</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0562</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4214</span><span class="p">,</span>  <span class="mf">0.0242</span><span class="p">,</span>  <span class="mf">0.5365</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]])),</span>
+ <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span>
+            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]]))</span>
+<span class="p">]</span>
+</pre></div>
 
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">A3CLearner</span><span class="p">(</span><span class="n">AgentLearner</span><span class="p">):</span>
-    <span class="n">fitter</span><span class="p">:</span><span class="n">Callable</span><span class="o">=</span><span class="n">a3c_data_fitter</span>
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">A3CLearner</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">share_memory</span><span class="p">()</span>
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L56" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>LearnerCallback</code></p>
+</blockquote>
+<p>Base class for creating callbacks for a <code>Learner</code>.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">PolicyAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">A3CLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">A3CTrainer</span><span class="p">,</span><span class="n">RewardMetric</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -76,135 +181,14 @@ description: "A decoupled actor critic agent which trains on data collected from
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">PolicyAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">A3CLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">A3CLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">A3CTrainer</span><span class="p">,</span><span class="n">RewardMetric</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='0' class='' max='1' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      0.00% [0/1 00:00<00:00]
-    </div>
-    
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table><p>
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='0' class='' max='50' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      0.00% [0/50 00:00<00:00]
-    </div>
-    
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 00:01:39] p3162 line:87 WARNING - `self.learn` is None. will use random actions instead.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">RuntimeError</span>                              Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-23-4481823f5380&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> agent<span class="ansi-blue-fg">=</span>PolicyAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> learn<span class="ansi-blue-fg">=</span>A3CLearner<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span>model<span class="ansi-blue-fg">,</span>agent<span class="ansi-blue-fg">=</span>agent<span class="ansi-blue-fg">,</span>loss_func<span class="ansi-blue-fg">=</span>fake_loss<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span>learn<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span>lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">,</span>wd<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/basic_train.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, epochs, lr, wd, callbacks)</span>
-<span class="ansi-green-intense-fg ansi-bold">    198</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>wd <span class="ansi-blue-fg">=</span> lr<span class="ansi-blue-fg">,</span>wd
-<span class="ansi-green-intense-fg ansi-bold">    199</span>         callbacks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>cb<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> cb <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>callback_fns <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>extra_callback_fns<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>callbacks<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 200</span><span class="ansi-red-fg">         </span>fit<span class="ansi-blue-fg">(</span>epochs<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">,</span> metrics<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>metrics<span class="ansi-blue-fg">,</span> callbacks<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">+</span>callbacks<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    201</span> 
-<span class="ansi-green-intense-fg ansi-bold">    202</span>     <span class="ansi-green-fg">def</span> create_opt<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">,</span> wd<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/basic_train.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(epochs, learn, callbacks, metrics)</span>
-<span class="ansi-green-intense-fg ansi-bold">     99</span>             <span class="ansi-green-fg">for</span> xb<span class="ansi-blue-fg">,</span>yb <span class="ansi-green-fg">in</span> progress_bar<span class="ansi-blue-fg">(</span>learn<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>train_dl<span class="ansi-blue-fg">,</span> parent<span class="ansi-blue-fg">=</span>pbar<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    100</span>                 xb<span class="ansi-blue-fg">,</span> yb <span class="ansi-blue-fg">=</span> cb_handler<span class="ansi-blue-fg">.</span>on_batch_begin<span class="ansi-blue-fg">(</span>xb<span class="ansi-blue-fg">,</span> yb<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 101</span><span class="ansi-red-fg">                 </span>loss <span class="ansi-blue-fg">=</span> loss_batch<span class="ansi-blue-fg">(</span>learn<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> xb<span class="ansi-blue-fg">,</span> yb<span class="ansi-blue-fg">,</span> learn<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">,</span> learn<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">,</span> cb_handler<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    102</span>                 <span class="ansi-green-fg">if</span> cb_handler<span class="ansi-blue-fg">.</span>on_batch_end<span class="ansi-blue-fg">(</span>loss<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">break</span>
-<span class="ansi-green-intense-fg ansi-bold">    103</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/basic_train.py</span> in <span class="ansi-cyan-fg">loss_batch</span><span class="ansi-blue-fg">(model, xb, yb, loss_func, opt, cb_handler)</span>
-<span class="ansi-green-intense-fg ansi-bold">     32</span>     <span class="ansi-green-fg">if</span> opt <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     33</span>         loss<span class="ansi-blue-fg">,</span>skip_bwd <span class="ansi-blue-fg">=</span> cb_handler<span class="ansi-blue-fg">.</span>on_backward_begin<span class="ansi-blue-fg">(</span>loss<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 34</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> skip_bwd<span class="ansi-blue-fg">:</span>                     loss<span class="ansi-blue-fg">.</span>backward<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     35</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> cb_handler<span class="ansi-blue-fg">.</span>on_backward_end<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> opt<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     36</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> cb_handler<span class="ansi-blue-fg">.</span>on_step_end<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>     opt<span class="ansi-blue-fg">.</span>zero_grad<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/tensor.py</span> in <span class="ansi-cyan-fg">backward</span><span class="ansi-blue-fg">(self, gradient, retain_graph, create_graph)</span>
-<span class="ansi-green-intense-fg ansi-bold">    100</span>                 products<span class="ansi-blue-fg">.</span> Defaults to<span class="ansi-red-fg"> </span><span class="ansi-red-fg">`</span><span class="ansi-red-fg">`</span><span class="ansi-green-fg">False</span><span class="ansi-red-fg">`</span><span class="ansi-red-fg">`</span><span class="ansi-blue-fg">.</span>
-<span class="ansi-green-intense-fg ansi-bold">    101</span>         &#34;&#34;&#34;
-<span class="ansi-green-fg">--&gt; 102</span><span class="ansi-red-fg">         </span>torch<span class="ansi-blue-fg">.</span>autograd<span class="ansi-blue-fg">.</span>backward<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> gradient<span class="ansi-blue-fg">,</span> retain_graph<span class="ansi-blue-fg">,</span> create_graph<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    103</span> 
-<span class="ansi-green-intense-fg ansi-bold">    104</span>     <span class="ansi-green-fg">def</span> register_hook<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> hook<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/autograd/__init__.py</span> in <span class="ansi-cyan-fg">backward</span><span class="ansi-blue-fg">(tensors, grad_tensors, retain_graph, create_graph, grad_variables)</span>
-<span class="ansi-green-intense-fg ansi-bold">     88</span>     Variable._execution_engine.run_backward(
-<span class="ansi-green-intense-fg ansi-bold">     89</span>         tensors<span class="ansi-blue-fg">,</span> grad_tensors<span class="ansi-blue-fg">,</span> retain_graph<span class="ansi-blue-fg">,</span> create_graph<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">---&gt; 90</span><span class="ansi-red-fg">         allow_unreachable=True)  # allow_unreachable flag
-</span><span class="ansi-green-intense-fg ansi-bold">     91</span> 
-<span class="ansi-green-intense-fg ansi-bold">     92</span> 
-
-<span class="ansi-red-fg">RuntimeError</span>: element 0 of tensors does not require grad and does not have a grad_fn</pre>
-</div>
-</div>
-
 </div>
 </div>
 

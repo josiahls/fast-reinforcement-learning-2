@@ -8,11 +8,10 @@ from fastai.basic_train import *
 from fastai.torch_core import *
 from fastai.layers import *
 from .data_block import *
+from .basic_agents import *
 from dataclasses import asdict
 import logging
 import gym
-
-from .basic_agents import *
 
 # Cell
 class FloatifyCallback(LearnerCallback):

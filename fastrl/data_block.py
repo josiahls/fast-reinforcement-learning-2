@@ -14,6 +14,7 @@ from fastai.torch_core import *
 from fastai.callbacks import *
 from .wrappers import *
 from .basic_agents import *
+from .metrics import *
 from dataclasses import asdict
 from functools import partial
 from fastprogress.fastprogress import IN_NOTEBOOK
@@ -73,8 +74,9 @@ class ExperienceSourceDataset(Dataset):
         self.d=np.zeros((len(self.envs),))+1
         self.s=np.zeros((len(self.envs),*self.envs[0].observation_space.sample().shape))
         self.iterations=np.zeros((len(self.envs)))
+        self.current_r=np.zeros((len(self.envs)))
         self.total_r=[]
-        self.total_steps=[]
+        self.total_iterations=[]
         self.learn=None
         self._warned=False
         self.callback_fns=[ExperienceSourceCallback]
@@ -96,34 +98,57 @@ class ExperienceSourceDataset(Dataset):
         if idx==0 and self.iterations[idx]==0:
             for i,e in enumerate(self.envs): self.s[i]=e.reset() # There is the possiblity this will equal None (and crash)?
             self.iterations=np.zeros((len(self.envs)),dtype=int)
+            self.current_r=np.zeros((len(self.envs)))
 
         exps:List[Experience]=[]
         while True:
             a,agent_s=self.get_action(idx)
             sp,r,self.d[idx],_=self.envs[idx].step(a)
-            self.total_r.append(r)
-            self.total_steps.append(self.iterations[idx])
+            self.current_r[idx]+=r
             exps.append(Experience(self.s[idx],sp,a,r,self.d[idx],agent_s=ifnone(agent_s,[])))
             self.s[idx]=sp
             self.iterations[idx]+=1
             if self.d[idx] or self.iterations[idx]>=len(self)-1:
+                self.total_r.append(self.current_r[idx])
+                self.total_iterations.append(self.iterations[idx])
                 self.iterations[idx]=0
                 if self.inc>=len(self.envs)-1:self.inc=0
-                else:                       self.inc+=1
-                if idx>=len(self.envs)-1:raise StopIteration()
+                else:                         self.inc+=1
+                if idx>=len(self.envs):raise StopIteration()
                 break
             if len(exps)%self.steps==0:
                 break
         return [e.s for e in exps],[asdict(e) for e in exps]
 
+    def pop_total_r(self):
+        r=self.total_r
+        if r:self.total_r,self.total_steps=[],[]
+        return r
+
+    def pop_r_interations(self):
+        res = list(zip(self.total_r, self.total_iterations))
+        if res:self.total_r,self.total_iterations=[],[]
+        return res
+
 # Cell
 class FirstLastExperienceSourceDataset(ExperienceSourceDataset):
     "Similar to `ExperienceSourceDataset` but only keeps the first and last parts of a step. Can be seen as frame skipping."
+    def __init__(self,*args,discount=0.99,**kwargs):
+        super(FirstLastExperienceSourceDataset,self).__init__(*args,**kwargs)
+        self.discount=discount
+
     @log_args
     def __getitem__(self,idx):
         s,exps=super(FirstLastExperienceSourceDataset,self).__getitem__(idx)
         exp=exps[-1]
         exp['s']=exps[0]['s']
+
+        total_reward=0.0
+        for e in reversed(exps):
+            total_reward*=self.discount
+            total_reward+=e['r']
+        exp['r']=total_reward
+
         return [exps[0]['s']],[exp]
 
 # Cell
@@ -168,7 +193,8 @@ class AsyncGradExperienceSourceCallback(AsyncExperienceSourceCallback):
             self.learn.data.valid_ds)
         return mp.Process(target=getattr(self.learn,'fitter',grad_fitter),
                           args=(self.learn.model,self.learn.agent,ds.ds_cls),
-                          kwargs={'grad_queue':ds.grad_queue,'loss_queue':ds.loss_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event})
+                          kwargs={'grad_queue':ds.grad_queue,'loss_queue':ds.loss_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event,
+                                  'metric_queue':ds.metric_queue})
     def empty_queues(self):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
@@ -181,7 +207,8 @@ class AsyncDataExperienceSourceCallback(AsyncExperienceSourceCallback):
             self.learn.data.valid_ds)
         return mp.Process(target=getattr(self.learn,'fitter',data_fitter),
                           args=(self.learn.model,self.learn.agent,ds.ds_cls),
-                          kwargs={'data_queue':ds.data_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event})
+                          kwargs={'data_queue':ds.data_queue,'pause_event':ds.pause_event,'cancel_event':ds.cancel_event,
+                                  'metric_queue':ds.metric_queue})
     def empty_queues(self):
         ds=(self.learn.data.train_ds if self.learn.model.training or self.learn.data.empty_val else
             self.learn.data.valid_ds)
@@ -196,13 +223,13 @@ def safe_fit(f):
         finally:
             cancel_event.set()
             for k,v in kwargs.items():
-                if k.__contains__('queue'):v.put(None)
+                if k.__contains__('queue') and v is not None:v.put(None)
             return None
     return wrap
 
 @safe_fit
 def grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_queue:mp.JoinableQueue,
-                loss_queue:mp.JoinableQueue,pause_event:mp.Event,cancel_event:mp.Event):
+                loss_queue:mp.JoinableQueue,pause_event:mp.Event,cancel_event:mp.Event,metric_queue:mp.JoinableQueue=None):
     "Updates a `train_queue` with `model.parameters()` and `loss_queue` with the loss. Note that this is only an example grad_fitter."
     while not cancel_event.is_set(): # We are expecting the  grad_fitter to loop unless cancel_event is set
         cancel_event.wait(0.1)
@@ -214,7 +241,7 @@ def grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_
 
 @safe_fit
 def data_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
-                pause_event:mp.Event,cancel_event:mp.Event):
+                pause_event:mp.Event,cancel_event:mp.Event,metric_queue:mp.JoinableQueue=None):
     _logger.warning('Using the `test_fitter` function. Make sure your `AgentLearner` has a `data_fitter` to actually run/train.')
     while not cancel_event.is_set(): # We are expecting the  grad_fitter to loop unless cancel_event is set
         cancel_event.wait(0.1)
@@ -233,7 +260,7 @@ def _soft_queue_get(q:mp.Queue,e:mp.Event):
 
 class AsyncGradExperienceSourceDataset(ExperienceSourceDataset):
     "Contains dataloaders of multiple sub-datasets and executes them using `n_processes`. `xb` is the gradients from the agents, `yb` is the loss."
-    def __init__(self,env_name:str,n_envs=1,ds_cls=ExperienceSourceDataset,max_episode_step=None,n_processes=1,*args,**kwargs):
+    def __init__(self,env_name:str,n_envs=1,ds_cls=ExperienceSourceDataset,max_episode_step=None,n_processes=1,queue_sz=None,*args,**kwargs):
         self.n_processes=n_processes
         self.n_envs=n_envs
         self.env_name=env_name
@@ -241,8 +268,10 @@ class AsyncGradExperienceSourceDataset(ExperienceSourceDataset):
         self.pause_event=mp.Event()                               # If the event is set, then the Process will freeze.
         self.cancel_event=mp.Event()                              # If the event is set, then the Process will freeze.
         self.max_episode_step=max_episode_step
-        self.grad_queue=mp.JoinableQueue(maxsize=self.n_processes)
-        self.loss_queue=mp.JoinableQueue(maxsize=self.n_processes)
+        self.queue_sz=ifnone(queue_sz,self.n_processes*n_envs)
+        self.grad_queue=mp.JoinableQueue(maxsize=self.queue_sz)
+        self.loss_queue=mp.JoinableQueue(maxsize=self.queue_sz)
+        self.metric_queue:mp.JoinableQueue=None
         self.data_proc_list=[]
         self.callback_fns=[AsyncGradExperienceSourceCallback]
         self._env=gym.make(self.env_name)
@@ -262,7 +291,7 @@ class AsyncGradExperienceSourceDataset(ExperienceSourceDataset):
 
 class AsyncDataExperienceSourceDataset(ExperienceSourceDataset):
     "Contains dataloaders of multiple sub-datasets and executes them using `n_processes`. `xb` is the gradients from the agents, `yb` is the loss."
-    def __init__(self,env_name:str,n_envs=1,ds_cls=ExperienceSourceDataset,max_episode_step=None,n_processes=1,*args,**kwargs):
+    def __init__(self,env_name:str,n_envs=1,ds_cls=ExperienceSourceDataset,max_episode_step=None,n_processes=1,queue_sz=None,**kwargs):
         self.n_processes=n_processes
         self.n_envs=n_envs
         self.ds_cls=ds_cls
@@ -270,7 +299,9 @@ class AsyncDataExperienceSourceDataset(ExperienceSourceDataset):
         self.pause_event=mp.Event()                               # If the event is set, then the Process will freeze.
         self.cancel_event=mp.Event()                              # If the event is set, then the Process will freeze.
         self.max_episode_step=max_episode_step
+        self.queue_sz=ifnone(queue_sz,self.n_processes*n_envs)
         self.data_queue=mp.JoinableQueue(maxsize=self.n_processes)
+        self.metric_queue:mp.JoinableQueue=None
         self.data_proc_list=[]
         self.callback_fns=[AsyncDataExperienceSourceCallback]
         self._env=gym.make(self.env_name)
@@ -364,12 +395,12 @@ class ExperienceSourceDataBunch(DataBunch):
 class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
     @classmethod
     def from_env(cls,env:str,n_envs=1,data_exp=True,firstlast=False,display=False,max_steps=None,skip_step=1,path:PathOrStr='.',add_valid=True,
-                 cols=1,rows=1,max_w=800,n_processes=1):
+                 cols=1,rows=1,max_w=800,n_processes=1,queue_sz=None):
         def create_ds(make_empty=False):
             _sub_ds_cls=FirstLastExperienceSourceDataset if firstlast else ExperienceSourceDataset
             _sub_ds_cls=partial(_sub_ds_cls,env=env,n_envs=1,max_episode_step=0 if make_empty else max_steps,steps=skip_step)
             _ds_cls=AsyncDataExperienceSourceDataset if data_exp else AsyncGradExperienceSourceDataset
-            _ds=_ds_cls(env,max_episode_step=0 if make_empty else max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes)
+            _ds=_ds_cls(env,max_episode_step=0 if make_empty else max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes,queue_sz=queue_sz)
             if display:_ds=DatasetDisplayWrapper(_ds,cols=cols,rows=rows,max_w=max_w)
             return _ds
 
@@ -379,18 +410,19 @@ class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
 # Cell
 @safe_fit
 def dqn_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
-                pause_event:mp.Event,cancel_event:mp.Event):
+               pause_event:mp.Event,cancel_event:mp.Event,metric_queue:mp.JoinableQueue=None):
     dataset=ds()
     while not cancel_event.is_set():
         for xb,yb in dataset:
             data_queue.put(yb)
             if pause_event.is_set():cancel_event.wait(0.1)
             if cancel_event.is_set():break
+        if metric_queue is not None:metric_queue.put(TotalRewards(np.mean(dataset.pop_total_r())))
         if cancel_event.is_set():break
 
 @safe_fit
 def dqn_grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_queue:mp.JoinableQueue,loss_queue:mp.JoinableQueue,
-                    pause_event:mp.Event,cancel_event:mp.Event):
+                    pause_event:mp.Event,cancel_event:mp.Event,metric_queue:mp.JoinableQueue=None):
     dataset=ds()
     while not cancel_event.is_set():
         for xb,yb in dataset:
@@ -399,11 +431,12 @@ def dqn_grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,g
             loss_queue.put(0.5)
             if pause_event.is_set():cancel_event.wait(0.1)
             if cancel_event.is_set():break
+        if metric_queue is not None:metric_queue.put(TotalRewards(np.mean(dataset.pop_total_r())))
         if cancel_event.is_set():break
 
 @safe_fit
 def buggy_dqn_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
-                pause_event:mp.Event,cancel_event:mp.Event):
+                pause_event:mp.Event,cancel_event:mp.Event,metric_queue:mp.JoinableQueue=None):
     dataset=ds()
     while not cancel_event.is_set():
         for xb,yb in dataset:
