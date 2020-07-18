@@ -19,6 +19,7 @@ from functools import partial
 from fastprogress.fastprogress import IN_NOTEBOOK
 from fastcore.utils import *
 import torch.multiprocessing as mp
+from functools import wraps
 from queue import Empty
 import textwrap
 import logging
@@ -159,7 +160,7 @@ class AsyncExperienceSourceCallback(LearnerCallback):
             ds.cancel_event.set()
             for _ in range(5):
                 self.empty_queues()
-            for proc in ds.data_proc_list: proc.join(timeout=5)
+            for proc in ds.data_proc_list: proc.join(timeout=0)
 
 class AsyncGradExperienceSourceCallback(AsyncExperienceSourceCallback):
     def load_process(self):
@@ -188,6 +189,7 @@ class AsyncDataExperienceSourceCallback(AsyncExperienceSourceCallback):
 
 # Cell
 def safe_fit(f):
+    @wraps(f)
     def wrap(*args,cancel_event,**kwargs):
         try:
             return f(*args,cancel_event=cancel_event,**kwargs)
@@ -213,13 +215,12 @@ def grad_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,grad_
 @safe_fit
 def data_fitter(model:nn.Module,agent:BaseAgent,ds:ExperienceSourceDataset,data_queue:mp.JoinableQueue,
                 pause_event:mp.Event,cancel_event:mp.Event):
-    _logger.warning('Using the `test_fitter` function. Make sure your `AgentLearner` has a `grad_fitter` to actually run/train.')
+    _logger.warning('Using the `test_fitter` function. Make sure your `AgentLearner` has a `data_fitter` to actually run/train.')
     while not cancel_event.is_set(): # We are expecting the  grad_fitter to loop unless cancel_event is set
         cancel_event.wait(0.1)
         data_queue.put(None)         # Adding `None` to `train_queue` will trigger an eventual ending of training
         if pause_event.is_set():     # There needs to be the ability for the grad_fitter to pause e.g. if waiting for validation to end.
             cancel_event.wait(0.1)   # Using cancel_event to wait allows the main process to end this Process.
-        break
 
 def _soft_queue_get(q:mp.Queue,e:mp.Event):
     entry=None
@@ -296,7 +297,9 @@ class DatasetDisplayWrapper(object):
         "Wraps a ExperienceSourceDataset instance showing multiple envs in a `rows` by `cols` grid in a Jupyter notebook."
         # Ref: https://stackoverflow.com/questions/1443129/completely-wrap-an-object-in-python
         # We are basically Wrapping any instance of ExperienceSourceDataset (kind of cool right?)
-        assert issubclass(ds.__class__,(ExperienceSourceDataset,FirstLastExperienceSourceDataset)),'Currently this only works with the ExperienceSourceDataset class only.'
+        clss=(ExperienceSourceDataset,FirstLastExperienceSourceDataset,
+              AsyncGradExperienceSourceDataset,AsyncDataExperienceSourceDataset)
+        assert issubclass(ds.__class__,clss),'Currently this only works with the ExperienceSourceDataset and Async*ExperienceSourceDataset class only.'
         self.__class__ = type(ds.__class__.__name__,(self.__class__, ds.__class__),{})
         self.__dict__=ds.__dict__
         self.rows,self.cols,self.max_w=rows,cols,max_w
@@ -312,13 +315,13 @@ class DatasetDisplayWrapper(object):
                             max_w,rdr.shape[1],self.cols,max_w%rdr.shape[1],max_w%rdr.shape[1])
             self.cols=max_w%rdr.shape[1]
             self.rows+=max_w%rdr.shape[1]
-
+        self.max_displays=self.cols*self.rows
         self.current_display=np.zeros(shape=(self.rows*rdr.shape[0],self.cols*rdr.shape[1],rdr.shape[2])).astype('uint8')
         _logger.info('%s, %s, %s, %s, %s',0,0//self.cols,0%self.cols,rdr.shape,self.current_display.shape)
 
     def __getitem__(self,idx):
         o=super(DatasetDisplayWrapper,self).__getitem__(idx)
-        idx=idx%len(self.envs)
+        idx=idx%self.max_displays
         if self.current_display is not None and idx<self.rows*self.cols:
             display.clear_output(wait=True)
             im=self.envs[idx].render(mode='rgb_array')

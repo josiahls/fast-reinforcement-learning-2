@@ -14,6 +14,9 @@ index = {"PixelObservationWrapper": "01_wrappers.ipynb",
          "TestAgent": "03_basic_agents.ipynb",
          "DiscreteAgent": "03_basic_agents.ipynb",
          "DQNAgent": "03_basic_agents.ipynb",
+         "TargetNet": "03_basic_agents.ipynb",
+         "PolicyAgent": "03_basic_agents.ipynb",
+         "ActorCriticAgent": "03_basic_agents.ipynb",
          "fix_s": "05_data_block.ipynb",
          "Experience": "05_data_block.ipynb",
          "ExperienceSourceCallback": "05_data_block.ipynb",
@@ -42,7 +45,8 @@ modules = ["wrappers.py",
            "callbacks.py",
            "basic_agents.py",
            "data_block.py",
-           "basic_train.py"]
+           "basic_train.py",
+           "a3c/a3c_data.py"]
 
 doc_url = "https://josiahls.github.io/fastrl/"
 

@@ -70,7 +70,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_s" class="doc_header"><code>fix_s</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_s</code>(<strong><code>x</code></strong>)</p>
+<h4 id="fix_s" class="doc_header"><code>fix_s</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_s</code>(<strong><code>x</code></strong>)</p>
 </blockquote>
 <p>Flatten <code>x</code> to <code>(1,-1)</code> where <code>1</code> is the batch dim (B) unless <strong>seems</strong> to be an image e.g. has 3 dims (W,H,C), then it will attempt (B,W,H,C).</p>
 
@@ -95,7 +95,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Experience" class="doc_header"><code>class</code> <code>Experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L39" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Experience</code>(<strong><code>s</code></strong>:<code>array</code>, <strong><code>sp</code></strong>:<code>array</code>, <strong><code>a</code></strong>:<code>array</code>, <strong><code>r</code></strong>:<code>array</code>, <strong><code>d</code></strong>:<code>array</code>, <strong><code>agent_s</code></strong>:<code>array</code>)</p>
+<h2 id="Experience" class="doc_header"><code>class</code> <code>Experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Experience</code>(<strong><code>s</code></strong>:<code>array</code>, <strong><code>sp</code></strong>:<code>array</code>, <strong><code>a</code></strong>:<code>array</code>, <strong><code>r</code></strong>:<code>array</code>, <strong><code>d</code></strong>:<code>array</code>, <strong><code>agent_s</code></strong>:<code>array</code>)</p>
 </blockquote>
 <p>Experience(s: <built-in function array>, sp: <built-in function array>, a: <built-in function array>, r: <built-in function array>, d: <built-in function array>, agent_s: <built-in function array>)</p>
 
@@ -189,7 +189,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L55" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -214,7 +214,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L60" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <code>Dataset</code></p>
+<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L61" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <code>Dataset</code></p>
 </blockquote>
 <p>Similar to fastai's <code>LabelList</code>, iters in-order samples from <code>1-&gt;len(envs)</code> <code>envs</code>.</p>
 
@@ -341,7 +341,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>steps</code></strong>=<em><code>1</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>pixels</code></strong>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Similar to <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a> but only keeps the first and last parts of a step. Can be seen as frame skipping.</p>
 
@@ -414,7 +414,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L129" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -439,7 +439,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L164" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
+<h2 id="AsyncGradExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L165" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -464,7 +464,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncDataExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L177" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
+<h2 id="AsyncDataExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L178" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <a href="/fastrl/data_block#AsyncExperienceSourceCallback"><code>AsyncExperienceSourceCallback</code></a></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -496,7 +496,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit" class="doc_header"><code>safe_fit</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L190" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit</code>(<strong><code>f</code></strong>)</p>
+<h4 id="safe_fit" class="doc_header"><code>safe_fit</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit</code>(<strong><code>f</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -520,7 +520,32 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit.<locals>.wrap" class="doc_header"><code>safe_fit.<locals>.wrap</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit.<locals>.wrap</code>(<strong>*<code>args</code></strong>, <strong><code>cancel_event</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="grad_fitter" class="doc_header"><code>grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L203" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
+</blockquote>
+<p>Updates a <code>train_queue</code> with <code>model.parameters()</code> and <code>loss_queue</code> with the loss. Note that this is only an example grad_fitter.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_fitter" class="doc_header"><code>data_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
 </blockquote>
 
 </div>
@@ -544,31 +569,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit.<locals>.wrap" class="doc_header"><code>safe_fit.<locals>.wrap</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit.<locals>.wrap</code>(<strong>*<code>args</code></strong>, <strong><code>cancel_event</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L233" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L234" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Contains dataloaders of multiple sub-datasets and executes them using <code>n_processes</code>. <code>xb</code> is the gradients from the agents, <code>yb</code> is the loss.</p>
 
@@ -593,7 +594,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncDataExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L262" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="AsyncDataExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncDataExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L263" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncDataExperienceSourceDataset</code>(<strong><code>env_name</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>=<em><code>1</code></em>, <strong><code>ds_cls</code></strong>=<em><code>'ExperienceSourceDataset'</code></em>, <strong><code>max_episode_step</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Contains dataloaders of multiple sub-datasets and executes them using <code>n_processes</code>. <code>xb</code> is the gradients from the agents, <code>yb</code> is the loss.</p>
 
@@ -675,7 +676,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L294" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
+<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L295" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
 </blockquote>
 
 </div>
@@ -712,7 +713,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L334" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
+<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L337" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -749,7 +750,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 21:28:52] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-17 23:07:47] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -783,7 +784,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 20:31:22] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-17 23:07:47] p260 line:34 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -812,7 +813,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L361" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
+<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L364" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -844,7 +845,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit.<locals>.wrap" class="doc_header"><code>safe_fit.<locals>.wrap</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit.<locals>.wrap</code>(<strong>*<code>args</code></strong>, <strong><code>cancel_event</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="dqn_fitter" class="doc_header"><code>dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L380" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
 </blockquote>
 
 </div>
@@ -868,7 +869,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit.<locals>.wrap" class="doc_header"><code>safe_fit.<locals>.wrap</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit.<locals>.wrap</code>(<strong>*<code>args</code></strong>, <strong><code>cancel_event</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="dqn_grad_fitter" class="doc_header"><code>dqn_grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L391" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
 </blockquote>
 
 </div>
@@ -892,7 +893,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="safe_fit.<locals>.wrap" class="doc_header"><code>safe_fit.<locals>.wrap</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_fit.<locals>.wrap</code>(<strong>*<code>args</code></strong>, <strong><code>cancel_event</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="buggy_dqn_fitter" class="doc_header"><code>buggy_dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L404" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>buggy_dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>)</p>
 </blockquote>
 
 </div>
@@ -1010,9 +1011,9 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 22:14:32] p260 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
-[07-17 22:14:32] p260 line:15 INFO - Starting Process
-[07-17 22:14:32] p2182 line:28 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `grad_fitter` to actually run/train.
+<pre>[07-17 23:07:49] p260 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
+[07-17 23:07:49] p260 line:15 INFO - Starting Process
+[07-17 23:07:49] p2466 line:28 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `grad_fitter` to actually run/train.
 </pre>
 </div>
 </div>
@@ -1074,10 +1075,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-17 22:14:30] p260 line:15 INFO - Starting Process
-[07-17 22:14:30] p260 line:15 INFO - Starting Process
-[07-17 22:14:30] p2172 line:34 WARNING - `self.learn` is None. will use random actions instead.
-[07-17 22:14:30] p2175 line:34 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-17 23:07:55] p260 line:15 INFO - Starting Process
+[07-17 23:07:55] p260 line:15 INFO - Starting Process
+[07-17 23:07:55] p2470 line:34 WARNING - `self.learn` is None. will use random actions instead.
+[07-17 23:07:55] p2473 line:34 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
