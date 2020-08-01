@@ -23,7 +23,7 @@ dependencies:
       - requests
       - sklearn
       - cython
-      - gym
+      - gym[box2d, atari]
       - easydict
       - matplotlib
       - jupyter_console

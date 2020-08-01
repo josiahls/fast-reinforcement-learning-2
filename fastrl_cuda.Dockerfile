@@ -61,8 +61,9 @@ RUN /bin/bash -c "source activate fastrl && pip install fastcore"
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 #RUN chmod +x ./entrypoint.sh
 RUN ["chmod", "+x", "entrypoint.sh"]
+RUN /bin/bash -c "source activate fastrl && python setup.py develop"
 USER $CONTAINER_USER
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash","-c"]
-RUN /bin/bash -c "source activate fastrl && python setup.py develop"
+
 
