@@ -78,7 +78,7 @@ description: "A decoupled actor critic agent which trains on data collected from
 <div class="output_markdown rendered_html output_subarea ">
 <h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L45" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>data</code></strong>:<code>DataBunch</code>, <strong><code>model</code></strong>:<code>Module</code>, <strong><code>opt_func</code></strong>:<code>Callable</code>=<em><code>'Adam'</code></em>, <strong><code>loss_func</code></strong>:<code>Callable</code>=<em><code>None</code></em>, <strong><code>metrics</code></strong>:<code>Collection</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>true_wd</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>bn_wd</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>wd</code></strong>:<code>Union</code>[<code>float</code>, <code>Collection</code>[<code>float</code>]]=<em><code>0.01</code></em>, <strong><code>train_bn</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>path</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'models'</code></em>, <strong><code>callback_fns</code></strong>:<code>Collection</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>callbacks</code></strong>:<code>Collection</code>[<code>Callback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>layer_groups</code></strong>:<code>Collection</code>[<code>Module</code>]=<em><code>None</code></em>, <strong><code>add_time</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>silent</code></strong>:<code>bool</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>training</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>fitter</code></strong>:<code>Callable</code>=<em><code>'a3c_data_fitter'</code></em>, <strong><code>batch_sz</code></strong>:<code>int</code>=<em><code>100</code></em>) :: <a href="/fastrl/basic_train#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
-<p>A3CLearner(data: fastai.basic_data.DataBunch, model: torch.nn.modules.module.Module, opt_func: Callable = functools.partial(&lt;class 'torch.optim.adam.Adam'&gt;, betas=(0.9, 0.99)), loss_func: Callable = None, metrics: Collection[Callable] = None, true_wd: bool = True, bn_wd: bool = True, wd: Union[float, Collection[float]] = 0.01, train_bn: bool = True, path: str = None, model_dir: Union[pathlib.Path, str] = 'models', callback_fns: Collection[Callable] = None, callbacks: Collection[fastai.callback.Callback] = <factory>, layer_groups: Collection[torch.nn.modules.module.Module] = None, add_time: bool = True, silent: bool = None, agent: fastrl.basic_agents.BaseAgent = BaseAgent(model=None), training: bool = False, fitter: Callable = &lt;function a3c_data_fitter at 0x7fece946a680&gt;, batch_sz: int = 100)</p>
+<p>A3CLearner(data: fastai.basic_data.DataBunch, model: torch.nn.modules.module.Module, opt_func: Callable = functools.partial(&lt;class 'torch.optim.adam.Adam'&gt;, betas=(0.9, 0.99)), loss_func: Callable = None, metrics: Collection[Callable] = None, true_wd: bool = True, bn_wd: bool = True, wd: Union[float, Collection[float]] = 0.01, train_bn: bool = True, path: str = None, model_dir: Union[pathlib.Path, str] = 'models', callback_fns: Collection[Callable] = None, callbacks: Collection[fastai.callback.Callback] = <factory>, layer_groups: Collection[torch.nn.modules.module.Module] = None, add_time: bool = True, silent: bool = None, agent: fastrl.basic_agents.BaseAgent = BaseAgent(model=None), training: bool = False, fitter: Callable = &lt;function a3c_data_fitter at 0x7fe51b3cb3b0&gt;, batch_sz: int = 100)</p>
 
 </div>
 
@@ -111,9 +111,124 @@ description: "A decoupled actor critic agent which trains on data collected from
  <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span>
             <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">agent_s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">]]]))</span>
 <span class="p">]</span>
+<span class="k">class</span> <span class="nc">LinearA2C</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">n_actions</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LinearA2C</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">policy</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_actions</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_conv_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">o</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">fx</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">policy</span><span class="p">(</span><span class="n">fx</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">LinearA2C</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">r_estimate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">d_mask</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">val_gamma</span><span class="p">,</span><span class="n">device</span><span class="p">):</span>
+    <span class="s2">&quot;Returns rewards `r` estimated direction by `model` from states `s`&quot;</span>
+    <span class="n">r_np</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d_mask</span><span class="p">:</span>
+        <span class="n">s_v</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">v</span><span class="o">=</span><span class="n">model</span><span class="p">(</span><span class="n">s_v</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Remember that models are going to return the actions and the values</span>
+        <span class="n">v_np</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">r_np</span><span class="p">[</span><span class="n">d_mask</span><span class="p">]</span><span class="o">+=</span><span class="n">val_gamma</span><span class="o">*</span><span class="n">v_np</span>
+    <span class="k">return</span> <span class="n">r_np</span>
+
+<span class="k">def</span> <span class="nf">unbatch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">last_val_gamma</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Tuple</span><span class="p">(</span><span class="n">List</span><span class="p">,</span><span class="n">List</span><span class="p">,</span><span class="n">List</span><span class="p">):</span>
+    <span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">d_mask</span><span class="p">,</span><span class="n">sp</span><span class="o">=</span><span class="p">[],[],[],[],[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">exp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">exp</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span> <span class="c1"># TODO can we change this to toggle between discrete and continuous actions?</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">exp</span><span class="o">.</span><span class="n">d</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">d_mask</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">sp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exp</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">s_t</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">a_t</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    
+    <span class="n">r_np</span><span class="o">=</span><span class="n">r_estimate</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">d_mask</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">last_val_gamma</span><span class="p">,</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">estimated_r</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">r_np</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s_t</span><span class="p">,</span><span class="n">a_t</span><span class="p">,</span><span class="n">estimated_r</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unbatch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(tensor([[[-0.0285,  0.1640, -0.0033, -0.3421]],
+ 
+         [[-0.0252, -0.0311, -0.0101, -0.0504]],
+ 
+         [[-0.0258, -0.2261, -0.0111,  0.2391]],
+ 
+         [[-0.0517, -0.2260,  0.0195,  0.2377]],
+ 
+         [[-0.0562, -0.4214,  0.0242,  0.5365]],
+ 
+         [[-0.0647, -0.6169,  0.0349,  0.8367]]]),
+ tensor([1, 0, 0, 1, 0, 0]),
+ tensor([[1.2883],
+         [1.2978],
+         [1.3391],
+         [1.3321],
+         [1.3981],
+         [1.0000]]))</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -138,7 +253,7 @@ description: "A decoupled actor critic agent which trains on data collected from
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L56" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/a3c/a3c_data.py#L61" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -171,6 +286,51 @@ description: "A decoupled actor critic agent which trains on data collected from
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_reward</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -189,6 +349,93 @@ description: "A decoupled actor critic agent which trains on data collected from
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_reward</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 

@@ -52,6 +52,11 @@ class A3CLearner(AgentLearner):
         if self.agent.model is None: self.agent.model=self.model
         self.model.share_memory()
 
+    def predict(self,s):
+        out=self.model(s)
+        if type(out)==tuple:return out[0]
+        return out
+
 # Cell
 class A3CTrainer(LearnerCallback):
     def __init__(self,*args,**kwargs):

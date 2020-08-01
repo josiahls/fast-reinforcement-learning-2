@@ -71,5 +71,6 @@ RUN conda init bash
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 # Install the deploy package for system access
 ENTRYPOINT "entrypoint.sh"
+RUN echo 'source activate fastrl' >> ~/.bashrc
 CMD ["/bin/bash","-c"]
 RUN /bin/bash -c "source activate fastrl && python setup.py develop"

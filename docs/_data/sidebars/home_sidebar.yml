@@ -22,6 +22,9 @@ entries:
       title: Basic Action Selection
       url: /basic_agents
     - output: web,pdf
+      title: Metrics
+      url: /metrics
+    - output: web,pdf
       title: Data Block
       url: /data_block
     - output: web,pdf
