@@ -19,6 +19,7 @@ from dataclasses import asdict
 from functools import partial
 from fastprogress.fastprogress import IN_NOTEBOOK
 from fastcore.utils import *
+from fastcore.foundation import *
 import torch.multiprocessing as mp
 from functools import wraps
 from queue import Empty
@@ -61,7 +62,7 @@ class ExperienceSourceCallback(LearnerCallback):
 
 class ExperienceSourceDataset(Dataset):
     "Similar to fastai's `LabelList`, iters in-order samples from `1->len(envs)` `envs`."
-    def __init__(self,env:str,n_envs=1,steps=1,max_episode_step=None,pixels=False):
+    def __init__(self,env:str,n_envs=1,skip_n_steps=1,max_steps=None,pixels=False):
         def make_env():
             env=gym.make("CartPole-v1")
             if pixels:env.reset()
@@ -69,66 +70,139 @@ class ExperienceSourceDataset(Dataset):
 
         self.envs=[make_env() for _ in range(n_envs)]
         if pixels:self.envs=[PixelObservationWrapper(e) for e in self.envs]
-        self.steps=steps
-        self.max_episode_step=max_episode_step
-        self.d=np.zeros((len(self.envs),))+1
-        self.s=np.zeros((len(self.envs),*self.envs[0].observation_space.sample().shape))
-        self.iterations=np.zeros((len(self.envs)))
-        self.current_r=np.zeros((len(self.envs)))
-        self.total_r=[]
-        self.total_iterations=[]
         self.learn=None
-        self._warned=False
         self.callback_fns=[ExperienceSourceCallback]
-        self.inc=0
+        # Behavior modification fields / param fields.
+        self.skip_n_steps=skip_n_steps
+        self.max_steps=max_steps
+        # Env tracking fields
+        self.per_env_d=np.zeros((len(self.envs),))+1
+        self.per_env_s=np.zeros((len(self.envs),*self.envs[0].observation_space.sample().shape))
+        self.per_env_steps=np.zeros((len(self.envs)))
+        self.per_env_rewards=np.zeros((len(self.envs)))
+        # Metric fields
+        self.total_rewards=[]
+        self.total_steps=[]
+        # Private funcational fields.
+        self._step=0
+        self._warned=False
+        self._end_interation=False
 
-    def __len__(self): return ifnone(self.max_episode_step,self.envs[0].spec.max_episode_steps)*len(self.envs)
-
-    def get_action(self,idx):
+    def __len__(self): return ifnone(self.max_steps,self.envs[0].spec.max_episode_steps)
+    @log_args
+    def is_last_step(self,d,steps,idx,max_steps)->bool:return bool(d) or steps>=max_steps-1
+    @log_args
+    def at_start(self,idx,steps):return idx==0 and steps==0
+    @log_args
+    def skip_loop(self,steps,skip_steps,d):return steps%skip_steps!=0 and not d
+    @log_args
+    def cycle_env(self,step,n_envs):self._step=0 if step==n_envs else step+1
+    def stop_loop(self):
+        self._end_interation=False
+        raise StopIteration()
+    @log_args
+    def reset_envs(self,idx):
+        for i,e in enumerate(self.envs):self.per_env_s[i]=e.reset() # TODO: There is the possiblity this will equal None (and crash)?
+        self.per_env_steps=np.zeros((len(self.envs)),dtype=int)
+        self.per_env_rewards=np.zeros((len(self.envs)))
+    @log_args
+    def pick_action(self,idx):
         if self.learn is None:
             if not self._warned:_logger.warning('`self.learn` is None. will use random actions instead.')
             self._warned=True
             return self.envs[0].action_space.sample(),np.zeros((1,1))
-        return self.learn.predict(self.s[idx])
+        return self.learn.predict(self.per_env_s[idx])
+    @log_args
+    def pop_total_rewards(self,total_rewards:List):
+        if total_rewards:self.total_rewards,self.total_steps=[],[]
+        return total_rewards
+    @log_args
+    def pop_reward_steps(self,total_rewards,total_steps):
+        res=list(zip(total_rewards,total_steps))
+        if res:self.total_r,self.total_iterations=[],[]
+        return res
 
     @log_args
     def __getitem__(self,_):
-        idx=self.inc
-        _logger.debug('Idx:%s,Iter:%s',idx,self.iterations[idx])
-        if idx==0 and self.iterations[idx]==0:
-            for i,e in enumerate(self.envs): self.s[i]=e.reset() # There is the possiblity this will equal None (and crash)?
-            self.iterations=np.zeros((len(self.envs)),dtype=int)
-            self.current_r=np.zeros((len(self.envs)))
+        idx=self.inc  # This is the current env that we are running on
+        if self._end_interation:self.stop_loop()
+        if self.at_start(idx,self.per_env_steps[idx]):self.reset_envs(idx)
 
-        exps:List[Experience]=[]
         while True:
             a,agent_s=self.get_action(idx)
-            sp,r,self.d[idx],_=self.envs[idx].step(a)
-            self.current_r[idx]+=r
-            exps.append(Experience(self.s[idx],sp,a,r,self.d[idx],agent_s=ifnone(agent_s,[])))
-            self.s[idx]=sp
-            self.iterations[idx]+=1
-            if self.d[idx] or self.iterations[idx]>=len(self)-1:
-                self.total_r.append(self.current_r[idx])
-                self.total_iterations.append(self.iterations[idx])
-                self.iterations[idx]=0
-                if self.inc>=len(self.envs)-1:self.inc=0
-                else:                         self.inc+=1
-                if idx>=len(self.envs):raise StopIteration()
-                break
-            if len(exps)%self.steps==0:
-                break
-        return [e.s for e in exps],[asdict(e) for e in exps]
+            sp,r,d,_=self.envs[idx].step(a)
+            if self.skip_loop(self.per_env_steps[idx],self.skip_n_steps,d):continue
 
-    def pop_total_r(self):
-        r=self.total_r
-        if r:self.total_r,self.total_steps=[],[]
-        return r
+            exp=Experience(self.s[idx],sp,a,r,d,agent_s=ifnone(agent_s,[]))
 
-    def pop_r_interations(self):
-        res = list(zip(self.total_r, self.total_iterations))
-        if res:self.total_r,self.total_iterations=[],[]
-        return res
+            self.per_env_rewards[idx]+=r
+            self.per_env_s[idx]=sp
+            self.per_env_steps[idx]+=1
+            self.per_env_d[idx]=d
+
+            if self.is_last_step(self.per_env_d[idx],self.per_env_steps[idx],idx,len(self)):
+                self.total_rewards.append(self.per_env_rewards[idx])
+                self.total_steps.append(self.per_env_steps[idx])
+                self.per_env_steps[idx]=0
+
+                self.cycle_env()
+                self._end_interation=True
+            return exp.s,asdict(exp)
+
+#     @log_args
+#     def __getitem__(self,_):
+#         idx=self.inc  # This is the current env that we are running on
+#         if self._end_interation:self.stop_loop()
+#         if self.at_start(idx,self.per_env_steps[idx]):self.reset_envs(idx)
+
+#         exps:List[Experience]=[]
+#         while True:
+#             a,agent_s=self.get_action(idx)
+#             sp,r,self.d[idx],_=self.envs[idx].step(a)
+#             if self.iterations[idx]%self.steps_delta==0 or self.d[idx]:
+#                 exps.append(Experience(self.s[idx],sp,a,r,self.d[idx],agent_s=ifnone(agent_s,[])))
+
+#             self.current_r[idx]+=r
+#             self.s[idx]=sp
+#             self.iterations[idx]+=1
+#             if self.is_last_step(self.per_env_d[idx],self.per_env_steps[idx],idx,len(self)):
+#                 self.total_r.append(self.current_r[idx])
+#                 self.total_iterations.append(self.iterations[idx])
+#                 self.iterations[idx]=0
+
+#                 self.cycle_env()
+#                 self._end_interation=True
+#                 break
+#             if len(exps)%self.steps==0:break
+#         return [e.s for e in exps],[asdict(e) for e in exps]
+
+add_docs(ExperienceSourceDataset,
+         __init__='Provides an easy interface to iterate through an env or list of envs.\n Some importants notes:\n'
+                  'an iteration through a loop. This is the maximum steps, and may be less due to the environment ending early.\n'
+                  '- `skip_n_steps` are the number of steps to skip in the returned elements. This can be seen as frame skipping.',
+        pick_action='Returns the action and learner\'s `self.learn.model`\'s state as determined by the learner for a state `self.s`'
+                    'belonging to env `idx`. If the `self.learn` is None, a random action using the `action_space` from `self.envs[0]` is used.\n\n'
+                    'For the sake of clarity, the return type is Tuple[Tensor,Tensor] which can be understood as [a,agent_s] or [action, agent state].\n\n'
+                    'While the returned action like `1`,`2` if discrete and `[0.2,0.5,0.2,0.1]` is a continuous action output, the agent state\n'
+                    'is simply the raw values are were used to get the action. This information can be useful where for example we have an agent playing\n'
+                    'the cartpole game. The action can either be `0` or `1`. This is considered the "action".\n'
+                    'The agent state is the result of `self.learn.model(self.s)`. This is the raw `nn.Module` output and in the cartpole env case, is likely a\n'
+                    'tensor of `Tensor([0.35,0.75])`, which for a discrete agent would an action of `1`. (we do an argmax, thus the action is which ever \n'
+                    'neuron has the highest expected reward. This can be used to determine how confident the agent was when taking an action.',
+        is_last_step='An env has reached it\'s last step when it is either `d` is true or `steps` is more than or equal to `self.max_steps-1`. '
+                     'The reason this method has so many parameters is due to the use of `log_args` decorator. Having these all these parameters passed on makes '
+                     'debugging much easier.',
+        cycle_env='Increments the private `self._step` field to cyucle through the envs. Requires passing in parameters for easy debugging using `log_args`.',
+        stop_loop='Raises the `StopIteration` exception and resets the `self._end_interation=False`. Used when the current env is done.',
+        reset_envs='Performs a very interesting function for reseting all the envs. One might wonder "why not reset the envs individually?". The reason\n '
+                   'is that performing a reset within a single process for most `gym` envs actually resets the overall renderer. This means that if you reset\n '
+                   'one env, it affects all the others that haven\'t finished yet. In order to avoid this issue,\n '
+                   'we only reset when all the envs are ready to be reset. The `idx` is here only for debugging.',
+        at_start='Similar to `is_last_step`. We determine that the dataset as looped through all the envs and needs to reset them.\n '
+                 'We have all the important params passed in for debugging via `log_args`.',
+        pop_total_rewards='Returns and clears the `total_rewards` fields. Each element of total reward is a single episode or full iteration through an env.',
+        pop_reward_steps='Returns and clears the `total_rewards` and `total_steps` fields. Each element in each represents data over a single episode.',
+        skip_loop='If the current step should be skipped per `self.skip-step` and the current step is not done then we have the loop do a pass over.')
 
 # Cell
 class FirstLastExperienceSourceDataset(ExperienceSourceDataset):
