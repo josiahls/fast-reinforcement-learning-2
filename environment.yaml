@@ -8,7 +8,8 @@ dependencies:
   - pip
   - cuda100
   - fastprogress
-  - fastai=1.0.58
+  - pytorch>=1.6.0
+  - fastai=1.0.61
   - jupyter
   - notebook
   - setuptools

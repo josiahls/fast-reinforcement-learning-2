@@ -57,14 +57,85 @@ description: "Notes about using jupyter, openai gyms"
 
 <div class="output_area">
 
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NoSuchDisplayException</span>                    Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-2-875f1b28055f&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">for</span> _ <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">200</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span>     display<span class="ansi-blue-fg">.</span>clear_output<span class="ansi-blue-fg">(</span>wait<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg">     </span>display<span class="ansi-blue-fg">.</span>display<span class="ansi-blue-fg">(</span>PIL<span class="ansi-blue-fg">.</span>Image<span class="ansi-blue-fg">.</span>fromarray<span class="ansi-blue-fg">(</span>env<span class="ansi-blue-fg">.</span>render<span class="ansi-blue-fg">(</span>mode<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;rgb_array&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     11</span>     s<span class="ansi-blue-fg">,</span>r<span class="ansi-blue-fg">,</span>d<span class="ansi-blue-fg">,</span>_<span class="ansi-blue-fg">=</span>env<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span>env<span class="ansi-blue-fg">.</span>action_space<span class="ansi-blue-fg">.</span>sample<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span>     <span class="ansi-green-fg">if</span> d<span class="ansi-blue-fg">:</span>env<span class="ansi-blue-fg">.</span>reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/gym/core.py</span> in <span class="ansi-cyan-fg">render</span><span class="ansi-blue-fg">(self, mode, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    231</span> 
+<span class="ansi-green-intense-fg ansi-bold">    232</span>     <span class="ansi-green-fg">def</span> render<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> mode<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;human&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 233</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">.</span>render<span class="ansi-blue-fg">(</span>mode<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    234</span> 
+<span class="ansi-green-intense-fg ansi-bold">    235</span>     <span class="ansi-green-fg">def</span> close<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/gym/envs/classic_control/cartpole.py</span> in <span class="ansi-cyan-fg">render</span><span class="ansi-blue-fg">(self, mode)</span>
+<span class="ansi-green-intense-fg ansi-bold">    172</span> 
+<span class="ansi-green-intense-fg ansi-bold">    173</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>viewer <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 174</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">from</span> gym<span class="ansi-blue-fg">.</span>envs<span class="ansi-blue-fg">.</span>classic_control <span class="ansi-green-fg">import</span> rendering
+<span class="ansi-green-intense-fg ansi-bold">    175</span>             self<span class="ansi-blue-fg">.</span>viewer <span class="ansi-blue-fg">=</span> rendering<span class="ansi-blue-fg">.</span>Viewer<span class="ansi-blue-fg">(</span>screen_width<span class="ansi-blue-fg">,</span> screen_height<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    176</span>             l<span class="ansi-blue-fg">,</span> r<span class="ansi-blue-fg">,</span> t<span class="ansi-blue-fg">,</span> b <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">-</span>cartwidth <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> cartwidth <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> cartheight <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">-</span>cartheight <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">2</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/gym/envs/classic_control/rendering.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span> 
+<span class="ansi-green-intense-fg ansi-bold">     24</span> <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 25</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">from</span> pyglet<span class="ansi-blue-fg">.</span>gl <span class="ansi-green-fg">import</span> <span class="ansi-blue-fg">*</span>
+<span class="ansi-green-intense-fg ansi-bold">     26</span> <span class="ansi-green-fg">except</span> ImportError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     27</span>     raise ImportError(&#39;&#39;&#39;
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/gl/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">    242</span>     <span class="ansi-red-fg"># trickery is for circular import</span>
+<span class="ansi-green-intense-fg ansi-bold">    243</span>     _pyglet<span class="ansi-blue-fg">.</span>gl <span class="ansi-blue-fg">=</span> _sys<span class="ansi-blue-fg">.</span>modules<span class="ansi-blue-fg">[</span>__name__<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">--&gt; 244</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">import</span> pyglet<span class="ansi-blue-fg">.</span>window
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/window/__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">   1878</span> <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> _is_pyglet_doc_run<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1879</span>     pyglet<span class="ansi-blue-fg">.</span>window <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>modules<span class="ansi-blue-fg">[</span>__name__<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">-&gt; 1880</span><span class="ansi-red-fg">     </span>gl<span class="ansi-blue-fg">.</span>_create_shadow_window<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/gl/__init__.py</span> in <span class="ansi-cyan-fg">_create_shadow_window</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">    218</span> 
+<span class="ansi-green-intense-fg ansi-bold">    219</span>     <span class="ansi-green-fg">from</span> pyglet<span class="ansi-blue-fg">.</span>window <span class="ansi-green-fg">import</span> Window
+<span class="ansi-green-fg">--&gt; 220</span><span class="ansi-red-fg">     </span>_shadow_window <span class="ansi-blue-fg">=</span> Window<span class="ansi-blue-fg">(</span>width<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> height<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> visible<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    221</span>     _shadow_window<span class="ansi-blue-fg">.</span>switch_to<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    222</span> 
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/window/xlib/__init__.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    163</span>                     self<span class="ansi-blue-fg">.</span>_event_handlers<span class="ansi-blue-fg">[</span>message<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> func
+<span class="ansi-green-intense-fg ansi-bold">    164</span> 
+<span class="ansi-green-fg">--&gt; 165</span><span class="ansi-red-fg">         </span>super<span class="ansi-blue-fg">(</span>XlibWindow<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__init__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    166</span> 
+<span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">global</span> _can_detect_autorepeat
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/window/__init__.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, width, height, caption, resizable, style, fullscreen, visible, vsync, display, screen, config, context, mode)</span>
+<span class="ansi-green-intense-fg ansi-bold">    568</span> 
+<span class="ansi-green-intense-fg ansi-bold">    569</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> display<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 570</span><span class="ansi-red-fg">             </span>display <span class="ansi-blue-fg">=</span> pyglet<span class="ansi-blue-fg">.</span>canvas<span class="ansi-blue-fg">.</span>get_display<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    571</span> 
+<span class="ansi-green-intense-fg ansi-bold">    572</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> screen<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/canvas/__init__.py</span> in <span class="ansi-cyan-fg">get_display</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     92</span> 
+<span class="ansi-green-intense-fg ansi-bold">     93</span>     <span class="ansi-red-fg"># Otherwise, create a new display and return it.</span>
+<span class="ansi-green-fg">---&gt; 94</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> Display<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     95</span> 
+<span class="ansi-green-intense-fg ansi-bold">     96</span> 
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/pyglet/canvas/xlib.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, name, x_screen)</span>
+<span class="ansi-green-intense-fg ansi-bold">    121</span>         self<span class="ansi-blue-fg">.</span>_display <span class="ansi-blue-fg">=</span> xlib<span class="ansi-blue-fg">.</span>XOpenDisplay<span class="ansi-blue-fg">(</span>name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    122</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>_display<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 123</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> NoSuchDisplayException<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Cannot connect to &#34;%s&#34;&#39;</span> <span class="ansi-blue-fg">%</span> name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    124</span> 
+<span class="ansi-green-intense-fg ansi-bold">    125</span>         screen_count <span class="ansi-blue-fg">=</span> xlib<span class="ansi-blue-fg">.</span>XScreenCount<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_display<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NoSuchDisplayException</span>: Cannot connect to &#34;None&#34;</pre>
 </div>
-
 </div>
 
 </div>
