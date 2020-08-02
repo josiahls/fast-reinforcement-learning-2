@@ -137,24 +137,24 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;s&#39;: array([[1, 1, 2, 1, 2],
-        [2, 1, 1, 1, 1],
-        [1, 2, 2, 2, 1],
-        [2, 2, 2, 2, 2],
-        [2, 1, 1, 1, 2]]),
- &#39;sp&#39;: array([[1, 2, 2, 1, 2],
-        [1, 1, 1, 1, 2],
-        [1, 1, 1, 2, 1],
-        [2, 1, 1, 2, 1],
-        [1, 1, 2, 2, 2]]),
+<pre>{&#39;s&#39;: array([[2, 1, 1, 2, 2],
+        [1, 2, 1, 2, 1],
+        [1, 1, 1, 2, 2],
+        [1, 1, 2, 2, 1],
+        [2, 2, 1, 1, 2]]),
+ &#39;sp&#39;: array([[2, 2, 2, 1, 2],
+        [1, 1, 2, 2, 1],
+        [2, 1, 2, 2, 2],
+        [1, 1, 1, 2, 2],
+        [1, 1, 1, 1, 1]]),
  &#39;a&#39;: array([[1, 1]]),
- &#39;r&#39;: array([[1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2]]),
+ &#39;r&#39;: array([[2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1]]),
  &#39;d&#39;: array([[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]]),
- &#39;agent_s&#39;: array([[2, 5, 4, 3, 4]])}</pre>
+ &#39;agent_s&#39;: array([[4, 5, 0, 4, 4]])}</pre>
 </div>
 
 </div>
@@ -272,108 +272,108 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 21:53:41] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 21:53:41] p3996 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-25 16:03:48] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([12, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([6, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([9, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:8 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([5, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([20, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([25, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([10, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:48] p186 line:19 CRITICAL - xb: torch.Size([15, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -413,10 +413,57 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:08] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 19:54:08] p3996 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-25 16:03:49] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:49] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:50] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:51] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([3, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:52] p186 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:53] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([6, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([12, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([9, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:4 CRITICAL - xb: torch.Size([15, 400, 600, 3]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -486,11 +533,57 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:08] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
-[07-18 19:54:08] p3996 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+<pre>[07-25 16:03:54] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:54] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:55] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:55] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:55] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
+[07-25 16:03:55] p186 line:5 CRITICAL - xb: torch.Size([3, 4]), yb: dict_keys([&#39;s&#39;, &#39;sp&#39;, &#39;a&#39;, &#39;r&#39;, &#39;d&#39;, &#39;agent_s&#39;])
 </pre>
 </div>
 </div>
@@ -855,7 +948,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:09] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:03:55] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -889,7 +982,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:09] p3996 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:03:55] p186 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -950,7 +1043,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dqn_fitter" class="doc_header"><code>dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L411" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
+<h4 id="dqn_fitter" class="doc_header"><code>dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L413" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -974,7 +1067,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dqn_grad_fitter" class="doc_header"><code>dqn_grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L423" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
+<h4 id="dqn_grad_fitter" class="doc_header"><code>dqn_grad_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L425" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dqn_grad_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>grad_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>loss_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -998,7 +1091,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="buggy_dqn_fitter" class="doc_header"><code>buggy_dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L437" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>buggy_dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
+<h4 id="buggy_dqn_fitter" class="doc_header"><code>buggy_dqn_fitter</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L439" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>buggy_dqn_fitter</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>agent</code></strong>:<a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a>, <strong><code>ds</code></strong>:<a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a>, <strong><code>data_queue</code></strong>:<code>JoinableQueue</code>, <strong><code>pause_event</code></strong>:<code>Event</code>, <strong><code>cancel_event</code></strong>:<code>Event</code>, <strong><code>metric_queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1067,7 +1160,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">data_exp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback2</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback2</span><span class="p">])</span>
 <span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_fitter</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1114,117 +1207,8 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 21:53:53] p3996 line:15 INFO - Starting Process
-[07-18 21:53:53] p12403 line:35 WARNING - `self.learn` is None. will use random actions instead.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[1.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
-[0.0]
+<pre>[07-25 16:04:11] p186 line:15 INFO - Starting Process
+[07-25 16:04:11] p258 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1245,7 +1229,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">data_exp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span>
 <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
     <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1316,9 +1300,9 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 21:42:51] p3996 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
-[07-18 21:42:51] p3996 line:15 INFO - Starting Process
-[07-18 21:42:51] p10715 line:29 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `data_fitter` to actually run/train.
+<pre>[07-25 16:04:17] p186 line:12 WARNING - Using the default fitter function which will likely not work. Make sure your `AgentLearner` has a `fitter` attribute to actually run/train.
+[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p262 line:29 WARNING - Using the `test_fitter` function. Make sure your `AgentLearner` has a `data_fitter` to actually run/train.
 </pre>
 </div>
 </div>
@@ -1339,7 +1323,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">data_exp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span>
 <span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_grad_fitter</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1380,10 +1364,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p4072 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 19:54:09] p4075 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p266 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:04:17] p269 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1404,7 +1388,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span>
 <span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_fitter</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1445,10 +1429,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p4082 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 19:54:09] p4085 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p276 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:04:17] p279 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1470,7 +1454,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span>
 <span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">buggy_dqn_fitter</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span>
     <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1542,9 +1526,9 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p3996 line:15 INFO - Starting Process
-[07-18 19:54:09] p4090 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p284 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1565,7 +1549,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">],</span><span class="n">loss_func</span><span class="o">=</span><span class="n">fake_loss</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span>
 <span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_fitter</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1606,10 +1590,10 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[07-18 19:54:10] p3996 line:15 INFO - Starting Process
-[07-18 19:54:10] p3996 line:15 INFO - Starting Process
-[07-18 19:54:10] p4096 line:35 WARNING - `self.learn` is None. will use random actions instead.
-[07-18 19:54:10] p4099 line:35 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:17] p186 line:15 INFO - Starting Process
+[07-25 16:04:18] p290 line:35 WARNING - `self.learn` is None. will use random actions instead.
+[07-25 16:04:18] p293 line:35 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>

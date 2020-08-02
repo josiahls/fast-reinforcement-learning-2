@@ -401,6 +401,8 @@ class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
             _sub_ds_cls=partial(_sub_ds_cls,env=env,n_envs=1,max_episode_step=0 if make_empty else max_steps,steps=skip_step)
             _ds_cls=AsyncDataExperienceSourceDataset if data_exp else AsyncGradExperienceSourceDataset
             _ds=_ds_cls(env,max_episode_step=0 if make_empty else max_steps,steps=skip_step,ds_cls=_sub_ds_cls,n_processes=n_processes,queue_sz=queue_sz)
+            for k,v in {'env':env,'n_envs':n_envs,'steps':skip_step}.items():
+                if not hasattr(_ds,k):setattr(_ds,k,v)
             if display:_ds=DatasetDisplayWrapper(_ds,cols=cols,rows=rows,max_w=max_w)
             return _ds
 
