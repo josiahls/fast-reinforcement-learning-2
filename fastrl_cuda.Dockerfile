@@ -56,13 +56,13 @@ RUN conda env create -f environment.yaml
 RUN chown -R $CONTAINER_USER /opt/conda/envs/fastrl/ && chmod -R 777 /opt/conda/envs/fastrl/
 RUN /bin/bash -c "source activate fastrl && conda install -c conda-forge nodejs ptvsd"
 RUN apt-get install -y python-opengl xvfb
-RUN /bin/bash -c "source activate fastrl && pip install fastcore"
 
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
-#RUN chmod +x ./entrypoint.sh
 RUN ["chmod", "+x", "entrypoint.sh"]
+RUN echo 'source activate fastrl' >> ~/.bashrc
+RUN /bin/bash -c "source activate fastrl && python setup.py develop"
 USER $CONTAINER_USER
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash","-c"]
-RUN /bin/bash -c "source activate fastrl && python setup.py develop"
+
 

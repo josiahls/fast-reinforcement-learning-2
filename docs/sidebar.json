@@ -5,6 +5,7 @@
     "Wrappers": "/wrappers",
     "Callbacks": "/callbacks",
     "Basic Action Selection": "/basic_agents",
+    "Metrics": "/metrics",
     "Data Block": "/data_block",
     "Basic Train": "/basic_train",
     "A3C Data": "/a3c.a3c_data",

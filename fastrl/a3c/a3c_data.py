@@ -4,6 +4,7 @@ __all__ = ['a3c_data_fitter', 'A3CLearner', 'A3CTrainer']
 
 # Cell
 # from fastai.basic_data import *
+import torch.nn.utils as nn_utils
 from fastai.torch_core import *
 from fastai.callbacks import *
 from ..wrappers import *
@@ -27,7 +28,7 @@ logging.basicConfig(format='[%(asctime)s] p%(process)s line:%(lineno)d %(levelna
 _logger=logging.getLogger(__name__)
 
 # Cell
-@safe_fit
+# @safe_fit
 def a3c_data_fitter(model,agent,ds,data_queue,pause_event,
                     cancel_event,metric_queue):
     dataset=ds()
@@ -36,15 +37,21 @@ def a3c_data_fitter(model,agent,ds,data_queue,pause_event,
             data_queue.put(yb)
             if pause_event.is_set():cancel_event.wait(0.1)
             if cancel_event.is_set():break
+
+            if metric_queue is not None:
+                rs=dataset.pop_total_r()
+                if len(rs)!=0:metric_queue.put(TotalRewards(np.mean(rs)))
+
+            if cancel_event.is_set():break
         if cancel_event.is_set():break
-        if metric_queue is not None:
-            rs=dataset.pop_total_r()
-            if len(rs)!=0:metric_queue.put(TotalRewards(np.mean(rs)))
 
 @dataclass
 class A3CLearner(AgentLearner):
     fitter:Callable=a3c_data_fitter
-    batch_sz:int=100
+    batch_sz:int=128
+    discount:float=0.99
+    entropy_beta:float=0.01
+    clip_grad:float=0.1
 
     def __post_init__(self):
         super(A3CLearner,self).__post_init__()
@@ -52,17 +59,50 @@ class A3CLearner(AgentLearner):
         if self.agent.model is None: self.agent.model=self.model
         self.model.share_memory()
 
+    def predict(self,s):
+        out=self.model(s)
+        if type(out)==tuple:return out[0]
+        return out
+
 # Cell
 class A3CTrainer(LearnerCallback):
     def __init__(self,*args,**kwargs):
         super(A3CTrainer,self).__init__(*args,**kwargs)
         self.batch=[]
 
+    @property
+    def skip_process_batch(self):return len(self.batch)<self.learn.batch_sz
+
     def on_train_begin(self,**kwargs):
         self.batch.clear()
 
     def on_batch_begin(self,last_target,**kwargs):
         self.batch.extend([Experience(**o) for o in last_target])
-        if len(self.batch)<self.learn.batch_sz:return
 
-    def on_backward_begin(self,*args,**kwargs): return {'skip_bwd':True,'skip_validate':True}
+    def on_backward_begin(self,last_loss,**kwargs):
+        if self.skip_process_batch:return {'skip_bwd':self.skip_process_batch}
+
+        s_t,a_t,r_est=unbatch(self.batch,self.learn.model,self.learn.discount**self.learn.data.steps)
+
+        logits_v,value_v=self.learn.model(s_t)
+        loss_value_v=F.mse_loss(value_v.squeeze(-1),r_est)
+        log_prob_v=F.log_softmax(logits_v,dim=1)
+        adv_v=r_est-value_v.detach()
+        log_prob_actions_v=adv_v*log_prob_v[range(self.learn.batch_sz),a_t]
+        loss_policy_v=-log_prob_actions_v.mean()
+
+        prob_v=F.softmax(logits_v,dim=1)
+        entropy_loss_v=self.learn.entropy_beta*(prob_v*log_prob_v).sum(dim=1).mean()
+
+        loss_v=entropy_loss_v+loss_policy_v+loss_value_v
+        self.learn.loss_func.loss=loss_v.detach()
+        return {'last_loss':loss_v,'skip_bwd':self.skip_process_batch}
+
+
+    def on_backward_end(self,*args,**kwargs): return {'skip_bwd':self.skip_process_batch,
+                                                      'skip_step':self.skip_process_batch,
+                                                      'skip_zero':self.skip_process_batch}
+    def on_step_end(self,*args,**kwargs):
+        if self.skip_process_batch:return
+        nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
+        self.batch.clear()
