@@ -41,6 +41,6 @@ class RewardMetric(LearnerCallback):
                 if ds.metric_queue is not None:
                     while not ds.metric_queue.empty():
                         rs.append(ds.metric_queue.get().rewards)
-            else:rs=ds.pop_total_r()
+            else:rs=ds.pop_total_rewards()
             rewards.append(np.mean(rs))
         return add_metrics(last_metrics,rewards)

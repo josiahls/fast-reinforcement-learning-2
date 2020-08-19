@@ -55,7 +55,7 @@ COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP environment.yaml environment.yaml
 RUN conda env create -f environment.yaml
 RUN chown -R $CONTAINER_USER /opt/conda/envs/fastrl/ && chmod -R 777 /opt/conda/envs/fastrl/
 RUN /bin/bash -c "source activate fastrl && conda install -c conda-forge nodejs ptvsd"
-RUN apt-get install -y python-opengl xvfb
+RUN apt-get update && apt-get install -y python-opengl xvfb
 
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 RUN ["chmod", "+x", "entrypoint.sh"]

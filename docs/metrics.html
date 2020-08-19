@@ -109,7 +109,7 @@ description: "Metrics for reinforcement learning"
             <span class="k">if</span> <span class="n">pause_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="n">cancel_event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> 
             <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
         <span class="k">if</span> <span class="n">metric_queue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">rs</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">pop_total_r</span><span class="p">()</span>
+            <span class="n">rs</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">pop_total_rewards</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span><span class="n">metric_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">TotalRewards</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rs</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
 </pre></div>
@@ -137,6 +137,112 @@ description: "Metrics for reinforcement learning"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_reward</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>21.609756</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>20.360000</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>20.416667</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>23.190476</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>26.100000</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>19.800000</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>18.481481</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>23.500000</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>26.363636</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.499999</td>
+      <td>#na#</td>
+      <td>21.391304</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/utils/data/dataloader.py:375: UserWarning: Length of IterableDataset &lt;fastrl.data_block.AsyncGradExperienceSourceDataset object at 0x7f01f1f27410&gt; was reported to be 500 (when accessing len(dataloader)), but 501 samples have been fetched. 
+  warnings.warn(warn_msg)
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 

@@ -7,17 +7,19 @@ __all__ = ['a3c_data_fitter', 'A3CLearner', 'A3CTrainer']
 import torch.nn.utils as nn_utils
 from fastai.torch_core import *
 from fastai.callbacks import *
+from fastai.basic_train import *
+from fastai.callback import *
 from ..wrappers import *
 from ..basic_agents import *
 from ..basic_train import *
 from ..data_block import *
 from ..metrics import *
-from fastai.basic_train import *
 from dataclasses import asdict
 from functools import partial
 from fastprogress.fastprogress import IN_NOTEBOOK
 from fastcore.utils import *
 import torch.multiprocessing as mp
+import torch.optim as optim
 from queue import Empty
 import textwrap
 import logging
@@ -28,7 +30,7 @@ logging.basicConfig(format='[%(asctime)s] p%(process)s line:%(lineno)d %(levelna
 _logger=logging.getLogger(__name__)
 
 # Cell
-# @safe_fit
+@safe_fit
 def a3c_data_fitter(model,agent,ds,data_queue,pause_event,
                     cancel_event,metric_queue):
     dataset=ds()
@@ -39,7 +41,7 @@ def a3c_data_fitter(model,agent,ds,data_queue,pause_event,
             if cancel_event.is_set():break
 
             if metric_queue is not None:
-                rs=dataset.pop_total_r()
+                rs=dataset.pop_total_rewards()
                 if len(rs)!=0:metric_queue.put(TotalRewards(np.mean(rs)))
 
             if cancel_event.is_set():break
@@ -58,6 +60,7 @@ class A3CLearner(AgentLearner):
         if self.model is None:self.model=self.agent.model
         if self.agent.model is None: self.agent.model=self.model
         self.model.share_memory()
+        self.opt=OptimWrapper(AdamW(self.model.parameters(),eps=1e-3))
 
     def predict(self,s):
         out=self.model(s)
@@ -77,12 +80,13 @@ class A3CTrainer(LearnerCallback):
         self.batch.clear()
 
     def on_batch_begin(self,last_target,**kwargs):
-        self.batch.extend([Experience(**o) for o in last_target])
+        print(last_target)
+        self.batch.extend([Experience(**o) for o in ([last_target] if type(last_target)!=list else last_target,)])
 
     def on_backward_begin(self,last_loss,**kwargs):
         if self.skip_process_batch:return {'skip_bwd':self.skip_process_batch}
-
-        s_t,a_t,r_est=unbatch(self.batch,self.learn.model,self.learn.discount**self.learn.data.steps)
+        s_t,a_t,r_est=unbatch(self.batch,self.learn.model,self.learn.discount**self.data.skip_n_steps)
+#         self.learn.opt.zero_grad()
 
         logits_v,value_v=self.learn.model(s_t)
         loss_value_v=F.mse_loss(value_v.squeeze(-1),r_est)
@@ -95,14 +99,21 @@ class A3CTrainer(LearnerCallback):
         entropy_loss_v=self.learn.entropy_beta*(prob_v*log_prob_v).sum(dim=1).mean()
 
         loss_v=entropy_loss_v+loss_policy_v+loss_value_v
+
+        print(s_t.shape)
+#         getBack(loss_v.grad_fn)
+
         self.learn.loss_func.loss=loss_v.detach()
         return {'last_loss':loss_v,'skip_bwd':self.skip_process_batch}
 
 
-    def on_backward_end(self,*args,**kwargs): return {'skip_bwd':self.skip_process_batch,
-                                                      'skip_step':self.skip_process_batch,
-                                                      'skip_zero':self.skip_process_batch}
-    def on_step_end(self,*args,**kwargs):
+    def on_backward_end(self,*args,**kwargs):
+        if not self.skip_process_batch:nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
+        return {'skip_bwd':self.skip_process_batch,
+                'skip_step':self.skip_process_batch,
+                'skip_zero':self.skip_process_batch}
+    def on_step_end(self,last_loss,*args,**kwargs):
         if self.skip_process_batch:return
-        nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
+#         getBack(last_loss.grad_fn)
         self.batch.clear()
+        print(len(self.batch))
