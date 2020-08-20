@@ -63,7 +63,7 @@ class A3CLearner(AgentLearner):
         self.opt=OptimWrapper(AdamW(self.model.parameters(),eps=1e-3))
 
     def predict(self,s):
-        out=self.model(s)
+        out=self.agent(s)
         if type(out)==tuple:return out[0]
         return out
 
