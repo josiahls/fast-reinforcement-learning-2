@@ -98,20 +98,33 @@ description: "Metrics for reinforcement learning"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dqn_grad_fitter_2</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span><span class="n">agent</span><span class="p">:</span><span class="n">BaseAgent</span><span class="p">,</span><span class="n">ds</span><span class="p">:</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">grad_queue</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">,</span><span class="n">loss_queue</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">,</span>
-                      <span class="n">pause_event</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span><span class="n">cancel_event</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span><span class="n">metric_queue</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">dataset</span><span class="o">=</span><span class="n">ds</span><span class="p">()</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span> 
-        <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
-            <span class="n">grad_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
-            <span class="n">loss_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">pause_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="n">cancel_event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> 
-            <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
-        <span class="k">if</span> <span class="n">metric_queue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">rs</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">pop_total_rewards</span><span class="p">()</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span><span class="n">metric_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">TotalRewards</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rs</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">break</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_grad_fitter</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span><span class="n">learner_cls</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;AgentLearner&#39;</span><span class="p">],</span><span class="n">agent</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;BaseAgent&#39;</span><span class="p">],</span><span class="n">ds_cls</span><span class="p">:</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span>
+            <span class="n">pause_event</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span><span class="n">cancel_event</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">Event</span><span class="p">,</span><span class="n">main_queue</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">],</span><span class="n">metric_queue</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">JoinableQueue</span><span class="p">]):</span>
+    <span class="s2">&quot;Default fitter for AsyncGradExperienceSourceDataset.&quot;</span>
+    <span class="n">ds</span><span class="o">=</span><span class="n">ds_cls</span><span class="p">()</span>
+    <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">learner_cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">learn</span><span class="o">=</span><span class="n">learner_cls</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">DataBunch</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="n">dl</span><span class="p">),</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">learn</span><span class="o">=</span><span class="n">learn</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">pause_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cancel_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="n">cancel_event</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">main_queue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">loss</span><span class="o">=</span><span class="mf">0.5</span> <span class="c1"># Place holder</span>
+                    <span class="n">main_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">xb</span><span class="p">,{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span><span class="n">loss</span><span class="p">,</span><span class="o">**</span><span class="n">yb</span><span class="p">}))</span>
+            <span class="k">if</span> <span class="n">metric_queue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">total_rewards</span><span class="o">=</span><span class="n">ds</span><span class="o">.</span><span class="n">pop_total_rewards</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">total_rewards</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">metric_queue</span><span class="o">.</span><span class="n">full</span><span class="p">():</span><span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Metric queue is full. Increase its size,empty it, or set metric_queue to None.&#39;</span><span class="p">)</span>
+                    <span class="n">metric_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">TotalRewards</span><span class="p">(</span><span class="n">total_rewards</span><span class="p">))</span>                    
+            <span class="k">while</span> <span class="n">pause_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span><span class="k">pass</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">main_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">metric_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">cancel_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -128,11 +141,12 @@ description: "Metrics for reinforcement learning"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">data_exp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">queue_sz</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">use_grad_experience</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">fitter_fn</span><span class="o">=</span><span class="n">_grad_fitter</span><span class="p">,</span>
+                                             <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">ds_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_envs&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">})</span>
 <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">,</span><span class="n">RewardMetric</span><span class="p">])</span>
-<span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">dqn_grad_fitter_2</span><span class="p">)</span>
+<span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">_grad_fitter</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
@@ -162,70 +176,199 @@ description: "Metrics for reinforcement learning"
       <td>0</td>
       <td>0.500000</td>
       <td>#na#</td>
-      <td>21.609756</td>
+      <td>10.750000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>10.375000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.400000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.571429</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.750000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.600000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.857143</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.250000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.500000</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>9.333333</td>
+      <td>00:01</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">ExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">,</span><span class="n">RewardMetric</span><span class="p">])</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_reward</th>
+      <th>valid_reward</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>18.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>20.360000</td>
+      <td>11.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>20.416667</td>
+      <td>12.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>23.190476</td>
+      <td>9.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>26.100000</td>
+      <td>9.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>5</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>19.800000</td>
+      <td>10.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>6</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>18.481481</td>
+      <td>10.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>7</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>23.500000</td>
+      <td>9.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>8</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>26.363636</td>
+      <td>8.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>9</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
-      <td>21.391304</td>
+      <td>9.000000</td>
+      <td>nan</td>
       <td>00:00</td>
     </tr>
   </tbody>
@@ -234,13 +377,275 @@ description: "Metrics for reinforcement learning"
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/utils/data/dataloader.py:375: UserWarning: Length of IterableDataset &lt;fastrl.data_block.AsyncGradExperienceSourceDataset object at 0x7f01f1f27410&gt; was reported to be 500 (when accessing len(dataloader)), but 501 samples have been fetched. 
-  warnings.warn(warn_msg)
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="NGamesMetric" class="doc_header"><code>class</code> <code>NGamesMetric</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/metrics.py#L50" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>NGamesMetric</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>LearnerCallback</code></p>
+</blockquote>
+<p>Base class for creating callbacks for a <code>Learner</code>.</p>
+
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">use_grad_experience</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">fitter_fn</span><span class="o">=</span><span class="n">_grad_fitter</span><span class="p">,</span>
+                                             <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">ds_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_envs&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">})</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">,</span><span class="n">NGamesMetric</span><span class="p">])</span>
+<span class="nb">setattr</span><span class="p">(</span><span class="n">learn</span><span class="p">,</span><span class="s1">&#39;fitter&#39;</span><span class="p">,</span><span class="n">_grad_fitter</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_n_games</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>4</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>8</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>12</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>16</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>22</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>28</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>32</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>38</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>41</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>45</td>
+      <td>00:01</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                             <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">ds_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;n_envs&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">})</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">=</span><span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">,</span><span class="n">NGamesMetric</span><span class="p">])</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>train_n_games</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>5</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>13</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>19</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>27</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>33</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>39</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>47</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>55</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>60</td>
+      <td>00:01</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>67</td>
+      <td>00:01</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 </div>
 
 </div>

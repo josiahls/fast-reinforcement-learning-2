@@ -34,9 +34,6 @@ entries:
       title: A3C Data
       url: /a3c.a3c_data
     - output: web,pdf
-      title: Title
-      url: /Untitled
-    - output: web,pdf
       title: General Notes
       url: /notes
     output: web

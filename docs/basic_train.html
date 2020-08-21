@@ -142,6 +142,348 @@ description: "Contains basic Learners and Agents"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>Learner<span class="o">??</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Init signature:</span>
+Learner<span class="ansi-blue-fg">(</span>
+    data<span class="ansi-blue-fg">:</span> fastai<span class="ansi-blue-fg">.</span>basic_data<span class="ansi-blue-fg">.</span>DataBunch<span class="ansi-blue-fg">,</span>
+    model<span class="ansi-blue-fg">:</span> torch<span class="ansi-blue-fg">.</span>nn<span class="ansi-blue-fg">.</span>modules<span class="ansi-blue-fg">.</span>module<span class="ansi-blue-fg">.</span>Module<span class="ansi-blue-fg">,</span>
+    opt_func<span class="ansi-blue-fg">:</span> Callable <span class="ansi-blue-fg">=</span> functools<span class="ansi-blue-fg">.</span>partial<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&lt;</span><span class="ansi-green-fg">class</span> <span class="ansi-blue-fg">&#39;torch.optim.adam.Adam&#39;</span><span class="ansi-blue-fg">&gt;</span><span class="ansi-blue-fg">,</span> betas<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0.9</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0.99</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+    loss_func<span class="ansi-blue-fg">:</span> Callable <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    metrics<span class="ansi-blue-fg">:</span> Collection<span class="ansi-blue-fg">[</span>Callable<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    true_wd<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+    bn_wd<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+    wd<span class="ansi-blue-fg">:</span> Union<span class="ansi-blue-fg">[</span>float<span class="ansi-blue-fg">,</span> Collection<span class="ansi-blue-fg">[</span>float<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0.01</span><span class="ansi-blue-fg">,</span>
+    train_bn<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+    path<span class="ansi-blue-fg">:</span> str <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    model_dir<span class="ansi-blue-fg">:</span> Union<span class="ansi-blue-fg">[</span>pathlib<span class="ansi-blue-fg">.</span>Path<span class="ansi-blue-fg">,</span> str<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;models&#39;</span><span class="ansi-blue-fg">,</span>
+    callback_fns<span class="ansi-blue-fg">:</span> Collection<span class="ansi-blue-fg">[</span>Callable<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    callbacks<span class="ansi-blue-fg">:</span> Collection<span class="ansi-blue-fg">[</span>fastai<span class="ansi-blue-fg">.</span>callback<span class="ansi-blue-fg">.</span>Callback<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&lt;</span>factory<span class="ansi-blue-fg">&gt;</span><span class="ansi-blue-fg">,</span>
+    layer_groups<span class="ansi-blue-fg">:</span> Collection<span class="ansi-blue-fg">[</span>torch<span class="ansi-blue-fg">.</span>nn<span class="ansi-blue-fg">.</span>modules<span class="ansi-blue-fg">.</span>module<span class="ansi-blue-fg">.</span>Module<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    add_time<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+    silent<span class="ansi-blue-fg">:</span> bool <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-red-fg">Source:</span>        
+<span class="ansi-green-fg">class</span> Learner<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-blue-fg">&#34;Trainer for `model` using `data` to minimize `loss_func` with optimizer `opt_func`.&#34;</span>
+    data<span class="ansi-blue-fg">:</span>DataBunch
+    model<span class="ansi-blue-fg">:</span>nn<span class="ansi-blue-fg">.</span>Module
+    opt_func<span class="ansi-blue-fg">:</span>Callable<span class="ansi-blue-fg">=</span>AdamW
+    loss_func<span class="ansi-blue-fg">:</span>Callable<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span>
+    metrics<span class="ansi-blue-fg">:</span>Collection<span class="ansi-blue-fg">[</span>Callable<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span>
+    true_wd<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+    bn_wd<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+    wd<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">=</span>defaults<span class="ansi-blue-fg">.</span>wd
+    train_bn<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+    path<span class="ansi-blue-fg">:</span>str <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+    model_dir<span class="ansi-blue-fg">:</span>PathOrStr <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;models&#39;</span>
+    callback_fns<span class="ansi-blue-fg">:</span>Collection<span class="ansi-blue-fg">[</span>Callable<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span>
+    callbacks<span class="ansi-blue-fg">:</span>Collection<span class="ansi-blue-fg">[</span>Callback<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span>field<span class="ansi-blue-fg">(</span>default_factory<span class="ansi-blue-fg">=</span>list<span class="ansi-blue-fg">)</span>
+    layer_groups<span class="ansi-blue-fg">:</span>Collection<span class="ansi-blue-fg">[</span>nn<span class="ansi-blue-fg">.</span>Module<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span>
+    add_time<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span>
+    silent<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span>
+    <span class="ansi-green-fg">def</span> __post_init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Setup path,metrics, callbacks and ensure model directory exists.&#34;</span>
+        self<span class="ansi-blue-fg">.</span>path <span class="ansi-blue-fg">=</span> Path<span class="ansi-blue-fg">(</span>ifnone<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>model <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>loss_func <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>loss_func <span class="ansi-green-fg">or</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>loss_func
+        self<span class="ansi-blue-fg">.</span>metrics<span class="ansi-blue-fg">=</span>listify<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>metrics<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>layer_groups <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>nn<span class="ansi-blue-fg">.</span>Sequential<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>flatten_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        self<span class="ansi-blue-fg">.</span>callbacks <span class="ansi-blue-fg">=</span> listify<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>silent <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>silent <span class="ansi-blue-fg">=</span> defaults<span class="ansi-blue-fg">.</span>silent
+        self<span class="ansi-blue-fg">.</span>callback_fns <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>partial<span class="ansi-blue-fg">(</span>Recorder<span class="ansi-blue-fg">,</span> add_time<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>add_time<span class="ansi-blue-fg">,</span> silent<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>silent<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callback_fns<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> defaults<span class="ansi-blue-fg">.</span>extra_callbacks <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>callbacks <span class="ansi-blue-fg">+=</span> defaults<span class="ansi-blue-fg">.</span>extra_callbacks
+
+    <span class="ansi-green-fg">def</span> init<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> init<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> apply_init<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> init<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> _test_writeable_path<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        path <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">/</span>self<span class="ansi-blue-fg">.</span>model_dir
+        <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+            path<span class="ansi-blue-fg">.</span>mkdir<span class="ansi-blue-fg">(</span>parents<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span> exist_ok<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+            tmp_file <span class="ansi-blue-fg">=</span> get_tmp_file<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">except</span> OSError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">raise</span> Exception<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;{e}\nCan&#39;t write to &#39;{path}&#39;, set `learn.model_dir` attribute in Learner to a full libpath path that is writable&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">from</span> <span class="ansi-green-fg">None</span>
+        os<span class="ansi-blue-fg">.</span>remove<span class="ansi-blue-fg">(</span>tmp_file<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> lr_range<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">:</span>Union<span class="ansi-blue-fg">[</span>float<span class="ansi-blue-fg">,</span>slice<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span>np<span class="ansi-blue-fg">.</span>ndarray<span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Build differential learning rates from `lr`.&#34;</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">,</span>slice<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> lr
+        <span class="ansi-green-fg">if</span> lr<span class="ansi-blue-fg">.</span>start<span class="ansi-blue-fg">:</span> res <span class="ansi-blue-fg">=</span> even_mults<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">.</span>start<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">.</span>stop<span class="ansi-blue-fg">,</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> res <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>lr<span class="ansi-blue-fg">.</span>stop<span class="ansi-blue-fg">/</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">[</span>lr<span class="ansi-blue-fg">.</span>stop<span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">return</span> np<span class="ansi-blue-fg">.</span>array<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> fit<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> epochs<span class="ansi-blue-fg">:</span>int<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">:</span>Union<span class="ansi-blue-fg">[</span>Floats<span class="ansi-blue-fg">,</span>slice<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span>defaults<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">,</span>
+            wd<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> callbacks<span class="ansi-blue-fg">:</span>Collection<span class="ansi-blue-fg">[</span>Callback<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Fit the model on this learner with `lr` learning rate, `wd` weight decay for `epochs` with `callbacks`.&#34;</span>
+        lr <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>lr_range<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> wd <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> wd <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>wd
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>create_opt<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">,</span> wd<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>wd <span class="ansi-blue-fg">=</span> lr<span class="ansi-blue-fg">,</span>wd
+        callbacks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>cb<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> cb <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>callback_fns <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>extra_callback_fns<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>callbacks<span class="ansi-blue-fg">)</span>
+        fit<span class="ansi-blue-fg">(</span>epochs<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">,</span> metrics<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>metrics<span class="ansi-blue-fg">,</span> callbacks<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">+</span>callbacks<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> create_opt<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">,</span> wd<span class="ansi-blue-fg">:</span>Floats<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Create optimizer with `lr` learning rate and `wd` weight decay.&#34;</span>
+        self<span class="ansi-blue-fg">.</span>opt <span class="ansi-blue-fg">=</span> OptimWrapper<span class="ansi-blue-fg">.</span>create<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>opt_func<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">,</span> wd<span class="ansi-blue-fg">=</span>wd<span class="ansi-blue-fg">,</span> true_wd<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>true_wd<span class="ansi-blue-fg">,</span> bn_wd<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>bn_wd<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> split<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> split_on<span class="ansi-blue-fg">:</span>SplitFuncOrIdxList<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Split the model at `split_on`.&#34;</span>
+        <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>split_on<span class="ansi-blue-fg">,</span>Callable<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> split_on <span class="ansi-blue-fg">=</span> split_on<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>layer_groups <span class="ansi-blue-fg">=</span> split_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> split_on<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> self
+
+    <span class="ansi-green-fg">def</span> freeze_to<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">:</span>int<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Freeze layers up to layer group `n`.&#34;</span>
+        <span class="ansi-green-fg">if</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;reset&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">.</span>reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">for</span> g <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span>n<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">for</span> l <span class="ansi-green-fg">in</span> g<span class="ansi-blue-fg">:</span>
+                <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>train_bn <span class="ansi-green-fg">or</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>l<span class="ansi-blue-fg">,</span> bn_types<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> requires_grad<span class="ansi-blue-fg">(</span>l<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">for</span> g <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span> requires_grad<span class="ansi-blue-fg">(</span>g<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>create_opt<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> freeze<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Freeze up to last layer group.&#34;</span>
+        <span class="ansi-green-fg">assert</span><span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&gt;</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>freeze_to<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> unfreeze<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Unfreeze entire model.&#34;</span>
+        self<span class="ansi-blue-fg">.</span>freeze_to<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> export<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> file<span class="ansi-blue-fg">:</span>PathLikeOrBinaryStream<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;export.pkl&#39;</span><span class="ansi-blue-fg">,</span> destroy<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Export the state of the `Learner` in `self.path/file`. `file` can be file-like (file or buffer)&#34;</span>
+        <span class="ansi-green-fg">if</span> rank_distrib<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-red-fg"># don&#39;t save if slave proc</span>
+        args <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;opt_func&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;loss_func&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;metrics&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;true_wd&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;bn_wd&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;wd&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;train_bn&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;model_dir&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;callback_fns&#39;</span><span class="ansi-blue-fg">]</span>
+        state <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>a<span class="ansi-blue-fg">:</span>getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>a<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> args<span class="ansi-blue-fg">}</span>
+        state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cb_state&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>cb<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">:</span>cb<span class="ansi-blue-fg">.</span>get_state<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> cb <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">}</span>
+        <span class="ansi-red-fg">#layer_groups -&gt; need to find a way</span>
+        <span class="ansi-red-fg">#TO SEE: do we save model structure and weights separately?</span>
+        <span class="ansi-green-fg">with</span> ModelOnCPU<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> m<span class="ansi-blue-fg">:</span>
+            state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;model&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> m
+            xtra <span class="ansi-blue-fg">=</span> dict<span class="ansi-blue-fg">(</span>normalize<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>norm<span class="ansi-blue-fg">.</span>keywords<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;norm&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
+            state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;data&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>valid_ds<span class="ansi-blue-fg">.</span>get_state<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">**</span>xtra<span class="ansi-blue-fg">)</span>
+            state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cls&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>__class__
+            try_save<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">,</span> file<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> destroy<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>destroy<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> save<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> file<span class="ansi-blue-fg">:</span>PathLikeOrBinaryStream<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> return_path<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> with_opt<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Save model and optimizer state (if `with_opt`) with `file` to `self.model_dir`. `file` can be file-like (file or buffer)&#34;</span>
+        <span class="ansi-green-fg">if</span> is_pathlike<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>_test_writeable_path<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> rank_distrib<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-red-fg"># don&#39;t save if slave proc</span>
+        target <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">/</span>self<span class="ansi-blue-fg">.</span>model_dir<span class="ansi-blue-fg">/</span><span class="ansi-blue-fg">f&#39;{file}.pth&#39;</span> <span class="ansi-green-fg">if</span> is_pathlike<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> file
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> with_opt<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> with_opt<span class="ansi-blue-fg">:</span> state <span class="ansi-blue-fg">=</span> get_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>state_dict<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> state <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">&#39;model&#39;</span><span class="ansi-blue-fg">:</span> get_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>state_dict<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">:</span>self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>state_dict<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">}</span>
+        torch<span class="ansi-blue-fg">.</span>save<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">,</span> target<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> return_path<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> target
+
+    <span class="ansi-green-fg">def</span> dl<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_type<span class="ansi-blue-fg">:</span>DatasetType<span class="ansi-blue-fg">=</span>DatasetType<span class="ansi-blue-fg">.</span>Valid<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Return DataLoader for DatasetType `ds_type`.&#34;</span>
+        <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> load<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> file<span class="ansi-blue-fg">:</span>PathLikeOrBinaryStream<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> device<span class="ansi-blue-fg">:</span>torch<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> strict<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+             with_opt<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> purge<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> remove_module<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">-&gt;</span><span class="ansi-blue-fg">&#39;Learner&#39;</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Load model and optimizer state (if `with_opt`) `file` from `self.model_dir` using `device`. `file` can be file-like (file or buffer)&#34;</span>
+        <span class="ansi-green-fg">if</span> purge<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>purge<span class="ansi-blue-fg">(</span>clear_opt<span class="ansi-blue-fg">=</span>ifnone<span class="ansi-blue-fg">(</span>with_opt<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> device <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> device <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>device
+        <span class="ansi-green-fg">elif</span> isinstance<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">,</span> int<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> device <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;cuda&#39;</span><span class="ansi-blue-fg">,</span> device<span class="ansi-blue-fg">)</span>
+        source <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">/</span>self<span class="ansi-blue-fg">.</span>model_dir<span class="ansi-blue-fg">/</span><span class="ansi-blue-fg">f&#39;{file}.pth&#39;</span> <span class="ansi-green-fg">if</span> is_pathlike<span class="ansi-blue-fg">(</span>file<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> file
+        distrib_barrier<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        state <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>source<span class="ansi-blue-fg">,</span> map_location<span class="ansi-blue-fg">=</span>device<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> set<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">.</span>keys<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">&#39;model&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">:</span>
+            model_state <span class="ansi-blue-fg">=</span> state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;model&#39;</span><span class="ansi-blue-fg">]</span>
+            <span class="ansi-green-fg">if</span> remove_module<span class="ansi-blue-fg">:</span> model_state <span class="ansi-blue-fg">=</span> remove_module_load<span class="ansi-blue-fg">(</span>model_state<span class="ansi-blue-fg">)</span>
+            get_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>load_state_dict<span class="ansi-blue-fg">(</span>model_state<span class="ansi-blue-fg">,</span> strict<span class="ansi-blue-fg">=</span>strict<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">if</span> ifnone<span class="ansi-blue-fg">(</span>with_opt<span class="ansi-blue-fg">,</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+                <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>create_opt<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>wd<span class="ansi-blue-fg">)</span>
+                <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>    self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>load_state_dict<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+                <span class="ansi-green-fg">except</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">pass</span>
+        <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> with_opt<span class="ansi-blue-fg">:</span> warn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Saved filed doesn&#39;t contain an optimizer state.&#34;</span><span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">if</span> remove_module<span class="ansi-blue-fg">:</span> state <span class="ansi-blue-fg">=</span> remove_module_load<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">)</span>
+            get_model<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>load_state_dict<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">,</span> strict<span class="ansi-blue-fg">=</span>strict<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">del</span> state
+        gc<span class="ansi-blue-fg">.</span>collect<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> self
+
+    <span class="ansi-green-fg">def</span> destroy<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Free the Learner internals, leaving just an empty shell that consumes no memory&#34;</span>
+
+        <span class="ansi-green-fg">class</span> ZombieLearner<span class="ansi-blue-fg">(</span>Learner<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            msg <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;this object has been destroyed&#34;</span>
+            <span class="ansi-green-fg">def</span> __getattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> item<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>    print<span class="ansi-blue-fg">(</span>ZombieLearner<span class="ansi-blue-fg">.</span>msg<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span> <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">None</span>
+            <span class="ansi-green-fg">def</span> destroyed<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> print<span class="ansi-blue-fg">(</span>ZombieLearner<span class="ansi-blue-fg">.</span>msg<span class="ansi-blue-fg">)</span>
+
+        attrs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>k <span class="ansi-green-fg">for</span> k <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>__dict__<span class="ansi-blue-fg">.</span>keys<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> k<span class="ansi-blue-fg">.</span>startswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;__&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> attrs<span class="ansi-blue-fg">:</span> delattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">)</span>
+        <span class="ansi-red-fg"># the instance methods can still be called, but will just give a message</span>
+        methods <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>k <span class="ansi-green-fg">for</span> k <span class="ansi-green-fg">in</span> dir<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> k<span class="ansi-blue-fg">.</span>startswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;__&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">and</span> inspect<span class="ansi-blue-fg">.</span>isroutine<span class="ansi-blue-fg">(</span>getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">for</span> m <span class="ansi-green-fg">in</span> methods<span class="ansi-blue-fg">:</span> setattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> m<span class="ansi-blue-fg">,</span> ZombieLearner<span class="ansi-blue-fg">.</span>destroyed<span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>__class__ <span class="ansi-blue-fg">=</span> ZombieLearner
+        gc<span class="ansi-blue-fg">.</span>collect<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;this Learner object self-destroyed - it still exists, but no longer usable&#34;</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> purge<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> clear_opt<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Purge the `Learner` of all cached attributes to release some GPU memory.&#34;</span>
+        self<span class="ansi-blue-fg">.</span>_test_writeable_path<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        attrs_all <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>k <span class="ansi-green-fg">for</span> k <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>__dict__<span class="ansi-blue-fg">.</span>keys<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> k<span class="ansi-blue-fg">.</span>startswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;__&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        attrs_pkl <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;bn_wd&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;callback_fns&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;layer_groups&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;loss_func&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;metrics&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;model&#39;</span><span class="ansi-blue-fg">,</span>
+                     <span class="ansi-blue-fg">&#39;model_dir&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt_func&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;path&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;train_bn&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;true_wd&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;wd&#39;</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-red-fg"># +callbacks: get pickled too, but not directly</span>
+        attrs_keep <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;data&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;recorder&#39;</span><span class="ansi-blue-fg">]</span>
+        attrs_del <span class="ansi-blue-fg">=</span> list<span class="ansi-blue-fg">(</span>set<span class="ansi-blue-fg">(</span>attrs_all<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-</span> set<span class="ansi-blue-fg">(</span>attrs_keep<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        state <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>a<span class="ansi-blue-fg">:</span>getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> attrs_pkl<span class="ansi-blue-fg">}</span>
+        state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;cb_state&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>cb<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">:</span>cb<span class="ansi-blue-fg">.</span>get_state<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> cb <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">}</span>
+        <span class="ansi-green-fg">if</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>get_state<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+        tmp_file <span class="ansi-blue-fg">=</span> get_tmp_file<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">/</span>self<span class="ansi-blue-fg">.</span>model_dir<span class="ansi-blue-fg">)</span>
+        torch<span class="ansi-blue-fg">.</span>save<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">,</span> open<span class="ansi-blue-fg">(</span>tmp_file<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;wb&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> attrs_del<span class="ansi-blue-fg">:</span> delattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">)</span>
+        gc<span class="ansi-blue-fg">.</span>collect<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        state <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>tmp_file<span class="ansi-blue-fg">)</span>
+        os<span class="ansi-blue-fg">.</span>remove<span class="ansi-blue-fg">(</span>tmp_file<span class="ansi-blue-fg">)</span>
+
+        <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> attrs_pkl<span class="ansi-blue-fg">:</span> setattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> a<span class="ansi-blue-fg">,</span> state<span class="ansi-blue-fg">[</span>a<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+        cb_state <span class="ansi-blue-fg">=</span> state<span class="ansi-blue-fg">.</span>pop<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;cb_state&#39;</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>callbacks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>load_callback<span class="ansi-blue-fg">(</span>c<span class="ansi-blue-fg">,</span>s<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> c<span class="ansi-blue-fg">,</span>s <span class="ansi-green-fg">in</span> cb_state<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> clear_opt <span class="ansi-green-fg">and</span> <span class="ansi-blue-fg">&#39;opt&#39;</span> <span class="ansi-green-fg">in</span> state<span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>opt <span class="ansi-blue-fg">=</span> OptimWrapper<span class="ansi-blue-fg">.</span>load_with_state_and_layer_group<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>layer_groups<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">except</span><span class="ansi-blue-fg">:</span> warn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Wasn&#39;t able to properly load the optimizer state again.&#34;</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">del</span> state
+        gc<span class="ansi-blue-fg">.</span>collect<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> self
+
+    <span class="ansi-green-fg">def</span> get_preds<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_type<span class="ansi-blue-fg">:</span>DatasetType<span class="ansi-blue-fg">=</span>DatasetType<span class="ansi-blue-fg">.</span>Valid<span class="ansi-blue-fg">,</span> activ<span class="ansi-blue-fg">:</span>nn<span class="ansi-blue-fg">.</span>Module<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+                  with_loss<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> n_batch<span class="ansi-blue-fg">:</span>Optional<span class="ansi-blue-fg">[</span>int<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> pbar<span class="ansi-blue-fg">:</span>Optional<span class="ansi-blue-fg">[</span>PBar<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> List<span class="ansi-blue-fg">[</span>Tensor<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Return predictions and targets on `ds_type` dataset.&#34;</span>
+        lf <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>loss_func <span class="ansi-green-fg">if</span> with_loss <span class="ansi-green-fg">else</span> <span class="ansi-green-fg">None</span>
+        activ <span class="ansi-blue-fg">=</span> ifnone<span class="ansi-blue-fg">(</span>activ<span class="ansi-blue-fg">,</span> _loss_func2activ<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;opt&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>create_opt<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>lr<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>wd<span class="ansi-blue-fg">)</span>
+        callbacks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>cb<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> cb <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>callback_fns <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>defaults<span class="ansi-blue-fg">.</span>extra_callback_fns<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> listify<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> get_preds<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> cb_handler<span class="ansi-blue-fg">=</span>CallbackHandler<span class="ansi-blue-fg">(</span>callbacks<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+                         activ<span class="ansi-blue-fg">=</span>activ<span class="ansi-blue-fg">,</span> loss_func<span class="ansi-blue-fg">=</span>lf<span class="ansi-blue-fg">,</span> n_batch<span class="ansi-blue-fg">=</span>n_batch<span class="ansi-blue-fg">,</span> pbar<span class="ansi-blue-fg">=</span>pbar<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> pred_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_type<span class="ansi-blue-fg">:</span>DatasetType<span class="ansi-blue-fg">=</span>DatasetType<span class="ansi-blue-fg">.</span>Valid<span class="ansi-blue-fg">,</span> batch<span class="ansi-blue-fg">:</span>Tuple<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> reconstruct<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+                   with_dropout<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> activ<span class="ansi-blue-fg">:</span>nn<span class="ansi-blue-fg">.</span>Module<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> List<span class="ansi-blue-fg">[</span>Tensor<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Return output of the model on one batch from `ds_type` dataset.&#34;</span>
+        <span class="ansi-green-fg">if</span> batch <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> xb<span class="ansi-blue-fg">,</span>yb <span class="ansi-blue-fg">=</span> batch
+        <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> xb<span class="ansi-blue-fg">,</span>yb <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>one_batch<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">,</span> detach<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> denorm<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        cb_handler <span class="ansi-blue-fg">=</span> CallbackHandler<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">)</span>
+        xb<span class="ansi-blue-fg">,</span>yb <span class="ansi-blue-fg">=</span> cb_handler<span class="ansi-blue-fg">.</span>on_batch_begin<span class="ansi-blue-fg">(</span>xb<span class="ansi-blue-fg">,</span>yb<span class="ansi-blue-fg">,</span> train<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        activ <span class="ansi-blue-fg">=</span> ifnone<span class="ansi-blue-fg">(</span>activ<span class="ansi-blue-fg">,</span> _loss_func2activ<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">with</span> torch<span class="ansi-blue-fg">.</span>no_grad<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> with_dropout<span class="ansi-blue-fg">:</span> preds <span class="ansi-blue-fg">=</span> loss_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">.</span>eval<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> xb<span class="ansi-blue-fg">,</span> yb<span class="ansi-blue-fg">,</span> cb_handler<span class="ansi-blue-fg">=</span>cb_handler<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> preds <span class="ansi-blue-fg">=</span> loss_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">.</span>eval<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>apply<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>apply_dropout<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> xb<span class="ansi-blue-fg">,</span> yb<span class="ansi-blue-fg">,</span> cb_handler<span class="ansi-blue-fg">=</span>cb_handler<span class="ansi-blue-fg">)</span>
+            res <span class="ansi-blue-fg">=</span> activ<span class="ansi-blue-fg">(</span>preds<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> reconstruct<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> res
+        res <span class="ansi-blue-fg">=</span> res<span class="ansi-blue-fg">.</span>detach<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>cpu<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        ds <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>dataset
+        norm <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;norm&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> norm <span class="ansi-green-fg">and</span> norm<span class="ansi-blue-fg">.</span>keywords<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;do_y&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            res <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span> do_x<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> res<span class="ansi-blue-fg">]</span>
+
+    <span class="ansi-green-fg">def</span> backward<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> item<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Pass `item` through the model and computes the gradient. Useful if `backward_hooks` are attached.&#34;</span>
+        xb<span class="ansi-blue-fg">,</span>yb <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>one_item<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span>
+        loss <span class="ansi-blue-fg">=</span> loss_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">.</span>eval<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> xb<span class="ansi-blue-fg">,</span> yb<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">,</span> opt<span class="ansi-blue-fg">=</span>FakeOptimizer<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+                          cb_handler<span class="ansi-blue-fg">=</span>CallbackHandler<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> loss
+
+    <span class="ansi-green-fg">def</span> predict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> item<span class="ansi-blue-fg">:</span>ItemBase<span class="ansi-blue-fg">,</span> return_x<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> batch_first<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span> with_dropout<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Return predicted class, label and probabilities for `item`.&#34;</span>
+        batch <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>one_item<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">)</span>
+        res <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>pred_batch<span class="ansi-blue-fg">(</span>batch<span class="ansi-blue-fg">=</span>batch<span class="ansi-blue-fg">,</span> with_dropout<span class="ansi-blue-fg">=</span>with_dropout<span class="ansi-blue-fg">)</span>
+        raw_pred<span class="ansi-blue-fg">,</span>x <span class="ansi-blue-fg">=</span> grab_idx<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span>batch_first<span class="ansi-blue-fg">=</span>batch_first<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>batch<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+        norm <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;norm&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> norm<span class="ansi-blue-fg">:</span>
+            x <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">if</span> norm<span class="ansi-blue-fg">.</span>keywords<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;do_y&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> raw_pred <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>raw_pred<span class="ansi-blue-fg">)</span>
+        ds <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>single_ds
+        pred <span class="ansi-blue-fg">=</span> ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>analyze_pred<span class="ansi-blue-fg">(</span>raw_pred<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+        x <span class="ansi-blue-fg">=</span> ds<span class="ansi-blue-fg">.</span>x<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>grab_idx<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        y <span class="ansi-blue-fg">=</span> ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>pred<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> has_arg<span class="ansi-blue-fg">(</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;x&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>pred<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> y<span class="ansi-blue-fg">,</span> pred<span class="ansi-blue-fg">,</span> raw_pred<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> return_x <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> pred<span class="ansi-blue-fg">,</span> raw_pred<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> validate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> dl<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> callbacks<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> metrics<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Validate on `dl` with potential `callbacks` and `metrics`.&#34;</span>
+        dl <span class="ansi-blue-fg">=</span> ifnone<span class="ansi-blue-fg">(</span>dl<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>valid_dl<span class="ansi-blue-fg">)</span>
+        metrics <span class="ansi-blue-fg">=</span> ifnone<span class="ansi-blue-fg">(</span>metrics<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>metrics<span class="ansi-blue-fg">)</span>
+        cb_handler <span class="ansi-blue-fg">=</span> CallbackHandler<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>callbacks <span class="ansi-blue-fg">+</span> ifnone<span class="ansi-blue-fg">(</span>callbacks<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> metrics<span class="ansi-blue-fg">)</span>
+        cb_handler<span class="ansi-blue-fg">.</span>on_train_begin<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> metrics<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span> cb_handler<span class="ansi-blue-fg">.</span>on_epoch_begin<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        val_metrics <span class="ansi-blue-fg">=</span> validate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> dl<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">,</span> cb_handler<span class="ansi-blue-fg">)</span>
+        cb_handler<span class="ansi-blue-fg">.</span>on_epoch_end<span class="ansi-blue-fg">(</span>val_metrics<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> cb_handler<span class="ansi-blue-fg">.</span>state_dict<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;last_metrics&#39;</span><span class="ansi-blue-fg">]</span>
+
+    <span class="ansi-green-fg">def</span> show_results<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_type<span class="ansi-blue-fg">=</span>DatasetType<span class="ansi-blue-fg">.</span>Valid<span class="ansi-blue-fg">,</span> rows<span class="ansi-blue-fg">:</span>int<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Show `rows` result of predictions on `ds_type` dataset.&#34;</span>
+        <span class="ansi-red-fg">#TODO: get read of has_arg x and split_kwargs_by_func if possible</span>
+        <span class="ansi-red-fg">#TODO: simplify this and refactor with pred_batch(...reconstruct=True)</span>
+        n_items <span class="ansi-blue-fg">=</span> rows <span class="ansi-blue-fg">**</span> <span class="ansi-cyan-fg">2</span> <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>train_ds<span class="ansi-blue-fg">.</span>x<span class="ansi-blue-fg">.</span>_square_show_res <span class="ansi-green-fg">else</span> rows
+        <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>batch_size <span class="ansi-blue-fg">&lt;</span> n_items<span class="ansi-blue-fg">:</span> n_items <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>batch_size
+        ds <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>dataset
+        self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>RecordOnCPU<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        preds <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>pred_batch<span class="ansi-blue-fg">(</span>ds_type<span class="ansi-blue-fg">)</span>
+        <span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>callbacks<span class="ansi-blue-fg">,</span>rec_cpu <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>callbacks
+        x<span class="ansi-blue-fg">,</span>y <span class="ansi-blue-fg">=</span> rec_cpu<span class="ansi-blue-fg">.</span>input<span class="ansi-blue-fg">,</span>rec_cpu<span class="ansi-blue-fg">.</span>target
+        norm <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;norm&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> norm<span class="ansi-blue-fg">:</span>
+            x <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">if</span> norm<span class="ansi-blue-fg">.</span>keywords<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;do_y&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+                y     <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> do_x<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+                preds <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>data<span class="ansi-blue-fg">.</span>denorm<span class="ansi-blue-fg">(</span>preds<span class="ansi-blue-fg">,</span> do_x<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+        analyze_kwargs<span class="ansi-blue-fg">,</span>kwargs <span class="ansi-blue-fg">=</span> split_kwargs_by_func<span class="ansi-blue-fg">(</span>kwargs<span class="ansi-blue-fg">,</span> ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>analyze_pred<span class="ansi-blue-fg">)</span>
+        preds <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>analyze_pred<span class="ansi-blue-fg">(</span>grab_idx<span class="ansi-blue-fg">(</span>preds<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>analyze_kwargs<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> i <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>n_items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        xs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>x<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>grab_idx<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> i <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>n_items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">if</span> has_arg<span class="ansi-blue-fg">(</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;x&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            ys <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>grab_idx<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">=</span>x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> i<span class="ansi-blue-fg">,</span>x <span class="ansi-green-fg">in</span> enumerate<span class="ansi-blue-fg">(</span>xs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+            zs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">=</span>x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> z<span class="ansi-blue-fg">,</span>x <span class="ansi-green-fg">in</span> zip<span class="ansi-blue-fg">(</span>preds<span class="ansi-blue-fg">,</span>xs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">:</span>
+            ys <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>grab_idx<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> i <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>n_items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+            zs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>ds<span class="ansi-blue-fg">.</span>y<span class="ansi-blue-fg">.</span>reconstruct<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> z <span class="ansi-green-fg">in</span> preds<span class="ansi-blue-fg">]</span>
+        ds<span class="ansi-blue-fg">.</span>x<span class="ansi-blue-fg">.</span>show_xyzs<span class="ansi-blue-fg">(</span>xs<span class="ansi-blue-fg">,</span> ys<span class="ansi-blue-fg">,</span> zs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> apply_dropout<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> m<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;If a module contains &#39;dropout&#39; in it&#39;s name, it will be switched to .train() mode.&#34;</span>
+        <span class="ansi-green-fg">if</span> <span class="ansi-blue-fg">&#39;dropout&#39;</span> <span class="ansi-green-fg">in</span> m<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">.</span>__name__<span class="ansi-blue-fg">.</span>lower<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> m<span class="ansi-blue-fg">.</span>train<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> predict_with_mc_dropout<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> item<span class="ansi-blue-fg">:</span>ItemBase<span class="ansi-blue-fg">,</span> with_dropout<span class="ansi-blue-fg">:</span>bool<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span> n_times<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-blue-fg">&#34;Make predictions with dropout turned on for n_times (default 10).&#34;</span>
+        <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>predict<span class="ansi-blue-fg">(</span>item<span class="ansi-blue-fg">,</span> with_dropout<span class="ansi-blue-fg">=</span>with_dropout<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> _ <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>n_times<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-red-fg">File:</span>           /opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/basic_train.py
+<span class="ansi-red-fg">Type:</span>           type
+<span class="ansi-red-fg">Subclasses:</span>     
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -214,55 +556,55 @@ description: "Contains basic Learners and Agents"
     </tr>
     <tr>
       <td>1</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>5</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>6</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>7</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>8</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
     <tr>
       <td>9</td>
-      <td>0.499999</td>
+      <td>0.500000</td>
       <td>#na#</td>
       <td>00:00</td>
     </tr>
@@ -296,6 +638,24 @@ description: "Contains basic Learners and Agents"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAHSklEQVR4nO3dwY0TQRBAUYxIgjggDOKANEgD4iAMiIMwhsPeABm0npmu2f/e0ZKtvlhf01XrvW3b9goAql6vPgAArCSEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEcIgfXz+tPgLwX96sPgC8HOIHV3Tbtm31GeCq/lm+dx+/nHMS4NlcjcLz6Ry8AEIIQJoQApAmhHAg6zMwnxACkCaE8BD7MnB1QghAmhACkCaEcCz7MjCcEMKjjAnh0oQQgDQhBCBNCOFwxoQwmRACkCaEsAP7MnBdQghAmhACkCaEcAb7MjCWEMI+jAnhooQQgDQhBCBNCAFIE0I4iX0ZmEkIYTf2ZeCKhBCANCEEIE0I4TzGhDCQEMKejAnhcoQQgDQhBCBNCAFIE0I4lX0ZmEYIYWf2ZeBahBCANCEEIE0I4WzGhDCKEML+jAnhQoQQgDQhBCBNCAFIE0JYwL4MzCGEcAj7MnAVQghAmhACkCaEsIYxIQwhhHAUY0K4BCEEIE0IAUgTQgDShBCWsS8DEwghHMi+DMwnhACkCSEAaUIIKxkTwnJCCMcyJoThhBCANCEEIE0IAUgTQljMvgysJYRwOPsyMJkQApAmhACkCSGsZ0wICwkhnMGYEMYSQgDShBCANCEEIE0IYQT7MrCKEMJJ7MvATEIIQJoQApAmhDCFMSEsIYRwHmNCGEgIAUgTQgDShBCANCGEQezLwPmEEE5lXwamEUIA0oQQgDQhhFmMCeFkQghnMyaEUYQQgDQhBCBNCAFIE0IYx74MnEkIYQH7MjCHEAKQJoQApAkhTGRMCKcRQljDmBCGEEIA0oQQgDQhBCBNCGEo+zJwDiGEZezLwARCCECaEAKQJoQwlzEhnEAIYSVjQlhOCAFIE0IA0oQQgDQhhNHsy8DRhBAWsy8DawkhAGlCCECaEMJ0xoRwqDerDwAvyu12e94bv3/5eMTHPtm27ZG3w8vmiRCANCEEIM3VKMzy7efvd6Qf3n5dchKI8EQIg/xZwacX708QgUcIIYzw/tO9x76/BhLYhRDCFGoHSwghAGlCCNdgTAgHEUKY4vPn96uPAEVCCBfgLyjgOEIIg/w1eE8v3l8rBZ7t5kcIYUcP/ijob4PAveLnaw53CCHs6cEQHsTXHO5wNQoAAFDlahT25GoULsfVKABpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBp/vsEAGmeCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCDtF7gtiazJx+e+AAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -315,6 +675,29 @@ description: "Contains basic Learners and Agents"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-11-8a6942697a4b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>data<span class="ansi-blue-fg">=</span>AsyncExperienceSourceDataBunch<span class="ansi-blue-fg">.</span>from_env<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;CartPole-v1&#39;</span><span class="ansi-blue-fg">,</span>display<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>firstlast<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>add_valid<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> model<span class="ansi-blue-fg">=</span>nn<span class="ansi-blue-fg">.</span>Sequential<span class="ansi-blue-fg">(</span>nn<span class="ansi-blue-fg">.</span>Linear<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>nn<span class="ansi-blue-fg">.</span>ReLU<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>nn<span class="ansi-blue-fg">.</span>Linear<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> agent<span class="ansi-blue-fg">=</span>DQNAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> learn<span class="ansi-blue-fg">=</span>AgentLearner<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">,</span>model<span class="ansi-blue-fg">,</span>agent<span class="ansi-blue-fg">=</span>agent<span class="ansi-blue-fg">,</span>callback_fns<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>FakeRunCallback<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> setattr<span class="ansi-blue-fg">(</span>learn<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;fitter&#39;</span><span class="ansi-blue-fg">,</span>dqn_fitter<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: from_env() got an unexpected keyword argument &#39;display&#39;</pre>
+</div>
+</div>
+
 </div>
 </div>
 

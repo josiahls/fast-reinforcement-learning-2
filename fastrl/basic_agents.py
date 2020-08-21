@@ -86,22 +86,22 @@ class TestAgent(BaseAgent):
 # Cell
 @dataclass
 class DiscreteAgent(BaseAgent):
-    "DQNAgent is a memoryless DQN agent which calculates Q values from the observations and  converts them into the actions using a_selector."
+    "DiscreteAgent a simple discrete action selector."
     a_selector:ActionSelector=None
     device:str=None
     preprocessor:Callable=default_states_preprocessor
     apply_softmax:bool=False
 
     def safe_unbatch(self,o:np.array)->np.array:return o[0] if o.shape[0]==1 and len(o.shape)>1 else o
-    def split_v(v,asl): return v,asl
+    def split_v(self,v,asl): return v,asl
 
     @torch.no_grad()
-    def __call__(self,s,asl=None,include_batch_dim=False)->Tuple[np.array,np.array]:
+    def __call__(self,s,asl=None,include_batch_dim=False):
         s=self.preprocessor(s) if self.preprocessor is not None else s
         asl= np.zeros(s.shape) if asl is None else asl
         s=s.to(self.device) if torch.is_tensor(s) else s
         v=self.model(s)
-        if type(v)==tuple:v,asl=self.split(v,asl)
+        if type(v)==tuple:v,asl=self.split_v(v,asl)
         if self.apply_softmax:
             v=F.softmax(v,dim=1)
         q=v.data.cpu().numpy()
@@ -143,4 +143,5 @@ class PolicyAgent(DiscreteAgent):
 class ActorCriticAgent(PolicyAgent):
     "Policy agent which returns policy and value tensors from observations. Value are stored in agent's state \
      and could be reused for rollouts calculations by ExperienceSource."
-    def split_v(v,asl):return v,v.data.squeeze().cpu().numpy()
+    def split_v(self,v,asl):
+        return v[0],v[1].data.squeeze().cpu().numpy()

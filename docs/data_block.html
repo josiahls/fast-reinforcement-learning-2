@@ -112,24 +112,24 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;s&#39;: array([[2, 1, 2, 1, 1],
-        [1, 2, 2, 2, 2],
-        [2, 1, 1, 2, 1],
+<pre>{&#39;s&#39;: array([[1, 1, 1, 2, 2],
         [1, 1, 1, 1, 1],
-        [1, 2, 1, 1, 1]]),
- &#39;sp&#39;: array([[1, 1, 1, 2, 2],
-        [2, 1, 1, 1, 1],
-        [1, 2, 2, 1, 1],
-        [1, 1, 2, 1, 2],
-        [1, 1, 2, 1, 2]]),
- &#39;a&#39;: array([[2, 2]]),
- &#39;r&#39;: array([[2, 2, 1, 1, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 1, 1, 1, 2]]),
+        [1, 2, 2, 1, 2],
+        [2, 1, 1, 2, 2],
+        [1, 1, 1, 2, 2]]),
+ &#39;sp&#39;: array([[1, 1, 2, 1, 2],
+        [2, 2, 2, 1, 1],
+        [1, 1, 1, 1, 1],
+        [2, 1, 1, 2, 2],
+        [2, 1, 2, 2, 1]]),
+ &#39;a&#39;: array([[1, 1]]),
+ &#39;r&#39;: array([[2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2]]),
  &#39;d&#39;: array([[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]]),
- &#39;agent_s&#39;: array([[1, 4, 0, 2, 4]])}</pre>
+ &#39;agent_s&#39;: array([[1, 3, 0, 2, 5]])}</pre>
 </div>
 
 </div>
@@ -256,7 +256,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:00:48] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:45] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -308,7 +308,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:00:48] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:48] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -360,7 +360,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:00:48] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:48] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -416,7 +416,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:00:50] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:50] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -468,7 +468,7 @@ description: "Primary handlers for interfacing the openai gym envs"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="n">ds</span><span class="o">=</span><span class="n">FirstLastExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">bs</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">bs</span><span class="o">=</span><span class="mi">128</span>
 
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">final_yb</span><span class="o">=</span><span class="kc">None</span>
@@ -499,7 +499,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-fb63fcc718f3&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-7-53fb5fc34de5&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">     10</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;s&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
 <span class="ansi-green-intense-fg ansi-bold">     11</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;d&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
 <span class="ansi-green-fg">---&gt; 12</span><span class="ansi-red-fg">     </span>test_eq<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;r&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>pytest<span class="ansi-blue-fg">.</span>approx<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3.99</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
@@ -557,9 +557,109 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:01:33] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:52] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Experience-Dataset-Shower">Experience Dataset Shower<a class="anchor-link" href="#Experience-Dataset-Shower"> </a></h2><p>We can define a wrapper around a dataset which will show up to <code>rows * cols</code> environments.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L236" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">DatasetDisplayWrapper</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span><span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
 </div>
 
 </div>
@@ -592,7 +692,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L231" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
+<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L276" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -628,7 +728,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:01:33] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 01:56:59] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -646,7 +746,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">ExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">ExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">firstlast</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">add_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">train_dl</span><span class="p">:</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">5</span>
 </pre></div>
@@ -660,10 +760,14 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:01:33] p32688 line:69 WARNING - `self.learn` is None. will use random actions instead.
-</pre>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
 </div>
+
 </div>
 
 </div>
@@ -704,7 +808,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="getattrsoftly" class="doc_header"><code>getattrsoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L256" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>getattrsoftly</code>(<strong><code>o</code></strong>:<code>Optional</code>[<code>object</code>], <strong><code>name</code></strong>:<code>str</code>, <strong><code>default</code></strong>)</p>
+<h4 id="getattrsoftly" class="doc_header"><code>getattrsoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L301" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>getattrsoftly</code>(<strong><code>o</code></strong>:<code>Optional</code>[<code>object</code>], <strong><code>name</code></strong>:<code>str</code>, <strong><code>default</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -728,7 +832,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="arginpartial" class="doc_header"><code>arginpartial</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L257" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>arginpartial</code>(<strong><code>fn</code></strong>, <strong><code>arg_v</code></strong>)</p>
+<h4 id="arginpartial" class="doc_header"><code>arginpartial</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L302" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>arginpartial</code>(<strong><code>fn</code></strong>, <strong><code>arg_v</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -752,7 +856,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dequeuesoftly" class="doc_header"><code>dequeuesoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dequeuesoftly</code>(<strong><code>q</code></strong>:<code>Queue</code>, <strong><code>e</code></strong>:<code>Event</code>, <strong><code>n_attempts</code></strong>=<em><code>5</code></em>, <strong><code>warnings</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="dequeuesoftly" class="doc_header"><code>dequeuesoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L303" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dequeuesoftly</code>(<strong><code>q</code></strong>:<code>Queue</code>, <strong><code>e</code></strong>:<code>Event</code>, <strong><code>n_attempts</code></strong>=<em><code>5</code></em>, <strong><code>warnings</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -783,7 +887,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncException" class="doc_header"><code>class</code> <code>AsyncException</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L276" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncException</code>() :: <code>Exception</code></p>
+<h2 id="AsyncException" class="doc_header"><code>class</code> <code>AsyncException</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L322" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncException</code>() :: <code>Exception</code></p>
 </blockquote>
 <p>Common base class for all non-exit exceptions.</p>
 
@@ -808,7 +912,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L278" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L324" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -833,9 +937,9 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L326" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>max_steps</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7f830df57a90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7f830dee1550&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <code>Dataset</code></p>
+<h2 id="AsyncExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L371" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <code>Dataset</code></p>
 </blockquote>
-<p>AsyncExperienceSourceDataset(env: str, ds_cls: type, max_steps: Union[int, NoneType] = 1, n_envs: int = 1, learn: Union[fastai.basic_train.Learner, NoneType] = None, callback_fns: List[fastai.basic_train.LearnerCallback] = <factory>, n_processes: int = 1, pause_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7f830df57a90&gt;, cancel_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7f830dee1550&gt;, queue_sz: Union[int, NoneType] = None, main_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt;, NoneType] = None, metric_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt;, NoneType] = None, _proc_list: List[multiprocessing.context.Process] = <factory>, fitter_fn: Union[Callable, NoneType] = None, fitter_kwargs: Dict = None, dequeue_warnings: bool = False, dequeue_n_attempts: int = 50)</p>
+<p>AsyncExperienceSourceDataset(env: str, ds_cls: type, bs: Union[int, NoneType] = 1, learn: Union[fastai.basic_train.Learner, NoneType] = None, callback_fns: List[fastai.basic_train.LearnerCallback] = <factory>, n_processes: int = 1, pause_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;, cancel_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;, queue_sz: Union[int, NoneType] = None, main_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt;, NoneType] = None, metric_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt;, NoneType] = None, _proc_list: List[multiprocessing.context.Process] = <factory>, fitter_fn: Union[Callable, NoneType] = None, fitter_kwargs: Dict = None, ds_kwargs: Dict = <factory>, learner_kwargs: Dict = <factory>, dequeue_warnings: bool = False, dequeue_n_attempts: int = 50)</p>
 
 </div>
 
@@ -857,13 +961,16 @@ The second is more complex. We basically have 2 fit procedures shared between th
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastrl.basic_train</span> <span class="kn">import</span> <span class="n">AgentLearner</span>
 <span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
 
+<span class="n">bs</span><span class="o">=</span><span class="mi">4</span>
+
 <span class="k">class</span> <span class="nc">FakeRunCallback</span><span class="p">(</span><span class="n">LearnerCallback</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">on_backward_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;skip_bwd&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;skip_validate&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+    <span class="k">def</span> <span class="nf">on_batch_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">last_target</span><span class="p">,</span><span class="n">last_input</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">last_target</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">]),</span><span class="n">bs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">last_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bs</span><span class="p">)</span>
 
-<span class="n">max_steps</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span>
-
-<span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ds_empty</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ds_empty</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dl_empty</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_empty</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">data</span><span class="o">=</span><span class="n">DataBunch</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="n">dl_empty</span><span class="p">)</span>
@@ -974,8 +1081,8 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_steps</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="mi">40</span>
-<span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">batch_shapes</span><span class="o">=</span><span class="p">[]</span>
@@ -1003,8 +1110,8 @@ The second is more complex. We basically have 2 fit procedures shared between th
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:01:37] p32688 line:100 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
-[08-20 02:01:37] p317 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-21 02:06:04] p22390 line:105 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
+[08-21 02:06:04] p22548 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1024,7 +1131,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastrl.basic_train</span> <span class="kn">import</span> <span class="n">AgentLearner</span>
 <span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
-<span class="n">max_steps</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="mi">40</span>
+<span class="n">bs</span><span class="o">=</span><span class="mi">90</span>
 
 <span class="k">class</span> <span class="nc">AlwaysDiscreteRight</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1044,7 +1151,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
     
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="n">AlwaysDiscreteRight</span><span class="p">(),</span><span class="n">AlwaysDiscreteLeft</span><span class="p">()):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Testing action: </span><span class="si">{</span><span class="n">m</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
     <span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">m</span><span class="p">)</span>
@@ -1060,10 +1167,9 @@ The second is more complex. We basically have 2 fit procedures shared between th
             <span class="n">full_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">yb</span><span class="p">))</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_shapes</span><span class="p">)</span><span class="o">&gt;</span><span class="n">bs</span><span class="p">:</span><span class="k">raise</span> <span class="n">AsyncException</span><span class="p">(</span><span class="s1">&#39;batch_shapes should not be larger than the `ds.bs`*`ds.max_steps`&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">batch_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">bs</span><span class="p">:</span><span class="k">raise</span> <span class="n">AsyncException</span><span class="p">(</span><span class="s1">&#39;batch_shapes should not be larger than the `ds.bs`&#39;</span><span class="p">)</span>
-
     <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">full_data</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">==</span><span class="n">bs</span><span class="p">),</span><span class="s1">&#39;Dones are not being returned&#39;</span>
     <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">all</span><span class="p">([</span><span class="n">a</span><span class="o">==</span><span class="n">m</span><span class="o">.</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">o</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">full_data</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">full_data</span><span class="p">),</span><span class="n">max_steps</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">full_data</span><span class="p">),</span><span class="n">bs</span><span class="p">)</span>
     <span class="n">full_data</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">batch_shapes</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -1115,9 +1221,15 @@ Testing action: 0
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L452" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>max_steps</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7f830df57a90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7f830dee1550&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <a href="/fastrl/data_block#AsyncExperienceSourceDataset"><code>AsyncExperienceSourceDataset</code></a></p>
+<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L504" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <a href="/fastrl/data_block#AsyncExperienceSourceDataset"><code>AsyncExperienceSourceDataset</code></a></p>
 </blockquote>
-<p>AsyncExperienceSourceDataset(env: str, ds_cls: type, max_steps: Union[int, NoneType] = 1, n_envs: int = 1, learn: Union[fastai.basic_train.Learner, NoneType] = None, callback_fns: List[fastai.basic_train.LearnerCallback] = <factory>, n_processes: int = 1, pause_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7f830df57a90&gt;, cancel_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7f830dee1550&gt;, queue_sz: Union[int, NoneType] = None, main_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt;, NoneType] = None, metric_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7f8374769f10&gt;&gt;, NoneType] = None, _proc_list: List[multiprocessing.context.Process] = <factory>, fitter_fn: Union[Callable, NoneType] = None, fitter_kwargs: Dict = None, dequeue_warnings: bool = False, dequeue_n_attempts: int = 50)</p>
+<p>The <a href="/fastrl/data_block#AsyncGradExperienceSourceDataset"><code>AsyncGradExperienceSourceDataset</code></a> class is instantiated via
+passing          the <code>env_name</code> that we want to train on, and a
+<code>partial</code> class of a <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a> called <code>ds_cls</code>.
+<code>bs</code> is a field here since the length of the dataset is not
+necessarily the length of an episode. If <code>None</code> it will be the length
+of a single episode of the environment. Agents such as A3C will likely
+change this.</p>
 
 </div>
 
@@ -1139,10 +1251,10 @@ Testing action: 0
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FakeRunCallback</span><span class="p">(</span><span class="n">LearnerCallback</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">on_backward_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;skip_bwd&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;skip_validate&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
     
-<span class="n">max_steps</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="mi">40</span>
+<span class="n">bs</span><span class="o">=</span><span class="mi">40</span>
 
-<span class="n">ds</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">ds_empty</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ds_empty</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dl_empty</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_empty</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">data</span><span class="o">=</span><span class="n">DataBunch</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="n">dl_empty</span><span class="p">)</span>
@@ -1157,58 +1269,6 @@ Testing action: 0
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:02:07] p32688 line:101 WARNING - `self.learn` does not have a `fitter_fn`. Using default.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>0.500000</td>
-      <td>#na#</td>
-      <td>00:02</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0.500000</td>
-      <td>#na#</td>
-      <td>00:01</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0.500000</td>
-      <td>#na#</td>
-      <td>00:01</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1219,8 +1279,8 @@ Testing action: 0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_steps</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="mi">40</span>
-<span class="n">ds</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">AsyncGradExperienceSourceDataset</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">ExperienceSourceDataset</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dequeue_warnings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="n">batch_shapes</span><span class="o">=</span><span class="p">[]</span>
@@ -1233,27 +1293,12 @@ Testing action: 0
         <span class="k">if</span> <span class="n">batch_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">&gt;</span><span class="n">bs</span><span class="p">:</span><span class="k">raise</span> <span class="n">AsyncException</span><span class="p">(</span><span class="s1">&#39;batch_shapes should not be larger than the `ds.bs`&#39;</span><span class="p">)</span>
 
 <span class="n">test_eq</span><span class="p">(</span><span class="n">batch_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">bs</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bs</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bs</span><span class="p">)</span>
 <span class="n">test_eq</span><span class="p">(</span><span class="n">batch_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">],(</span><span class="n">bs</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">full_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">list</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-20 02:02:17] p32688 line:100 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
-[08-20 02:02:17] p411 line:69 WARNING - `self.learn` is None. will use random actions instead.
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1285,7 +1330,7 @@ Testing action: 0
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L471" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
+<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L523" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -1299,20 +1344,6 @@ Testing action: 0
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dataset-Shower">Dataset Shower<a class="anchor-link" href="#Dataset-Shower"> </a></h2><p>We can define a wrapper around a dataset which will show up to <code>rows * cols</code> environments.</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1320,41 +1351,20 @@ Testing action: 0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">bs</span><span class="p">)</span>
+
+<span class="n">batch_shapes</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">full_data</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">with</span> <span class="n">data</span><span class="o">.</span><span class="n">train_ds</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">train_dl</span><span class="p">:</span>
+        <span class="n">batch_shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">full_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yb</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_shapes</span><span class="p">)</span><span class="o">&gt;</span><span class="n">bs</span><span class="p">:</span><span class="k">raise</span> <span class="n">AsyncException</span><span class="p">(</span><span class="s1">&#39;batch_shapes should not be larger than `bs`&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">batch_shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">bs</span><span class="p">:</span><span class="k">raise</span> <span class="n">AsyncException</span><span class="p">(</span><span class="s1">&#39;batch_shapes should not be larger than `bs`&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L494" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1368,32 +1378,13 @@ Testing action: 0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ds</span><span class="o">=</span><span class="n">DatasetDisplayWrapper</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">800</span><span class="p">)</span>
-<span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
-    <span class="k">pass</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DQNAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1407,135 +1398,29 @@ Testing action: 0
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">notebook2script</span><span class="p">()</span>
-<span class="n">notebook2html</span><span class="p">(</span><span class="n">n_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">use_grad_experience</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Converted 00_core.ipynb.
-Converted 01_wrappers.ipynb.
-Converted 02_callbacks.ipynb.
-Converted 03_basic_agents.ipynb.
-Converted 04_metrics.ipynb.
-Converted 05_data_block.ipynb.
-Converted 06_basic_train.ipynb.
-Converted 12_a3c.a3c_data.ipynb.
-Converted Untitled.ipynb.
-Converted index.ipynb.
-Converted notes.ipynb.
-</pre>
 </div>
-</div>
+    {% endraw %}
 
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>converting: /opt/project/fastrl/nbs/05_data_block.ipynb
-An error occurred while executing the following cell:
-------------------
-from fastrl.basic_train import AgentLearner
-max_steps,bs=90,40
-
-class AlwaysDiscreteRight(nn.Module):
-    def __init__(self,*args,**kwargs):
-        super(AlwaysDiscreteRight,self).__init__(*args,**kwargs)
-        self.a=1
-        
-    def forward(self,x):
-        return FloatTensor([[0.1,0.5]])
+    {% raw %}
     
-class AlwaysDiscreteLeft(nn.Module):
-    def __init__(self,*args,**kwargs):
-        super(AlwaysDiscreteLeft,self).__init__(*args,**kwargs)
-        self.a=0
-    
-    def forward(self,x):
-        return FloatTensor([[0.5,0.1]])
-    
-for m in (AlwaysDiscreteRight(),AlwaysDiscreteLeft()):
-    print(f&#39;Testing action: {m.a}&#39;)
-    ds=AsyncExperienceSourceDataset(&#39;CartPole-v1&#39;,ExperienceSourceDataset,n_envs=1,max_steps=max_steps,n_processes=1,dequeue_warnings=False)
-    dl=DataLoader(ds,batch_size=bs,num_workers=12)
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-    model=nn.Sequential(nn.Linear(4,5),nn.ReLU(),nn.Linear(5,2),m)
-    agent=DQNAgent(model=model)
-    learn=AgentLearner(DataBunch(dl,dl),model,agent=agent)
-    ds.learn=learn
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">AsyncExperienceSourceDataBunch</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">use_grad_experience</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ds_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;skip_n_steps&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">})</span>
+<span class="n">AgentLearner</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">callback_fns</span><span class="o">=</span><span class="p">[</span><span class="n">FakeRunCallback</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
 
-    batch_shapes=[]
-    full_data=[]
-    with ds:
-        for xb,yb in dl:
-            batch_shapes.append(xb[0].shape)
-            full_data.append(copy(yb))
-            if len(batch_shapes)&gt;bs:raise AsyncException(&#39;batch_shapes should not be larger than the `ds.bs`*`ds.max_steps`&#39;)
-            if batch_shapes[0][0]&gt;bs:raise AsyncException(&#39;batch_shapes should not be larger than the `ds.bs`&#39;)
-
-    assert all(any(o[&#39;d&#39;]) for o in full_data if len(o[&#39;d&#39;])==bs),&#39;Dones are not being returned&#39;
-    assert all(all([a==m.a for a in o[&#39;a&#39;]]) for o in full_data)
-    test_eq(sum(len(o[&#39;s&#39;]) for o in full_data),max_steps)
-    full_data.clear()
-    batch_shapes.clear()
-------------------
-
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-16-6e13c90962fb&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     39</span>     <span class="ansi-green-fg">assert</span> all<span class="ansi-blue-fg">(</span>any<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;d&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> full_data <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;d&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">==</span>bs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;Dones are not being returned&#39;</span>
-<span class="ansi-green-intense-fg ansi-bold">     40</span>     <span class="ansi-green-fg">assert</span> all<span class="ansi-blue-fg">(</span>all<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>a<span class="ansi-blue-fg">==</span>m<span class="ansi-blue-fg">.</span>a <span class="ansi-green-fg">for</span> a <span class="ansi-green-fg">in</span> o<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;a&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> full_data<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 41</span><span class="ansi-red-fg">     </span>test_eq<span class="ansi-blue-fg">(</span>sum<span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;s&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> full_data<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>max_steps<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     42</span>     full_data<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     43</span>     batch_shapes<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">NameError</span>: name &#39;test_eq&#39; is not defined
-NameError: name &#39;test_eq&#39; is not defined
-
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">Exception</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-37-e212a96b8210&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">from</span> nbdev<span class="ansi-blue-fg">.</span>export <span class="ansi-green-fg">import</span> <span class="ansi-blue-fg">*</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> notebook2script<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>notebook2html<span class="ansi-blue-fg">(</span>n_workers<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/nbdev/export2html.py</span> in <span class="ansi-cyan-fg">notebook2html</span><span class="ansi-blue-fg">(fname, force_all, n_workers, cls, template_file, exporter, dest)</span>
-<span class="ansi-green-intense-fg ansi-bold">    578</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> all<span class="ansi-blue-fg">(</span>passed<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    579</span>             msg <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;Conversion failed on the following:\n&#34;</span>
-<span class="ansi-green-fg">--&gt; 580</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> Exception<span class="ansi-blue-fg">(</span>msg <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">&#39;\n&#39;</span><span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>f<span class="ansi-blue-fg">.</span>name <span class="ansi-green-fg">for</span> p<span class="ansi-blue-fg">,</span>f <span class="ansi-green-fg">in</span> zip<span class="ansi-blue-fg">(</span>passed<span class="ansi-blue-fg">,</span>files<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> p<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    581</span> 
-<span class="ansi-green-intense-fg ansi-bold">    582</span> <span class="ansi-red-fg"># Cell</span>
-
-<span class="ansi-red-fg">Exception</span>: Conversion failed on the following:
-05_data_block.ipynb</pre>
-</div>
-</div>
-
+    </div>
 </div>
 </div>
 
