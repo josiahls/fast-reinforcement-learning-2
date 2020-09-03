@@ -112,24 +112,24 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;s&#39;: array([[1, 1, 1, 2, 2],
+<pre>{&#39;s&#39;: array([[2, 2, 2, 1, 1],
+        [1, 2, 2, 2, 1],
+        [2, 1, 2, 2, 1],
+        [1, 2, 1, 1, 1],
+        [1, 2, 1, 1, 1]]),
+ &#39;sp&#39;: array([[2, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2],
+        [2, 2, 1, 2, 1],
         [1, 1, 1, 1, 1],
-        [1, 2, 2, 1, 2],
-        [2, 1, 1, 2, 2],
-        [1, 1, 1, 2, 2]]),
- &#39;sp&#39;: array([[1, 1, 2, 1, 2],
-        [2, 2, 2, 1, 1],
-        [1, 1, 1, 1, 1],
-        [2, 1, 1, 2, 2],
-        [2, 1, 2, 2, 1]]),
+        [1, 2, 2, 2, 2]]),
  &#39;a&#39;: array([[1, 1]]),
- &#39;r&#39;: array([[2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2]]),
+ &#39;r&#39;: array([[2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1]]),
  &#39;d&#39;: array([[0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]]),
- &#39;agent_s&#39;: array([[1, 3, 0, 2, 5]])}</pre>
+ &#39;agent_s&#39;: array([[3, 3, 2, 5, 2]])}</pre>
 </div>
 
 </div>
@@ -181,7 +181,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L53" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="ExperienceSourceCallback" class="doc_header"><code>class</code> <code>ExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L57" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -206,7 +206,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L60" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>skip_n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>max_steps</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>pixels</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>per_env_d</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_s</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_steps</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_rewards</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>total_rewards</code></strong>:<code>List</code>[<code>T</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>total_steps</code></strong>:<code>List</code>[<code>T</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>_env_idx</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>_warned</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>_end_interation</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>_getitem_as_exp</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>IterableDataset</code></p>
+<h2 id="ExperienceSourceDataset" class="doc_header"><code>class</code> <code>ExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L64" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>skip_n_steps</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>max_steps</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>pixels</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>per_env_d</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_s</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_steps</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>per_env_rewards</code></strong>:<code>array</code>=<em><code>None</code></em>, <strong><code>total_rewards</code></strong>:<code>List</code>[<code>T</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>total_steps</code></strong>:<code>List</code>[<code>T</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>_env_idx</code></strong>:<code>int</code>=<em><code>0</code></em>, <strong><code>_warned</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>_end_interation</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>_getitem_as_exp</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>IterableDataset</code></p>
 </blockquote>
 <p>Similar to fastai's <code>LabelList</code>, iters in-order samples from <code>1-&gt;len(envs)</code> <code>envs</code>.</p>
 
@@ -227,8 +227,8 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">bs</span><span class="o">=</span><span class="mi">10</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;CartPole-v1&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bs</span><span class="o">=</span><span class="mi">2</span>
 
 <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">bs</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">final_yb</span><span class="o">=</span><span class="kc">None</span>
@@ -236,6 +236,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <span class="n">yb_data</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">bs</span>
+    <span class="n">test_ne</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;sp&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">bs</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">bs</span>
     <span class="n">final_yb</span><span class="o">=</span><span class="n">yb</span>
@@ -256,7 +257,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:45] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:15:30] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -274,7 +275,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">bs</span><span class="o">=</span><span class="mi">10</span>
 <span class="n">mountain_car_steps</span><span class="o">=</span><span class="mi">200</span>
 
@@ -308,7 +309,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:48] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:15:30] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -326,7 +327,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">bs</span><span class="o">=</span><span class="mi">10</span>
 <span class="n">mountain_car_steps</span><span class="o">=</span><span class="mi">200</span><span class="o">//</span><span class="mi">2</span> <span class="c1"># If we skip 2 steps, this should be 100</span>
 
@@ -360,7 +361,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:48] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:15:30] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -378,7 +379,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">bs</span><span class="o">=</span><span class="mi">10</span>
 <span class="n">mountain_car_steps</span><span class="o">=</span><span class="mi">200</span>
 
@@ -416,7 +417,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:50] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:15:40] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -445,7 +446,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L203" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong>*<code>args</code></strong>, <strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>skip_n_steps</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
+<h2 id="FirstLastExperienceSourceDataset" class="doc_header"><code>class</code> <code>FirstLastExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L207" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSourceDataset</code>(<strong>*<code>args</code></strong>, <strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>skip_n_steps</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>Similar to <a href="/fastrl/data_block#ExperienceSourceDataset"><code>ExperienceSourceDataset</code></a> but only keeps the first and last parts of a step. Can be seen as frame skipping.</p>
 
@@ -474,10 +475,11 @@ description: "Primary handlers for interfacing the openai gym envs"
 <span class="n">final_yb</span><span class="o">=</span><span class="kc">None</span>
 <span class="n">data</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
+<span class="c1">#     print(yb)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">bs</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">bs</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">bs</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">pytest</span><span class="o">.</span><span class="n">approx</span><span class="p">(</span><span class="mf">3.99</span><span class="p">,</span><span class="mf">0.1</span><span class="p">))</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">pytest</span><span class="o">.</span><span class="n">approx</span><span class="p">(</span><span class="mf">3.94</span><span class="p">,</span><span class="mf">0.1</span><span class="p">))</span>
     <span class="n">final_yb</span><span class="o">=</span><span class="n">yb</span>
     <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
 
@@ -499,12 +501,12 @@ description: "Primary handlers for interfacing the openai gym envs"
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-7-53fb5fc34de5&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     10</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;s&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
-<span class="ansi-green-intense-fg ansi-bold">     11</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;d&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
-<span class="ansi-green-fg">---&gt; 12</span><span class="ansi-red-fg">     </span>test_eq<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;r&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>pytest<span class="ansi-blue-fg">.</span>approx<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3.99</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     13</span>     final_yb<span class="ansi-blue-fg">=</span>yb
-<span class="ansi-green-intense-fg ansi-bold">     14</span>     data<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>xb<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-7-e323d3407290&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     11</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;s&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
+<span class="ansi-green-intense-fg ansi-bold">     12</span>     <span class="ansi-green-fg">assert</span> len<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;d&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;=</span>bs
+<span class="ansi-green-fg">---&gt; 13</span><span class="ansi-red-fg">     </span>test_eq<span class="ansi-blue-fg">(</span>yb<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;r&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>pytest<span class="ansi-blue-fg">.</span>approx<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3.94</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span>     final_yb<span class="ansi-blue-fg">=</span>yb
+<span class="ansi-green-intense-fg ansi-bold">     15</span>     data<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>xb<span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">NameError</span>: name &#39;test_eq&#39; is not defined</pre>
 </div>
@@ -557,7 +559,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:52] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:43:51] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -617,9 +619,47 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L236" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
+<h2 id="DatasetDisplayWrapper" class="doc_header"><code>class</code> <code>DatasetDisplayWrapper</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L247" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DatasetDisplayWrapper</code>(<strong><code>ds</code></strong>, <strong><code>rows</code></strong>=<em><code>2</code></em>, <strong><code>cols</code></strong>=<em><code>2</code></em>, <strong><code>max_w</code></strong>=<em><code>800</code></em>)</p>
 </blockquote>
 
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">ExperienceSourceDataset</span><span class="p">(</span><span class="s2">&quot;MountainCar-v0&quot;</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">skip_n_steps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">=</span><span class="n">DatasetDisplayWrapper</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">xb</span><span class="p">,</span><span class="n">yb</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span><span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
 </div>
 
 </div>
@@ -655,7 +695,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -692,7 +732,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L276" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
+<h2 id="ExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>ExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L287" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>DataBunch</code></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -728,7 +768,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 01:56:59] p22390 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:34:47] p409 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -763,7 +803,7 @@ description: "Primary handlers for interfacing the openai gym envs"
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -808,7 +848,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="getattrsoftly" class="doc_header"><code>getattrsoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L301" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>getattrsoftly</code>(<strong><code>o</code></strong>:<code>Optional</code>[<code>object</code>], <strong><code>name</code></strong>:<code>str</code>, <strong><code>default</code></strong>)</p>
+<h4 id="getattrsoftly" class="doc_header"><code>getattrsoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L312" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>getattrsoftly</code>(<strong><code>o</code></strong>:<code>Optional</code>[<code>object</code>], <strong><code>name</code></strong>:<code>str</code>, <strong><code>default</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -832,7 +872,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="arginpartial" class="doc_header"><code>arginpartial</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L302" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>arginpartial</code>(<strong><code>fn</code></strong>, <strong><code>arg_v</code></strong>)</p>
+<h4 id="arginpartial" class="doc_header"><code>arginpartial</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L313" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>arginpartial</code>(<strong><code>fn</code></strong>, <strong><code>arg_v</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -856,7 +896,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dequeuesoftly" class="doc_header"><code>dequeuesoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L303" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dequeuesoftly</code>(<strong><code>q</code></strong>:<code>Queue</code>, <strong><code>e</code></strong>:<code>Event</code>, <strong><code>n_attempts</code></strong>=<em><code>5</code></em>, <strong><code>warnings</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="dequeuesoftly" class="doc_header"><code>dequeuesoftly</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L314" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dequeuesoftly</code>(<strong><code>q</code></strong>:<code>Queue</code>, <strong><code>e</code></strong>:<code>Event</code>, <strong><code>n_attempts</code></strong>=<em><code>5</code></em>, <strong><code>warnings</code></strong>=<em><code>False</code></em>, <strong><code>unsafe_wait</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -887,7 +927,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncException" class="doc_header"><code>class</code> <code>AsyncException</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L322" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncException</code>() :: <code>Exception</code></p>
+<h2 id="AsyncException" class="doc_header"><code>class</code> <code>AsyncException</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L334" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncException</code>() :: <code>Exception</code></p>
 </blockquote>
 <p>Common base class for all non-exit exceptions.</p>
 
@@ -912,7 +952,7 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L324" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
+<h2 id="AsyncExperienceSourceCallback" class="doc_header"><code>class</code> <code>AsyncExperienceSourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L336" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceCallback</code>(<strong><code>learn</code></strong>) :: <code>LearnerCallback</code></p>
 </blockquote>
 <p>Base class for creating callbacks for a <code>Learner</code>.</p>
 
@@ -937,9 +977,9 @@ The second is more complex. We basically have 2 fit procedures shared between th
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L371" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <code>Dataset</code></p>
+<h2 id="AsyncExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L383" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fcdf5319290&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fcdf52a03d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>, <strong><code>unsafe_wait</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <code>Dataset</code></p>
 </blockquote>
-<p>AsyncExperienceSourceDataset(env: str, ds_cls: type, bs: Union[int, NoneType] = 1, learn: Union[fastai.basic_train.Learner, NoneType] = None, callback_fns: List[fastai.basic_train.LearnerCallback] = <factory>, n_processes: int = 1, pause_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;, cancel_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;, queue_sz: Union[int, NoneType] = None, main_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt;, NoneType] = None, metric_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fb2077ddf10&gt;&gt;, NoneType] = None, _proc_list: List[multiprocessing.context.Process] = <factory>, fitter_fn: Union[Callable, NoneType] = None, fitter_kwargs: Dict = None, ds_kwargs: Dict = <factory>, learner_kwargs: Dict = <factory>, dequeue_warnings: bool = False, dequeue_n_attempts: int = 50)</p>
+<p>AsyncExperienceSourceDataset(env: str, ds_cls: type, bs: Union[int, NoneType] = 1, learn: Union[fastai.basic_train.Learner, NoneType] = None, callback_fns: List[fastai.basic_train.LearnerCallback] = <factory>, n_processes: int = 1, pause_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fce5bb3a050&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fcdf5319290&gt;, cancel_event: &lt;bound method BaseContext.Event of &lt;multiprocessing.context.DefaultContext object at 0x7fce5bb3a050&gt;&gt; = &lt;multiprocessing.synchronize.Event object at 0x7fcdf52a03d0&gt;, queue_sz: Union[int, NoneType] = None, main_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fce5bb3a050&gt;&gt;, NoneType] = None, metric_queue: Union[&lt;bound method BaseContext.JoinableQueue of &lt;multiprocessing.context.DefaultContext object at 0x7fce5bb3a050&gt;&gt;, NoneType] = None, _proc_list: List[multiprocessing.context.Process] = <factory>, fitter_fn: Union[Callable, NoneType] = None, fitter_kwargs: Dict = None, ds_kwargs: Dict = <factory>, learner_kwargs: Dict = <factory>, dequeue_warnings: bool = False, dequeue_n_attempts: int = 50, unsafe_wait: bool = False)</p>
 
 </div>
 
@@ -1110,8 +1150,8 @@ The second is more complex. We basically have 2 fit procedures shared between th
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>[08-21 02:06:04] p22390 line:105 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
-[08-21 02:06:04] p22548 line:69 WARNING - `self.learn` is None. will use random actions instead.
+<pre>[08-22 21:34:48] p409 line:106 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
+[08-22 21:34:48] p16596 line:69 WARNING - `self.learn` is None. will use random actions instead.
 </pre>
 </div>
 </div>
@@ -1221,7 +1261,7 @@ Testing action: 0
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L504" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0fbaa90&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fb1a0f530d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>) :: <a href="/fastrl/data_block#AsyncExperienceSourceDataset"><code>AsyncExperienceSourceDataset</code></a></p>
+<h2 id="AsyncGradExperienceSourceDataset" class="doc_header"><code>class</code> <code>AsyncGradExperienceSourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L517" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncGradExperienceSourceDataset</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>ds_cls</code></strong>:<code>type</code>, <strong><code>bs</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>1</code></em>, <strong><code>learn</code></strong>:<code>Optional</code>[<code>Learner</code>]=<em><code>None</code></em>, <strong><code>callback_fns</code></strong>:<code>List</code>[<code>LearnerCallback</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>pause_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fcdf5319290&gt;</code></em>, <strong><code>cancel_event</code></strong>:<code>Event</code>=<em><code>&lt;multiprocessing.synchronize.Event object at 0x7fcdf52a03d0&gt;</code></em>, <strong><code>queue_sz</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>, <strong><code>main_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>metric_queue</code></strong>:<code>Optional</code>[<code>JoinableQueue</code>]=<em><code>None</code></em>, <strong><code>_proc_list</code></strong>:<code>List</code>[<code>Process</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>fitter_fn</code></strong>:<code>Optional</code>[<code>Callable</code>]=<em><code>None</code></em>, <strong><code>fitter_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>None</code></em>, <strong><code>ds_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>learner_kwargs</code></strong>:<code>Dict</code>[<code>KT</code>, <code>VT</code>]=<em><code>&lt;factory&gt;</code></em>, <strong><code>dequeue_warnings</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>dequeue_n_attempts</code></strong>:<code>int</code>=<em><code>50</code></em>, <strong><code>unsafe_wait</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#AsyncExperienceSourceDataset"><code>AsyncExperienceSourceDataset</code></a></p>
 </blockquote>
 <p>The <a href="/fastrl/data_block#AsyncGradExperienceSourceDataset"><code>AsyncGradExperienceSourceDataset</code></a> class is instantiated via
 passing          the <code>env_name</code> that we want to train on, and a
@@ -1269,6 +1309,58 @@ change this.</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:34:54] p409 line:107 WARNING - `self.learn` does not have a `fitter_fn`. Using default.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1302,6 +1394,21 @@ change this.</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:34:55] p409 line:106 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
+[08-22 21:34:56] p16676 line:69 WARNING - `self.learn` is None. will use random actions instead.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1330,7 +1437,7 @@ change this.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L523" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
+<h2 id="AsyncExperienceSourceDataBunch" class="doc_header"><code>class</code> <code>AsyncExperienceSourceDataBunch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data_block.py#L536" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AsyncExperienceSourceDataBunch</code>(<strong><code>train_dl</code></strong>:<code>DataLoader</code>, <strong><code>valid_dl</code></strong>:<code>DataLoader</code>, <strong><code>fix_dl</code></strong>:<code>DataLoader</code>=<em><code>None</code></em>, <strong><code>test_dl</code></strong>:<code>Optional</code>[<code>DataLoader</code>]=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>device</code>=<em><code>None</code></em>, <strong><code>dl_tfms</code></strong>:<code>Optional</code>[<code>Collection</code>[<code>Callable</code>]]=<em><code>None</code></em>, <strong><code>path</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>]=<em><code>'.'</code></em>, <strong><code>collate_fn</code></strong>:<code>Callable</code>=<em><code>'data_collate'</code></em>, <strong><code>no_check</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/data_block#ExperienceSourceDataBunch"><code>ExperienceSourceDataBunch</code></a></p>
 </blockquote>
 <p>Bind <code>train_dl</code>,<code>valid_dl</code> and <code>test_dl</code> in a data object.</p>
 
@@ -1368,6 +1475,31 @@ change this.</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:35:00] p409 line:106 WARNING - `self.learn` is None. Async&#39;s ds_cls will likely use random actions.
+[08-22 21:35:00] p16706 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16709 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16713 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16716 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16719 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16722 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16725 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16728 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16731 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16734 line:69 WARNING - `self.learn` is None. will use random actions instead.
+[08-22 21:35:00] p16737 line:69 WARNING - `self.learn` is None. will use random actions instead.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1385,6 +1517,58 @@ change this.</p>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:35:00] p409 line:107 WARNING - `self.learn` does not have a `fitter_fn`. Using default.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1406,6 +1590,58 @@ change this.</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:35:00] p409 line:107 WARNING - `self.learn` does not have a `fitter_fn`. Using default.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -1421,6 +1657,58 @@ change this.</p>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[08-22 21:35:00] p409 line:107 WARNING - `self.learn` does not have a `fitter_fn`. Using default.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>#na#</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
 </div>
 </div>
 

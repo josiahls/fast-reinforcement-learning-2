@@ -44,6 +44,10 @@ class Experience(object):
     def x(self):return self.s.copy()
     @x.setter
     def x(self,v):self.s=v.copy()
+    @property
+    def y(self):return self.sp.copy()
+    @x.setter
+    def y(self,v):self.sp=v.copy()
 
 add_docs(Experience,x='Should return the field for `xb` in the training loop. It must be copied on return or'
          ' else there will be strange multiple reference errors.'
@@ -64,7 +68,7 @@ class ExperienceSourceDataset(IterableDataset):
     learn:Optional[Learner]=None
     callback_fns:List[LearnerCallback]=field(default_factory=lambda:[ExperienceSourceCallback])
     # Behavior modification fields / param fields.
-    skip_n_steps:int=1
+    skip_n_steps:int=0
     max_steps:Optional[int]=None
     pixels:bool=False
     # Env tracking fields
@@ -103,7 +107,7 @@ class ExperienceSourceDataset(IterableDataset):
     @log_args
     def at_start(self,idx,steps):return idx==0 and steps==0
     @log_args
-    def skip_loop(self,steps,skip_steps,d):return steps%skip_steps!=0 and not d
+    def skip_loop(self,steps,skip_steps,d):return skip_steps!=0 and ((steps%(skip_steps+1))!=0) and not d
     @log_args
     def cycle_env(self,idx,n_envs):self._env_idx=0 if idx==n_envs-1 else idx+1
     def stop_loop(self):
@@ -151,10 +155,10 @@ class ExperienceSourceDataset(IterableDataset):
             a,agent_s=self.pick_action(idx)
             sp,r,d,_=self.envs[idx].step(a)
 
-            exp=Experience(self.per_env_s[idx],sp,a,r,d,agent_s=ifnone(agent_s,[]))
+            exp=Experience(self.per_env_s[idx].copy(),sp.copy(),a,r,d,agent_s=ifnone(agent_s,[]))
 
             self.per_env_rewards[idx]+=r
-            self.per_env_s[idx]=sp
+            self.per_env_s[idx]=sp.copy()
             self.per_env_steps[idx]+=1
             self.per_env_d[idx]=d
 
@@ -203,28 +207,35 @@ add_docs(ExperienceSourceDataset,
 class FirstLastExperienceSourceDataset(ExperienceSourceDataset):
     "Similar to `ExperienceSourceDataset` but only keeps the first and last parts of a step. Can be seen as frame skipping."
     def __init__(self,*args,discount=0.99,skip_n_steps=1,**kwargs):
-        super(FirstLastExperienceSourceDataset,self).__init__(*args,skip_n_steps=1,**kwargs)
+        super(FirstLastExperienceSourceDataset,self).__init__(*args,skip_n_steps=0,**kwargs)
         self.discount=discount
         self.fst_lst_steps=skip_n_steps
         self._getitem_as_exp=True
+        self._exp_ls=[]
 
     @log_args
     def __getitem__(self,_):
-        exp_ls=[]
-        while True:
-            exp=super(FirstLastExperienceSourceDataset,self).__getitem__(_)
-            exp_ls.append(exp)
-            if len(exp_ls)>=self.fst_lst_steps or self._end_interation:break
+        if len(self._exp_ls)==0:
+            while True:
+                exp=super(FirstLastExperienceSourceDataset,self).__getitem__(_)
+    #             print(exp)
+                self._exp_ls.append(exp)
+                if len(self._exp_ls)>=self.fst_lst_steps or self._end_interation:break
 
-        exp=exp_ls[-1]
-        exp.x=exp_ls[0].x
+        exp=self._exp_ls[0]
+        exp.y=self._exp_ls[-1].y
 
         total_reward=0.0
-        for e in reversed(exp_ls):
+#         if not exp_ls[-1].d:exp_ls=exp_ls[:-1]
+        for e in reversed(self._exp_ls):
             total_reward*=self.discount
             total_reward+=e.r
         exp.r=total_reward
-
+#         if any([e.d for e in exp_ls]):
+#             print([e.d for e in exp_ls])
+#             print(total_reward,flush=True)
+        if self._exp_ls[-1].d:self._exp_ls.pop(0)
+        else:                 self._exp_ls.clear()
         return exp.x,asdict(exp)
 
 # Cell
@@ -300,12 +311,13 @@ class ExperienceSourceDataBunch(DataBunch):
 # Cell
 def getattrsoftly(o:Optional[object],name:str,default):return getattr(o,name,default) if o is not None else default
 def arginpartial(fn,arg_v):return arg_v in fn.args if fn.__class__==partial else False
-def dequeuesoftly(q:mp.Queue,e:mp.Event,n_attempts=5,warnings=False):
+def dequeuesoftly(q:mp.Queue,e:mp.Event,n_attempts=5,warnings=False,unsafe_wait=False):
     entry=None
     count=0
     while not e.is_set():
         try:
-            entry=q.get_nowait()
+            if unsafe_wait:entry=q.get()
+            else:          entry=q.get_nowait()
             count=0
             break
         except Empty:
@@ -387,6 +399,7 @@ class AsyncExperienceSourceDataset(Dataset):
     learner_kwargs:Dict=field(default_factory=dict)
     dequeue_warnings:bool=False
     dequeue_n_attempts:int=50
+    unsafe_wait:bool=False
 
     def __post_init__(self):
         if not arginpartial(self.ds_cls,self.env):self.ds_cls=partial(self.ds_cls,self.env)
@@ -453,7 +466,7 @@ class AsyncExperienceSourceDataset(Dataset):
 
     def __getitem__(self,_):
         if len(self._proc_list)==0:raise StopIteration()
-        train_entry=dequeuesoftly(self.main_queue,self.cancel_event,self.dequeue_n_attempts,self.dequeue_warnings)
+        train_entry=dequeuesoftly(self.main_queue,self.cancel_event,self.dequeue_n_attempts,self.dequeue_warnings,self.unsafe_wait)
         if train_entry is None:raise StopIteration()
         return [Experience(**train_entry).x],train_entry
 
@@ -523,12 +536,13 @@ add_docs(AsyncGradExperienceSourceDataset,
 class AsyncExperienceSourceDataBunch(ExperienceSourceDataBunch):
     @classmethod
     def from_env(cls,env,bs=16,use_grad_experience=False,firstlast=False,n_processes=defaults.cpus,num_workers:int=defaults.cpus,queue_sz=None,add_valid=False,
-                fitter_fn=None,ds_kwargs:Dict=None,fitter_kwargs:Dict=None,learner_kwargs:Dict=None):
+                fitter_fn=None,ds_kwargs:Dict=None,fitter_kwargs:Dict=None,learner_kwargs:Dict=None,dequeue_warnings=False,**kwargs):
         def create_ds(make_empty=False):
             _sub_ds_cls=FirstLastExperienceSourceDataset if firstlast else ExperienceSourceDataset
             _ds_cls=AsyncGradExperienceSourceDataset if use_grad_experience else AsyncExperienceSourceDataset
             _ds=_ds_cls(env,bs=0 if make_empty else bs,ds_cls=_sub_ds_cls,n_processes=n_processes,queue_sz=queue_sz,fitter_fn=fitter_fn,
-                        ds_kwargs=ifnone(ds_kwargs,{}),fitter_kwargs=fitter_kwargs,learner_kwargs=ifnone(learner_kwargs,{}))
+                        ds_kwargs=ifnone(ds_kwargs,{}),fitter_kwargs=fitter_kwargs,learner_kwargs=ifnone(learner_kwargs,{}),
+                        dequeue_warnings=dequeue_warnings,**kwargs)
             return _ds
 
         return cls.create(create_ds(),create_ds(not add_valid),bs=bs,num_workers=0)

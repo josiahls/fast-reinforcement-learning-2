@@ -8,8 +8,8 @@ dependencies:
   - pip
   - cuda100
   - fastprogress
-  - pytorch>=1.6.0
-  - fastai=1.0.61
+#  - pytorch>=1.6.0
+  - fastai
   - jupyter
   - notebook
   - setuptools
@@ -17,7 +17,7 @@ dependencies:
       - pytest
       - nvidia-ml-py3
       - dataclasses
-      - numpy==1.17.4
+#      - numpy==1.17.4
       - pandas
       - pyyaml
       - opencv-contrib-python

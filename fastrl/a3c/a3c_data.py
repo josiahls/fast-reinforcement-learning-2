@@ -83,33 +83,39 @@ class A3CLearner(AgentLearner):
         return out,None
 
 # Cell
-def r_estimate(s,r,d_mask,model,val_gamma,device):
+def r_estimate(s, r, d_mask,non_d_mask, model, val_gamma, device):
     "Returns rewards `r` estimated direction by `model` from states `s`"
-    r_np=np.array(r,dtype=np.float32)
-#     print(len(d_mask),len(r),len(s))
-    if len(d_mask)!=0:
-        s_v=torch.FloatTensor(s).to(device)
-        v=model(s_v)[1] # Remember that models are going to return the actions and the values
-        v_np=v.data.cpu().numpy()[:,0]
-        r_np[d_mask]+=val_gamma*v_np
-
+    r_np = np.array(r, dtype=np.float32)
+#     print(r_np[d_mask].mean(), r_np[non_d_mask].mean())
+    #     print(len(d_mask),len(r),len(s))
+    if len(d_mask) != 0:
+        s_v = torch.FloatTensor(s).to(device)
+        v = model(s_v)[1]  # Remember that models are going to return the actions and the values
+        v_np = v.data.cpu().numpy()[:, 0]
+        r_np[d_mask] += val_gamma * v_np
     return r_np
 
-def unbatch(batch,model,last_val_gamma,device='cpu')->Tuple(List,List,List):
-    s,a,r,d_mask,sp=[],[],[],[],[]
-    for i,exp in enumerate(batch):
+def unbatch(batch, model, last_val_gamma, device='cpu'):
+    # print(batch[0])
+    s, a, r, d_mask, sp = [], [], [], [], []
+    non_d_mask = []
+    for i, exp in enumerate(batch):
         s.append(exp.s.numpy())
-        a.append(int(exp.a.numpy())) # TODO can we change this to toggle between discrete and continuous actions?
-        r.append(exp.r.numpy().astype(np.float32))
+        a.append(int(exp.a.numpy()))  # TODO can we change this to toggle between discrete and continuous actions?
+        r.append(exp.r.numpy().astype(np.float32).reshape(1,))
         if not bool(exp.d):
             d_mask.append(i)
-            sp.append(exp.sp.numpy())
-    s_t=torch.FloatTensor(s).to(device)
-    a_t=torch.LongTensor(a).to(device)
-
-    r_np=r_estimate(sp,r,d_mask,model,last_val_gamma,device)
-    estimated_r=torch.FloatTensor(r_np).to(device)
-    return s_t,a_t,estimated_r
+            sp.append(exp.sp.numpy().reshape(1,-1))
+        else:
+            non_d_mask.append(i)
+    s_t = torch.FloatTensor(s).to(device)
+    a_t = torch.LongTensor(a).to(device)
+    # print(batch[0].r)
+    # print(np.array(sp).mean(),np.array(r).mean())
+    r_np = r_estimate(sp, r, d_mask, non_d_mask,model, last_val_gamma, device)
+    estimated_r = torch.FloatTensor(r_np).to(device)
+    # print(s_t.shape,a_t.shape,estimated_r.shape)
+    return s_t, a_t, estimated_r
 
 # Cell
 debug_batch=[]
@@ -129,13 +135,19 @@ class A3CTrainer(LearnerCallback):
     def on_backward_begin(self,last_loss,**kwargs):
         if self.skip_process_batch:return {'skip_bwd':self.skip_process_batch}
         s_t,a_t,r_est=unbatch(self.batch,self.learn.model,self.learn.discount**self.data.ds_kwargs['skip_n_steps'])
+        r_est=r_est.squeeze(1)
+#         print(a_t.float().mean(),s_t.mean(),r_est.mean())
+#         print(a_t.shape,s_t.shape,r_est.shape)
+#         r_est=r_est.squeeze(1)
         self.learn.opt.zero_grad()
         logits_v,value_v=self.learn.model(s_t)
+#         print(logits_v.shape,s_t.shape)
 
         loss_value_v=F.mse_loss(value_v.squeeze(-1),r_est)
 #         print((r_est.mean(),value_v.mean()))
         log_prob_v=F.log_softmax(logits_v,dim=1)
         adv_v=r_est-value_v.detach()
+#         print(log_prob_v.shape)
         log_prob_actions_v=adv_v*log_prob_v[range(self.learn.data.bs),a_t]
         loss_policy_v=-log_prob_actions_v.mean()
 
@@ -143,19 +155,20 @@ class A3CTrainer(LearnerCallback):
 #         print(prob_v.max(),log_prob_v.max(),prob_v.min(),log_prob_v.min())
         entropy_loss_v=self.learn.entropy_beta*(prob_v*log_prob_v).sum(dim=1).mean()
 
-        print(entropy_loss_v,loss_policy_v,loss_value_v)
-        loss_v=entropy_loss_v+loss_policy_v+loss_value_v
+        loss_v=entropy_loss_v+loss_value_v+loss_policy_v
 
         self.learn.loss_func.loss=loss_v.detach()
         return {'last_loss':loss_v,'skip_bwd':self.skip_process_batch}
 
 
     def on_backward_end(self,*args,**kwargs):
-        if not self.skip_process_batch:nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
+        if not self.skip_process_batch:
+            nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
+#             print(getModelconf(self.learn.model,True))
         return {'skip_bwd':self.skip_process_batch,
                 'skip_step':self.skip_process_batch,
                 'skip_zero':self.skip_process_batch}
     def on_step_end(self,last_loss,*args,**kwargs):
-        getBack(last_loss.grad_fn)
+#         getBack(last_loss.grad_fn)
         if self.skip_process_batch:return
         self.batch.clear()
