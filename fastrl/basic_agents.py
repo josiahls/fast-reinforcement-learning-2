@@ -12,9 +12,10 @@ from torch.utils.data import BatchSampler, DataLoader, Dataset, Sampler, TensorD
 from torch.nn.utils import weight_norm, spectral_norm
 from dataclasses import asdict,dataclass
 from typing import Callable,Tuple,Union
-from fastai.torch_core import *
-from fastai.basic_data import *
-from fastai.basic_train import *
+# from fastai.torch_core import *
+# from fastai.basic_data import *
+# from fastai.basic_train import *
+from fastai.basics import *
 import textwrap
 import numpy as np
 import logging

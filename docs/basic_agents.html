@@ -7,6 +7,7 @@ sidebar: home_sidebar
 
 summary: "Methods of exploratively selecting actions based on a model state input."
 description: "Methods of exploratively selecting actions based on a model state input."
+nb_path: "nbs/03_basic_agents.ipynb"
 ---
 <!--
 
@@ -68,7 +69,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActionSelector" class="doc_header"><code>class</code> <code>ActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionSelector</code>()</p>
+<h2 id="ActionSelector" class="doc_header"><code>class</code> <code>ActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L26" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActionSelector</code>()</p>
 </blockquote>
 <p>Abstract class which converts scores to the actions.</p>
 
@@ -93,7 +94,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ArgmaxActionSelector" class="doc_header"><code>class</code> <code>ArgmaxActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ArgmaxActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="ArgmaxActionSelector" class="doc_header"><code>class</code> <code>ArgmaxActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ArgmaxActionSelector</code>() :: <a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
 <p>Selects actions using argmax.</p>
 
@@ -118,9 +119,9 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L36" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f58968319d0&gt;</code></em>) :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f252027a190&gt;</code></em>) :: <a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
-<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f58968319d0&gt;)</p>
+<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f252027a190&gt;)</p>
 
 </div>
 
@@ -143,7 +144,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ProbabilityActionSelector" class="doc_header"><code>class</code> <code>ProbabilityActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L49" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProbabilityActionSelector</code>() :: <a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="ProbabilityActionSelector" class="doc_header"><code>class</code> <code>ProbabilityActionSelector</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L50" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProbabilityActionSelector</code>() :: <a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
 <p>Converts probabilities of actions into action by sampling them.</p>
 
@@ -159,10 +160,10 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Basic-Agents">Basic Agents<a class="anchor-link" href="#Basic-Agents"> </a></h1><blockquote><p>Basic Agent classes for handling models and actions. Details, please ref <a href="/fastrl/basic_train"><code>basic_train</code></a></p>
+<h1 id="Basic-Agents">Basic Agents<a class="anchor-link" href="#Basic-Agents"> </a></h1><blockquote><p>Basic Agent classes for handling models and actions. Details, please ref <code>basic_train</code></p>
 </blockquote>
 <p>There is an important difference between <code>Learner</code>'s, <code>nn.Module</code>'s, and <code>Agent</code>'s.</p>
-<p><code>Learners</code>:- Ref <a href="/fastrl/basic_train"><code>basic_train</code></a>
+<p><code>Learners</code>:- Ref <code>basic_train</code>
 <code>nn.Module</code>:</p>
 <ul>
 <li>Contain only <code>pytorch</code> related code.</li>
@@ -177,7 +178,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 <li>Modify the <code>nn.Module</code> output (actions) for randomized exploration.</li>
 </ul>
 </li>
-<li>Designed to be highly portable only requiring <a href="/fastrl/basic_agents"><code>basic_agents</code></a> as a dependency. These should allow for easily saving, and using in environments where <code>fastrl</code> might not necessarily be installed.</li>
+<li>Designed to be highly portable only requiring <a href="/fastrl/basic_agents.html"><code>basic_agents</code></a> as a dependency. These should allow for easily saving, and using in environments where <code>fastrl</code> might not necessarily be installed.</li>
 </ul>
 
 </div>
@@ -201,7 +202,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="default_states_preprocessor" class="doc_header"><code>default_states_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_states_preprocessor</code>(<strong><code>s</code></strong>, <strong><code>dtype</code></strong>=<em><code>'float32'</code></em>)</p>
+<h4 id="default_states_preprocessor" class="doc_header"><code>default_states_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>default_states_preprocessor</code>(<strong><code>s</code></strong>, <strong><code>dtype</code></strong>=<em><code>float32</code></em>)</p>
 </blockquote>
 <p>Convert list of states into the form suitable for model. By default we assume Variable.</p>
 
@@ -226,7 +227,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="float32_preprocessor" class="doc_header"><code>float32_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>float32_preprocessor</code>(<strong><code>s</code></strong>)</p>
+<h4 id="float32_preprocessor" class="doc_header"><code>float32_preprocessor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>float32_preprocessor</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -257,7 +258,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L68" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>)</p>
+<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L69" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>BaseAgent(model: torch.nn.modules.module.Module = None)</p>
 
@@ -282,7 +283,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L79" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L80" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fastrl/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>TestAgent(model: torch.nn.modules.module.Module = None, env: object = None)</p>
 
@@ -357,7 +358,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -388,7 +389,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DiscreteAgent" class="doc_header"><code>class</code> <code>DiscreteAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L88" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DiscreteAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="DiscreteAgent" class="doc_header"><code>class</code> <code>DiscreteAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L89" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DiscreteAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>DiscreteAgent a simple discrete action selector.</p>
 
@@ -413,7 +414,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L113" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#DiscreteAgent"><code>DiscreteAgent</code></a></p>
+<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L114" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
 </blockquote>
 <p>DQNAgent is a memoryless DQN agent which calculates Q values from the observations and  converts them into the actions using a_selector.</p>
 
@@ -481,7 +482,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAGk0lEQVR4nO3d20kDURRAUSNpwjpiGdaR1JTUYRmmDssYPwTBJ0Tl3tG91leYQDg/w+YehslmWZYrAKi6nj0AAMwkhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAadvZA0DX+XR4/rDbH+dOAmVCCCO8NA9YG6tRGOHrM59MwkRCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhrML5dJg9AkQJIQyy2x9njwB8QAgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IYRxdvvjF9+eT4dhkwAvhBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCGEi21+YNYvA58RQgDShBCAtO3sAaDo/nH/5srdzWnKJIATIYz2voKfXQQGEEJYCy2EKYQQhlI7WBshBCBNCAFIE0IYytOhsDZCCGuhkTCFEMJoHwZPBWGWzbIss2eAP+YnL/Z8OL56avT28Gv9cy/D9wghXGydb7h2L8P3WI0CAABUWY3CxaxG4T+xGgUgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgTQgBSBNCANKEEIA0IQQgzb9PAJDmRAhAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpT0PWO1dDCuzuAAAAAElFTkSuQmCC
 "
 >
 </div>
@@ -512,7 +513,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TargetNet" class="doc_header"><code>class</code> <code>TargetNet</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetNet</code>(<strong><code>model</code></strong>)</p>
+<h2 id="TargetNet" class="doc_header"><code>class</code> <code>TargetNet</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetNet</code>(<strong><code>model</code></strong>)</p>
 </blockquote>
 <p>Wrapper around model which provides copy of it instead of trained weights.</p>
 
@@ -537,7 +538,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PolicyAgent" class="doc_header"><code>class</code> <code>PolicyAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L137" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PolicyAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#DiscreteAgent"><code>DiscreteAgent</code></a></p>
+<h2 id="PolicyAgent" class="doc_header"><code>class</code> <code>PolicyAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L138" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PolicyAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
 </blockquote>
 <p>Policy agent gets action probabilities from the model and samples actions from it.</p>
 
@@ -562,7 +563,7 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActorCriticAgent" class="doc_header"><code>class</code> <code>ActorCriticAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L143" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActorCriticAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>'default_states_preprocessor'</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents#PolicyAgent"><code>PolicyAgent</code></a></p>
+<h2 id="ActorCriticAgent" class="doc_header"><code>class</code> <code>ActorCriticAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/basic_agents.py#L144" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActorCriticAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fastrl/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fastrl/basic_agents.html#PolicyAgent"><code>PolicyAgent</code></a></p>
 </blockquote>
 <p>Policy agent which returns policy and value tensors from observations. Value are stored in agent's state      and could be reused for rollouts calculations by ExperienceSource.</p>
 
@@ -626,18 +627,10 @@ description: "Methods of exploratively selecting actions based on a model state 
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor([[0.1058, 0.0005]])
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(0, array([[0., 0., 0., 0.]]))</pre>
+<pre>(1, array([[0., 0., 0., 0.]]))</pre>
 </div>
 
 </div>
