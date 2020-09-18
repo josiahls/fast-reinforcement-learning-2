@@ -1,16 +1,15 @@
 {
   "fastrl": {
     "Overview": "/",
-    "module name here": "core.html",
+    "Core": "core.html",
     "Wrappers": "wrappers.html",
-    "Callbacks": "callbacks.html",
     "Basic Action Selection": "basic_agents.html",
     "AgentLearner": "learner.html",
     "Experience Blocks": "data.html",
     "Async Experience Blocks": "async_data.html",
     "Basic Train": "basic_train.html",
-    "A3C Datawise": "a3c.a3c_data.html",
-    "Title": "metrics.html",
-    "SAC": "actorcritic.sac.html"
+    "RL Metrics": "metrics.html",
+    "SAC": "actorcritic.sac.html",
+    "A3C Datawise": "actorcritic.a3c_data.html"
   }
 }

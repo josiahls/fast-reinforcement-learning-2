@@ -10,14 +10,11 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: Core
       url: core.html
     - output: web,pdf
       title: Wrappers
       url: wrappers.html
-    - output: web,pdf
-      title: Callbacks
-      url: callbacks.html
     - output: web,pdf
       title: Basic Action Selection
       url: basic_agents.html
@@ -34,14 +31,14 @@ entries:
       title: Basic Train
       url: basic_train.html
     - output: web,pdf
-      title: A3C Datawise
-      url: a3c.a3c_data.html
-    - output: web,pdf
-      title: Title
+      title: RL Metrics
       url: metrics.html
     - output: web,pdf
       title: SAC
       url: actorcritic.sac.html
+    - output: web,pdf
+      title: A3C Datawise
+      url: actorcritic.a3c_data.html
     output: web
     title: fastrl
   output: web
