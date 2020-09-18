@@ -38,6 +38,16 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Current-Issues-of-Interest">Current Issues of Interest<a class="anchor-link" href="#Current-Issues-of-Interest"> </a></h1><h2 id="Data-Issues">Data Issues<a class="anchor-link" href="#Data-Issues"> </a></h2><ul>
+<li>[ ] data and async_data are still buggy. We need to verify that the order that the data being returned is the best it can be for our models. We need to make sure that "dones" are returned and that there are new duplicate (unless intended)</li>
+<li>[ ] Better data debugging. Do environments skips steps correctly? Do n_steps work correct?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Whats-new?">Whats new?<a class="anchor-link" href="#Whats-new?"> </a></h1><p>As we have learned how to support as many RL agents as possible, we found that <code>fastrl==1.*</code> was vastly limited in the models that it can support. <code>fastrl==2.*</code> will leverage the <code>nbdev</code> library for better documentation and more relevant testing. We also will be building on the work of the <code>ptan</code><sup>1</sup> library as a close reference for pytorch based reinforcement learning APIs.</p>
 <p><sup>1</sup> "Shmuma/Ptan". Github, 2020, <a href="https://github.com/Shmuma/ptan">https://github.com/Shmuma/ptan</a>. Accessed 13 June 2020.</p>
 
@@ -52,14 +62,23 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install fastrl==2.0.0 --pre</code></p>
+<h2 id="PyPI-(No-implemented-yet)">PyPI (No implemented yet)<a class="anchor-link" href="#PyPI-(No-implemented-yet)"> </a></h2><p>Placeholder here, there is no pypi package yet. It is recommended to do traditional forking.</p>
+<p>(For future, currently there is no pypi persion)<code>pip install fastrl==2.0.0 --pre</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Docker">Docker<a class="anchor-link" href="#Docker"> </a></h2><p>For cpu execution</p>
+<h2 id="Conda">Conda<a class="anchor-link" href="#Conda"> </a></h2><p><code>conda env create -f environment.yaml</code></p>
+<p><code>source activate fastrl &amp;&amp; python setup.py develop</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>For cpu execution</p>
 <div class="highlight"><pre><span></span>docker build -f fastrl.Dockerfile -t fastrl:latest .
 docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl /bin/bash
 </pre></div>

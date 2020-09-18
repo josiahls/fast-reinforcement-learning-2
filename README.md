@@ -8,6 +8,12 @@ Fastai for computer vision and tabular learning has been amazing. One would wish
 
 Documentation is being served  at https://josiahls.github.io/fast-reinforcement-learning-2/ from documentation directly generated via `nbdev` in this repo.
 
+# Current Issues of Interest
+
+## Data Issues
+- [ ] data and async_data are still buggy. We need to verify that the order that the data being returned is the best it can be for our models. We need to make sure that "dones" are returned and that there are new duplicate (unless intended)
+- [ ] Better data debugging. Do environments skips steps correctly? Do n_steps work correct?
+
 # Whats new?
 
 As we have learned how to support as many RL agents as possible, we found that `fastrl==1.*` was vastly limited in the models that it can support. `fastrl==2.*` will leverage the `nbdev` library for better documentation and more relevant testing. We also will be building on the work of the `ptan`<sup>1</sup> library as a close reference for pytorch based reinforcement learning APIs. 
@@ -17,9 +23,18 @@ As we have learned how to support as many RL agents as possible, we found that `
 
 ## Install
 
-`pip install fastrl==2.0.0 --pre`
+## PyPI (No implemented yet)
+Placeholder here, there is no pypi package yet. It is recommended to do traditional forking.
 
-## Docker
+(For future, currently there is no pypi persion)`pip install fastrl==2.0.0 --pre`
+
+## Conda
+
+`conda env create -f environment.yaml`
+
+`source activate fastrl && python setup.py develop`
+
+## Docker (highly recommend)
 
 For cpu execution
 ```bash
