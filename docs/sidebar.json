@@ -1,14 +1,16 @@
 {
   "fastrl": {
     "Overview": "/",
-    "module name here": "/core",
-    "Wrappers": "/wrappers",
-    "Callbacks": "/callbacks",
-    "Basic Action Selection": "/basic_agents",
-    "Metrics": "/metrics",
-    "Data Block": "/data_block",
-    "Basic Train": "/basic_train",
-    "A3C Data": "/a3c.a3c_data",
-    "General Notes": "/notes"
+    "module name here": "core.html",
+    "Wrappers": "wrappers.html",
+    "Callbacks": "callbacks.html",
+    "Basic Action Selection": "basic_agents.html",
+    "AgentLearner": "learner.html",
+    "Experience Blocks": "data.html",
+    "Async Experience Blocks": "async_data.html",
+    "Basic Train": "basic_train.html",
+    "A3C Datawise": "a3c.a3c_data.html",
+    "Title": "metrics.html",
+    "SAC": "actorcritic.sac.html"
   }
 }

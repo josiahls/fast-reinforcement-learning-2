@@ -155,6 +155,7 @@ class ResetAndStepTfm(Transform):
         if self.history and self.history[-1].d:
             self.history.popleft()
             if len(self.history)==0:raise SourceExhausted
+            if len(self.history)==1:self.history[-1].absolute_end=True
             return self.queue2dict(self.history) if self.hist2dict else copy(self.history)
 
         while True:
@@ -173,7 +174,8 @@ class ResetAndStepTfm(Transform):
             if len(self.history)!=self.n_steps:       continue
             break
 
-        if len(self.history)==1:self.history[-1].absolute_end=True
+#         print(len(self.history))
+        if self.history[-1].d and len(self.history)==1:self.history[-1].absolute_end=True
         return self.queue2dict(self.history) if self.hist2dict else copy(self.history)
 
 # Cell
@@ -189,10 +191,12 @@ class FirstLastTfm(Transform):
         if items.extra_len!=0:items.extra_len=0
 
     def encodes(self,o):
-        total_reward=0.0
         first_o=o[0]
         first_o.sp=o[-1].sp
-        for exp in reversed(list(o)):
+        total_reward=first_o.r
+        elms=list(o)[:-1]
+
+        for exp in reversed(elms):
             total_reward*=self.discount
             total_reward+=exp.r
         first_o.r=total_reward

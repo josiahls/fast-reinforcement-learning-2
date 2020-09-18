@@ -28,8 +28,8 @@ index = {"PixelObservationWrapper": "01_wrappers.ipynb",
          "envlen": "05a_data.ipynb",
          "ResetAndStepTfm": "05a_data.ipynb",
          "ExperienceBlock": "05a_data.ipynb",
-         "FirstLastTfm": "05a_data.ipynb",
-         "FirstLastExperienceBlock": "05a_data.ipynb",
+         "FirstLastTfm": "12_a3c.a3c_data.ipynb",
+         "FirstLastExperienceBlock": "12_a3c.a3c_data.ipynb",
          "template_data_fit": "05b_async_data.ipynb",
          "DataFitProcess": "05b_async_data.ipynb",
          "MultiProcessTfm": "05b_async_data.ipynb",
@@ -37,7 +37,7 @@ index = {"PixelObservationWrapper": "01_wrappers.ipynb",
          "FloatifyCallback": "06_basic_train.ipynb",
          "FakeRunCallback": "06_basic_train.ipynb",
          "LatentLossBuffer": "06_basic_train.ipynb",
-         "LinearA2C": "12_a3c.a3c_data.ipynb",
+         "LinearA2C": "14_actorcritic.sac.ipynb",
          "r_estimate": "12_a3c.a3c_data.ipynb",
          "unbatch": "12_a3c.a3c_data.ipynb",
          "loss_func": "12_a3c.a3c_data.ipynb",
@@ -53,10 +53,11 @@ modules = ["wrappers.py",
            "async_data.py",
            "basic_train.py",
            "a3c/a3c_data.py",
-           "metrics.py"]
+           "metrics.py",
+           "actorcritic/sac.py"]
 
-doc_url = "https://josiahls.github.io/fastrl/"
+doc_url = "https://josiahls.github.io/fast-reinforcement-learning-2/"
 
-git_url = "https://github.com/josiahls/fastrl/tree/master/"
+git_url = "https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/"
 
 def custom_doc_links(name): return None

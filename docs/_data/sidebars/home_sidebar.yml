@@ -11,31 +11,37 @@ entries:
       url: /
     - output: web,pdf
       title: module name here
-      url: /core
+      url: core.html
     - output: web,pdf
       title: Wrappers
-      url: /wrappers
+      url: wrappers.html
     - output: web,pdf
       title: Callbacks
-      url: /callbacks
+      url: callbacks.html
     - output: web,pdf
       title: Basic Action Selection
-      url: /basic_agents
+      url: basic_agents.html
     - output: web,pdf
-      title: Metrics
-      url: /metrics
+      title: AgentLearner
+      url: learner.html
     - output: web,pdf
-      title: Data Block
-      url: /data_block
+      title: Experience Blocks
+      url: data.html
+    - output: web,pdf
+      title: Async Experience Blocks
+      url: async_data.html
     - output: web,pdf
       title: Basic Train
-      url: /basic_train
+      url: basic_train.html
     - output: web,pdf
-      title: A3C Data
-      url: /a3c.a3c_data
+      title: A3C Datawise
+      url: a3c.a3c_data.html
     - output: web,pdf
-      title: General Notes
-      url: /notes
+      title: Title
+      url: metrics.html
+    - output: web,pdf
+      title: SAC
+      url: actorcritic.sac.html
     output: web
     title: fastrl
   output: web
