@@ -38,6 +38,6 @@ class AvgEpisodeRewardMetric(Metric):
 #         if len(rewards)!=0:self.r=sum(rewards)/len(rewards)
 
     @property
-    def value(self): return np.mean(self.rolling_rewards)
+    def value(self): return np.mean(self.rolling_rewards) if len(self.rolling_rewards)!=1 else self.rolling_rewards
     @property
     def name(self):return 'avg_episode_r'

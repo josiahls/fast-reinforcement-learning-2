@@ -53,7 +53,32 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="LinearA2C" class="doc_header"><code>class</code> <code>LinearA2C</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearA2C</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
+<h2 id="Critic" class="doc_header"><code>class</code> <code>Critic</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Critic</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
+</blockquote>
+<p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Actor" class="doc_header"><code>class</code> <code>Actor</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L43" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Actor</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
 
@@ -74,7 +99,18 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SACModule</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span><span class="k">pass</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SACModule</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">n_actions</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SACModule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="o">=</span><span class="n">Critic</span><span class="p">(</span><span class="n">input_shape</span><span class="p">,</span><span class="n">n_actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critic_target</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="o">=</span><span class="n">Actor</span><span class="p">(</span><span class="n">input_shape</span><span class="p">,</span><span class="n">n_actions</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">critic_mode</span><span class="o">=</span><span class="kc">False</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">critic_mode</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -102,7 +138,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACTrainer" class="doc_header"><code>class</code> <code>SACTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACTrainer</code>(<strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SACTrainer" class="doc_header"><code>class</code> <code>SACTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACTrainer</code>(<strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -119,6 +155,44 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>Tensor<span class="o">??</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Init signature:</span> Tensor<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">/</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span>      &lt;no docstring&gt;
+<span class="ansi-red-fg">File:</span>           /opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/__init__.py
+<span class="ansi-red-fg">Type:</span>           type
+<span class="ansi-red-fg">Subclasses:</span>     Parameter, TensorBase
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -134,7 +208,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L60" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>yb</code></strong>, <strong><code>learn</code></strong>)</p>
+<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>yb</code></strong>, <strong><code>learn</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -158,7 +232,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L66" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L70" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Group together a <code>model</code>, some <code>dls</code> and a <a href="/fast-reinforcement-learning-2/actorcritic.a3c_data.html#loss_func"><code>loss_func</code></a> to handle training</p>
 
@@ -180,23 +254,164 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;CartPole-v1&#39;</span>
-<span class="n">model</span><span class="o">=</span><span class="n">LinearA2C</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">model</span><span class="o">=</span><span class="n">SACModule</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span><span class="mi">2</span><span class="p">)</span>
 
 
-<span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                                                                             <span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-                                                                             <span class="s1">&#39;batch_tfms&#39;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)})),</span>
+<span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                       <span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                                                                 <span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+                                                                 <span class="s1">&#39;batch_tfms&#39;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)})),</span>
                       <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">),</span>
                       <span class="n">batch_tfms</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">),</span>
                      <span class="p">)</span>
-<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 
-<span class="n">agent</span><span class="o">=</span><span class="n">ActorCriticAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-<span class="n">learner</span><span class="o">=</span><span class="n">SACLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">A3CTrainer</span><span class="p">],</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">()])</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">PolicyAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">learner</span><span class="o">=</span><span class="n">SACLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">SACTrainer</span><span class="p">],</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">()])</span>
 <span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>train_avg_episode_r</th>
+      <th>valid_loss</th>
+      <th>valid_avg_episode_r</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>[8.4]</td>
+      <td>00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-36-1ae56c7b763c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span> agent<span class="ansi-blue-fg">=</span>PolicyAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> learner<span class="ansi-blue-fg">=</span>SACLearner<span class="ansi-blue-fg">(</span>dls<span class="ansi-blue-fg">,</span>agent<span class="ansi-blue-fg">=</span>agent<span class="ansi-blue-fg">,</span>cbs<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>SACTrainer<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>metrics<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>AvgEpisodeRewardMetric<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg"> </span>learner<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">400</span><span class="ansi-blue-fg">,</span>lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.001</span><span class="ansi-blue-fg">,</span>wd<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/utils.py</span> in <span class="ansi-cyan-fg">_f</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    452</span>         init_args<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>log<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    453</span>         setattr<span class="ansi-blue-fg">(</span>inst<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;init_args&#39;</span><span class="ansi-blue-fg">,</span> init_args<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 454</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> inst <span class="ansi-green-fg">if</span> to_return <span class="ansi-green-fg">else</span> f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    455</span>     <span class="ansi-green-fg">return</span> _f
+<span class="ansi-green-intense-fg ansi-bold">    456</span> 
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, n_epoch, lr, wd, cbs, reset_opt)</span>
+<span class="ansi-green-intense-fg ansi-bold">    202</span>             self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>set_hypers<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>lr <span class="ansi-green-fg">if</span> lr <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> lr<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    203</span>             self<span class="ansi-blue-fg">.</span>n_epoch<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>loss <span class="ansi-blue-fg">=</span> n_epoch<span class="ansi-blue-fg">,</span>tensor<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0.</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 204</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_fit<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;fit&#39;</span><span class="ansi-blue-fg">,</span> CancelFitException<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_end_cleanup<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    205</span> 
+<span class="ansi-green-intense-fg ansi-bold">    206</span>     <span class="ansi-green-fg">def</span> _end_cleanup<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>xb<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>yb<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>pred<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>loss <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">None</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
+<span class="ansi-green-intense-fg ansi-bold">    153</span> 
+<span class="ansi-green-intense-fg ansi-bold">    154</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 155</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_fit</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    192</span>         <span class="ansi-green-fg">for</span> epoch <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>n_epoch<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    193</span>             self<span class="ansi-blue-fg">.</span>epoch<span class="ansi-blue-fg">=</span>epoch
+<span class="ansi-green-fg">--&gt; 194</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_epoch<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;epoch&#39;</span><span class="ansi-blue-fg">,</span> CancelEpochException<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    195</span> 
+<span class="ansi-green-intense-fg ansi-bold">    196</span>     <span class="ansi-blue-fg">@</span>log_args<span class="ansi-blue-fg">(</span>but<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;cbs&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
+<span class="ansi-green-intense-fg ansi-bold">    153</span> 
+<span class="ansi-green-intense-fg ansi-bold">    154</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 155</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_epoch</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    186</span> 
+<span class="ansi-green-intense-fg ansi-bold">    187</span>     <span class="ansi-green-fg">def</span> _do_epoch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 188</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_do_epoch_train<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    189</span>         self<span class="ansi-blue-fg">.</span>_do_epoch_validate<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    190</span> 
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_epoch_train</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    178</span>     <span class="ansi-green-fg">def</span> _do_epoch_train<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    179</span>         self<span class="ansi-blue-fg">.</span>dl <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>dls<span class="ansi-blue-fg">.</span>train
+<span class="ansi-green-fg">--&gt; 180</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>all_batches<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;train&#39;</span><span class="ansi-blue-fg">,</span> CancelTrainException<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    181</span> 
+<span class="ansi-green-intense-fg ansi-bold">    182</span>     <span class="ansi-green-fg">def</span> _do_epoch_validate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_idx<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> dl<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
+<span class="ansi-green-intense-fg ansi-bold">    153</span> 
+<span class="ansi-green-intense-fg ansi-bold">    154</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 155</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">all_batches</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    159</span>     <span class="ansi-green-fg">def</span> all_batches<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    160</span>         self<span class="ansi-blue-fg">.</span>n_iter <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 161</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> enumerate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>one_batch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>o<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    162</span> 
+<span class="ansi-green-intense-fg ansi-bold">    163</span>     <span class="ansi-green-fg">def</span> _do_one_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">one_batch</span><span class="ansi-blue-fg">(self, i, b)</span>
+<span class="ansi-green-intense-fg ansi-bold">    174</span>         self<span class="ansi-blue-fg">.</span>iter <span class="ansi-blue-fg">=</span> i
+<span class="ansi-green-intense-fg ansi-bold">    175</span>         self<span class="ansi-blue-fg">.</span>_split<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 176</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_one_batch<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;batch&#39;</span><span class="ansi-blue-fg">,</span> CancelBatchException<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    177</span> 
+<span class="ansi-green-intense-fg ansi-bold">    178</span>     <span class="ansi-green-fg">def</span> _do_epoch_train<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
+<span class="ansi-green-intense-fg ansi-bold">    153</span> 
+<span class="ansi-green-intense-fg ansi-bold">    154</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 155</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    157</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_one_batch</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span>         self<span class="ansi-blue-fg">.</span>pred <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>xb<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>                self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;after_pred&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    165</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>yb<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span>
+<span class="ansi-green-fg">--&gt; 166</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>loss <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>pred<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>yb<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;after_loss&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>training<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span>
+<span class="ansi-green-intense-fg ansi-bold">    168</span>         self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;before_backward&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-33-b77a7f12d10c&gt;</span> in <span class="ansi-cyan-fg">loss_func</span><span class="ansi-blue-fg">(pred, yb, learn)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> loss_v
+<span class="ansi-green-intense-fg ansi-bold">      7</span> 
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-green-fg">class</span> SACLearner<span class="ansi-blue-fg">(</span>AgentLearner<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;loss_v&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 

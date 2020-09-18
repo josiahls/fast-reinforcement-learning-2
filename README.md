@@ -23,7 +23,7 @@ As we have learned how to support as many RL agents as possible, we found that `
 
 ## Install
 
-## PyPI (No implemented yet)
+## PyPI (Not implemented yet)
 Placeholder here, there is no pypi package yet. It is recommended to do traditional forking.
 
 (For future, currently there is no pypi persion)`pip install fastrl==2.0.0 --pre`

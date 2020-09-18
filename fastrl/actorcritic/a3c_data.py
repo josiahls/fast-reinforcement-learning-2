@@ -111,7 +111,6 @@ def loss_func(pred,yb,learn):
 
 class A3CLearner(AgentLearner):
     def __init__(self,dls,discount=0.99,entropy_beta=0.01,clip_grad=0.1,reward_steps=1,**kwargs):
-        self.create_m=True
         super().__init__(dls,loss_func=partial(loss_func,learn=self),**kwargs)
         self.opt=OptimWrapper(AdamW(self.model.parameters(),eps=1e-3))
         self.model.share_memory()
