@@ -73,4 +73,4 @@ COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 ENTRYPOINT "entrypoint.sh"
 RUN echo 'source activate fastrl' >> ~/.bashrc
 CMD ["/bin/bash","-c"]
-RUN /bin/bash -c "source activate fastrl && python setup.py develop"
+RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"

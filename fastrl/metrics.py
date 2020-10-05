@@ -26,18 +26,22 @@ if IN_NOTEBOOK:
 
 # Cell
 class AvgEpisodeRewardMetric(Metric):
-    def __init__(self):self.rolling_rewards=[deque([0],maxlen=100)]
+    def __init__(self):self.rolling_rewards=deque([0],maxlen=100)
 
     def accumulate(self,learn):
         yb=learn.yb[0]
-        yb=[Experience(**{k:yb[k][i] for k in yb}) for i in range(learn.dls.bs)]
+#         print(yb)
+        yb=[Experience(**{k:yb[k][i] for k in yb}) for i in range(yb['absolute_end'].shape[0])]
+#         yb=[for yb.items()]
         rewards=[y.episode_r for y in yb if y.absolute_end]
 #         print([y for y in yb if y.absolute_end])
-        for r in rewards:self.rolling_rewards.append(r.numpy())
+        for r in rewards:
+            if len(r.numpy().shape)!=0:self.rolling_rewards.extend(r.numpy())
+            else:                      self.rolling_rewards.append(r.numpy())
 #         print(len(rewards))
 #         if len(rewards)!=0:self.r=sum(rewards)/len(rewards)
 
     @property
-    def value(self): return np.mean(self.rolling_rewards) if len(self.rolling_rewards)!=1 else self.rolling_rewards
+    def value(self):return np.mean(self.rolling_rewards) if len(self.rolling_rewards)!=1 else self.rolling_rewards[0]
     @property
     def name(self):return 'avg_episode_r'

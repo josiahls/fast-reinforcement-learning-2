@@ -10,6 +10,7 @@
     "Basic Train": "basic_train.html",
     "RL Metrics": "metrics.html",
     "SAC": "actorcritic.sac.html",
-    "A3C Datawise": "actorcritic.a3c_data.html"
+    "A3C Datawise": "actorcritic.a3c_data.html",
+    "A2C": "actorcritic.a2c.html"
   }
 }

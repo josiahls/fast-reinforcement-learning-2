@@ -28,8 +28,6 @@ if IN_NOTEBOOK:
 # Cell
 class Critic(Module):
     def __init__(self, input_shape, n_actions):
-        super(Critic, self).__init__()
-
         self.q=nn.Sequential(
             nn.Linear(input_shape[0]+n_actions, 512),
             nn.ReLU(),
@@ -42,8 +40,6 @@ class Critic(Module):
 
 class Actor(Module):
     def __init__(self, input_shape, n_actions):
-        super(Actor, self).__init__()
-
         self.actions=nn.Sequential(
             nn.Linear(input_shape[0], 512),
             nn.ReLU(),
@@ -58,7 +54,10 @@ class Actor(Module):
 class SACTrainer(Callback):
     def __init__(self):     self.batch_n=0
     def before_fit(self):   self.batch_n=0
-    def after_batch(self):  self.batch_n%
+    def after_batch(self):
+        if self.batch_n%self.soft_copy_freq==0: self.model.soft_copy()
+        self.batch_n+=1
+
     def after_backward(self):
         nn_utils.clip_grad_norm_(self.learn.model.parameters(),self.learn.clip_grad)
 
@@ -70,7 +69,8 @@ def loss_func(pred,yb,learn):
     return loss_v
 
 class SACLearner(AgentLearner):
-    def __init__(self,dls,**kwargs):
+    def __init__(self,dls,soft_copy_freq=1,**kwargs):
+        self.soft_copy_freq=soft_copy_freq
         super().__init__(dls,loss_func=partial(loss_func,learn=self),**kwargs)
 
     def _split(self, b):

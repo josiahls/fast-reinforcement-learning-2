@@ -173,10 +173,11 @@ nb_path: "nbs/05b_async_data.ipynb"
 <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dls</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="c1">#     print(x)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span><span class="n">test_eq</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;s&#39;</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.5891</span><span class="p">,</span>  <span class="mf">0.0000</span><span class="p">]]])</span><span class="o">.</span><span class="n">double</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span><span class="n">test_eq</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.5891</span><span class="p">,</span>  <span class="mf">0.0000</span><span class="p">]]])</span><span class="o">.</span><span class="n">double</span><span class="p">()))</span>
 
-<span class="n">test_eq</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;s&#39;</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.7148</span><span class="p">,</span>  <span class="mf">0.0039</span><span class="p">]]])</span><span class="o">.</span><span class="n">double</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">x</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">tensor</span><span class="p">([[[</span><span class="o">-</span><span class="mf">0.7148</span><span class="p">,</span>  <span class="mf">0.0039</span><span class="p">]]])</span><span class="o">.</span><span class="n">double</span><span class="p">()))</span>
 <span class="n">test_eq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">199</span><span class="p">)</span>
 </pre></div>
 
@@ -190,10 +191,240 @@ nb_path: "nbs/05b_async_data.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>resetting
-resetting
-resetting
+<pre>(tensor([[[-0.5891,  0.0000]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5891,  0.0000]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5891,  0.0000]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5891,  0.0000]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5891,  0.0000]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-5.8964e-01, -5.1169e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-5.8964e-01, -5.1169e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-5.8964e-01, -5.1169e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-5.8964e-01, -5.1169e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-5.8964e-01, -5.1169e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5907, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5907, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5907, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5907, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5907, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5922, -0.0015]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5922, -0.0015]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5922, -0.0015]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5922, -0.0015]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5922, -0.0015]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5942, -0.0020]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5942, -0.0020]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5942, -0.0020]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5942, -0.0020]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5942, -0.0020]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5967, -0.0025]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5967, -0.0025]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5967, -0.0025]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5967, -0.0025]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5967, -0.0025]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5996, -0.0029]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5996, -0.0029]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5996, -0.0029]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5996, -0.0029]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.5996, -0.0029]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6030, -0.0034]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6030, -0.0034]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6030, -0.0034]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6030, -0.0034]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6030, -0.0034]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6068, -0.0038]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6068, -0.0038]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6068, -0.0038]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6068, -0.0038]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6068, -0.0038]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6109, -0.0042]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6109, -0.0042]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6109, -0.0042]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6109, -0.0042]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6109, -0.0042]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6155, -0.0045]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6155, -0.0045]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6155, -0.0045]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6155, -0.0045]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6155, -0.0045]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6203, -0.0048]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6203, -0.0048]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6203, -0.0048]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6203, -0.0048]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6203, -0.0048]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6254, -0.0051]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6254, -0.0051]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6254, -0.0051]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6254, -0.0051]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6254, -0.0051]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6308, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6308, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6308, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6308, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6308, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6364, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6364, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6364, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6364, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6364, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6421, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6421, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6421, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6421, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6421, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6480, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6480, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6480, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6480, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6480, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6540, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6540, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6540, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6540, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6540, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6600, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6600, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6600, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6600, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6600, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6660, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6660, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6660, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6660, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6660, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6720, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6720, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6720, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6720, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6720, -0.0060]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6779, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6779, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6779, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6779, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6779, -0.0059]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6837, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6837, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6837, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6837, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6837, -0.0058]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6894, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6894, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6894, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6894, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6894, -0.0056]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6948, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6948, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6948, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6948, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.6948, -0.0054]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7000, -0.0052]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7000, -0.0052]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7000, -0.0052]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7000, -0.0052]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7000, -0.0052]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7050, -0.0050]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7050, -0.0050]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7050, -0.0050]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7050, -0.0050]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7050, -0.0050]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7096, -0.0047]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7096, -0.0047]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7096, -0.0047]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7096, -0.0047]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7096, -0.0047]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7140, -0.0043]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7140, -0.0043]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7140, -0.0043]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7140, -0.0043]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7140, -0.0043]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7180, -0.0040]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7180, -0.0040]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7180, -0.0040]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7180, -0.0040]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7180, -0.0040]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7216, -0.0036]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7216, -0.0036]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7216, -0.0036]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7216, -0.0036]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7216, -0.0036]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7248, -0.0032]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7248, -0.0032]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7248, -0.0032]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7248, -0.0032]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7248, -0.0032]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7276, -0.0028]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7276, -0.0028]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7276, -0.0028]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7276, -0.0028]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7276, -0.0028]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7299, -0.0024]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7299, -0.0024]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7299, -0.0024]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7299, -0.0024]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7299, -0.0024]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7318, -0.0019]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7318, -0.0019]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7318, -0.0019]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7318, -0.0019]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7318, -0.0019]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7333, -0.0014]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7333, -0.0014]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7333, -0.0014]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7333, -0.0014]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7333, -0.0014]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7342, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7342, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7342, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7342, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-0.7342, -0.0010]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3474e-01, -4.9485e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3474e-01, -4.9485e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3474e-01, -4.9485e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3474e-01, -4.9485e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3474e-01, -4.9485e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3476e-01, -1.5080e-05]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3476e-01, -1.5080e-05]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3476e-01, -1.5080e-05]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3476e-01, -1.5080e-05]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3476e-01, -1.5080e-05]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))
+[(tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64), tensor([[0]]), tensor([[-1.]], dtype=torch.float64), tensor([[False]]))]
 </pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-19-df3472714839&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span> 
+<span class="ansi-green-intense-fg ansi-bold">     15</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>x<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg"> </span>test_eq<span class="ansi-blue-fg">(</span>str<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>str<span class="ansi-blue-fg">(</span>tensor<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">0.7148</span><span class="ansi-blue-fg">,</span>  <span class="ansi-cyan-fg">0.0039</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>double<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span> test_eq<span class="ansi-blue-fg">(</span>i<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">199</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/test.py</span> in <span class="ansi-cyan-fg">test_eq</span><span class="ansi-blue-fg">(a, b)</span>
+<span class="ansi-green-intense-fg ansi-bold">     30</span> <span class="ansi-green-fg">def</span> test_eq<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">,</span>b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     31</span>     <span class="ansi-blue-fg">&#34;`test` that `a==b`&#34;</span>
+<span class="ansi-green-fg">---&gt; 32</span><span class="ansi-red-fg">     </span>test<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">,</span>b<span class="ansi-blue-fg">,</span>equals<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;==&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     33</span> 
+<span class="ansi-green-intense-fg ansi-bold">     34</span> <span class="ansi-red-fg"># Cell</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/test.py</span> in <span class="ansi-cyan-fg">test</span><span class="ansi-blue-fg">(a, b, cmp, cname)</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span>     <span class="ansi-blue-fg">&#34;`assert` that `cmp(a,b)`; display inputs and `cname or cmp.__name__` if it fails&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span>     <span class="ansi-green-fg">if</span> cname <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> cname<span class="ansi-blue-fg">=</span>cmp<span class="ansi-blue-fg">.</span>__name__
+<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">assert</span> cmp<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">,</span>b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">f&#34;{cname}:\n{a}\n{b}&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span> 
+<span class="ansi-green-intense-fg ansi-bold">     24</span> <span class="ansi-red-fg"># Cell</span>
+
+<span class="ansi-red-fg">AssertionError</span>: ==:
+tensor([[[-7.3429e-01,  4.6478e-04]]], dtype=torch.float64)
+tensor([[[-0.7148,  0.0039]]], dtype=torch.float64)</pre>
 </div>
 </div>
 

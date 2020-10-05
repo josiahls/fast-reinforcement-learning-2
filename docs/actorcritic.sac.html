@@ -78,7 +78,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Actor" class="doc_header"><code>class</code> <code>Actor</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L43" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Actor</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
+<h2 id="Actor" class="doc_header"><code>class</code> <code>Actor</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L41" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Actor</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
 
@@ -101,7 +101,6 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SACModule</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">n_actions</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SACModule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="o">=</span><span class="n">Critic</span><span class="p">(</span><span class="n">input_shape</span><span class="p">,</span><span class="n">n_actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">critic_target</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="p">)</span>
         
@@ -110,7 +109,11 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
         <span class="bp">self</span><span class="o">.</span><span class="n">critic_mode</span><span class="o">=</span><span class="kc">False</span>
         
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">critic_mode</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">soft_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tau</span><span class="o">=</span><span class="mf">0.99</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">target_param</span><span class="p">,</span> <span class="n">local_param</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">critic_target</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">critic</span><span class="o">.</span><span class="n">parameters</span><span class="p">()):</span>
+            <span class="n">target_param</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy_</span><span class="p">(</span><span class="n">tau</span><span class="o">*</span><span class="n">local_param</span><span class="o">.</span><span class="n">data</span><span class="o">+</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">tau</span><span class="p">)</span><span class="o">*</span><span class="n">target_param</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -138,7 +141,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACTrainer" class="doc_header"><code>class</code> <code>SACTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACTrainer</code>(<strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SACTrainer" class="doc_header"><code>class</code> <code>SACTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACTrainer</code>() :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -155,44 +158,6 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>Tensor<span class="o">??</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Init signature:</span> Tensor<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">/</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Docstring:</span>      &lt;no docstring&gt;
-<span class="ansi-red-fg">File:</span>           /opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/__init__.py
-<span class="ansi-red-fg">Type:</span>           type
-<span class="ansi-red-fg">Subclasses:</span>     Parameter, TensorBase
-</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -208,7 +173,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>yb</code></strong>, <strong><code>learn</code></strong>)</p>
+<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>yb</code></strong>, <strong><code>learn</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -232,7 +197,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L70" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L71" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Group together a <code>model</code>, some <code>dls</code> and a <a href="/fast-reinforcement-learning-2/actorcritic.a3c_data.html#loss_func"><code>loss_func</code></a> to handle training</p>
 
@@ -308,11 +273,20 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/numpy/core/_asarray.py:136: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+  return array(a, dtype, copy=False, order=order, subok=True)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-36-1ae56c7b763c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-43-1ae56c7b763c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">     14</span> agent<span class="ansi-blue-fg">=</span>PolicyAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     15</span> learner<span class="ansi-blue-fg">=</span>SACLearner<span class="ansi-blue-fg">(</span>dls<span class="ansi-blue-fg">,</span>agent<span class="ansi-blue-fg">=</span>agent<span class="ansi-blue-fg">,</span>cbs<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>SACTrainer<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>metrics<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>AvgEpisodeRewardMetric<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg"> </span>learner<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">400</span><span class="ansi-blue-fg">,</span>lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.001</span><span class="ansi-blue-fg">,</span>wd<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
@@ -401,7 +375,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 <span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>training<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span>
 <span class="ansi-green-intense-fg ansi-bold">    168</span>         self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;before_backward&#39;</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-33-b77a7f12d10c&gt;</span> in <span class="ansi-cyan-fg">loss_func</span><span class="ansi-blue-fg">(pred, yb, learn)</span>
+<span class="ansi-green-fg">&lt;ipython-input-42-afcecc8a4cb5&gt;</span> in <span class="ansi-cyan-fg">loss_func</span><span class="ansi-blue-fg">(pred, yb, learn)</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> 
 <span class="ansi-green-intense-fg ansi-bold">      5</span> 
 <span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> loss_v

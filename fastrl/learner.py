@@ -27,5 +27,15 @@ class AgentLearner(Learner):
             for cb in self.cbs:
                 if issubclass(cb.__class__,Recorder):cb.train_metrics=True
 
+    def _split(self, b):
+        if len(b)==1 and type(b[0])==tuple:b=b[0]
+        super()._split(b)
+
     def predict(self,s):
         return self.agent(s,None)
+
+# Cell
+add_docs(AgentLearner,cls_doc="Base Learner for all reinforcement learning agents",
+         _split="Since RL environments have primarily 1 source usually, the DL is going to be returning single element tuples (element,)."
+                " We want these to be unwrapped properly into a list of elements.",
+         predict="The predict method for an `AgentLearner` is mainly feeding into an agent object.")

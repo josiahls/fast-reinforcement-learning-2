@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install -y python-opengl xvfb
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 RUN ["chmod", "+x", "entrypoint.sh"]
 RUN echo 'source activate fastrl' >> ~/.bashrc
-RUN /bin/bash -c "source activate fastrl && python setup.py develop"
+RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"
 USER $CONTAINER_USER
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash","-c"]

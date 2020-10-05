@@ -39,6 +39,9 @@ entries:
     - output: web,pdf
       title: A3C Datawise
       url: actorcritic.a3c_data.html
+    - output: web,pdf
+      title: A2C
+      url: actorcritic.a2c.html
     output: web
     title: fastrl
   output: web

@@ -53,31 +53,31 @@ class MultiProcessTfm(Transform):
         self.cached_items=[]
 
     def setup(self,items:TfmdSource,train_setup=False):
-        with items:
-            if len(items.items)!=0 and not issubclass(items.items[0].__class__,DataFitProcess):
-                self.cached_items=deepcopy(items.items)
-            self.reset(items)
+#         with items:
+        if len(items.items)!=0 and not issubclass(items.items[0].__class__,DataFitProcess):
+            self.cached_items=deepcopy(items.items)
+        self.reset(items)
 
     def reset(self,items:TfmdSource,train_setup=False):
-        with items:
-            self.close(items)
-            self.cancel.clear()
-            self.queue=mp.JoinableQueue(maxsize=self.maxsize)
-            items.items=[self.process_cls(n=self.n,start=True,queue=self.queue,items=self.cached_items,cancel=self.cancel) for _ in range(self.n_processes)]
+#         with items:
+        self.close(items)
+        self.cancel.clear()
+        self.queue=mp.JoinableQueue(maxsize=self.maxsize)
+        items.items=[self.process_cls(n=self.n,start=True,queue=self.queue,items=self.cached_items,cancel=self.cancel) for _ in range(self.n_processes)]
 
     def close(self,items:TfmdSource):
-        with items:
-            self.cancel.set()
-            try:
-                while not self.queue.empty():self.queue.get()
-            except (ConnectionResetError,FileNotFoundError,EOFError,ConnectionRefusedError):pass
-            [p.termijoin() for p in items.items if issubclass(p.__class__,DataFitProcess)]
-            items.items.clear()
+#         with items:
+        self.cancel.set()
+        try:
+            while not self.queue.empty():self.queue.get()
+        except (ConnectionResetError,FileNotFoundError,EOFError,ConnectionRefusedError):pass
+        [p.termijoin() for p in items.items if issubclass(p.__class__,DataFitProcess)]
+        items.items.clear()
 
     def encodes(self,o):
         s=self.queue.get()
 #         print(s[0])
-        return s
+        return [s]
 
 # Cell
 @delegates(MultiProcessTfm)
