@@ -20,6 +20,8 @@ from .basic_agents import *
 from .learner import *
 from fastai.callback.progress import *
 
+import ptan
+
 if IN_NOTEBOOK:
     from IPython import display
     import PIL.Image
@@ -29,15 +31,22 @@ class AvgEpisodeRewardMetric(Metric):
     def __init__(self):self.rolling_rewards=deque([0],maxlen=100)
 
     def accumulate(self,learn):
-        yb=learn.yb[0]
-#         print(yb)
-        yb=[Experience(**{k:yb[k][i] for k in yb}) for i in range(yb['absolute_end'].shape[0])]
+#         yb=learn.yb
+#         print(len(yb),len(yb[0]),yb)
+        yb=[]
+        for i in range(len(learn.xb[0])):
+#             print(learn.yb)
+            yb.append(ExperienceFirstLast(learn.xb[0][i].cpu().detach(),*(learn.yb[j][i].cpu().detach() for j in range(len(learn.yb)))))
+#             print(yb[-1])
+#         yb=[ExperienceFirstLast([0],*(yb[k][i] for k in range(len(yb)))) for i in range(len(yb[0]))]
 #         yb=[for yb.items()]
-        rewards=[y.episode_r for y in yb if y.absolute_end]
+#         print([o.done for o in yb if o.done])
+        if len([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])==0:return
+#         print([o.episode_reward for o in yb if o.done])
+        r=np.average([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])
 #         print([y for y in yb if y.absolute_end])
-        for r in rewards:
-            if len(r.numpy().shape)!=0:self.rolling_rewards.extend(r.numpy())
-            else:                      self.rolling_rewards.append(r.numpy())
+#         for r in rewards:
+        if r!=0:self.rolling_rewards.extend([r])
 #         print(len(rewards))
 #         if len(rewards)!=0:self.r=sum(rewards)/len(rewards)
 

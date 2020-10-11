@@ -32,7 +32,7 @@ Placeholder here, there is no pypi package yet. It is recommended to do traditio
 
 `conda env create -f environment.yaml`
 
-`source activate fastrl && python setup.py develop`
+`source activate fastrl && pip install ptan --no-dependencies && python setup.py develop`
 
 ## Docker (highly recommend)
 
@@ -42,9 +42,11 @@ docker build -f fastrl.Dockerfile -t fastrl:latest .
 docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl /bin/bash
 ```
 
+Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
 ```bash
 docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
-docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl_cuda /bin/bash
+docker run --rm -it -p 8888:8888 -p 4000:4000  --gpus all --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl_cuda /bin/bash
 ```
 
 ## Contributing

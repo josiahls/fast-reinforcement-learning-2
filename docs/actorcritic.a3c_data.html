@@ -59,7 +59,7 @@ nb_path: "nbs/15_actorcritic.a3c_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="LinearA2C" class="doc_header"><code>class</code> <code>LinearA2C</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearA2C</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
+<h2 id="LinearA2C" class="doc_header"><code>class</code> <code>LinearA2C</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L28" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearA2C</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -106,20 +106,19 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batch</span><span class="o">=</span><span class="p">[</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0285</span><span class="p">,</span>  <span class="mf">0.1640</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0033</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3421</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0285</span><span class="p">,</span>  <span class="mf">0.1640</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0033</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3421</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">])),</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0252</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0311</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0101</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0504</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0252</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0311</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0101</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0504</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">])),</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0258</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2261</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0111</span><span class="p">,</span>  <span class="mf">0.2391</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0258</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2261</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0111</span><span class="p">,</span>  <span class="mf">0.2391</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">])),</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0517</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2260</span><span class="p">,</span>  <span class="mf">0.0195</span><span class="p">,</span>  <span class="mf">0.2377</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0517</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2260</span><span class="p">,</span>  <span class="mf">0.0195</span><span class="p">,</span>  <span class="mf">0.2377</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">])),</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0562</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4214</span><span class="p">,</span>  <span class="mf">0.0242</span><span class="p">,</span>  <span class="mf">0.5365</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0562</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4214</span><span class="p">,</span>  <span class="mf">0.0242</span><span class="p">,</span>  <span class="mf">0.5365</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.</span><span class="p">])),</span>
- <span class="n">Experience</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span><span class="n">sp</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.0647</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6169</span><span class="p">,</span>  <span class="mf">0.0349</span><span class="p">,</span>  <span class="mf">0.8367</span><span class="p">]]),</span>
-            <span class="n">a</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span><span class="n">r</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]),</span><span class="n">d</span><span class="o">=</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">]))</span>
-<span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#  Experience(s=tensor([[-0.0285,  0.1640, -0.0033, -0.3421]]),sp=tensor([[-0.0285,  0.1640, -0.0033, -0.3421]]),</span>
+<span class="c1">#             a=tensor([1]),r=tensor([1.]),d=tensor([0.])),</span>
+<span class="c1">#  Experience(s=tensor([[-0.0252, -0.0311, -0.0101, -0.0504]]),sp=tensor([[-0.0252, -0.0311, -0.0101, -0.0504]]),</span>
+<span class="c1">#             a=tensor([0]),r=tensor([1.]),d=tensor([0.])),</span>
+<span class="c1">#  Experience(s=tensor([[-0.0258, -0.2261, -0.0111,  0.2391]]),sp=tensor([[-0.0258, -0.2261, -0.0111,  0.2391]]),</span>
+<span class="c1">#             a=tensor([0]),r=tensor([1.]),d=tensor([0.])),</span>
+<span class="c1">#  Experience(s=tensor([[-0.0517, -0.2260,  0.0195,  0.2377]]),sp=tensor([[-0.0517, -0.2260,  0.0195,  0.2377]]),</span>
+<span class="c1">#             a=tensor([1]),r=tensor([1.]),d=tensor([0.])),</span>
+<span class="c1">#  Experience(s=tensor([[-0.0562, -0.4214,  0.0242,  0.5365]]),sp=tensor([[-0.0562, -0.4214,  0.0242,  0.5365]]),</span>
+<span class="c1">#             a=tensor([0]),r=tensor([1.]),d=tensor([0.])),</span>
+<span class="c1">#  Experience(s=tensor([[-0.0647, -0.6169,  0.0349,  0.8367]]),sp=tensor([[-0.0647, -0.6169,  0.0349,  0.8367]]),</span>
+<span class="c1">#             a=tensor([0]),r=tensor([1.]),d=tensor([1.]))</span>
+<span class="c1"># ]</span>
 </pre></div>
 
     </div>
@@ -147,32 +146,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="r_estimate" class="doc_header"><code>r_estimate</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>r_estimate</code>(<strong><code>s</code></strong>, <strong><code>r</code></strong>, <strong><code>d_mask</code></strong>, <strong><code>non_d_mask</code></strong>, <strong><code>model</code></strong>, <strong><code>val_gamma</code></strong>, <strong><code>device</code></strong>)</p>
-</blockquote>
-<p>Returns rewards <code>r</code> estimated direction by <code>model</code> from states <code>s</code></p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="unbatch" class="doc_header"><code>unbatch</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unbatch</code>(<strong><code>batch</code></strong>, <strong><code>model</code></strong>, <strong><code>last_val_gamma</code></strong>, <strong><code>device</code></strong>=<em><code>'cpu'</code></em>)</p>
+<h4 id="unbatch" class="doc_header"><code>unbatch</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unbatch</code>(<strong><code>batch</code></strong>, <strong><code>net</code></strong>, <strong><code>last_val_gamma</code></strong>, <strong><code>device</code></strong>=<em><code>'cpu'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -192,39 +166,10 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">=</span><span class="n">LinearA2C</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">unbatch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># unbatch(batch,model,2)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(tensor([[-0.0285,  0.1640, -0.0033, -0.3421],
-         [-0.0252, -0.0311, -0.0101, -0.0504],
-         [-0.0258, -0.2261, -0.0111,  0.2391],
-         [-0.0517, -0.2260,  0.0195,  0.2377],
-         [-0.0562, -0.4214,  0.0242,  0.5365],
-         [-0.0647, -0.6169,  0.0349,  0.8367]]),
- tensor([1, 0, 0, 1, 0, 0]),
- tensor([[1.0210],
-         [0.9960],
-         [1.0248],
-         [1.0280],
-         [1.0872],
-         [1.0000]]))</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -249,7 +194,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L85" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>yb</code></strong>, <strong><code>learn</code></strong>)</p>
+<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>a</code></strong>, <strong><code>r</code></strong>, <strong><code>sp</code></strong>, <strong><code>d</code></strong>, <strong><code>episode_rewards</code></strong>, <strong><code>learn</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -273,7 +218,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L112" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L126" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_train.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Base Learner for all reinforcement learning agents</p>
 
@@ -305,7 +250,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="A2CTrainer" class="doc_header"><code>class</code> <code>A2CTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L127" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A2CTrainer</code>(<strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L141" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -331,7 +276,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <span class="c1">#     print(agent,flush=True)</span>
     <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">experience_block</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">)),</span>
                           <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">))</span>
-    <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">items</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dls</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -350,53 +295,15 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-</div>
-    {% endraw %}
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">temp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastTfm" class="doc_header"><code>class</code> <code>FirstLastTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L186" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastTfm</code>(<strong><code>discount</code></strong>=<em><code>0.99</code></em>) :: <code>Transform</code></p>
-</blockquote>
-<p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="FirstLastExperienceBlock" class="doc_header"><code>FirstLastExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L205" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>FirstLastExperienceBlock</code>(<strong><code>dls_kwargs</code></strong>=<em><code>None</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>history</code></strong>:<code>deque</code>=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -415,22 +322,21 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <span class="n">block</span><span class="o">=</span><span class="n">AsyncExperienceBlock</span><span class="p">(</span>
     <span class="n">experience_block</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-                                                                             <span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-                                                                             <span class="s1">&#39;batch_tfms&#39;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)}),</span>
+                                                                             <span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}),</span>
     <span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">n</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">128</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">data_fit</span><span class="o">=</span><span class="n">data_fit</span><span class="p">,</span>
     <span class="n">agent</span><span class="o">=</span><span class="n">ActorCriticAgent</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">block</span><span class="p">),</span>
-                      <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">),</span>
-                      <span class="n">batch_tfms</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;s&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">),</span>
+                      <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">)</span><span class="c1">#,</span>
+<span class="c1">#                       batch_tfms=temp,</span>
                      <span class="p">)</span>
-<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">agent</span><span class="o">=</span><span class="n">ActorCriticAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
 <span class="n">learner</span><span class="o">=</span><span class="n">A3CLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">A3CTrainer</span><span class="p">],</span><span class="n">reward_steps</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">()])</span>
-<span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -442,20 +348,360 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Process DataFitProcess-1:
+Traceback (most recent call last):
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/process.py&#34;, line 297, in _bootstrap
+    self.run()
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/process.py&#34;, line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-10-4e9b1d45a02a&gt;&#34;, line 6, in data_fit
+    dls=blk.dataloaders(items,device=&#39;cpu&#39;)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/block.py&#34;, line 113, in dataloaders
+    dsets = self.datasets(source)
+  File &#34;/opt/project/fastrl/fastrl/data.py&#34;, line 80, in datasets
+    tls=L([self.tls_type(items, t,verbose=verbose) for t in L(ifnone(self._combine_type_tfms(),[None]))])
+  File &#34;/opt/project/fastrl/fastrl/data.py&#34;, line 80, in &lt;listcomp&gt;
+    tls=L([self.tls_type(items, t,verbose=verbose) for t in L(ifnone(self._combine_type_tfms(),[None]))])
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/foundation.py&#34;, line 47, in __call__
+    res = super().__call__(*((x,) + args), **kwargs)
+  File &#34;/opt/project/fastrl/fastrl/data.py&#34;, line 42, in __init__
+    super().__init__(items,tfms,**kwargs)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py&#34;, line 226, in __init__
+    self.setup(train_setup=train_setup)
+  File &#34;/opt/project/fastrl/fastrl/data.py&#34;, line 54, in setup
+    def setup(self,train_setup=True):super().setup(train_setup);self.reset_src()
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py&#34;, line 248, in setup
+    x = f(x)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py&#34;, line 72, in __call__
+    def __call__(self, x, **kwargs): return self._call(&#39;encodes&#39;, x, **kwargs)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py&#34;, line 82, in _call
+    return self._do_call(getattr(self, fn), x, **kwargs)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py&#34;, line 88, in _do_call
+    return retain_type(f(x, **kwargs), x, ret)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/dispatch.py&#34;, line 99, in __call__
+    return f(*args, **kwargs)
+  File &#34;/opt/project/fastrl/fastrl/data.py&#34;, line 175, in encodes
+    exps=next(self.exp_src_iter)
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/ptan/experience.py&#34;, line 176, in __iter__
+    for exp in super(ExperienceSourceFirstLast, self).__iter__():
+  File &#34;/opt/conda/envs/fastrl/lib/python3.7/site-packages/ptan/experience.py&#34;, line 83, in __iter__
+    for idx, action in enumerate(states_actions):
+TypeError: &#39;int&#39; object is not iterable
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-14-0813f29cb1cc&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     11</span> 
-<span class="ansi-green-intense-fg ansi-bold">     12</span> agent<span class="ansi-blue-fg">=</span>ActorCriticAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 13</span><span class="ansi-red-fg"> </span>learner<span class="ansi-blue-fg">=</span>A2CLearner<span class="ansi-blue-fg">(</span>dls<span class="ansi-blue-fg">,</span>agent<span class="ansi-blue-fg">=</span>agent<span class="ansi-blue-fg">,</span>cbs<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>A2CTrainer<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>reward_steps<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span>metrics<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span>AvgEpisodeRewardMetric<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     14</span> learner<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span>lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.001</span><span class="ansi-blue-fg">,</span>wd<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-9510891d9695&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span> <span class="ansi-red-fg">#                       batch_tfms=temp,</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span>                      )
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg"> </span>dls<span class="ansi-blue-fg">=</span>blk<span class="ansi-blue-fg">.</span>dataloaders<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>env<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">*</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span>bs<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span> 
+<span class="ansi-green-intense-fg ansi-bold">     18</span> agent<span class="ansi-blue-fg">=</span>ActorCriticAgent<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">NameError</span>: name &#39;A2CLearner&#39; is not defined</pre>
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/block.py</span> in <span class="ansi-cyan-fg">dataloaders</span><span class="ansi-blue-fg">(self, source, path, verbose, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    111</span> 
+<span class="ansi-green-intense-fg ansi-bold">    112</span>     <span class="ansi-green-fg">def</span> dataloaders<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> source<span class="ansi-blue-fg">,</span> path<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;.&#39;</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 113</span><span class="ansi-red-fg">         </span>dsets <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>datasets<span class="ansi-blue-fg">(</span>source<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    114</span>         kwargs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">**</span>self<span class="ansi-blue-fg">.</span>dls_kwargs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;verbose&#39;</span><span class="ansi-blue-fg">:</span> verbose<span class="ansi-blue-fg">}</span>
+<span class="ansi-green-intense-fg ansi-bold">    115</span>         <span class="ansi-green-fg">return</span> dsets<span class="ansi-blue-fg">.</span>dataloaders<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">=</span>path<span class="ansi-blue-fg">,</span> after_item<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>item_tfms<span class="ansi-blue-fg">,</span> after_batch<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>batch_tfms<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">datasets</span><span class="ansi-blue-fg">(self, source, verbose)</span>
+<span class="ansi-green-intense-fg ansi-bold">     78</span>         splits <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>splitter <span class="ansi-green-fg">or</span> RandomSplitter<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     79</span>         pv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;{len(splits)} datasets of sizes {&#39;,&#39;.join([str(len(s)) for s in splits])}&#34;</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 80</span><span class="ansi-red-fg">         </span>tls<span class="ansi-blue-fg">=</span>L<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>tls_type<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span> t<span class="ansi-blue-fg">,</span>verbose<span class="ansi-blue-fg">=</span>verbose<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> L<span class="ansi-blue-fg">(</span>ifnone<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_combine_type_tfms<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">[</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span>         <span class="ansi-green-fg">return</span> Datasets<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span>tls<span class="ansi-blue-fg">=</span>tls<span class="ansi-blue-fg">,</span>splits<span class="ansi-blue-fg">=</span>splits<span class="ansi-blue-fg">,</span> dl_type<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>dl_type<span class="ansi-blue-fg">,</span> n_inp<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>n_inp<span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span>verbose<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     82</span> 
+
+<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">     78</span>         splits <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>splitter <span class="ansi-green-fg">or</span> RandomSplitter<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     79</span>         pv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;{len(splits)} datasets of sizes {&#39;,&#39;.join([str(len(s)) for s in splits])}&#34;</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 80</span><span class="ansi-red-fg">         </span>tls<span class="ansi-blue-fg">=</span>L<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>tls_type<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span> t<span class="ansi-blue-fg">,</span>verbose<span class="ansi-blue-fg">=</span>verbose<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> L<span class="ansi-blue-fg">(</span>ifnone<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_combine_type_tfms<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">[</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span>         <span class="ansi-green-fg">return</span> Datasets<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span>tls<span class="ansi-blue-fg">=</span>tls<span class="ansi-blue-fg">,</span>splits<span class="ansi-blue-fg">=</span>splits<span class="ansi-blue-fg">,</span> dl_type<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>dl_type<span class="ansi-blue-fg">,</span> n_inp<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>n_inp<span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">=</span>verbose<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     82</span> 
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/foundation.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(cls, x, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     45</span>             <span class="ansi-green-fg">return</span> x
+<span class="ansi-green-intense-fg ansi-bold">     46</span> 
+<span class="ansi-green-fg">---&gt; 47</span><span class="ansi-red-fg">         </span>res <span class="ansi-blue-fg">=</span> super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__call__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> args<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span>         res<span class="ansi-blue-fg">.</span>_newchk <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
+<span class="ansi-green-intense-fg ansi-bold">     49</span>         <span class="ansi-green-fg">return</span> res
+
+<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, items, tfms, n, cycle_srcs, verbose, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     40</span>     <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>items<span class="ansi-blue-fg">,</span> tfms<span class="ansi-blue-fg">,</span>n<span class="ansi-blue-fg">:</span>int<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>cycle_srcs<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>verbose<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     41</span>         self<span class="ansi-blue-fg">.</span>n<span class="ansi-blue-fg">=</span>n<span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>cycle_srcs<span class="ansi-blue-fg">=</span>cycle_srcs<span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>source_idx<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>verbose<span class="ansi-blue-fg">=</span>verbose<span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">=</span>deque<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>extra_len<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span>
+<span class="ansi-green-fg">---&gt; 42</span><span class="ansi-red-fg">         </span>super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__init__<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span>tfms<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     43</span> 
+<span class="ansi-green-intense-fg ansi-bold">     44</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#34;{self.__class__.__name__}: Cycling sources: {self.cycle_srcs}\n{self.items}\ntfms - {self.tfms.fs}&#34;</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, items, tfms, use_list, do_setup, split_idx, train_setup, splits, types, verbose, dl_type)</span>
+<span class="ansi-green-intense-fg ansi-bold">    224</span>         <span class="ansi-green-fg">if</span> do_setup<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    225</span>             pv<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;Setting up {self.tfms}&#34;</span><span class="ansi-blue-fg">,</span> verbose<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 226</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>setup<span class="ansi-blue-fg">(</span>train_setup<span class="ansi-blue-fg">=</span>train_setup<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    227</span> 
+<span class="ansi-green-intense-fg ansi-bold">    228</span>     <span class="ansi-green-fg">def</span> _new<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> items<span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">setup</span><span class="ansi-blue-fg">(self, train_setup)</span>
+<span class="ansi-green-intense-fg ansi-bold">     52</span>         self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">.</span>clear<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     53</span> 
+<span class="ansi-green-fg">---&gt; 54</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> setup<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>train_setup<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>setup<span class="ansi-blue-fg">(</span>train_setup<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>self<span class="ansi-blue-fg">.</span>reset_src<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     55</span> 
+<span class="ansi-green-intense-fg ansi-bold">     56</span>     <span class="ansi-green-fg">def</span> __len__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">setup</span><span class="ansi-blue-fg">(self, train_setup)</span>
+<span class="ansi-green-intense-fg ansi-bold">    246</span>             <span class="ansi-green-fg">for</span> f <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>tfms<span class="ansi-blue-fg">.</span>fs<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    247</span>                 self<span class="ansi-blue-fg">.</span>types<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>getattr<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;input_types&#39;</span><span class="ansi-blue-fg">,</span> type<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 248</span><span class="ansi-red-fg">                 </span>x <span class="ansi-blue-fg">=</span> f<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    249</span>             self<span class="ansi-blue-fg">.</span>types<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>type<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    250</span>         types <span class="ansi-blue-fg">=</span> L<span class="ansi-blue-fg">(</span>t <span class="ansi-green-fg">if</span> is_listy<span class="ansi-blue-fg">(</span>t<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">[</span>t<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>types<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>concat<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>unique<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, x, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     70</span>     <span class="ansi-blue-fg">@</span>property
+<span class="ansi-green-intense-fg ansi-bold">     71</span>     <span class="ansi-green-fg">def</span> name<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;_name&#39;</span><span class="ansi-blue-fg">,</span> _get_name<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 72</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;encodes&#39;</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     73</span>     <span class="ansi-green-fg">def</span> decode  <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;decodes&#39;</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     74</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#39;{self.name}:\nencodes: {self.encodes}decodes: {self.decodes}&#39;</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">_call</span><span class="ansi-blue-fg">(self, fn, x, split_idx, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     80</span>     <span class="ansi-green-fg">def</span> _call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     81</span>         <span class="ansi-green-fg">if</span> split_idx<span class="ansi-blue-fg">!=</span>self<span class="ansi-blue-fg">.</span>split_idx <span class="ansi-green-fg">and</span> self<span class="ansi-blue-fg">.</span>split_idx <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> x
+<span class="ansi-green-fg">---&gt; 82</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     83</span> 
+<span class="ansi-green-intense-fg ansi-bold">     84</span>     <span class="ansi-green-fg">def</span> _do_call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">_do_call</span><span class="ansi-blue-fg">(self, f, x, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     86</span>             <span class="ansi-green-fg">if</span> f <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> x
+<span class="ansi-green-intense-fg ansi-bold">     87</span>             ret <span class="ansi-blue-fg">=</span> f<span class="ansi-blue-fg">.</span>returns_none<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> hasattr<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;returns_none&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-fg">---&gt; 88</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> retain_type<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> ret<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span>         res <span class="ansi-blue-fg">=</span> tuple<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> x_<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> x_ <span class="ansi-green-fg">in</span> x<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     90</span>         <span class="ansi-green-fg">return</span> retain_type<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/dispatch.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     97</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> f<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">     98</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>inst <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> f <span class="ansi-blue-fg">=</span> MethodType<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>inst<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 99</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    100</span> 
+<span class="ansi-green-intense-fg ansi-bold">    101</span>     <span class="ansi-green-fg">def</span> __get__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> inst<span class="ansi-blue-fg">,</span> owner<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/project/fastrl/fastrl/async_data.py</span> in <span class="ansi-cyan-fg">encodes</span><span class="ansi-blue-fg">(self, o)</span>
+<span class="ansi-green-intense-fg ansi-bold">     86</span>     <span class="ansi-green-fg">def</span> encodes<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>o<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span> <span class="ansi-red-fg">#         print(&#39;waiting&#39;)</span>
+<span class="ansi-green-fg">---&gt; 88</span><span class="ansi-red-fg">         </span>s<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>queue<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span> <span class="ansi-red-fg">#         print(s[0])</span>
+<span class="ansi-green-intense-fg ansi-bold">     90</span>         <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span>s<span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/queues.py</span> in <span class="ansi-cyan-fg">get</span><span class="ansi-blue-fg">(self, block, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">     92</span>         <span class="ansi-green-fg">if</span> block <span class="ansi-green-fg">and</span> timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     93</span>             <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">.</span>_rlock<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 94</span><span class="ansi-red-fg">                 </span>res <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_recv_bytes<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     95</span>             self<span class="ansi-blue-fg">.</span>_sem<span class="ansi-blue-fg">.</span>release<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     96</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/connection.py</span> in <span class="ansi-cyan-fg">recv_bytes</span><span class="ansi-blue-fg">(self, maxlength)</span>
+<span class="ansi-green-intense-fg ansi-bold">    214</span>         <span class="ansi-green-fg">if</span> maxlength <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span> maxlength <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    215</span>             <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;negative maxlength&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 216</span><span class="ansi-red-fg">         </span>buf <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_recv_bytes<span class="ansi-blue-fg">(</span>maxlength<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    217</span>         <span class="ansi-green-fg">if</span> buf <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    218</span>             self<span class="ansi-blue-fg">.</span>_bad_message_length<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/connection.py</span> in <span class="ansi-cyan-fg">_recv_bytes</span><span class="ansi-blue-fg">(self, maxsize)</span>
+<span class="ansi-green-intense-fg ansi-bold">    405</span> 
+<span class="ansi-green-intense-fg ansi-bold">    406</span>     <span class="ansi-green-fg">def</span> _recv_bytes<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> maxsize<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 407</span><span class="ansi-red-fg">         </span>buf <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_recv<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    408</span>         size<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">=</span> struct<span class="ansi-blue-fg">.</span>unpack<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;!i&#34;</span><span class="ansi-blue-fg">,</span> buf<span class="ansi-blue-fg">.</span>getvalue<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    409</span>         <span class="ansi-green-fg">if</span> maxsize <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span> size <span class="ansi-blue-fg">&gt;</span> maxsize<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/multiprocessing/connection.py</span> in <span class="ansi-cyan-fg">_recv</span><span class="ansi-blue-fg">(self, size, read)</span>
+<span class="ansi-green-intense-fg ansi-bold">    377</span>         remaining <span class="ansi-blue-fg">=</span> size
+<span class="ansi-green-intense-fg ansi-bold">    378</span>         <span class="ansi-green-fg">while</span> remaining <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 379</span><span class="ansi-red-fg">             </span>chunk <span class="ansi-blue-fg">=</span> read<span class="ansi-blue-fg">(</span>handle<span class="ansi-blue-fg">,</span> remaining<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    380</span>             n <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>chunk<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    381</span>             <span class="ansi-green-fg">if</span> n <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import gym</span>
+<span class="c1"># import ptan</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># import argparse</span>
+<span class="c1"># import collections</span>
+
+<span class="c1"># import torch</span>
+<span class="c1"># import torch.nn.utils as nn_utils</span>
+<span class="c1"># import torch.nn.functional as F</span>
+<span class="c1"># import torch.optim as optim</span>
+<span class="c1"># import torch.multiprocessing as mp</span>
+
+<span class="c1"># # from lib import common</span>
+
+<span class="c1"># GAMMA = 0.99</span>
+<span class="c1"># LEARNING_RATE = 0.001</span>
+<span class="c1"># ENTROPY_BETA = 0.01</span>
+<span class="c1"># BATCH_SIZE = 128</span>
+
+<span class="c1"># REWARD_STEPS = 4</span>
+<span class="c1"># CLIP_GRAD = 0.1</span>
+
+<span class="c1"># PROCESSES_COUNT = 4</span>
+<span class="c1"># NUM_ENVS = 15</span>
+
+<span class="c1"># def unbatch(batch, net, last_val_gamma, device=&#39;cpu&#39;):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Convert batch into training tensors</span>
+<span class="c1">#     :param batch:</span>
+<span class="c1">#     :param net:</span>
+<span class="c1">#     :return: states variable, actions tensor, reference values variable</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     states = []</span>
+<span class="c1">#     actions = []</span>
+<span class="c1">#     rewards = []</span>
+<span class="c1">#     not_done_idx = []</span>
+<span class="c1">#     last_states = []</span>
+<span class="c1">#     for idx, exp in enumerate(batch):</span>
+<span class="c1"># #         print(exp.state.numpy()[0].shape,int(exp.action),float(exp.reward),exp.last_state.numpy()[0].shape if not bool(exp.done) else None,exp.done)</span>
+<span class="c1">#         states.append(np.array(exp.state.numpy()[0], copy=False))</span>
+<span class="c1">#         actions.append(int(exp.action))</span>
+<span class="c1">#         rewards.append(exp.reward)</span>
+<span class="c1">#         if not exp.done: #exp.last_state is not None:</span>
+<span class="c1">#             not_done_idx.append(idx)</span>
+<span class="c1">#             # if exp.last_state is None:print(exp)</span>
+<span class="c1">#             last_states.append(np.array(exp.last_state.numpy()[0], copy=False))</span>
+<span class="c1">#         # else:</span>
+<span class="c1">#         #     print(exp,&#39;is done, so skipping&#39;)</span>
+<span class="c1">#     states_v = torch.FloatTensor(states).to(device)</span>
+<span class="c1">#     actions_t = torch.LongTensor(actions).to(device)</span>
+
+<span class="c1">#     # handle rewards</span>
+<span class="c1">#     rewards_np = np.array(rewards, dtype=np.float32)</span>
+<span class="c1">#     if not_done_idx:</span>
+<span class="c1">#         # print(last_states)</span>
+<span class="c1">#         last_states_v = torch.FloatTensor(last_states).to(device)</span>
+<span class="c1">#         last_vals_v = net(last_states_v)[1]</span>
+<span class="c1">#         last_vals_np = last_vals_v.data.cpu().numpy()[:, 0]</span>
+<span class="c1">#         # print(last_vals_v.data.cpu().numpy().mean())</span>
+<span class="c1">#         rewards_np[not_done_idx] += last_val_gamma * last_vals_np</span>
+
+<span class="c1">#     # print(len(not_done_idx),len(rewards_np),len(last_states))</span>
+<span class="c1">#     ref_vals_v = torch.FloatTensor(rewards_np).to(device)</span>
+<span class="c1">#     return states_v, actions_t, ref_vals_v</span>
+
+
+
+<span class="c1"># device = &quot;cpu&quot; #&quot;cuda&quot;</span>
+<span class="c1"># net = LinearA2C((4,),2).to(device)</span>
+<span class="c1"># net.share_memory()</span>
+
+
+<span class="c1"># env=&#39;CartPole-v1&#39;</span>
+<span class="c1"># block=AsyncExperienceBlock(</span>
+<span class="c1">#     experience_block=partial(FirstLastExperienceBlock,a=0,seed=0,n_steps=4,dls_kwargs={&#39;bs&#39;:1,&#39;num_workers&#39;:0,</span>
+<span class="c1">#                                                                              &#39;verbose&#39;:False,&#39;indexed&#39;:True,&#39;shuffle_train&#39;:False}),</span>
+<span class="c1">#     n_processes=4,</span>
+<span class="c1">#     n=128*1000,</span>
+<span class="c1">#     data_fit=data_fit,</span>
+<span class="c1">#     agent=ActorCriticAgent(net)</span>
+<span class="c1"># )</span>
+<span class="c1"># blk=IterableDataBlock(blocks=(block),</span>
+<span class="c1">#                       splitter=FuncSplitter(lambda x:False)#,</span>
+<span class="c1"># #                       batch_tfms=temp,</span>
+<span class="c1">#                      )</span>
+<span class="c1"># dls=blk.dataloaders([env]*15,bs=128)</span>
+
+
+
+
+
+<span class="c1"># optimizer = optim.Adam(net.parameters(), lr=LEARNING_RATE, eps=1e-3)</span>
+
+<span class="c1"># batch = []</span>
+<span class="c1"># step_idx = 0</span>
+<span class="c1"># batch_num = 0</span>
+
+<span class="c1"># rs_rolling=deque([],maxlen=100)</span>
+
+<span class="c1"># for j,b in enumerate(dls[0]):</span>
+<span class="c1">#     batch=[]</span>
+<span class="c1">#     for i in range(len(b[0])):</span>
+<span class="c1"># #         for j in range(len(b)):</span>
+<span class="c1">#     #         print(learn.xb[0][i],a[i],r[i],sp[i],d[i])</span>
+<span class="c1">#     #         print(a[i])</span>
+<span class="c1">#     #         print(b[0])</span>
+<span class="c1"># #             print(b[i][j],b[i][j],b[i][j],b[i][j],b[i][j])</span>
+<span class="c1">#         batch.append(ExperienceFirstLast(state=b[0][i],action=b[1][i],reward=b[2][i],last_state=b[3][i],done=b[4][i],episode_reward=b[5][i]))</span>
+    
+    
+    
+<span class="c1">#     rs=[o.episode_reward for o in batch if o.done and int(o.episode_reward)!=0]</span>
+<span class="c1">#     if rs: </span>
+<span class="c1">#         rs_rolling.append(np.mean(rs))</span>
+<span class="c1">#         print(j,np.mean(rs_rolling))</span>
+    
+    
+<span class="c1">#     batch_num+=1</span>
+<span class="c1">#     states_v, actions_t, vals_ref_v = \</span>
+<span class="c1">#         unbatch(batch, net, last_val_gamma=GAMMA**REWARD_STEPS, device=device)</span>
+
+<span class="c1">#     optimizer.zero_grad()</span>
+<span class="c1">#     logits_v, value_v = net(states_v)</span>
+<span class="c1">#     loss_value_v = F.mse_loss(value_v.squeeze(-1), vals_ref_v)</span>
+<span class="c1">#     log_prob_v = F.log_softmax(logits_v, dim=1)</span>
+<span class="c1">#     adv_v = vals_ref_v - value_v.detach()</span>
+<span class="c1">#     log_prob_actions_v = adv_v * log_prob_v[range(BATCH_SIZE), actions_t]</span>
+<span class="c1">#     loss_policy_v = -log_prob_actions_v.mean()</span>
+<span class="c1">#     prob_v = F.softmax(logits_v, dim=1)</span>
+<span class="c1">#     entropy_loss_v = ENTROPY_BETA * (prob_v * log_prob_v).sum(dim=1).mean()</span>
+<span class="c1">#     loss_v = entropy_loss_v + loss_value_v + loss_policy_v</span>
+
+<span class="c1">#     # print(entropy_loss_v,loss_policy_v,loss_value_v)</span>
+<span class="c1">#     loss_v.backward()</span>
+<span class="c1">#     # getBack(loss_v.grad_fn)</span>
+<span class="c1">#     nn_utils.clip_grad_norm_(net.parameters(), CLIP_GRAD)</span>
+<span class="c1">#     # print(step_idx)</span>
+<span class="c1">#     optimizer.step()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nbdev.export2html</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">notebook2script</span><span class="p">()</span>
+<span class="n">notebook2html</span><span class="p">()</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

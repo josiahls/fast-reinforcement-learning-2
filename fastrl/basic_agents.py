@@ -65,8 +65,10 @@ def float32_preprocessor(s):
     return torch.tensor(np_s)
 
 # Cell
+import ptan
+
 @dataclass
-class BaseAgent(object):
+class BaseAgent(ptan.agent.BaseAgent):
     model:nn.Module=None # If None, learner will set
     def initial_state(self):return None
     def __call__(self,sl,asl,include_batch_dim=False):
@@ -97,11 +99,12 @@ class DiscreteAgent(BaseAgent):
     def split_v(self,v,asl): return v,asl
 
     @torch.no_grad()
-    def __call__(self,s,asl=None,include_batch_dim=False):
-        s=self.preprocessor(s) if self.preprocessor is not None else s
-        asl= np.zeros(s.shape) if asl is None else asl
-        s=s.to(self.device) if torch.is_tensor(s) else s
-        v=self.model(s)
+    def __call__(self,x,asl=None,include_batch_dim=False):
+        x=self.preprocessor(x) if self.preprocessor is not None else s
+        asl= np.zeros(x.shape) if asl is None else asl
+        if torch.is_tensor(x):
+            x=x.to(self.device)
+        v=self.model(x)
         if type(v)==tuple:v,asl=self.split_v(v,asl)
         if self.apply_softmax:
             v=F.softmax(v,dim=1)
@@ -145,4 +148,5 @@ class ActorCriticAgent(PolicyAgent):
     "Policy agent which returns policy and value tensors from observations. Value are stored in agent's state \
      and could be reused for rollouts calculations by ExperienceSource."
     def split_v(self,v,asl):
-        return v[0],v[1].data.squeeze().cpu().numpy()
+#         v=v
+        return v[0],v[1].cpu().detach().squeeze().numpy()

@@ -27,9 +27,9 @@ class AgentLearner(Learner):
             for cb in self.cbs:
                 if issubclass(cb.__class__,Recorder):cb.train_metrics=True
 
-    def _split(self, b):
-        if len(b)==1 and type(b[0])==tuple:b=b[0]
-        super()._split(b)
+#     def _split(self, b):
+#         if len(b)==1 and type(b[0])==tuple:b=b[0]
+#         super()._split(b)
 
     def predict(self,s):
         return self.agent(s,None)

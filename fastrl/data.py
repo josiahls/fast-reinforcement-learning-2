@@ -119,21 +119,24 @@ class ResetAndStepTfm(Transform):
         self.steps=ifnone(steps,{})
         self._exhausted=False
         self.exp_src=None
+        self.exp_src_iter=None
         # store_attr('n,cycle_srcs', self) TODO (Josiah): Does not seem to work?
 
     def setup(self,items:TfmdSource,train_setup=False):
 #         self.reset(items)
-        self.exp_src=iter(ptan.experience.ExperienceSource(items.items, TestAgent(), steps_count=self.n_steps,steps_delta=self.steps_delta))
+        self.exp_src=ptan.experience.ExperienceSource(items.items, ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
+        self.exp_src_iter=iter(self.exp_src)
         return super().setup(items,train_setup)
 
     def reset(self,items):
         if len(items.items)==0:return
         if items.extra_len==0:
             items.extra_len=items.items[0].spec.max_episode_steps*(self.n_steps-1) # Extra steps to unwrap done
-        self.exp_src=iter(ptan.experience.ExperienceSource(items.items, TestAgent(), steps_count=self.n_steps,steps_delta=self.steps_delta))
+        self.exp_src=ptan.experience.ExperienceSource(items.items,ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
+        self.exp_src_iter=iter(self.exp_src)
 
     def encodes(self,o:gym.Env):
-        exps=next(self.exp_src)
+        exps=next(self.exp_src_iter)
         return exps
 
 # Cell
@@ -142,17 +145,21 @@ def ExperienceBlock(dls_kwargs=None,**kwargs):
     return TransformBlock(type_tfms=[MakeTfm(),ResetAndStepTfm(**kwargs)],dl_type=TfmdSourceDL,dls_kwargs=dls_kwargs)
 
 # Cell
-ExperienceFirstLast = collections.namedtuple('ExperienceFirstLast', ('state', 'action', 'reward', 'last_state','done'))
+ExperienceFirstLast = collections.namedtuple('ExperienceFirstLast', ('state', 'action', 'reward', 'last_state','done','episode_reward'))
 
 @delegates(ResetAndStepTfm)
 class FirstLastTfm(ResetAndStepTfm):
     def __init__(self,discount=0.99,**kwargs):
         super().__init__(**kwargs)
         self.discount=discount
+        self.exp_src_iter=None
+        self.exp_src=None
 
     def setup(self,items:TfmdSource,train_setup=False):
-        self.exp_src=iter(ptan.experience.ExperienceSourceFirstLast(items.items, TestAgent(), steps_count=self.n_steps,steps_delta=self.steps_delta,
+        self.exp_src=iter(ptan.experience.ExperienceSourceFirstLast(items.items,ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta,
                                                                     gamma=self.discount))
+
+        self.exp_src_iter=iter(self.exp_src)
         return super().setup(items,train_setup)
 
     def reset(self,items):
@@ -160,13 +167,19 @@ class FirstLastTfm(ResetAndStepTfm):
         if len(items.items)==0:return
         if items.extra_len==0:
             items.extra_len=items.items[0].spec.max_episode_steps*(self.n_steps-1) # Extra steps to unwrap done
-        self.exp_src=iter(ptan.experience.ExperienceSourceFirstLast(items.items, TestAgent(), steps_count=self.n_steps,steps_delta=self.steps_delta,
-                                                                    gamma=self.discount))
+        self.exp_src=ptan.experience.ExperienceSourceFirstLast(items.items,ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta,
+                                                                    gamma=self.discount)
+        self.exp_src_iter=iter(self.exp_src)
 
     def encodes(self,o:gym.Env):
-        exps=next(self.exp_src)
-        if exps.last_state is None: exps=ExperienceFirstLast(state=exps.state,reward=exps.reward,action=exps.action,last_state=exps.state,done=True)
-        else:exps=ExperienceFirstLast(state=exps.state,reward=exps.reward,action=exps.action,last_state=exps.last_state,done=False)
+        exps=next(self.exp_src_iter)
+        if exps.last_state is None:
+            r=self.exp_src.pop_total_rewards()
+            if len(r)==0: r=0
+            else:         r=r[0]
+#             print(r)
+            exps=ExperienceFirstLast(state=exps.state,reward=exps.reward,action=exps.action,last_state=exps.state,done=True,episode_reward=r)
+        else:exps=ExperienceFirstLast(state=exps.state,reward=exps.reward,action=exps.action,last_state=exps.last_state,done=False,episode_reward=0)
         return [exps]
 
 @delegates(FirstLastTfm)
