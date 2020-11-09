@@ -2,6 +2,7 @@ FROM continuumio/miniconda:4.7.12
 
 RUN apt-get update -y && apt-get install -y nano make curl jq
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV CONTAINER_USER fastrl
 ENV CONTAINER_GROUP fastrl_group
 ENV CONTAINER_UID 1000

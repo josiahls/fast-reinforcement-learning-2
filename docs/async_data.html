@@ -2,6 +2,7 @@
 
 title: Async Experience Blocks
 
+
 keywords: fastai
 sidebar: home_sidebar
 
@@ -35,6 +36,20 @@ nb_path: "nbs/05b_async_data.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some of the challenges involve being able to run async envs in <code>spawned</code> process.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First we need to define a more convenient <code>Process</code> object to work with. It allows for easily passing the <a href="/fast-reinforcement-learning-2/actorcritic.a3c_data.html#data_fit"><code>data_fit</code></a> callable along with allowing to query the <code>kwargs</code> using the fastai delegates.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -53,7 +68,7 @@ nb_path: "nbs/05b_async_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="template_data_fit" class="doc_header"><code>template_data_fit</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>template_data_fit</code>(<strong><code>queue</code></strong>:<code>JoinableQueue</code>=<em><code>None</code></em>, <strong><code>items</code></strong>:<code>L</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>None</code></em>, <strong><code>learner_cls</code></strong>:<code>Learner</code>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>:<a href="/fast-reinforcement-learning-2/data.html#ExperienceBlock"><code>ExperienceBlock</code></a>=<em><code>None</code></em>, <strong><code>cancel</code></strong>:<code>Event</code>=<em><code>None</code></em>)</p>
+<h4 id="template_data_fit" class="doc_header"><code>template_data_fit</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>template_data_fit</code>(<strong><code>train_queue</code></strong>=<em><code>None</code></em>, <strong><code>items</code></strong>:<code>L</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>:<a href="/fast-reinforcement-learning-2/data.html#ExperienceBlock"><code>ExperienceBlock</code></a>=<em><code>None</code></em>, <strong><code>cancel</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -70,6 +85,13 @@ nb_path: "nbs/05b_async_data.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -77,7 +99,7 @@ nb_path: "nbs/05b_async_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataFitProcess" class="doc_header"><code>class</code> <code>DataFitProcess</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L41" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataFitProcess</code>(<strong><code>n</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>start</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>data_fit</code></strong>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>None</code></em>, <strong><code>learner_cls</code></strong>:<code>Learner</code>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>:<a href="/fast-reinforcement-learning-2/data.html#ExperienceBlock"><code>ExperienceBlock</code></a>=<em><code>None</code></em>, <strong><code>cancel</code></strong>:<code>Event</code>=<em><code>None</code></em>) :: <code>Process</code></p>
+<h2 id="DataFitProcess" class="doc_header"><code>class</code> <code>DataFitProcess</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataFitProcess</code>(<strong><code>start</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>data_fit</code></strong>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>:<a href="/fast-reinforcement-learning-2/data.html#ExperienceBlock"><code>ExperienceBlock</code></a>=<em><code>None</code></em>, <strong><code>cancel</code></strong>=<em><code>None</code></em>) :: <code>Process</code></p>
 </blockquote>
 <p>Process objects represent activity that is run in a separate process</p>
 <p>The class is analogous to <code>threading.Thread</code></p>
@@ -103,6 +125,13 @@ nb_path: "nbs/05b_async_data.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -110,7 +139,38 @@ nb_path: "nbs/05b_async_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MultiProcessTfm" class="doc_header"><code>class</code> <code>MultiProcessTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L56" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MultiProcessTfm</code>(<strong><code>n</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>maxsize</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>process_cls</code></strong>=<em><code>DataFitProcess</code></em>) :: <code>Transform</code></p>
+<h4 id="safe_get" class="doc_header"><code>safe_get</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>safe_get</code>(<strong><code>q</code></strong>, <strong><code>e</code></strong>, <strong><code>p_in</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="MultiProcessTfm" class="doc_header"><code>class</code> <code>MultiProcessTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L110" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MultiProcessTfm</code>(<strong><code>n_processes</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>process_cls</code></strong>=<em><code>None</code></em>, <strong><code>cancel</code></strong>=<em><code>None</code></em>, <strong><code>verbose</code></strong>:<code>str</code>=<em><code>False</code></em>, <strong><code>regular_get</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>tracker</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -142,7 +202,7 @@ nb_path: "nbs/05b_async_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="AsyncExperienceBlock" class="doc_header"><code>AsyncExperienceBlock</code><a href="__main__.py#L2" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>AsyncExperienceBlock</code>(<strong><code>experience_block</code></strong>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>learner_cls</code></strong>=<em><code>None</code></em>, <strong><code>data_fit</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong><code>n</code></strong>=<em><code>200</code></em>, <strong><code>bs</code></strong>=<em><code>1</code></em>, <strong><code>maxsize</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>process_cls</code></strong>=<em><code>DataFitProcess</code></em>)</p>
+<h4 id="AsyncExperienceBlock" class="doc_header"><code>AsyncExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/async_data.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>AsyncExperienceBlock</code>(<strong><code>experience_block</code></strong>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>data_fit</code></strong>=<em><code>None</code></em>, <strong><code>n_processes</code></strong>=<em><code>1</code></em>, <strong><code>n</code></strong>=<em><code>200</code></em>, <strong><code>bs</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -158,91 +218,6 @@ nb_path: "nbs/05b_async_data.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>() :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
-</blockquote>
-<p>Abstract Agent interface</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span>
-<span class="k">for</span> <span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta_param</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)):</span>
-    <span class="n">block</span><span class="o">=</span><span class="n">AsyncExperienceBlock</span><span class="p">(</span>
-        <span class="n">experience_block</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta</span><span class="o">=</span><span class="n">steps_delta_param</span><span class="p">,</span>
-                                 <span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}),</span>
-        <span class="n">n_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">n</span><span class="o">=</span><span class="mi">200</span>
-    <span class="p">)</span>
-
-    <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">block</span><span class="p">),</span><span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">))</span>
-
-    <span class="n">envs</span><span class="o">=</span><span class="p">[</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_envs</span><span class="p">)]</span>
-    <span class="n">envs</span><span class="o">=</span><span class="p">[</span><span class="n">SeedZeroWrapper</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">envs</span><span class="p">]</span>
-    <span class="n">exp_src</span><span class="o">=</span><span class="n">ptan</span><span class="o">.</span><span class="n">experience</span><span class="o">.</span><span class="n">ExperienceSourceFirstLast</span><span class="p">(</span><span class="n">envs</span><span class="p">,</span> <span class="n">TestAgent</span><span class="p">(),</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">steps_count</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta</span><span class="o">=</span><span class="n">steps_delta_param</span><span class="p">)</span>
-
-    <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">n_envs</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                          <span class="n">indexed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">shuffle_train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-
-    <span class="n">fastrl_exp</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">ptan_exps</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">exp_src</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="c1">#             print(x)</span>
-            <span class="n">fastrl_exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExperienceFirstLast</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">j</span><span class="o">!=</span><span class="mi">3</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span>
-        <span class="k">for</span> <span class="n">ptan_e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">e</span><span class="p">]:</span>
-            <span class="n">fastrl_e</span><span class="o">=</span><span class="n">fastrl_exp</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">last_state</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">last_state</span><span class="p">)</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">reward</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">reward</span><span class="p">)</span>
-            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># agent=DQNAgent(model=model)</span>
-<span class="c1"># learn=AgentLearner(dls,agent=agent,model=model,loss_func=lambda x:0.5)</span>
-<span class="c1"># learn.fit(10,lr=0.01,wd=1)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}

@@ -2,6 +2,7 @@
 
 title: Experience Blocks
 
+
 keywords: fastai
 sidebar: home_sidebar
 
@@ -47,13 +48,6 @@ nb_path: "nbs/05a_data.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -61,7 +55,7 @@ nb_path: "nbs/05a_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="is_single_nested_tuple" class="doc_header"><code>is_single_nested_tuple</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_single_nested_tuple</code>(<strong><code>b</code></strong>)</p>
+<h4 id="is_single_nested_tuple" class="doc_header"><code>is_single_nested_tuple</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_single_nested_tuple</code>(<strong><code>b</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -85,7 +79,7 @@ nb_path: "nbs/05a_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TfmdSourceDL" class="doc_header"><code>class</code> <code>TfmdSourceDL</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L23" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdSourceDL</code>(<strong><code>dataset</code></strong>, <strong><code>bs</code></strong>=<em><code>64</code></em>, <strong><code>shuffle</code></strong>=<em><code>False</code></em>, <strong><code>num_workers</code></strong>=<em><code>None</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>pin_memory</code></strong>=<em><code>False</code></em>, <strong><code>timeout</code></strong>=<em><code>0</code></em>, <strong><code>batch_size</code></strong>=<em><code>None</code></em>, <strong><code>drop_last</code></strong>=<em><code>False</code></em>, <strong><code>indexed</code></strong>=<em><code>None</code></em>, <strong><code>n</code></strong>=<em><code>None</code></em>, <strong><code>device</code></strong>=<em><code>None</code></em>, <strong><code>wif</code></strong>=<em><code>None</code></em>, <strong><code>before_iter</code></strong>=<em><code>None</code></em>, <strong><code>after_item</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_iter</code></strong>=<em><code>None</code></em>, <strong><code>create_batches</code></strong>=<em><code>None</code></em>, <strong><code>create_item</code></strong>=<em><code>None</code></em>, <strong><code>create_batch</code></strong>=<em><code>None</code></em>, <strong><code>retain</code></strong>=<em><code>None</code></em>, <strong><code>get_idxs</code></strong>=<em><code>None</code></em>, <strong><code>sample</code></strong>=<em><code>None</code></em>, <strong><code>shuffle_fn</code></strong>=<em><code>None</code></em>, <strong><code>do_batch</code></strong>=<em><code>None</code></em>) :: <code>TfmdDL</code></p>
+<h2 id="TfmdSourceDL" class="doc_header"><code>class</code> <code>TfmdSourceDL</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L24" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdSourceDL</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>TfmdDL</code></p>
 </blockquote>
 <p>Transformed <code>DataLoader</code></p>
 
@@ -95,6 +89,13 @@ nb_path: "nbs/05a_data.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -110,13 +111,6 @@ nb_path: "nbs/05a_data.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -124,7 +118,7 @@ nb_path: "nbs/05a_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TfmdSource" class="doc_header"><code>class</code> <code>TfmdSource</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L38" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdSource</code>(<strong><code>items</code></strong>, <strong><code>tfms</code></strong>, <strong><code>n</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>cycle_srcs</code></strong>=<em><code>True</code></em>, <strong><code>verbose</code></strong>=<em><code>False</code></em>, <strong><code>use_list</code></strong>=<em><code>None</code></em>, <strong><code>do_setup</code></strong>=<em><code>True</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>train_setup</code></strong>=<em><code>True</code></em>, <strong><code>splits</code></strong>=<em><code>None</code></em>, <strong><code>types</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>) :: <code>TfmdLists</code></p>
+<h2 id="TfmdSource" class="doc_header"><code>class</code> <code>TfmdSource</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L46" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TfmdSource</code>(<strong><code>items</code></strong>=<em><code>None</code></em>, <strong>*<code>rest</code></strong>, <strong><code>use_list</code></strong>=<em><code>False</code></em>, <strong><code>match</code></strong>=<em><code>None</code></em>) :: <code>TfmdLists</code></p>
 </blockquote>
 <p>A <code>Pipeline</code> of <code>tfms</code> applied to a collection of sources called <code>items</code>. Only swtches between them if they get exhausted.</p>
 
@@ -156,7 +150,7 @@ nb_path: "nbs/05a_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="IterableDataBlock" class="doc_header"><code>class</code> <code>IterableDataBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L73" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableDataBlock</code>(<strong><code>blocks</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>getters</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>get_items</code></strong>=<em><code>None</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>get_y</code></strong>=<em><code>None</code></em>, <strong><code>get_x</code></strong>=<em><code>None</code></em>) :: <code>DataBlock</code></p>
+<h2 id="IterableDataBlock" class="doc_header"><code>class</code> <code>IterableDataBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L81" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableDataBlock</code>(<strong><code>blocks</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>getters</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>get_items</code></strong>=<em><code>None</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>get_y</code></strong>=<em><code>None</code></em>, <strong><code>get_x</code></strong>=<em><code>None</code></em>) :: <code>DataBlock</code></p>
 </blockquote>
 <p>Generic container to quickly build <code>Datasets</code> and <code>DataLoaders</code></p>
 
@@ -166,6 +160,13 @@ nb_path: "nbs/05a_data.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -180,13 +181,6 @@ nb_path: "nbs/05a_data.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -194,7 +188,7 @@ nb_path: "nbs/05a_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SeedZeroWrapper" class="doc_header"><code>class</code> <code>SeedZeroWrapper</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L84" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SeedZeroWrapper</code>(<strong><code>env</code></strong>) :: <code>Wrapper</code></p>
+<h2 id="SeedZeroWrapper" class="doc_header"><code>class</code> <code>SeedZeroWrapper</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L92" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SeedZeroWrapper</code>(<strong><code>env</code></strong>) :: <code>Wrapper</code></p>
 </blockquote>
 <p>Wraps the environment to allow a modular transformation.</p>
 <p>This class is the base class for all wrappers. The subclass could override
@@ -225,7 +219,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MakeTfm" class="doc_header"><code>class</code> <code>MakeTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L89" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MakeTfm</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="MakeTfm" class="doc_header"><code>class</code> <code>MakeTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L97" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MakeTfm</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -235,6 +229,13 @@ original code.</p>
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -260,13 +261,6 @@ original code.</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -274,7 +268,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="env_display" class="doc_header"><code>env_display</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L95" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>env_display</code>(<strong><code>env</code></strong>:<code>Env</code>)</p>
+<h4 id="env_display" class="doc_header"><code>env_display</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>env_display</code>(<strong><code>env</code></strong>:<code>Env</code>)</p>
 </blockquote>
 
 </div>
@@ -305,7 +299,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>() :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L114" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>() :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>Abstract Agent interface</p>
 
@@ -330,7 +324,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="envlen" class="doc_header"><code>envlen</code><a href="__main__.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>envlen</code>(<strong><code>o</code></strong>:<code>Env</code>)</p>
+<h4 id="envlen" class="doc_header"><code>envlen</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>envlen</code>(<strong><code>o</code></strong>:<code>Env</code>)</p>
 </blockquote>
 
 </div>
@@ -354,7 +348,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ResetAndStepTfm" class="doc_header"><code>class</code> <code>ResetAndStepTfm</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResetAndStepTfm</code>(<strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>Transform</code></p>
+<h2 id="ResetAndStepTfm" class="doc_header"><code>class</code> <code>ResetAndStepTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L121" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResetAndStepTfm</code>(<strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>ResetAndStepTfm(self, seed: int = None, agent: object = None, n_steps: int = 1, steps_delta: int = 1, a: Any = None, histories: Dict[str, collections.deque] = None, s: dict = None, steps: dict = None, maxsteps: int = None, display: bool = False, hist2dict: bool = True)</p>
 
@@ -386,7 +380,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ExperienceBlock" class="doc_header"><code>ExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L143" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ExperienceBlock</code>(<strong><code>dls_kwargs</code></strong>=<em><code>None</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h4 id="ExperienceBlock" class="doc_header"><code>ExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L151" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ExperienceBlock</code>(<strong><code>dls_kwargs</code></strong>=<em><code>None</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -395,6 +389,13 @@ original code.</p>
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -450,13 +451,6 @@ original code.</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -464,7 +458,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastTfm" class="doc_header"><code>class</code> <code>FirstLastTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastTfm</code>(<strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <a href="/fast-reinforcement-learning-2/data.html#ResetAndStepTfm"><code>ResetAndStepTfm</code></a></p>
+<h2 id="FirstLastTfm" class="doc_header"><code>class</code> <code>FirstLastTfm</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L159" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastTfm</code>(<strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>) :: <a href="/fast-reinforcement-learning-2/data.html#ResetAndStepTfm"><code>ResetAndStepTfm</code></a></p>
 </blockquote>
 <p>ResetAndStepTfm(self, seed: int = None, agent: object = None, n_steps: int = 1, steps_delta: int = 1, a: Any = None, histories: Dict[str, collections.deque] = None, s: dict = None, steps: dict = None, maxsteps: int = None, display: bool = False, hist2dict: bool = True)</p>
 
@@ -489,7 +483,7 @@ original code.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="FirstLastExperienceBlock" class="doc_header"><code>FirstLastExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L185" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>FirstLastExperienceBlock</code>(<strong><code>dls_kwargs</code></strong>=<em><code>None</code></em>, <strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h4 id="FirstLastExperienceBlock" class="doc_header"><code>FirstLastExperienceBlock</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/data.py#L193" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>FirstLastExperienceBlock</code>(<strong><code>dls_kwargs</code></strong>=<em><code>None</code></em>, <strong><code>discount</code></strong>=<em><code>0.99</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>:<code>object</code>=<em><code>None</code></em>, <strong><code>n_steps</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>a</code></strong>:<code>Any</code>=<em><code>None</code></em>, <strong><code>histories</code></strong>:<code>Dict</code>[<code>str</code>, <code>deque</code>]=<em><code>None</code></em>, <strong><code>s</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>steps</code></strong>:<code>dict</code>=<em><code>None</code></em>, <strong><code>maxsteps</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>display</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>hist2dict</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -505,39 +499,58 @@ original code.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta_param</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)):</span>
-    <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">n_steps</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta</span><span class="o">=</span><span class="n">steps_delta_param</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">fastrl.async_data</span>
+<span class="kn">from</span> <span class="nn">fastrl.basic_agents</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">for</span> <span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta_param</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)):</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">fastrl</span><span class="o">.</span><span class="n">async_data</span><span class="o">.</span><span class="n">_LinearA2C</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">default_device</span><span class="p">())</span>
+    <span class="n">agent</span><span class="o">=</span><span class="n">partialler</span><span class="p">(</span><span class="n">ActorCriticAgent</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
+    <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">n_steps</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta</span><span class="o">=</span><span class="n">steps_delta_param</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">())),</span>
                                   <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">))</span>
 
     <span class="n">n_envs</span><span class="o">=</span><span class="mi">15</span>
-    <span class="n">envs</span><span class="o">=</span><span class="p">[</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_envs</span><span class="p">)]</span>
-    <span class="n">envs</span><span class="o">=</span><span class="p">[</span><span class="n">SeedZeroWrapper</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">envs</span><span class="p">]</span>
-    <span class="n">exp_src</span><span class="o">=</span><span class="n">ptan</span><span class="o">.</span><span class="n">experience</span><span class="o">.</span><span class="n">ExperienceSourceFirstLast</span><span class="p">(</span><span class="n">envs</span><span class="p">,</span> <span class="n">TestAgent</span><span class="p">(),</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">steps_count</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">steps_delta</span><span class="o">=</span><span class="n">steps_delta_param</span><span class="p">)</span>
-
     <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">n_envs</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="n">n_step_param</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                          <span class="n">indexed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">shuffle_train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-
-    <span class="n">fastrl_exp</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">ptan_exps</span><span class="o">=</span><span class="p">[]</span>
+                          <span class="n">indexed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">shuffle_train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
     <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">e</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dls</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">exp_src</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="c1">#             print(x)</span>
-            <span class="n">fastrl_exp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExperienceFirstLast</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">el</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">j</span><span class="o">!=</span><span class="mi">3</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span>
-        <span class="k">for</span> <span class="n">ptan_e</span> <span class="ow">in</span> <span class="p">[</span><span class="n">e</span><span class="p">]:</span>
-            <span class="n">fastrl_e</span><span class="o">=</span><span class="n">fastrl_exp</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">last_state</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">last_state</span><span class="p">)</span>
-            <span class="n">test_eq</span><span class="p">(</span><span class="n">fastrl_e</span><span class="o">.</span><span class="n">reward</span><span class="p">,</span><span class="n">ptan_e</span><span class="o">.</span><span class="n">reward</span><span class="p">)</span>
-            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dls</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="n">counter</span><span class="o">=</span><span class="n">i</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-11-456c92567f15&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span>     model<span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>default_device<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>     agent<span class="ansi-blue-fg">=</span>partialler<span class="ansi-blue-fg">(</span>ActorCriticAgent<span class="ansi-blue-fg">,</span>model<span class="ansi-blue-fg">=</span>model<span class="ansi-blue-fg">,</span>device<span class="ansi-blue-fg">=</span>default_device<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg">     blk=IterableDataBlock(blocks=(FirstLastExperienceBlock(n_steps=n_step_param,steps_delta=steps_delta_param,a=0,seed=0,agent=agent())),
+</span><span class="ansi-green-intense-fg ansi-bold">      9</span>                                   splitter=FuncSplitter(lambda x:False))
+<span class="ansi-green-intense-fg ansi-bold">     10</span> 
+
+<span class="ansi-red-fg">NameError</span>: name &#39;IterableDataBlock&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 

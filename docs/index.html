@@ -2,6 +2,7 @@
 
 title: Fastrl2
 
+
 keywords: fastai
 sidebar: home_sidebar
 
@@ -80,11 +81,11 @@ nb_path: "nbs/index.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>For cpu execution</p>
 <div class="highlight"><pre><span></span>docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl /bin/bash
+docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl:latest /bin/bash
 </pre></div>
 <p>Install: <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">Nvidia-Docker</a></p>
 <div class="highlight"><pre><span></span>docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
-docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000  --gpus all --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl_cuda /bin/bash
+docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000  --gpus all --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl_cuda:latest /bin/bash
 </pre></div>
 
 </div>

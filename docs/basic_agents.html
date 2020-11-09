@@ -2,6 +2,7 @@
 
 title: Basic Action Selection
 
+
 keywords: fastai
 sidebar: home_sidebar
 
@@ -73,13 +74,6 @@ nb_path: "nbs/03_basic_agents.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -137,9 +131,9 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7fd038312150&gt;</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a></p>
+<h2 id="EpsilonGreedyActionSelector" class="doc_header"><code>class</code> <code>EpsilonGreedyActionSelector</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>EpsilonGreedyActionSelector</code>(<strong><code>epsilon</code></strong>:<code>float</code>=<em><code>0.05</code></em>, <strong><code>selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>&lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f525642b350&gt;</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a></p>
 </blockquote>
-<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7fd038312150&gt;)</p>
+<p>EpsilonGreedyActionSelector(epsilon: float = 0.05, selector: fastrl.basic_agents.ActionSelector = &lt;fastrl.basic_agents.ArgmaxActionSelector object at 0x7f525642b350&gt;)</p>
 
 </div>
 
@@ -176,6 +170,13 @@ nb_path: "nbs/03_basic_agents.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Basic-Agents">Basic Agents<a class="anchor-link" href="#Basic-Agents"> </a></h1><blockquote><p>Basic Agent classes for handling models and actions. Details, please ref <code>basic_train</code></p>
@@ -202,13 +203,6 @@ nb_path: "nbs/03_basic_agents.ipynb"
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -276,7 +270,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="BaseAgent" class="doc_header"><code>class</code> <code>BaseAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L71" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>BaseAgent(model: torch.nn.modules.module.Module = None)</p>
 
@@ -301,7 +295,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
+<h2 id="TestAgent" class="doc_header"><code>class</code> <code>TestAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L82" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>env</code></strong>:<code>object</code>=<em><code>None</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>TestAgent(model: torch.nn.modules.module.Module = None, env: object = None)</p>
 
@@ -311,6 +305,13 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -376,7 +377,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAGmElEQVR4nO3dzU0CURSAUTE0QR1ahnVATVCHZWgdljEuTAjxh5Dg8Ea/c1bAgtwN+fIuw7CapukOAKruRw8AACMJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghA2nr0ANDyetgdHz9s9wMnAT4IIczoNHvAMlmNApAmhDCj88tP50VYAiEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQhjp9bAbPQLUCSHM62G7Hz0CcI4QApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhHCR1RVGvTNwCSEEIE0IAUhbjx4AQp7ftqdPnzaHUZMAR06EcCOfKvjtK8DtCSHcwk/N00IYTggBSBNCmJ1jHyyZEMLszl8U87KXSRhJCGF2jztXh8JyCSGM5BcUMJwQwi08bQ5fm6eCsASraZpGzwB/wJU39jz9IvAXN6U+v3A9IYSLLPMO1z6/cD2rUQAAgCqrUbiI1Sj8V1ajAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKT59wkA0pwIAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIE0IAUgTQgDShBCANCEEIO0dCGs+V6FnPbIAAAAASUVORK5CYII=
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -385,13 +386,6 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 </div>
 </div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -432,7 +426,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L117" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
+<h2 id="DQNAgent" class="doc_header"><code>class</code> <code>DQNAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L127" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQNAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
 </blockquote>
 <p>DQNAgent is a memoryless DQN agent which calculates Q values from the observations and  converts them into the actions using a_selector.</p>
 
@@ -442,6 +436,13 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -479,7 +480,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">done</span><span class="p">:</span><span class="n">s</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="n">s</span><span class="p">,</span><span class="n">done</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">agent</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">s</span><span class="p">,</span><span class="n">done</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">agent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">include_batch_dim</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">im</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rgb_array&#39;</span><span class="p">)</span>
     <span class="n">new_im</span><span class="o">=</span><span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -500,7 +501,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAGc0lEQVR4nO3dwU3DUBQAQYzSBHVAGdSR1JTUQRlQB2WYG4IAIcLIP7Azt/hgvYu18pO+M83zfAUAVdejBwCAkYQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBNCAFIE0IA0oQQgDQhBCBtM3oASHg67N7+vN3uR00CHBFCGEAX4XJYjQKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCECaEAKQJoQApAkhAGlCCOeaFhh1Z+BbQghAmhACkLYZPQCEPDxvj67c3xyGTAK88kYIK/lYwa8uAmsSQljDieBpIYwlhACkCSEAaUIIQJoQApAmhLCGE8cknKCAsYQQVvJp8FQQhpvmeR49A/wNv/hhz8f9uyMTd7uf59AjDAsJIZzrMr9w7RGGhaxGAQAAqqxG4VxWo/AvWY0CkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkCaEAKQJIQBpQghAmhACkObfJwBI80YIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaUIIQJoQApAmhACkCSEAaS8qPjOJ9aB/NQAAAABJRU5ErkJggg==
 "
 >
 </div>
@@ -517,13 +518,6 @@ nb_path: "nbs/03_basic_agents.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -531,7 +525,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TargetNet" class="doc_header"><code>class</code> <code>TargetNet</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L123" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetNet</code>(<strong><code>model</code></strong>)</p>
+<h2 id="TargetNet" class="doc_header"><code>class</code> <code>TargetNet</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L133" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetNet</code>(<strong><code>model</code></strong>)</p>
 </blockquote>
 <p>Wrapper around model which provides copy of it instead of trained weights.</p>
 
@@ -556,7 +550,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PolicyAgent" class="doc_header"><code>class</code> <code>PolicyAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L141" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PolicyAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
+<h2 id="PolicyAgent" class="doc_header"><code>class</code> <code>PolicyAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PolicyAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#DiscreteAgent"><code>DiscreteAgent</code></a></p>
 </blockquote>
 <p>Policy agent gets action probabilities from the model and samples actions from it.</p>
 
@@ -581,7 +575,7 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActorCriticAgent" class="doc_header"><code>class</code> <code>ActorCriticAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L147" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActorCriticAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#PolicyAgent"><code>PolicyAgent</code></a></p>
+<h2 id="ActorCriticAgent" class="doc_header"><code>class</code> <code>ActorCriticAgent</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/basic_agents.py#L157" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActorCriticAgent</code>(<strong><code>model</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>a_selector</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#ActionSelector"><code>ActionSelector</code></a>=<em><code>None</code></em>, <strong><code>device</code></strong>:<code>str</code>=<em><code>None</code></em>, <strong><code>preprocessor</code></strong>:<code>Callable</code>=<em><code>default_states_preprocessor</code></em>, <strong><code>apply_softmax</code></strong>:<code>bool</code>=<em><code>False</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#PolicyAgent"><code>PolicyAgent</code></a></p>
 </blockquote>
 <p>Policy agent which returns policy and value tensors from observations. Value are stored in agent's state      and could be reused for rollouts calculations by ExperienceSource.</p>
 
@@ -591,6 +585,13 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -645,22 +646,70 @@ nb_path: "nbs/03_basic_agents.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor([[ 0.0442, -0.0213,  0.0335, -0.0114]])
-</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(array([1]), array([[0., 0., 0., 0.]]))</pre>
+</div>
+
+</div>
+
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agent</span><span class="o">=</span><span class="n">ActorCriticAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">default_device</span><span class="p">()),</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
+<span class="n">agent</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.04456399</span><span class="p">,</span>  <span class="mf">0.04653909</span><span class="p">,</span>  <span class="mf">0.01326909</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02099827</span><span class="p">]),</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 <div class="output_area">
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(1, array([[0., 0., 0., 0.]]))</pre>
+<pre>(array([0]), array([[0., 0., 0., 0.]]))</pre>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="o">%</span><span class="k">reset</span> -f
+    <span class="kn">import</span> <span class="nn">IPython</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">do_shutdown</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
 </div>
 </div>
 

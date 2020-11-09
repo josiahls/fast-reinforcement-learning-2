@@ -1,9 +1,10 @@
-FROM nvidia/cuda:10.0-base-ubuntu18.04
+FROM nvidia/cuda:11.0-base-ubuntu20.04
 # See http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 ENV PATH /opt/conda/bin:$PATH
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates nano curl \
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
@@ -64,6 +65,7 @@ RUN ["chmod", "+x", "entrypoint.sh"]
 RUN echo 'source activate fastrl' >> ~/.bashrc
 RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"
 USER $CONTAINER_USER
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP themes.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash","-c"]
 
