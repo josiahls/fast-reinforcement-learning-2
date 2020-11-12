@@ -69,10 +69,15 @@ def loss_func(pred,yb,learn):
     return loss_v
 
 class SACLearner(AgentLearner):
-    def __init__(self,dls,soft_copy_freq=1,**kwargs):
-        self.soft_copy_freq=soft_copy_freq
+    def __init__(self,dls,action_shape,critic_tau=0.1,discount=0.99,action_range:Tuple=None,temp=0.9,init_temp=0.1,
+                 actor_copy_freq=1,critic_copy_freq=1,**kwargs):
+        store_attr()
+        self.action_range=ifnone(self.action_range,(-1,1))
         super().__init__(dls,loss_func=partial(loss_func,learn=self),**kwargs)
+        self.log_alpha=torch.FloatTensor(torch.log(init_temp))
+        self.log_alpha.requires_grad=True
+        self.tgt_entropy= -action_shape
 
-    def _split(self, b):
-        if len(b)==1 and type(b[0])==tuple:b=b[0]
-        super()._split(b)
+#     def _split(self, b):
+#         if len(b)==1 and type(b[0])==tuple:b=b[0]
+#         super()._split(b)

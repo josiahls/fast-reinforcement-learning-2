@@ -28,9 +28,6 @@ entries:
       title: Async Experience Blocks
       url: async_data.html
     - output: web,pdf
-      title: Basic Train
-      url: basic_train.html
-    - output: web,pdf
       title: RL Metrics
       url: metrics.html
     - output: web,pdf
@@ -42,6 +39,9 @@ entries:
     - output: web,pdf
       title: A2C
       url: actorcritic.a2c.html
+    - output: web,pdf
+      title: General Notes
+      url: notes.html
     output: web
     title: fastrl
   output: web
