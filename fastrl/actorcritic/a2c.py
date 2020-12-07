@@ -19,6 +19,7 @@ from ..async_data import *
 from ..basic_agents import *
 from ..learner import *
 from ..metrics import *
+from ..ptan_extension import *
 
 if IN_NOTEBOOK:
     from IPython import display

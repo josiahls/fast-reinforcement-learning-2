@@ -71,7 +71,7 @@ nb_path: "nbs/15_actorcritic.a3c_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="LinearA2C" class="doc_header"><code>class</code> <code>LinearA2C</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L28" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearA2C</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
+<h2 id="LinearA2C" class="doc_header"><code>class</code> <code>LinearA2C</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L29" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LinearA2C</code>(<strong><code>input_shape</code></strong>, <strong><code>n_actions</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -129,7 +129,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="unbatch" class="doc_header"><code>unbatch</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unbatch</code>(<strong><code>batch</code></strong>, <strong><code>net</code></strong>, <strong><code>val_gamma</code></strong>, <strong><code>device</code></strong>=<em><code>'cpu'</code></em>)</p>
+<h4 id="unbatch" class="doc_header"><code>unbatch</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unbatch</code>(<strong><code>batch</code></strong>, <strong><code>net</code></strong>, <strong><code>val_gamma</code></strong>, <strong><code>device</code></strong>=<em><code>'cpu'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -160,7 +160,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L77" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>a</code></strong>, <strong><code>r</code></strong>, <strong><code>sp</code></strong>, <strong><code>d</code></strong>, <strong><code>episode_rewards</code></strong>, <strong><code>learn</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="loss_func" class="doc_header"><code>loss_func</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss_func</code>(<strong><code>pred</code></strong>, <strong><code>a</code></strong>, <strong><code>r</code></strong>, <strong><code>sp</code></strong>, <strong><code>d</code></strong>, <strong><code>episode_rewards</code></strong>, <strong><code>learn</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -184,7 +184,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L102" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="A3CLearner" class="doc_header"><code>class</code> <code>A3CLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L103" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Base Learner for all reinforcement learning agents</p>
 
@@ -216,7 +216,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L113" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="A3CTrainer" class="doc_header"><code>class</code> <code>A3CTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L114" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>A3CTrainer</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -248,7 +248,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_fit" class="doc_header"><code>data_fit</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_fit</code>(<strong><code>train_queue</code></strong>=<em><code>None</code></em>, <strong><code>items</code></strong>:<code>L</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>=<em><code>None</code></em>, <strong><code>cancel</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="data_fit" class="doc_header"><code>data_fit</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/a3c_data.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_fit</code>(<strong><code>train_queue</code></strong>=<em><code>None</code></em>, <strong><code>items</code></strong>:<code>L</code>=<em><code>None</code></em>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>experience_block</code></strong>=<em><code>None</code></em>, <strong><code>cancel</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -327,10 +327,6 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>starting
 starting
-starting
-starting
-starting
-starting
 </pre>
 </div>
 </div>
@@ -339,24 +335,6 @@ starting
 
 
 <div class="output_html rendered_html output_subarea ">
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='8' class='' max='10' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      80.00% [8/10 01:34<00:23]
-    </div>
-    
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: left;">
@@ -371,88 +349,86 @@ starting
   <tbody>
     <tr>
       <td>0</td>
-      <td>17.784607</td>
-      <td>24.259828</td>
+      <td>19.194157</td>
+      <td>23.660611</td>
       <td>None</td>
-      <td>24.259828</td>
-      <td>00:12</td>
+      <td>23.660611</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>25.146160</td>
-      <td>28.260095</td>
+      <td>26.692215</td>
+      <td>29.130821</td>
       <td>None</td>
-      <td>28.260095</td>
-      <td>00:11</td>
+      <td>29.130821</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>35.842628</td>
-      <td>47.247667</td>
+      <td>35.559528</td>
+      <td>63.534667</td>
       <td>None</td>
-      <td>47.247667</td>
-      <td>00:11</td>
+      <td>63.534667</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>43.709698</td>
-      <td>82.376167</td>
+      <td>49.418739</td>
+      <td>79.073167</td>
       <td>None</td>
-      <td>82.376167</td>
-      <td>00:11</td>
+      <td>79.073167</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>51.291195</td>
-      <td>105.553333</td>
+      <td>55.525867</td>
+      <td>123.143333</td>
       <td>None</td>
-      <td>105.553333</td>
-      <td>00:11</td>
+      <td>123.143333</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>5</td>
-      <td>61.589207</td>
-      <td>133.326667</td>
+      <td>61.535820</td>
+      <td>161.861667</td>
       <td>None</td>
-      <td>133.326667</td>
-      <td>00:11</td>
+      <td>161.861667</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>6</td>
-      <td>66.871201</td>
-      <td>167.423333</td>
+      <td>79.512482</td>
+      <td>186.555000</td>
       <td>None</td>
-      <td>167.423333</td>
-      <td>00:11</td>
+      <td>186.555000</td>
+      <td>00:19</td>
     </tr>
     <tr>
       <td>7</td>
-      <td>91.432045</td>
-      <td>185.909833</td>
+      <td>84.288086</td>
+      <td>209.763333</td>
       <td>None</td>
-      <td>185.909833</td>
-      <td>00:11</td>
+      <td>209.763333</td>
+      <td>00:19</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>97.959930</td>
+      <td>216.406667</td>
+      <td>None</td>
+      <td>216.406667</td>
+      <td>00:19</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>110.241119</td>
+      <td>207.075000</td>
+      <td>None</td>
+      <td>207.075000</td>
+      <td>00:19</td>
     </tr>
   </tbody>
-</table><p>
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='0' class='' max='0' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      100% [0/0]
-    </div>
-    
+</table>
 </div>
 
 </div>
@@ -486,6 +462,40 @@ starting
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Converted 00_core.ipynb.
+Converted 01_wrappers.ipynb.
+Converted 03_basic_agents.ipynb.
+Converted 04_learner.ipynb.
+Converted 05a_data.ipynb.
+Converted 05b_async_data.ipynb.
+Converted 13_metrics.ipynb.
+Converted 14_actorcritic.sac.ipynb.
+Converted 15_actorcritic.a3c_data.ipynb.
+Converted 16_actorcritic.a2c.ipynb.
+Converted index.ipynb.
+Converted notes.ipynb.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+</div>
+
+</div>
+
 </div>
 </div>
 

@@ -1,0 +1,11 @@
+{
+    "shortcuts": [
+        {
+            "command": "runmenu:run-all",
+            "keys": [
+                "Ctrl Shift Enter"
+            ],
+            "selector": "[data-jp-code-runner]"
+        }
+    ]
+}

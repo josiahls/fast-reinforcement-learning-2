@@ -70,6 +70,9 @@ RUN apt-get install -y xvfb
 USER $CONTAINER_USER
 RUN conda init bash
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP themes.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP shortcuts.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
+
 # Install the deploy package for system access
 ENTRYPOINT "entrypoint.sh"
 RUN echo 'source activate fastrl' >> ~/.bashrc

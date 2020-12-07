@@ -22,11 +22,14 @@ entries:
       title: AgentLearner
       url: learner.html
     - output: web,pdf
-      title: Experience Blocks
-      url: data.html
+      title: Ptan Extension
+      url: ptan_extend.html
     - output: web,pdf
       title: Async Experience Blocks
       url: async_data.html
+    - output: web,pdf
+      title: Experience Blocks
+      url: data.html
     - output: web,pdf
       title: RL Metrics
       url: metrics.html

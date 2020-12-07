@@ -19,6 +19,7 @@ from ..async_data import *
 from ..basic_agents import *
 from ..learner import *
 from ..metrics import *
+from ..ptan_extension import *
 
 if IN_NOTEBOOK:
     from IPython import display
@@ -118,10 +119,12 @@ class A3CTrainer(Callback):
 def data_fit(train_queue=None,items:L=None,agent=None,experience_block=None,
              cancel=None):
     try:
+        print('hi1')
         blk=IterableDataBlock(blocks=(experience_block(agent=agent())),
                               splitter=FuncSplitter(lambda x:False))
         dls=blk.dataloaders(items,device=default_device())#,n=128*100)
         while True:
+            print('hi')
             for xb in dls[0]:
                 xb=[o.cpu().numpy()[0] for o in xb]
                 xb=[ExperienceFirstLast(state=xb[0],action=xb[1],reward=xb[2],

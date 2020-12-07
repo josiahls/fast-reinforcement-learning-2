@@ -66,6 +66,8 @@ RUN echo 'source activate fastrl' >> ~/.bashrc
 RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"
 USER $CONTAINER_USER
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP themes.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP shortcuts.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
+
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["/bin/bash","-c"]
 

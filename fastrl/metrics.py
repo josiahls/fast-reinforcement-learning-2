@@ -19,6 +19,7 @@ from .async_data import *
 from .basic_agents import *
 from .learner import *
 from fastai.callback.progress import *
+from .ptan_extension import *
 
 import ptan
 
