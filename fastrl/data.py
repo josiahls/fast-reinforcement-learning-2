@@ -133,7 +133,7 @@ class ResetAndStepTfm(Transform):
 
     def setup(self,items:TfmdSource,train_setup=False):
 #         self.reset(items)
-        self.exp_src=ptan.experience.ExperienceSource(items.items, ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
+        self.exp_src=ExperienceSource(items.items, ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
         self.exp_src_iter=iter(self.exp_src)
         return super().setup(items,train_setup)
 
@@ -141,7 +141,7 @@ class ResetAndStepTfm(Transform):
         if len(items.items)==0:return
         if items.extra_len==0:
             items.extra_len=items.items[0].spec.max_episode_steps*(self.n_steps-1) # Extra steps to unwrap done
-        self.exp_src=ptan.experience.ExperienceSource(items.items,ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
+        self.exp_src=ExperienceSource(items.items,ifnone(self.agent,TestAgent()), steps_count=self.n_steps,steps_delta=self.steps_delta)
         self.exp_src_iter=iter(self.exp_src)
 
     def encodes(self,o:gym.Env):

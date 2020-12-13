@@ -43,6 +43,12 @@ entries:
       title: A2C
       url: actorcritic.a2c.html
     - output: web,pdf
+      title: Title
+      url: actorcritc.dads.html
+    - output: web,pdf
+      title: PPO
+      url: policy_gradient.ppo.html
+    - output: web,pdf
       title: General Notes
       url: notes.html
     output: web

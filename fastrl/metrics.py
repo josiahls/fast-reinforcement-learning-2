@@ -29,7 +29,9 @@ if IN_NOTEBOOK:
 
 # Cell
 class AvgEpisodeRewardMetric(Metric):
-    def __init__(self):self.rolling_rewards=deque([0],maxlen=100)
+    def __init__(self,experience_cls:ExperienceFirstLast):
+        self.experience_cls=experience_cls
+        self.rolling_rewards=deque([0],maxlen=100)
 
     def accumulate(self,learn):
 #         yb=learn.yb
@@ -38,7 +40,7 @@ class AvgEpisodeRewardMetric(Metric):
             yb=[]
             for i in range(len(learn.xb[0])):
     #             print(learn.yb)
-                yb.append(ExperienceFirstLast(learn.xb[0][i].cpu().detach(),*(learn.yb[j][i].cpu().detach() for j in range(len(learn.yb)))))
+                yb.append(self.experience_cls(learn.xb[0][i].cpu().detach(),*(learn.yb[j][i].cpu().detach() for j in range(len(learn.yb)))))
         else:
             yb=learn.yb[0]
 #             print(yb[-1])

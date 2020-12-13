@@ -12,6 +12,8 @@
     "SAC": "actorcritic.sac.html",
     "A3C Datawise": "actorcritic.a3c_data.html",
     "A2C": "actorcritic.a2c.html",
+    "Title": "actorcritc.dads.html",
+    "PPO": "policy_gradient.ppo.html",
     "General Notes": "notes.html"
   }
 }

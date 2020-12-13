@@ -2,7 +2,8 @@
 
 __all__ = ['weights_init_', 'ValueNetwork', 'QNetwork', 'GaussianPolicy', 'DeterministicPolicy', 'create_log_gaussian',
            'logsumexp', 'soft_update', 'hard_update', 'SAC', 'ExperienceReplay', 'SACCriticTrainer', 'SACLearner',
-           'LOG_SIG_MAX', 'LOG_SIG_MIN', 'epsilon']
+           'LOG_SIG_MAX', 'LOG_SIG_MIN', 'epsilon', 'ModelActor', 'ModelCritic', 'AgentA2C', 'HID_SIZE', 'PPOTrainer',
+           'PPOLearner']
 
 # Cell
 import torch.nn.utils as nn_utils
@@ -216,11 +217,10 @@ from pprint import pprint
 
 class SAC(BaseAgent):
     def __init__(self, num_inputs, action_space, gamma,tau,alpha,policy='gaussian',
-                automatic_entropy_tuning=True,target_update_interval=1,hidden_size=100,lr=0.0003,max_steps=1):
+                automatic_entropy_tuning=True,target_update_interval=1,hidden_size=100,lr=0.0003):
 
         self.action_space=action_space
         self.warming_up=False
-        self.max_steps=max_steps
 
         self.gamma = gamma
         self.tau = tau
@@ -334,29 +334,30 @@ class SAC(BaseAgent):
 
 # Cell
 class ExperienceReplay(Callback):
-    def __init__(self,sz=100,bs=128,starting_els=1):
+    def __init__(self,sz=100,bs=128,starting_els=1,max_steps=1):
         store_attr()
         self.queue=deque(maxlen=int(sz))
+        self.max_steps=max_steps
 
     def before_fit(self):
         self.learn.agent.warming_up=True
         while len(self.queue)<self.starting_els:
             for i,o in enumerate(self.dls.train):
                 batch=[ExperienceFirstLast(state=o[0][i],action=o[1][i],reward=o[2][i],
-                                    last_state=o[3][i], done=(o[4][i] and self.learn.agent.max_steps!=o[6][i]),episode_reward=o[5][i],steps=o[6][i])
+                                    last_state=o[3][i], done=(o[4][i] and self.max_steps!=o[6][i]),episode_reward=o[5][i],steps=o[6][i])
                                     for i in range(len(o[0]))]
-                print(self.learn.agent.max_steps,max([o.steps for o in batch]))
+#                 print(self.max_steps,max([o.steps for o in batch]))
                 for _b in batch: self.queue.append(_b)
                 if len(self.queue)>self.starting_els:break
         self.learn.agent.warming_up=False
 
-    def after_epoch(self):
-        print(len(self.queue))
+#     def after_epoch(self):
+#         print(len(self.queue))
     def before_batch(self):
 #         print(len(self.queue))
         b=list(self.learn.xb)+list(self.learn.yb)
         batch=[ExperienceFirstLast(state=b[0][i],action=b[1][i],reward=b[2][i],
-                                last_state=b[3][i], done=(b[4][i] and self.learn.agent.max_steps!=b[6][i]),episode_reward=b[5][i],
+                                last_state=b[3][i], done=(b[4][i] and self.max_steps!=b[6][i]),episode_reward=b[5][i],
                                 steps=b[6][i])
                                 for i in range(len(b[0]))]
         for _b in batch: self.queue.append(_b)
@@ -379,4 +380,102 @@ epsilon = 1e-6
 class SACLearner(AgentLearner):
     def __init__(self,dls,agent=None,reward_scale=2,**kwargs):
         store_attr()
+#         print(type(self.agent))
         super().__init__(dls,loss_func=partial(self.agent.update_parameters,learn=self),model=agent.policy,**kwargs)
+
+# Cell
+import torch.nn.utils as nn_utils
+from fastai.torch_basics import *
+import torch.nn.functional as F
+from fastai.data.all import *
+from fastai.basics import *
+from dataclasses import field,asdict
+from typing import List,Any,Dict,Callable
+from collections import deque
+import gym
+import torch.multiprocessing as mp
+from torch.optim import *
+from dataclasses import dataclass
+
+from ..data import *
+from ..async_data import *
+from ..basic_agents import *
+from ..learner import *
+from ..metrics import *
+from fastai.callback.progress import *
+from ..ptan_extension import *
+
+from torch.distributions import *
+
+if IN_NOTEBOOK:
+    from IPython import display
+    import PIL.Image
+
+# Cell
+HID_SIZE = 64
+
+class ModelActor(nn.Module):
+    def __init__(self, obs_size, act_size):
+        super(ModelActor, self).__init__()
+
+        self.mu = nn.Sequential(
+            nn.Linear(obs_size, HID_SIZE),
+            nn.Tanh(),
+            nn.Linear(HID_SIZE, HID_SIZE),
+            nn.Tanh(),
+            nn.Linear(HID_SIZE, act_size),
+            nn.Tanh(),
+        )
+        self.logstd = nn.Parameter(torch.zeros(act_size))
+
+    def forward(self, x):
+        return self.mu(x)
+
+
+class ModelCritic(nn.Module):
+    def __init__(self, obs_size):
+        super(ModelCritic, self).__init__()
+
+        self.value = nn.Sequential(
+            nn.Linear(obs_size, HID_SIZE),
+            nn.ReLU(),
+            nn.Linear(HID_SIZE, HID_SIZE),
+            nn.ReLU(),
+            nn.Linear(HID_SIZE, 1),
+        )
+
+    def forward(self, x):
+        return self.value(x)
+
+
+class AgentA2C(BaseAgent):
+
+    preprocessor:Callable=default_states_preprocessor
+    def __init__(self, model, device="cpu"):
+        self.model = model
+        self.device = device
+
+    def __call__(self, states, agent_states):
+        states_v = torch.tensor(np.stack(states)).float().to(self.device) #self.preprocessor(states[0].reshape(1,-1))
+
+        mu_v = self.model(states_v)
+        mu = mu_v.data.cpu().numpy()
+        logstd = self.model.logstd.data.cpu().numpy()
+        actions = mu + np.exp(logstd) * np.random.normal(size=logstd.shape)
+        actions = np.clip(actions, -1, 1)
+#         print(actions)
+        return actions, agent_states
+
+# Cell
+class PPOTrainer(Callback):
+    def after_loss(self):raise CancelBatchException
+
+# Cell
+class PPOLearner(AgentLearner):
+    def __init__(self,dls,agent=None,actr_lr=1e-4,crtic_lr=1e-3,**kwargs):
+        store_attr()
+        self.net_crt=ModelCritic(3).to(default_device())
+        self.opt_act = Adam(agent.model.parameters(), lr=actr_lr)
+        self.opt_crt = Adam(self.net_crt.parameters(), lr=crtic_lr)
+
+        super().__init__(dls,loss_func=partial(loss_func,learn=self),model=agent.model,**kwargs)

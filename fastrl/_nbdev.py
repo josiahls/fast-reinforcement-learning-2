@@ -65,7 +65,13 @@ index = {"PixelObservationWrapper": "01_wrappers.ipynb",
          "A3CTrainer": "15_actorcritic.a3c_data.ipynb",
          "data_fit": "15_actorcritic.a3c_data.ipynb",
          "A2CTrainer": "16_actorcritic.a2c.ipynb",
-         "A2CLearner": "16_actorcritic.a2c.ipynb"}
+         "A2CLearner": "16_actorcritic.a2c.ipynb",
+         "ModelActor": "18_policy_gradient.ppo.ipynb",
+         "ModelCritic": "18_policy_gradient.ppo.ipynb",
+         "AgentA2C": "18_policy_gradient.ppo.ipynb",
+         "HID_SIZE": "18_policy_gradient.ppo.ipynb",
+         "PPOTrainer": "18_policy_gradient.ppo.ipynb",
+         "PPOLearner": "18_policy_gradient.ppo.ipynb"}
 
 modules = ["wrappers.py",
            "basic_agents.py",

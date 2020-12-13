@@ -26,6 +26,21 @@ nb_path: "nbs/13_metrics.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1603729047590/work/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -47,7 +62,7 @@ nb_path: "nbs/13_metrics.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AvgEpisodeRewardMetric" class="doc_header"><code>class</code> <code>AvgEpisodeRewardMetric</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/metrics.py#L31" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AvgEpisodeRewardMetric</code>() :: <code>Metric</code></p>
+<h2 id="AvgEpisodeRewardMetric" class="doc_header"><code>class</code> <code>AvgEpisodeRewardMetric</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/metrics.py#L31" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AvgEpisodeRewardMetric</code>(<strong><code>experience_cls</code></strong>:<a href="/fast-reinforcement-learning-2/ptan_extend.html#ExperienceFirstLast"><code>ExperienceFirstLast</code></a>) :: <code>Metric</code></p>
 </blockquote>
 <p>Blueprint for defining a metric</p>
 
