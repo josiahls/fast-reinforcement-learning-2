@@ -1,21 +1,10 @@
-#!/usr/bin/env python3
-import os
-import math
 from collections import deque
 
-import ptan
-import time
-import gym
-# import roboschool
-import argparse
-# from tensorboardX import SummaryWriter
-
-# from lib import model
-
 import numpy as np
+
 import torch
-import torch.optim as optim
-import torch.nn.functional as F
+
+
 import ptan
 import numpy as np
 import torch
@@ -75,18 +64,128 @@ class AgentA2C(ptan.agent.BaseAgent):
 
 
 
-# ENV_ID = "LunarLander-v2"
-ENV_ID="Pendulum-v0"
+def get_flat_params_from(model):
+    params = []
+    for param in model.parameters():
+        params.append(param.data.view(-1))
+
+    flat_params = torch.cat(params)
+    return flat_params
+
+
+def set_flat_params_to(model, flat_params):
+    prev_ind = 0
+    for param in model.parameters():
+        flat_size = int(np.prod(list(param.size())))
+        param.data.copy_(
+            flat_params[prev_ind:prev_ind + flat_size].view(param.size()))
+        prev_ind += flat_size
+
+
+def conjugate_gradients(Avp, b, nsteps, residual_tol=1e-10, device="cpu"):
+    x = torch.zeros(b.size()).to(device)
+    r = b.clone()
+    p = b.clone()
+    rdotr = torch.dot(r, r)
+    for i in range(nsteps):
+        _Avp = Avp(p)
+        alpha = rdotr / torch.dot(p, _Avp)
+        x += alpha * p
+        r -= alpha * _Avp
+        new_rdotr = torch.dot(r, r)
+        betta = new_rdotr / rdotr
+        p = r + betta * p
+        rdotr = new_rdotr
+        if rdotr < residual_tol:
+            break
+    return x
+
+
+def linesearch(model,
+               f,
+               x,
+               fullstep,
+               expected_improve_rate,
+               max_backtracks=10,
+               accept_ratio=.1):
+    fval = f().data
+    for (_n_backtracks, stepfrac) in enumerate(.5**np.arange(max_backtracks)):
+        xnew = x + fullstep * stepfrac
+        set_flat_params_to(model, xnew)
+        newfval = f().data
+        actual_improve = fval - newfval
+        expected_improve = expected_improve_rate * stepfrac
+        ratio = actual_improve / expected_improve
+
+        if ratio.item() > accept_ratio and actual_improve.item() > 0:
+            return True, xnew
+    return False, x
+
+
+def trpo_step(model, get_loss, get_kl, max_kl, damping, device="cpu"):
+    loss = get_loss()
+    grads = torch.autograd.grad(loss, model.parameters())
+    loss_grad = torch.cat([grad.view(-1) for grad in grads]).data
+
+    def Fvp(v):
+        kl = get_kl()
+        kl = kl.mean()
+
+        grads = torch.autograd.grad(kl, model.parameters(), create_graph=True)
+        flat_grad_kl = torch.cat([grad.view(-1) for grad in grads])
+
+        v_v = torch.tensor(v).to(device)
+        kl_v = (flat_grad_kl * v_v).sum()
+        grads = torch.autograd.grad(kl_v, model.parameters())
+        flat_grad_grad_kl = torch.cat([grad.contiguous().view(-1) for grad in grads]).data
+
+        return flat_grad_grad_kl + v * damping
+
+    stepdir = conjugate_gradients(Fvp, -loss_grad, 10, device=device)
+
+    shs = 0.5 * (stepdir * Fvp(stepdir)).sum(0, keepdim=True)
+
+    lm = torch.sqrt(shs / max_kl)
+    fullstep = stepdir / lm[0]
+
+    neggdotstepdir = (-loss_grad * stepdir).sum(0, keepdim=True)
+
+    prev_params = get_flat_params_from(model)
+    success, new_params = linesearch(model, get_loss, prev_params, fullstep,
+                                     neggdotstepdir / lm[0])
+    set_flat_params_to(model, new_params)
+
+    return loss
+
+#!/usr/bin/env python3
+import os
+import math
+import ptan
+import time
+import gym
+# import roboschool
+import argparse
+# from tensorboardX import SummaryWriter
+
+# from lib import model, trpo
+
+import numpy as np
+import torch
+import torch.optim as optim
+import torch.nn.functional as F
+import gym
+import pybulletgym
+# ENV_ID = "RoboschoolHalfCheetah-v1"
+ENV_ID="HalfCheetahPyBulletEnv-v0"
+# ENV_ID = 'Pendulum-v0'
 GAMMA = 0.99
 GAE_LAMBDA = 0.95
 
 TRAJECTORY_SIZE = 2049
-LEARNING_RATE_ACTOR = 1e-4
 LEARNING_RATE_CRITIC = 1e-3
 
-PPO_EPS = 0.2
-PPO_EPOCHES = 10
-PPO_BATCH_SIZE = 64
+TRPO_MAX_KL = 0.01
+TRPO_DAMPING = 0.1
 
 TEST_ITERS = 100000
 
@@ -101,8 +200,7 @@ def test_net(net, env, count=10, device="cpu"):
             mu_v = net(obs_v)[0]
             action = mu_v.squeeze(dim=0).data.cpu().numpy()
             action = np.clip(action, -1, 1)
-            print(action)
-            obs, reward, done, _ = env.step([action])
+            obs, reward, done, _ = env.step(action)
             rewards += reward
             steps += 1
             if done:
@@ -119,9 +217,8 @@ def calc_logprob(mu_v, logstd_v, actions_v):
 def calc_adv_ref(trajectory, net_crt, states_v, device="cpu"):
     """
     By trajectory calculate advantage and 1-step ref value
-    :param trajectory: trajectory list
+    :param trajectory: list of Experience objects
     :param net_crt: critic network
-    :param states_v: states tensor
     :return: tuple with advantage numpy array and reference values
     """
     values_v = net_crt(states_v)
@@ -149,12 +246,12 @@ def calc_adv_ref(trajectory, net_crt, states_v, device="cpu"):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--cuda", default=False, action='store_true', help='Enable CUDA')
-    parser.add_argument("-n", "--name",default='silly', help="Name of the run")
+    parser.add_argument("-n", "--name", default='silly', help="Name of the run")
     parser.add_argument("-e", "--env", default=ENV_ID, help="Environment id, default=" + ENV_ID)
     args = parser.parse_args()
     device = torch.device("cuda" if args.cuda else "cpu")
 
-    save_path = os.path.join("saves", "ppo-" + args.name)
+    save_path = os.path.join("saves", "trpo-" + args.name)
     os.makedirs(save_path, exist_ok=True)
 
     env = gym.make(args.env)
@@ -165,26 +262,23 @@ if __name__ == "__main__":
     print(net_act)
     print(net_crt)
 
-    # writer = SummaryWriter(comment="-ppo_" + args.name)
+    # writer = SummaryWriter(comment="-trpo_" + args.name)
     agent = AgentA2C(net_act, device=device)
     exp_source = ptan.experience.ExperienceSource(env, agent, steps_count=1)
 
-    opt_act = optim.Adam(net_act.parameters(), lr=LEARNING_RATE_ACTOR)
     opt_crt = optim.Adam(net_crt.parameters(), lr=LEARNING_RATE_CRITIC)
 
     trajectory = []
-    batches=0
     r_queue=deque(maxlen=100)
     best_reward = None
+    batch_n=0
     # with ptan.common.utils.RewardTracker(writer) as tracker:
     for step_idx, exp in enumerate(exp_source):
         rewards_steps = exp_source.pop_rewards_steps()
         if rewards_steps:
             rewards, steps = zip(*rewards_steps)
-            # writer.add_scalar("episode_steps", np.mean(steps), step_idx)
             r_queue.append(np.mean(rewards))
-            print(np.mean(r_queue))
-            # tracker.reward(np.mean(rewards), step_idx)
+            # print(np.mean(r_queue))
 
         if step_idx % TEST_ITERS == 0:
             ts = time.time()
@@ -205,8 +299,6 @@ if __name__ == "__main__":
         if len(trajectory) < TRAJECTORY_SIZE:
             continue
 
-        print(batches)
-        batches+=1
         traj_states = [t[0].state for t in trajectory]
         traj_actions = [t[0].action for t in trajectory]
         traj_states_v = torch.FloatTensor(traj_states).to(device)
@@ -221,44 +313,43 @@ if __name__ == "__main__":
         # drop last entry from the trajectory, an our adv and ref value calculated without it
         trajectory = trajectory[:-1]
         old_logprob_v = old_logprob_v[:-1].detach()
-
+        traj_states_v = traj_states_v[:-1]
+        traj_actions_v = traj_actions_v[:-1]
         sum_loss_value = 0.0
         sum_loss_policy = 0.0
         count_steps = 0
 
-        for epoch in range(PPO_EPOCHES):
-            for batch_ofs in range(0, len(trajectory), PPO_BATCH_SIZE):
-                states_v = traj_states_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                actions_v = traj_actions_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                batch_adv_v = traj_adv_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE].unsqueeze(-1)
-                batch_ref_v = traj_ref_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                batch_old_logprob_v = old_logprob_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
+        # critic step
+        opt_crt.zero_grad()
+        value_v = net_crt(traj_states_v)
+        loss_value_v = F.mse_loss(value_v.squeeze(-1), traj_ref_v)
+        loss_value_v.backward()
+        opt_crt.step()
 
-                # critic training
-                opt_crt.zero_grad()
-                value_v = net_crt(states_v)
-                loss_value_v = F.mse_loss(value_v.squeeze(-1), batch_ref_v)
-                loss_value_v.backward()
-                opt_crt.step()
+        # actor step
+        def get_loss():
+            mu_v = net_act(traj_states_v)
+            logprob_v = calc_logprob(mu_v, net_act.logstd, traj_actions_v)
+            action_loss_v = -traj_adv_v.unsqueeze(dim=-1) * torch.exp(logprob_v - old_logprob_v)
+            return action_loss_v.mean()
 
-                # actor training
-                opt_act.zero_grad()
-                mu_v = net_act(states_v)
-                logprob_pi_v = calc_logprob(mu_v, net_act.logstd, actions_v)
-                ratio_v = torch.exp(logprob_pi_v - batch_old_logprob_v)
-                surr_obj_v = batch_adv_v * ratio_v
-                clipped_surr_v = batch_adv_v * torch.clamp(ratio_v, 1.0 - PPO_EPS, 1.0 + PPO_EPS)
-                loss_policy_v = -torch.min(surr_obj_v, clipped_surr_v).mean()
-                loss_policy_v.backward()
-                opt_act.step()
+        def get_kl():
+            mu_v = net_act(traj_states_v)
+            logstd_v = net_act.logstd
+            mu0_v = mu_v.detach()
+            logstd0_v = logstd_v.detach()
+            std_v = torch.exp(logstd_v)
+            std0_v = std_v.detach()
+            kl = logstd_v - logstd0_v + (std0_v ** 2 + (mu0_v - mu_v) ** 2) / (2.0 * std_v ** 2) - 0.5
+            return kl.sum(1, keepdim=True)
 
-                sum_loss_value += loss_value_v.item()
-                sum_loss_policy += loss_policy_v.item()
-                count_steps += 1
+        loss=trpo_step(net_act, get_loss, get_kl, TRPO_MAX_KL, TRPO_DAMPING, device=device)
+
+        # print(loss,batch_n)
+        batch_n+=1
 
         trajectory.clear()
         # writer.add_scalar("advantage", traj_adv_v.mean().item(), step_idx)
-            # writer.add_scalar("values", traj_ref_v.mean().item(), step_idx)
-            # writer.add_scalar("loss_policy", sum_loss_policy / count_steps, step_idx)
-            # writer.add_scalar("loss_value", sum_loss_value / count_steps, step_idx)
+        # writer.add_scalar("values", traj_ref_v.mean().item(), step_idx)
+        # writer.add_scalar("loss_value", loss_value_v.item(), step_idx)
 

@@ -64,6 +64,11 @@ COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
 RUN ["chmod", "+x", "entrypoint.sh"]
 RUN echo 'source activate fastrl' >> ~/.bashrc
 RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"
+WORKDIR /opt/project/
+RUN git clone https://github.com/benelot/pybullet-gym.git
+RUN /bin/bash -c "source activate fastrl && cd pybullet-gym && pip install -e ."
+WORKDIR /opt/project/fastrl/
+
 USER $CONTAINER_USER
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP themes.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP shortcuts.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
