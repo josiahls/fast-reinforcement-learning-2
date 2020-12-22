@@ -67,6 +67,7 @@ RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies &
 WORKDIR /opt/project/
 RUN git clone https://github.com/benelot/pybullet-gym.git
 RUN /bin/bash -c "source activate fastrl && cd pybullet-gym && pip install -e ."
+RUN /bin/bash -c "source activate fastrl && pip install tensorflow tensorflow_probability"
 WORKDIR /opt/project/fastrl/
 
 USER $CONTAINER_USER

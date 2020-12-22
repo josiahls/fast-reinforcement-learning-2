@@ -26,6 +26,21 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1603729047590/work/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -554,7 +569,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
 
 <span class="n">learner</span><span class="o">=</span><span class="n">SACLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">ExperienceReplay</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">starting_els</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">_max_episode_steps</span><span class="p">),</span><span class="n">SACCriticTrainer</span><span class="p">],</span>
-                   <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">()])</span>
+                   <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">(</span><span class="n">experience_cls</span><span class="o">=</span><span class="n">ExperienceFirstLast</span><span class="p">)])</span>
 <span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
@@ -567,18 +582,272 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-dac886cc9303&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> env<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;Pendulum-v0&#39;</span>
-<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>agent<span class="ansi-blue-fg">=</span>SAC<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span>gym<span class="ansi-blue-fg">.</span>make<span class="ansi-blue-fg">(</span>env<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>action_space<span class="ansi-blue-fg">,</span>gamma<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.99</span><span class="ansi-blue-fg">,</span>tau<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.005</span><span class="ansi-blue-fg">,</span>alpha<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.2</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
-<span class="ansi-green-intense-fg ansi-bold">      4</span> block=FirstLastExperienceBlock(agent=agent,seed=0,n_steps=2,exclude_nones=True,
-<span class="ansi-green-intense-fg ansi-bold">      5</span>                                dls_kwargs={&#39;bs&#39;:2049,&#39;num_workers&#39;:0,&#39;verbose&#39;:False,&#39;indexed&#39;:True,&#39;shuffle_train&#39;:False})
 
-<span class="ansi-red-fg">NameError</span>: name &#39;SAC&#39; is not defined</pre>
+<div class="output_html rendered_html output_subarea ">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>train_avg_episode_r</th>
+      <th>valid_loss</th>
+      <th>valid_avg_episode_r</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>67.867859</td>
+      <td>-1366.547326</td>
+      <td>None</td>
+      <td>-1366.547326</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>149.835205</td>
+      <td>-1374.884861</td>
+      <td>None</td>
+      <td>-1374.884861</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>239.833511</td>
+      <td>-1371.623351</td>
+      <td>None</td>
+      <td>-1371.623351</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>230.481308</td>
+      <td>-1314.894176</td>
+      <td>None</td>
+      <td>-1314.894176</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>264.249390</td>
+      <td>-1246.377057</td>
+      <td>None</td>
+      <td>-1246.377057</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>310.760803</td>
+      <td>-1162.032088</td>
+      <td>None</td>
+      <td>-1162.032088</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>343.544617</td>
+      <td>-1130.603722</td>
+      <td>None</td>
+      <td>-1130.603722</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>362.582153</td>
+      <td>-1113.652556</td>
+      <td>None</td>
+      <td>-1113.652556</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>379.829315</td>
+      <td>-1076.529074</td>
+      <td>None</td>
+      <td>-1076.529074</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>391.366364</td>
+      <td>-1025.440770</td>
+      <td>None</td>
+      <td>-1025.440770</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>406.220245</td>
+      <td>-972.337199</td>
+      <td>None</td>
+      <td>-972.337199</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>421.276794</td>
+      <td>-927.642430</td>
+      <td>None</td>
+      <td>-927.642430</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>433.103760</td>
+      <td>-889.666813</td>
+      <td>None</td>
+      <td>-889.666813</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>438.353668</td>
+      <td>-856.775668</td>
+      <td>None</td>
+      <td>-856.775668</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>445.719269</td>
+      <td>-828.110555</td>
+      <td>None</td>
+      <td>-828.110555</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>439.653717</td>
+      <td>-802.812854</td>
+      <td>None</td>
+      <td>-802.812854</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>435.211395</td>
+      <td>-780.258549</td>
+      <td>None</td>
+      <td>-780.258549</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>420.356628</td>
+      <td>-760.156314</td>
+      <td>None</td>
+      <td>-760.156314</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>420.747498</td>
+      <td>-742.115827</td>
+      <td>None</td>
+      <td>-742.115827</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>399.372437</td>
+      <td>-725.784546</td>
+      <td>None</td>
+      <td>-725.784546</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>397.689819</td>
+      <td>-710.920380</td>
+      <td>None</td>
+      <td>-710.920380</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>369.486847</td>
+      <td>-697.310483</td>
+      <td>None</td>
+      <td>-697.310483</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>354.255035</td>
+      <td>-684.854308</td>
+      <td>None</td>
+      <td>-684.854308</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>334.669556</td>
+      <td>-673.358420</td>
+      <td>None</td>
+      <td>-673.358420</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>313.210266</td>
+      <td>-669.272344</td>
+      <td>None</td>
+      <td>-669.272344</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>298.442230</td>
+      <td>-617.109973</td>
+      <td>None</td>
+      <td>-617.109973</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>283.432068</td>
+      <td>-578.053348</td>
+      <td>None</td>
+      <td>-578.053348</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>273.536011</td>
+      <td>-539.894737</td>
+      <td>None</td>
+      <td>-539.894737</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>265.283142</td>
+      <td>-511.163623</td>
+      <td>None</td>
+      <td>-511.163623</td>
+      <td>00:13</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>250.635330</td>
+      <td>-489.507176</td>
+      <td>None</td>
+      <td>-489.507176</td>
+      <td>00:13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastprogress/fastprogress.py:74: UserWarning: Your generator is empty.
+  warn(&#34;Your generator is empty.&#34;)
+</pre>
 </div>
 </div>
 

@@ -2,8 +2,13 @@
 
 __all__ = ['weights_init_', 'ValueNetwork', 'QNetwork', 'GaussianPolicy', 'DeterministicPolicy', 'create_log_gaussian',
            'logsumexp', 'soft_update', 'hard_update', 'SAC', 'ExperienceReplay', 'SACCriticTrainer', 'SACLearner',
-           'LOG_SIG_MAX', 'LOG_SIG_MIN', 'epsilon', 'ModelActor', 'ModelCritic', 'AgentA2C', 'HID_SIZE', 'PPOTrainer',
-           'PPOLearner']
+           'LOG_SIG_MAX', 'LOG_SIG_MIN', 'epsilon', 'ModelActor', 'ModelCritic', 'AgentA2C', 'HID_SIZE', 'calc_logprob',
+           'calc_adv_ref', 'GAMMA', 'GAE_LAMBDA', 'LEARNING_RATE_ACTOR', 'LEARNING_RATE_CRITIC', 'PPO_EPS',
+           'PPO_EPOCHES', 'PPO_BATCH_SIZE', 'loss_func', 'PPOTrainer', 'PPOLearner', 'ModelActor', 'ModelCritic',
+           'AgentA2C', 'HID_SIZE', 'calc_logprob', 'calc_adv_ref', 'GAMMA', 'GAE_LAMBDA', 'LEARNING_RATE_ACTOR',
+           'LEARNING_RATE_CRITIC', 'PPO_EPS', 'PPO_EPOCHES', 'PPO_BATCH_SIZE', 'get_flat_params_from',
+           'set_flat_params_to', 'conjugate_gradients', 'linesearch', 'trpo_step', 'loss_func', 'TRPO_MAX_KL',
+           'TRPO_DAMPING', 'TRPOTrainer', 'TRPOLearner']
 
 # Cell
 import torch.nn.utils as nn_utils
@@ -429,7 +434,7 @@ class ModelActor(nn.Module):
         self.logstd = nn.Parameter(torch.zeros(act_size))
 
     def forward(self, x):
-        return self.mu(x)
+        return self.mu(x.float())
 
 
 class ModelCritic(nn.Module):
@@ -445,7 +450,7 @@ class ModelCritic(nn.Module):
         )
 
     def forward(self, x):
-        return self.value(x)
+        return self.value(x.float())
 
 
 class AgentA2C(BaseAgent):
@@ -467,15 +472,435 @@ class AgentA2C(BaseAgent):
         return actions, agent_states
 
 # Cell
+GAMMA = 0.99
+GAE_LAMBDA = 0.95
+
+LEARNING_RATE_ACTOR = 1e-4
+LEARNING_RATE_CRITIC = 1e-3
+
+PPO_EPS = 0.2
+PPO_EPOCHES = 10
+PPO_BATCH_SIZE = 64
+
+def calc_logprob(mu_v, logstd_v, actions_v):
+    p1 = - ((mu_v - actions_v) ** 2) / (2*torch.exp(logstd_v).clamp(min=1e-3))
+    p2 = - torch.log(torch.sqrt(2 * math.pi * torch.exp(logstd_v)))
+    return p1 + p2
+
+
+def calc_adv_ref(trajectory, net_crt, states_v, device="cpu"):
+    """
+    By trajectory calculate advantage and 1-step ref value
+    :param trajectory: trajectory list
+    :param net_crt: critic network
+    :param states_v: states tensor
+    :return: tuple with advantage numpy array and reference values
+    """
+    values_v = net_crt(states_v)
+    values = values_v.squeeze().data.cpu().numpy()
+    # generalized advantage estimator: smoothed version of the advantage
+    last_gae = 0.0
+    result_adv = []
+    result_ref = []
+    for val, next_val, (exp,) in zip(reversed(values[:-1]), reversed(values[1:]),
+                                     reversed(trajectory[:-1])):
+        if exp.done:
+            delta = exp.reward - val
+            last_gae = delta
+        else:
+            delta = exp.reward + GAMMA * next_val - val
+            last_gae = delta + GAMMA * GAE_LAMBDA * last_gae
+        result_adv.append(last_gae)
+        result_ref.append(last_gae + val)
+
+    adv_v = torch.FloatTensor(list(reversed(result_adv))).to(device)
+    ref_v = torch.FloatTensor(list(reversed(result_ref))).to(device)
+    return adv_v, ref_v
+
+
+# Cell
+def loss_func(*yb,learn):
+    b=list(learn.xb)+list(learn.yb)
+    yxb=b
+    trajectory=[(Experience(state=b[0][i],action=b[1][i],reward=b[2][i],
+                done=(b[3][i] and learn.max_step!=b[5][i]),episode_reward=b[4][i],
+                steps=b[5][i]),) for i in range(len(b[0]))]
+    net_crt=learn.net_crt
+    net_act=learn.model
+    opt_crt=learn.opt_crt
+    opt_act=learn.opt_act
+
+
+    traj_states = [t[0].state for t in trajectory]
+    traj_actions = [t[0].action for t in trajectory]
+#     traj_states = [t.state for t in trajectory]
+#     traj_actions = [t.action for t in trajectory]
+#     traj_states_v = torch.FloatTensor(traj_states).to(device)
+#     traj_actions_v = torch.FloatTensor(traj_actions).to(device)
+    traj_states_v = torch.stack(traj_states).float().to(default_device())
+    traj_actions_v = torch.stack(traj_actions).float().to(default_device())
+#     print(traj_states_v.size(),net_act)
+    traj_adv_v, traj_ref_v = calc_adv_ref(trajectory, net_crt, traj_states_v, device=default_device())
+    mu_v = net_act(traj_states_v)
+    old_logprob_v = calc_logprob(mu_v, net_act.logstd, traj_actions_v)
+
+    # normalize advantages
+    traj_adv_v = (traj_adv_v - torch.mean(traj_adv_v)) / torch.std(traj_adv_v)
+
+    # drop last entry from the trajectory, an our adv and ref value calculated without it
+    trajectory = trajectory[:-1]
+    old_logprob_v = old_logprob_v[:-1].detach()
+
+    sum_loss_value = 0.0
+    sum_loss_policy = 0.0
+    count_steps = 0
+
+    for epoch in range(PPO_EPOCHES):
+        for batch_ofs in range(0, len(trajectory), PPO_BATCH_SIZE):
+            states_v = traj_states_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
+            actions_v = traj_actions_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
+            batch_adv_v = traj_adv_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE].unsqueeze(-1)
+            batch_ref_v = traj_ref_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
+            batch_old_logprob_v = old_logprob_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
+
+            # critic training
+            opt_crt.zero_grad()
+            value_v = net_crt(states_v)
+            loss_value_v = F.mse_loss(value_v.squeeze(-1), batch_ref_v)
+            loss_value_v.backward()
+            opt_crt.step()
+
+            # actor training
+            opt_act.zero_grad()
+            mu_v = net_act(states_v)
+            logprob_pi_v = calc_logprob(mu_v, net_act.logstd, actions_v)
+            ratio_v = torch.exp(logprob_pi_v - batch_old_logprob_v)
+            surr_obj_v = batch_adv_v * ratio_v
+            clipped_surr_v = batch_adv_v * torch.clamp(ratio_v, 1.0 - PPO_EPS, 1.0 + PPO_EPS)
+            loss_policy_v = -torch.min(surr_obj_v, clipped_surr_v).mean()
+            loss_policy_v.backward()
+            opt_act.step()
+
+            sum_loss_value += loss_value_v.item()
+            sum_loss_policy += loss_policy_v.item()
+            count_steps += 1
+    return torch.tensor(sum_loss_value+sum_loss_policy)
+
+# Cell
 class PPOTrainer(Callback):
     def after_loss(self):raise CancelBatchException
 
 # Cell
 class PPOLearner(AgentLearner):
-    def __init__(self,dls,agent=None,actr_lr=1e-4,crtic_lr=1e-3,**kwargs):
+    def __init__(self,dls,agent=None,actr_lr=1e-4,crtic_lr=1e-3,max_step=1,**kwargs):
         store_attr()
-        self.net_crt=ModelCritic(3).to(default_device())
+        self.net_crt=ModelCritic(26).to(default_device())
         self.opt_act = Adam(agent.model.parameters(), lr=actr_lr)
+        self.opt_crt = Adam(self.net_crt.parameters(), lr=crtic_lr)
+
+        super().__init__(dls,loss_func=partial(loss_func,learn=self),model=agent.model,**kwargs)
+
+# Cell
+import torch.nn.utils as nn_utils
+from fastai.torch_basics import *
+import torch.nn.functional as F
+from fastai.data.all import *
+from fastai.basics import *
+from dataclasses import field,asdict
+from typing import List,Any,Dict,Callable
+from collections import deque
+import gym
+import torch.multiprocessing as mp
+from torch.optim import *
+from dataclasses import dataclass
+
+from ..data import *
+from ..async_data import *
+from ..basic_agents import *
+from ..learner import *
+from ..metrics import *
+from fastai.callback.progress import *
+from ..ptan_extension import *
+
+from torch.distributions import *
+
+if IN_NOTEBOOK:
+    from IPython import display
+    import PIL.Image
+
+# Cell
+HID_SIZE = 64
+
+class ModelActor(nn.Module):
+    def __init__(self, obs_size, act_size):
+        super(ModelActor, self).__init__()
+
+        self.mu = nn.Sequential(
+            nn.Linear(obs_size, HID_SIZE),
+            nn.Tanh(),
+            nn.Linear(HID_SIZE, HID_SIZE),
+            nn.Tanh(),
+            nn.Linear(HID_SIZE, act_size),
+            nn.Tanh(),
+        )
+        self.logstd = nn.Parameter(torch.zeros(act_size))
+
+    def forward(self, x):
+        return self.mu(x.float())
+
+
+class ModelCritic(nn.Module):
+    def __init__(self, obs_size):
+        super(ModelCritic, self).__init__()
+
+        self.value = nn.Sequential(
+            nn.Linear(obs_size, HID_SIZE),
+            nn.ReLU(),
+            nn.Linear(HID_SIZE, HID_SIZE),
+            nn.ReLU(),
+            nn.Linear(HID_SIZE, 1),
+        )
+
+    def forward(self, x):
+        return self.value(x.float())
+
+
+class AgentA2C(BaseAgent):
+
+    preprocessor:Callable=default_states_preprocessor
+    def __init__(self, model, device="cpu"):
+        self.model = model
+        self.device = device
+
+    def __call__(self, states, agent_states):
+        states_v = torch.tensor(np.stack(states)).float().to(self.device) #self.preprocessor(states[0].reshape(1,-1))
+
+        mu_v = self.model(states_v)
+        mu = mu_v.data.cpu().numpy()
+        logstd = self.model.logstd.data.cpu().numpy()
+        actions = mu + np.exp(logstd) * np.random.normal(size=logstd.shape)
+        actions = np.clip(actions, -1, 1)
+#         print(actions)
+        return actions, agent_states
+
+# Cell
+GAMMA = 0.99
+GAE_LAMBDA = 0.95
+
+LEARNING_RATE_ACTOR = 1e-4
+LEARNING_RATE_CRITIC = 1e-3
+
+PPO_EPS = 0.2
+PPO_EPOCHES = 10
+PPO_BATCH_SIZE = 64
+
+def calc_logprob(mu_v, logstd_v, actions_v):
+    p1 = - ((mu_v - actions_v) ** 2) / (2*torch.exp(logstd_v).clamp(min=1e-3))
+    p2 = - torch.log(torch.sqrt(2 * math.pi * torch.exp(logstd_v)))
+    return p1 + p2
+
+
+def calc_adv_ref(trajectory, net_crt, states_v, device="cpu"):
+    """
+    By trajectory calculate advantage and 1-step ref value
+    :param trajectory: trajectory list
+    :param net_crt: critic network
+    :param states_v: states tensor
+    :return: tuple with advantage numpy array and reference values
+    """
+    values_v = net_crt(states_v)
+    values = values_v.squeeze().data.cpu().numpy()
+    # generalized advantage estimator: smoothed version of the advantage
+    last_gae = 0.0
+    result_adv = []
+    result_ref = []
+    for val, next_val, (exp,) in zip(reversed(values[:-1]), reversed(values[1:]),
+                                     reversed(trajectory[:-1])):
+        if exp.done:
+            delta = exp.reward - val
+            last_gae = delta
+        else:
+            delta = exp.reward + GAMMA * next_val - val
+            last_gae = delta + GAMMA * GAE_LAMBDA * last_gae
+        result_adv.append(last_gae)
+        result_ref.append(last_gae + val)
+
+    adv_v = torch.FloatTensor(list(reversed(result_adv))).to(device)
+    ref_v = torch.FloatTensor(list(reversed(result_ref))).to(device)
+    return adv_v, ref_v
+
+
+# Cell
+TRPO_MAX_KL = 0.01
+TRPO_DAMPING = 0.1
+
+def get_flat_params_from(model):
+    params = []
+    for param in model.parameters():
+        params.append(param.data.view(-1))
+
+    flat_params = torch.cat(params)
+    return flat_params
+
+
+def set_flat_params_to(model, flat_params):
+    prev_ind = 0
+    for param in model.parameters():
+        flat_size = int(np.prod(list(param.size())))
+        param.data.copy_(
+            flat_params[prev_ind:prev_ind + flat_size].view(param.size()))
+        prev_ind += flat_size
+
+
+def conjugate_gradients(Avp, b, nsteps, residual_tol=1e-10, device="cpu"):
+    x = torch.zeros(b.size()).to(device)
+    r = b.clone()
+    p = b.clone()
+    rdotr = torch.dot(r, r)
+    for i in range(nsteps):
+        _Avp = Avp(p)
+        alpha = rdotr / torch.dot(p, _Avp)
+        x += alpha * p
+        r -= alpha * _Avp
+        new_rdotr = torch.dot(r, r)
+        betta = new_rdotr / rdotr
+        p = r + betta * p
+        rdotr = new_rdotr
+        if rdotr < residual_tol:
+            break
+    return x
+
+
+def linesearch(model,
+               f,
+               x,
+               fullstep,
+               expected_improve_rate,
+               max_backtracks=10,
+               accept_ratio=.1):
+    fval = f().data
+    for (_n_backtracks, stepfrac) in enumerate(.5**np.arange(max_backtracks)):
+        xnew = x + fullstep * stepfrac
+        set_flat_params_to(model, xnew)
+        newfval = f().data
+        actual_improve = fval - newfval
+        expected_improve = expected_improve_rate * stepfrac
+        ratio = actual_improve / expected_improve
+
+        if ratio.item() > accept_ratio and actual_improve.item() > 0:
+            return True, xnew
+    return False, x
+
+def trpo_step(model, get_loss, get_kl, max_kl, damping, device="cpu"):
+    loss = get_loss()
+    grads = torch.autograd.grad(loss, model.parameters())
+    loss_grad = torch.cat([grad.view(-1) for grad in grads]).data
+
+    def Fvp(v):
+        kl = get_kl()
+        kl = kl.mean()
+
+        grads = torch.autograd.grad(kl, model.parameters(), create_graph=True)
+        flat_grad_kl = torch.cat([grad.view(-1) for grad in grads])
+
+        v_v = torch.tensor(v).to(device)
+        kl_v = (flat_grad_kl * v_v).sum()
+        grads = torch.autograd.grad(kl_v, model.parameters())
+        flat_grad_grad_kl = torch.cat([grad.contiguous().view(-1) for grad in grads]).data
+
+        return flat_grad_grad_kl + v * damping
+
+    stepdir = conjugate_gradients(Fvp, -loss_grad, 10, device=device)
+
+    shs = 0.5 * (stepdir * Fvp(stepdir)).sum(0, keepdim=True)
+
+    lm = torch.sqrt(shs / max_kl)
+    fullstep = stepdir / lm[0]
+
+    neggdotstepdir = (-loss_grad * stepdir).sum(0, keepdim=True)
+
+    prev_params = get_flat_params_from(model)
+    success, new_params = linesearch(model, get_loss, prev_params, fullstep,
+                                     neggdotstepdir / lm[0])
+    set_flat_params_to(model, new_params)
+
+    return loss
+
+def loss_func(*yb,learn):
+    b=list(learn.xb)+list(learn.yb)
+    yxb=b
+    trajectory=[(Experience(state=b[0][i],action=b[1][i],reward=b[2][i],
+                done=(b[3][i] and learn.max_step!=b[5][i]),episode_reward=b[4][i],
+                steps=b[5][i]),) for i in range(len(b[0]))]
+    net_crt=learn.net_crt
+    net_act=learn.model
+    opt_crt=learn.opt_crt
+
+
+    traj_states = [t[0].state for t in trajectory]
+    traj_actions = [t[0].action for t in trajectory]
+#     traj_states = [t.state for t in trajectory]
+#     traj_actions = [t.action for t in trajectory]
+#     traj_states_v = torch.FloatTensor(traj_states).to(device)
+#     traj_actions_v = torch.FloatTensor(traj_actions).to(device)
+    traj_states_v = torch.stack(traj_states).float().to(default_device())
+    traj_actions_v = torch.stack(traj_actions).float().to(default_device())
+#     print(traj_states_v.size(),net_act)
+    traj_adv_v, traj_ref_v = calc_adv_ref(trajectory, net_crt, traj_states_v, device=default_device())
+    mu_v = net_act(traj_states_v)
+    old_logprob_v = calc_logprob(mu_v, net_act.logstd, traj_actions_v)
+
+    # normalize advantages
+    traj_adv_v = (traj_adv_v - torch.mean(traj_adv_v)) / torch.std(traj_adv_v)
+
+    # drop last entry from the trajectory, an our adv and ref value calculated without it
+    trajectory = trajectory[:-1]
+    old_logprob_v = old_logprob_v[:-1].detach()
+    traj_states_v = traj_states_v[:-1]
+    traj_actions_v = traj_actions_v[:-1]
+    sum_loss_value = 0.0
+    sum_loss_policy = 0.0
+    count_steps = 0
+
+    # critic step
+    opt_crt.zero_grad()
+    value_v = net_crt(traj_states_v)
+    loss_value_v = F.mse_loss(value_v.squeeze(-1), traj_ref_v)
+    loss_value_v.backward()
+#     print(loss_value_v)
+    opt_crt.step()
+
+    # actor step
+    def get_loss():
+        mu_v = net_act(traj_states_v)
+        logprob_v = calc_logprob(mu_v, net_act.logstd, traj_actions_v)
+        action_loss_v = -traj_adv_v.unsqueeze(dim=-1) * torch.exp(logprob_v - old_logprob_v)
+#         print(action_loss_v,action_loss_v.mean())
+        return action_loss_v.mean()
+
+    def get_kl():
+        mu_v = net_act(traj_states_v)
+        logstd_v = net_act.logstd
+        mu0_v = mu_v.detach()
+        logstd0_v = logstd_v.detach()
+        std_v = torch.exp(logstd_v)
+        std0_v = std_v.detach()
+        kl = logstd_v - logstd0_v + (std0_v ** 2 + (mu0_v - mu_v) ** 2) / (2.0 * std_v ** 2) - 0.5
+        return kl.sum(1, keepdim=True)
+
+    loss=trpo_step(net_act, get_loss, get_kl, TRPO_MAX_KL, TRPO_DAMPING, device=default_device())
+
+    return torch.tensor(loss)
+
+# Cell
+class TRPOTrainer(Callback):
+    def after_loss(self):raise CancelBatchException
+
+# Cell
+class TRPOLearner(AgentLearner):
+    def __init__(self,dls,agent=None,crtic_lr=1e-3,max_step=1,**kwargs):
+        store_attr()
+        self.net_crt=ModelCritic(26).to(default_device())
         self.opt_crt = Adam(self.net_crt.parameters(), lr=crtic_lr)
 
         super().__init__(dls,loss_func=partial(loss_func,learn=self),model=agent.model,**kwargs)
