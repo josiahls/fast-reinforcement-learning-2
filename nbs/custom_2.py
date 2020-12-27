@@ -1,252 +1,395 @@
 #!/usr/bin/env python3
-import os
-import math
-import ptan
-import time
 import gym
-import roboschool
-import argparse
-from tensorboardX import SummaryWriter
-
 import ptan
+import argparse
+import numpy as np
+
+import torch.nn as nn
+import torch.optim as optim
+from torch.autograd import Variable
+
+# from tensorboardX import SummaryWriter
+
+import math
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+import numpy as np
+
+import sys
+import time
 import numpy as np
 import torch
 import torch.nn as nn
 
-HID_SIZE = 64
+
+HYPERPARAMS = {
+    'cartpole': {
+        'env_name': "CartPole-v1",
+        'stop_reward': 199.0,
+        'run_name': 'cartpole',
+        'replay_size': 100000,
+        'replay_initial': 32,
+        'target_net_sync': 300,
+        'epsilon_frames': 10 ** 2,
+        'epsilon_start': 1.0,
+        'epsilon_final': 0.02,
+        'learning_rate': 0.0001,
+        'gamma': 0.99,
+        'batch_size': 32
+    },
+    'pong': {
+        'env_name':         "PongNoFrameskip-v4",
+        'stop_reward':      18.0,
+        'run_name':         'pong',
+        'replay_size':      100000,
+        'replay_initial':   10000,
+        'target_net_sync':  1000,
+        'epsilon_frames':   10**5,
+        'epsilon_start':    1.0,
+        'epsilon_final':    0.02,
+        'learning_rate':    0.0001,
+        'gamma':            0.99,
+        'batch_size':       32
+    },
+    'breakout-small': {
+        'env_name':         "BreakoutNoFrameskip-v4",
+        'stop_reward':      500.0,
+        'run_name':         'breakout-small',
+        'replay_size':      3*10 ** 5,
+        'replay_initial':   20000,
+        'target_net_sync':  1000,
+        'epsilon_frames':   10 ** 6,
+        'epsilon_start':    1.0,
+        'epsilon_final':    0.1,
+        'learning_rate':    0.0001,
+        'gamma':            0.99,
+        'batch_size':       64
+    },
+    'breakout': {
+        'env_name':         "BreakoutNoFrameskip-v4",
+        'stop_reward':      500.0,
+        'run_name':         'breakout',
+        'replay_size':      10 ** 6,
+        'replay_initial':   50000,
+        'target_net_sync':  10000,
+        'epsilon_frames':   10 ** 6,
+        'epsilon_start':    1.0,
+        'epsilon_final':    0.1,
+        'learning_rate':    0.00025,
+        'gamma':            0.99,
+        'batch_size':       32
+    },
+    'invaders': {
+        'env_name': "SpaceInvadersNoFrameskip-v4",
+        'stop_reward': 500.0,
+        'run_name': 'breakout',
+        'replay_size': 10 ** 6,
+        'replay_initial': 50000,
+        'target_net_sync': 10000,
+        'epsilon_frames': 10 ** 6,
+        'epsilon_start': 1.0,
+        'epsilon_final': 0.1,
+        'learning_rate': 0.00025,
+        'gamma': 0.99,
+        'batch_size': 32
+    },
+}
 
 
-class ModelActor(nn.Module):
-    def __init__(self, obs_size, act_size):
-        super(ModelActor, self).__init__()
-
-        self.mu = nn.Sequential(
-            nn.Linear(obs_size, HID_SIZE),
-            nn.Tanh(),
-            nn.Linear(HID_SIZE, HID_SIZE),
-            nn.Tanh(),
-            nn.Linear(HID_SIZE, act_size),
-            nn.Tanh(),
-        )
-        self.logstd = nn.Parameter(torch.zeros(act_size))
-
-    def forward(self, x):
-        return self.mu(x)
-
-
-class ModelCritic(nn.Module):
-    def __init__(self, obs_size):
-        super(ModelCritic, self).__init__()
-
-        self.value = nn.Sequential(
-            nn.Linear(obs_size, HID_SIZE),
-            nn.ReLU(),
-            nn.Linear(HID_SIZE, HID_SIZE),
-            nn.ReLU(),
-            nn.Linear(HID_SIZE, 1),
-        )
-
-    def forward(self, x):
-        return self.value(x)
-
-
-class AgentA2C(ptan.agent.BaseAgent):
-    def __init__(self, net, device="cpu"):
-        self.net = net
-        self.device = device
-
-    def __call__(self, states, agent_states):
-        states_v = ptan.agent.float32_preprocessor(states).to(self.device)
-
-        mu_v = self.net(states_v)
-        mu = mu_v.data.cpu().numpy()
-        logstd = self.net.logstd.data.cpu().numpy()
-        actions = mu + np.exp(logstd) * np.random.normal(size=logstd.shape)
-        actions = np.clip(actions, -1, 1)
-        return actions, agent_states
-
-import numpy as np
-import torch
-import torch.optim as optim
-import torch.nn.functional as F
-
-
-ENV_ID = "RoboschoolHalfCheetah-v1"
-GAMMA = 0.99
-GAE_LAMBDA = 0.95
-
-TRAJECTORY_SIZE = 2049
-LEARNING_RATE_ACTOR = 1e-4
-LEARNING_RATE_CRITIC = 1e-3
-
-PPO_EPS = 0.2
-PPO_EPOCHES = 10
-PPO_BATCH_SIZE = 64
-
-TEST_ITERS = 100000
-
-
-def test_net(net, env, count=10, device="cpu"):
-    rewards = 0.0
-    steps = 0
-    for _ in range(count):
-        obs = env.reset()
-        while True:
-            obs_v = ptan.agent.float32_preprocessor([obs]).to(device)
-            mu_v = net(obs_v)[0]
-            action = mu_v.squeeze(dim=0).data.cpu().numpy()
-            action = np.clip(action, -1, 1)
-            obs, reward, done, _ = env.step(action)
-            rewards += reward
-            steps += 1
-            if done:
-                break
-    return rewards / count, steps / count
-
-
-def calc_logprob(mu_v, logstd_v, actions_v):
-    p1 = - ((mu_v - actions_v) ** 2) / (2*torch.exp(logstd_v).clamp(min=1e-3))
-    p2 = - torch.log(torch.sqrt(2 * math.pi * torch.exp(logstd_v)))
-    return p1 + p2
-
-
-def calc_adv_ref(trajectory, net_crt, states_v, device="cpu"):
-    """
-    By trajectory calculate advantage and 1-step ref value
-    :param trajectory: trajectory list
-    :param net_crt: critic network
-    :param states_v: states tensor
-    :return: tuple with advantage numpy array and reference values
-    """
-    values_v = net_crt(states_v)
-    values = values_v.squeeze().data.cpu().numpy()
-    # generalized advantage estimator: smoothed version of the advantage
-    last_gae = 0.0
-    result_adv = []
-    result_ref = []
-    for val, next_val, (exp,) in zip(reversed(values[:-1]), reversed(values[1:]),
-                                     reversed(trajectory[:-1])):
-        if exp.done:
-            delta = exp.reward - val
-            last_gae = delta
+def unpack_batch(batch):
+    states, actions, rewards, dones, last_states = [], [], [], [], []
+    for exp in batch:
+        state = np.array(exp.state, copy=False)
+        states.append(state)
+        actions.append(exp.action)
+        rewards.append(exp.reward)
+        dones.append(exp.last_state is None)
+        if exp.last_state is None:
+            last_states.append(state)       # the result will be masked anyway
         else:
-            delta = exp.reward + GAMMA * next_val - val
-            last_gae = delta + GAMMA * GAE_LAMBDA * last_gae
-        result_adv.append(last_gae)
-        result_ref.append(last_gae + val)
+            last_states.append(np.array(exp.last_state, copy=False))
+    return np.array(states, copy=False), np.array(actions), np.array(rewards, dtype=np.float32), \
+           np.array(dones, dtype=np.uint8), np.array(last_states, copy=False)
 
-    adv_v = torch.FloatTensor(list(reversed(result_adv))).to(device)
-    ref_v = torch.FloatTensor(list(reversed(result_ref))).to(device)
-    return adv_v, ref_v
+
+def calc_loss_dqn(batch, net, tgt_net, gamma, device="cpu"):
+    states, actions, rewards, dones, next_states = unpack_batch(batch)
+
+    states_v = torch.tensor(states).to(device)
+    next_states_v = torch.tensor(next_states).to(device)
+    actions_v = torch.tensor(actions).to(device)
+    rewards_v = torch.tensor(rewards).to(device)
+    done_mask = torch.ByteTensor(dones).to(device)
+
+    state_action_values = net(states_v).gather(1, actions_v.unsqueeze(-1)).squeeze(-1)
+    next_state_values = tgt_net(next_states_v).max(1)[0]
+    next_state_values[done_mask] = 0.0
+
+    expected_state_action_values = next_state_values.detach() * gamma + rewards_v
+    return nn.MSELoss()(state_action_values, expected_state_action_values)
+
+
+class RewardTracker:
+    def __init__(self, writer, stop_reward):
+        self.writer = writer
+        self.stop_reward = stop_reward
+
+    def __enter__(self):
+        self.ts = time.time()
+        self.ts_frame = 0
+        self.total_rewards = []
+        return self
+
+    def __exit__(self, *args):
+        self.writer.close()
+
+    def reward(self, reward, frame, epsilon=None):
+        self.total_rewards.append(reward)
+        speed = (frame - self.ts_frame) / (time.time() - self.ts)
+        self.ts_frame = frame
+        self.ts = time.time()
+        mean_reward = np.mean(self.total_rewards[-100:])
+        epsilon_str = "" if epsilon is None else ", eps %.2f" % epsilon
+        print("%d: done %d games, mean reward %.3f, speed %.2f f/s%s" % (
+            frame, len(self.total_rewards), mean_reward, speed, epsilon_str
+        ))
+        sys.stdout.flush()
+        if epsilon is not None:
+            self.writer.add_scalar("epsilon", epsilon, frame)
+        self.writer.add_scalar("speed", speed, frame)
+        self.writer.add_scalar("reward_100", mean_reward, frame)
+        self.writer.add_scalar("reward", reward, frame)
+        if mean_reward > self.stop_reward:
+            print("Solved in %d frames!" % frame)
+            return True
+        return False
+
+
+class EpsilonTracker:
+    def __init__(self, epsilon_greedy_selector, params):
+        self.epsilon_greedy_selector = epsilon_greedy_selector
+        self.epsilon_start = params['epsilon_start']
+        self.epsilon_final = params['epsilon_final']
+        self.epsilon_frames = params['epsilon_frames']
+        self.frame(0)
+
+    def frame(self, frame):
+        self.epsilon_greedy_selector.epsilon = \
+            max(self.epsilon_final, self.epsilon_start - frame / self.epsilon_frames)
+
+
+def distr_projection(next_distr, rewards, dones, Vmin, Vmax, n_atoms, gamma):
+    """
+    Perform distribution projection aka Catergorical Algorithm from the
+    "A Distributional Perspective on RL" paper
+    """
+    batch_size = len(rewards)
+    proj_distr = np.zeros((batch_size, n_atoms), dtype=np.float32)
+    delta_z = (Vmax - Vmin) / (n_atoms - 1)
+    for atom in range(n_atoms):
+        tz_j = np.minimum(Vmax, np.maximum(Vmin, rewards + (Vmin + atom * delta_z) * gamma))
+        b_j = (tz_j - Vmin) / delta_z
+        l = np.floor(b_j).astype(np.int64)
+        u = np.ceil(b_j).astype(np.int64)
+        eq_mask = u == l
+        proj_distr[eq_mask, l[eq_mask]] += next_distr[eq_mask, atom]
+        ne_mask = u != l
+        proj_distr[ne_mask, l[ne_mask]] += next_distr[ne_mask, atom] * (u - b_j)[ne_mask]
+        proj_distr[ne_mask, u[ne_mask]] += next_distr[ne_mask, atom] * (b_j - l)[ne_mask]
+    if dones.any():
+        proj_distr[dones] = 0.0
+        tz_j = np.minimum(Vmax, np.maximum(Vmin, rewards[dones]))
+        b_j = (tz_j - Vmin) / delta_z
+        l = np.floor(b_j).astype(np.int64)
+        u = np.ceil(b_j).astype(np.int64)
+        eq_mask = u == l
+        eq_dones = dones.copy()
+        eq_dones[dones] = eq_mask
+        if eq_dones.any():
+            proj_distr[eq_dones, l[eq_mask]] = 1.0
+        ne_mask = u != l
+        ne_dones = dones.copy()
+        ne_dones[dones] = ne_mask
+        if ne_dones.any():
+            proj_distr[ne_dones, l[ne_mask]] = (u - b_j)[ne_mask]
+            proj_distr[ne_dones, u[ne_mask]] = (b_j - l)[ne_mask]
+    return proj_distr
+
+
+
+class NoisyLinear(nn.Linear):
+    def __init__(self, in_features, out_features, sigma_init=0.017, bias=True):
+        super(NoisyLinear, self).__init__(in_features, out_features, bias=bias)
+        self.sigma_weight = nn.Parameter(torch.full((out_features, in_features), sigma_init))
+        self.register_buffer("epsilon_weight", torch.zeros(out_features, in_features))
+        if bias:
+            self.sigma_bias = nn.Parameter(torch.full((out_features,), sigma_init))
+            self.register_buffer("epsilon_bias", torch.zeros(out_features))
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        std = math.sqrt(3 / self.in_features)
+        self.weight.data.uniform_(-std, std)
+        self.bias.data.uniform_(-std, std)
+
+    def forward(self, input):
+        self.epsilon_weight.normal_()
+        bias = self.bias
+        if bias is not None:
+            self.epsilon_bias.normal_()
+            bias = bias + self.sigma_bias * self.epsilon_bias.data
+        return F.linear(input, self.weight + self.sigma_weight * self.epsilon_weight.data, bias)
+
+
+class NoisyFactorizedLinear(nn.Linear):
+    """
+    NoisyNet layer with factorized gaussian noise
+
+    N.B. nn.Linear already initializes weight and bias to
+    """
+    def __init__(self, in_features, out_features, sigma_zero=0.4, bias=True):
+        super(NoisyFactorizedLinear, self).__init__(in_features, out_features, bias=bias)
+        sigma_init = sigma_zero / math.sqrt(in_features)
+        self.sigma_weight = nn.Parameter(torch.full((out_features, in_features), sigma_init))
+        self.register_buffer("epsilon_input", torch.zeros(1, in_features))
+        self.register_buffer("epsilon_output", torch.zeros(out_features, 1))
+        if bias:
+            self.sigma_bias = nn.Parameter(torch.full((out_features,), sigma_init))
+
+    def forward(self, input):
+        self.epsilon_input.normal_()
+        self.epsilon_output.normal_()
+
+        func = lambda x: torch.sign(x) * torch.sqrt(torch.abs(x))
+        eps_in = func(self.epsilon_input.data)
+        eps_out = func(self.epsilon_output.data)
+
+        bias = self.bias
+        if bias is not None:
+            bias = bias + self.sigma_bias * eps_out.t()
+        noise_v = torch.mul(eps_in, eps_out)
+        return F.linear(input, self.weight + self.sigma_weight * noise_v, bias)
+
+
+class DQN(nn.Module):
+    def __init__(self, input_shape, n_actions):
+        super(DQN, self).__init__()
+
+        self.conv = nn.Sequential(
+            nn.Conv2d(input_shape[0], 32, kernel_size=8, stride=4),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.ReLU()
+        )
+
+        conv_out_size = self._get_conv_out(input_shape)
+        self.fc = nn.Sequential(
+            nn.Linear(conv_out_size, 512),
+            nn.ReLU(),
+            nn.Linear(512, n_actions)
+        )
+
+    def _get_conv_out(self, shape):
+        o = self.conv(torch.zeros(1, *shape))
+        return int(np.prod(o.size()))
+
+    def forward(self, x):
+        fx = x.float() / 256
+        conv_out = self.conv(fx).view(fx.size()[0], -1)
+        return self.fc(conv_out)
+
+
+
+class NoisyDQN(nn.Module):
+    def __init__(self, input_shape, n_actions):
+        super(NoisyDQN, self).__init__()
+
+        # self.conv = nn.Sequential(
+        #     nn.Conv2d(input_shape[0], 32, kernel_size=8, stride=4),
+        #     nn.ReLU(),
+        #     nn.Conv2d(32, 64, kernel_size=4, stride=2),
+        #     nn.ReLU(),
+        #     nn.Conv2d(64, 64, kernel_size=3, stride=1),
+        #     nn.ReLU()
+        # )
+
+        # conv_out_size = self._get_conv_out(input_shape)
+        self.noisy_layers = [
+            NoisyLinear(input_shape[0], 512),
+            NoisyLinear(512, n_actions)
+        ]
+        self.fc = nn.Sequential(
+            self.noisy_layers[0],
+            nn.ReLU(),
+            self.noisy_layers[1]
+        )
+
+    def _get_conv_out(self, shape):
+        o = self.conv(torch.zeros(1, *shape))
+        return int(np.prod(o.size()))
+
+    def forward(self, x):
+        fx = x.float() #/ 256
+        # conv_out = self.conv(fx).view(fx.size()[0], -1)
+        return self.fc(fx)
+
+    def noisy_layers_sigma_snr(self):
+        return [
+            ((layer.weight ** 2).mean().sqrt() / (layer.sigma_weight ** 2).mean().sqrt()).item()
+            for layer in self.noisy_layers
+        ]
 
 
 if __name__ == "__main__":
+    # params = common.HYPERPARAMS['pong']
+    params = HYPERPARAMS['cartpole']
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cuda", default=False, action='store_true', help='Enable CUDA')
-    parser.add_argument("-n", "--name", required=True, help="Name of the run")
-    parser.add_argument("-e", "--env", default=ENV_ID, help="Environment id, default=" + ENV_ID)
+    parser.add_argument("--cuda", default=False, action="store_true", help="Enable cuda")
     args = parser.parse_args()
     device = torch.device("cuda" if args.cuda else "cpu")
 
-    save_path = os.path.join("saves", "ppo-" + args.name)
-    os.makedirs(save_path, exist_ok=True)
+    env = gym.make(params['env_name'])
+    # env = ptan.common.wrappers.wrap_dqn(env)
 
-    env = gym.make(args.env)
-    test_env = gym.make(args.env)
+#     writer = SummaryWriter(comment="-" + params['run_name'] + "-noisy-net")
+    net = NoisyDQN(env.observation_space.shape, env.action_space.n).to(device)
+    tgt_net = ptan.agent.TargetNet(net)
+    agent = ptan.agent.DQNAgent(net, ptan.actions.ArgmaxActionSelector(), device=device)
 
-    net_act = model.ModelActor(env.observation_space.shape[0], env.action_space.shape[0]).to(device)
-    net_crt = model.ModelCritic(env.observation_space.shape[0]).to(device)
-    print(net_act)
-    print(net_crt)
+    exp_source = ptan.experience.ExperienceSourceFirstLast(env, agent, gamma=params['gamma'], steps_count=1)
+    buffer = ptan.experience.ExperienceReplayBuffer(exp_source, buffer_size=params['replay_size'])
+    optimizer = optim.Adam(net.parameters(), lr=params['learning_rate'])
 
-    writer = SummaryWriter(comment="-ppo_" + args.name)
-    agent = model.AgentA2C(net_act, device=device)
-    exp_source = ptan.experience.ExperienceSource(env, agent, steps_count=1)
+    frame_idx = 0
 
-    opt_act = optim.Adam(net_act.parameters(), lr=LEARNING_RATE_ACTOR)
-    opt_crt = optim.Adam(net_crt.parameters(), lr=LEARNING_RATE_CRITIC)
+#     with common.RewardTracker(writer, params['stop_reward']) as reward_tracker:
+    while True:
+        frame_idx += 1
+        buffer.populate(1)
 
-    trajectory = []
-    best_reward = None
-    with ptan.common.utils.RewardTracker(writer) as tracker:
-        for step_idx, exp in enumerate(exp_source):
-            rewards_steps = exp_source.pop_rewards_steps()
-            if rewards_steps:
-                rewards, steps = zip(*rewards_steps)
-                writer.add_scalar("episode_steps", np.mean(steps), step_idx)
-                tracker.reward(np.mean(rewards), step_idx)
+        new_rewards = exp_source.pop_total_rewards()
+        if new_rewards:
+            print(new_rewards)
+#             if reward_tracker.reward(new_rewards[0], frame_idx):
+#                 break
 
-            if step_idx % TEST_ITERS == 0:
-                ts = time.time()
-                rewards, steps = test_net(net_act, test_env, device=device)
-                print("Test done in %.2f sec, reward %.3f, steps %d" % (
-                    time.time() - ts, rewards, steps))
-                writer.add_scalar("test_reward", rewards, step_idx)
-                writer.add_scalar("test_steps", steps, step_idx)
-                if best_reward is None or best_reward < rewards:
-                    if best_reward is not None:
-                        print("Best reward updated: %.3f -> %.3f" % (best_reward, rewards))
-                        name = "best_%+.3f_%d.dat" % (rewards, step_idx)
-                        fname = os.path.join(save_path, name)
-                        torch.save(net_act.state_dict(), fname)
-                    best_reward = rewards
+        if len(buffer) < params['replay_initial']:
+            continue
 
-            trajectory.append(exp)
-            if len(trajectory) < TRAJECTORY_SIZE:
-                continue
+        optimizer.zero_grad()
+        batch = buffer.sample(params['batch_size'])
+        loss_v = calc_loss_dqn(batch, net, tgt_net.target_model, gamma=params['gamma'], device=device)
+        loss_v.backward()
+        optimizer.step()
 
-            traj_states = [t[0].state for t in trajectory]
-            traj_actions = [t[0].action for t in trajectory]
-            traj_states_v = torch.FloatTensor(traj_states).to(device)
-            traj_actions_v = torch.FloatTensor(traj_actions).to(device)
-            traj_adv_v, traj_ref_v = calc_adv_ref(trajectory, net_crt, traj_states_v, device=device)
-            mu_v = net_act(traj_states_v)
-            old_logprob_v = calc_logprob(mu_v, net_act.logstd, traj_actions_v)
+        if frame_idx % params['target_net_sync'] == 0:
+            tgt_net.sync()
 
-            # normalize advantages
-            traj_adv_v = (traj_adv_v - torch.mean(traj_adv_v)) / torch.std(traj_adv_v)
-
-            # drop last entry from the trajectory, an our adv and ref value calculated without it
-            trajectory = trajectory[:-1]
-            old_logprob_v = old_logprob_v[:-1].detach()
-
-            sum_loss_value = 0.0
-            sum_loss_policy = 0.0
-            count_steps = 0
-
-            for epoch in range(PPO_EPOCHES):
-                for batch_ofs in range(0, len(trajectory), PPO_BATCH_SIZE):
-                    states_v = traj_states_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                    actions_v = traj_actions_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                    batch_adv_v = traj_adv_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE].unsqueeze(-1)
-                    batch_ref_v = traj_ref_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-                    batch_old_logprob_v = old_logprob_v[batch_ofs:batch_ofs + PPO_BATCH_SIZE]
-
-                    # critic training
-                    opt_crt.zero_grad()
-                    value_v = net_crt(states_v)
-                    loss_value_v = F.mse_loss(value_v.squeeze(-1), batch_ref_v)
-                    loss_value_v.backward()
-                    opt_crt.step()
-
-                    # actor training
-                    opt_act.zero_grad()
-                    mu_v = net_act(states_v)
-                    logprob_pi_v = calc_logprob(mu_v, net_act.logstd, actions_v)
-                    ratio_v = torch.exp(logprob_pi_v - batch_old_logprob_v)
-                    surr_obj_v = batch_adv_v * ratio_v
-                    clipped_surr_v = batch_adv_v * torch.clamp(ratio_v, 1.0 - PPO_EPS, 1.0 + PPO_EPS)
-                    loss_policy_v = -torch.min(surr_obj_v, clipped_surr_v).mean()
-                    loss_policy_v.backward()
-                    opt_act.step()
-
-                    sum_loss_value += loss_value_v.item()
-                    sum_loss_policy += loss_policy_v.item()
-                    count_steps += 1
-
-            trajectory.clear()
-            writer.add_scalar("advantage", traj_adv_v.mean().item(), step_idx)
-            writer.add_scalar("values", traj_ref_v.mean().item(), step_idx)
-            writer.add_scalar("loss_policy", sum_loss_policy / count_steps, step_idx)
-            writer.add_scalar("loss_value", sum_loss_value / count_steps, step_idx)
-
+#         if frame_idx % 500 == 0:
+#             for layer_idx, sigma_l2 in enumerate(net.noisy_layers_sigma_snr()):
+#                 writer.add_scalar("sigma_snr_layer_%d" % (layer_idx+1),
+#                                   sigma_l2, frame_idx)

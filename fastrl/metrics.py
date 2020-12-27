@@ -47,6 +47,7 @@ class AvgEpisodeRewardMetric(Metric):
 #         yb=[ExperienceFirstLast([0],*(yb[k][i] for k in range(len(yb)))) for i in range(len(yb[0]))]
 #         yb=[for yb.items()]
 #         print([o.done for o in yb if o.done])
+#         print([float(o.episode_reward) for o in yb  if o.done])
         if len([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])==0:return
 #         print([o.episode_reward for o in yb if o.done])
         r=np.average([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])
