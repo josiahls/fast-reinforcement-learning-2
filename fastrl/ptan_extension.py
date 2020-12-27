@@ -130,8 +130,10 @@ class ExperienceSourceFirstLast(ExperienceSource):
         self.gamma = gamma
         self.steps = steps_count
         self.exclude_nones=exclude_nones
+        self.individual_rewards=False
         if exclude_nones and steps_count==1:
-            print('WARNING: steps_count==1 while exclude_nones is True. Setting steps_count==2 to avoid runtime errors.')
+            self.individual_rewards=True
+#             print('WARNING: steps_count==1 while exclude_nones is True. Setting steps_count==2 to avoid runtime errors.')
             self.steps=2
 
     def __iter__(self):
@@ -153,9 +155,11 @@ class ExperienceSourceFirstLast(ExperienceSource):
                     last_state = exp[-1].state
                     elems = exp[:-1]
             total_reward = 0.0
-            for e in reversed(elems):
-                total_reward *= self.gamma
-                total_reward += e.reward
+            if self.individual_rewards: total_reward=elems[-1].reward
+            else:
+                for e in reversed(elems):
+                    total_reward *= self.gamma
+                    total_reward += e.reward
             yield ExperienceFirstLast(state=exp[0].state, action=exp[0].action,done=exp[-1].done,
                                       reward=total_reward, last_state=last_state,steps=exp[-1].steps,
                                       episode_reward=exp[-1].episode_reward)

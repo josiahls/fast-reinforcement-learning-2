@@ -12,6 +12,7 @@ from typing import List,Any,Dict,Callable
 from collections import deque
 import gym
 import torch.multiprocessing as mp
+from copy import deepcopy
 from torch.optim import *
 
 from ..data import *
@@ -31,9 +32,9 @@ class LinearDQN(nn.Module):
         super(LinearDQN, self).__init__()
 
         self.policy = nn.Sequential(
-            nn.Linear(input_shape[0], 128),
+            nn.Linear(input_shape[0], 512),
             nn.ReLU(),
-            nn.Linear(128, n_actions)
+            nn.Linear(512, n_actions)
         )
 
     def forward(self,x):
@@ -69,7 +70,7 @@ class ExperienceReplay(Callback):
                                 for i in range(len(b[0]))]
         for _b in batch: self.queue.append(_b)
         idxs=np.random.randint(0,len(self.queue), self.bs)
-        self.learn.sample_yb=[self.queue[i] for i in idxs]
+        self.learn.sample_yb=[deepcopy(self.queue[i]) for i in idxs]
 
 # Cell
 class EpsilonTracker(Callback):

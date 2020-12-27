@@ -26,6 +26,21 @@ nb_path: "nbs/20e_qlearning.dqn_noisy.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1603729047590/work/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -212,7 +227,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TargetDQNLearner" class="doc_header"><code>class</code> <code>TargetDQNLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/qlearning/dqn_target.py#L64" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetDQNLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="TargetDQNLearner" class="doc_header"><code>class</code> <code>TargetDQNLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/qlearning/dqn_target.py#L72" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TargetDQNLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Base Learner for all reinforcement learning agents</p>
 
@@ -283,15 +298,15 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">agent</span><span class="o">=</span><span class="n">DiscreteAgent</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">default_device</span><span class="p">()),</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">(),</span>
                     <span class="n">a_selector</span><span class="o">=</span><span class="n">TestArgmaxActionSelector</span><span class="p">())</span>
 
-<span class="n">block</span><span class="o">=</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">})</span>
+<span class="n">block</span><span class="o">=</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">})</span>
 <span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">block</span><span class="p">),</span>
                       <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">),</span>
                      <span class="p">)</span>
-<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">32</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
+<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
 
-<span class="n">learner</span><span class="o">=</span><span class="n">TargetDQNLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">wd_bn_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span>
+<span class="n">learner</span><span class="o">=</span><span class="n">TargetDQNLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span>
                                         <span class="n">ExperienceReplay</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">starting_els</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">_max_episode_steps</span><span class="p">),</span>
-                                        <span class="n">TargetDQNTrainer</span><span class="p">],</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">(</span><span class="n">experience_cls</span><span class="o">=</span><span class="n">ExperienceFirstLast</span><span class="p">)])</span>
+                                        <span class="n">TargetDQNTrainer</span><span class="p">],</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">(</span><span class="n">experience_cls</span><span class="o">=</span><span class="n">ExperienceFirstLast</span><span class="p">,</span><span class="n">always_extend</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
 </pre></div>
 
     </div>
@@ -304,8 +319,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0083, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0168, device=&#39;cuda:0&#39;)
+<pre>[29.906591415405273, 2.5936224460601807]
 </pre>
 </div>
 </div>
@@ -323,7 +337,7 @@ tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0168, device=&#39;cuda:0&#39;)
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">47</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -337,6 +351,24 @@ tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0168, device=&#39;cuda:0&#39;)
 
 
 <div class="output_html rendered_html output_subarea ">
+
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='43' class='' max='47' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      91.49% [43/47 08:12<00:45]
+    </div>
+    
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: left;">
@@ -351,54 +383,368 @@ tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0168, device=&#39;cuda:0&#39;)
   <tbody>
     <tr>
       <td>0</td>
-      <td>1.874034</td>
-      <td>30.895833</td>
+      <td>0.811143</td>
+      <td>11.529412</td>
       <td>None</td>
-      <td>30.895833</td>
-      <td>00:13</td>
+      <td>11.529412</td>
+      <td>00:11</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>0.524404</td>
-      <td>25.115000</td>
+      <td>1.457842</td>
+      <td>10.020000</td>
       <td>None</td>
-      <td>25.115000</td>
-      <td>00:13</td>
+      <td>10.020000</td>
+      <td>00:11</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>0.288265</td>
-      <td>14.123333</td>
+      <td>2.042998</td>
+      <td>11.860000</td>
       <td>None</td>
-      <td>14.123333</td>
-      <td>00:12</td>
+      <td>11.860000</td>
+      <td>00:11</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>1.905628</td>
-      <td>9.263333</td>
+      <td>3.330062</td>
+      <td>16.380000</td>
       <td>None</td>
-      <td>9.263333</td>
-      <td>00:13</td>
+      <td>16.380000</td>
+      <td>00:11</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>1.413778</td>
-      <td>9.005000</td>
+      <td>3.820169</td>
+      <td>22.960000</td>
       <td>None</td>
-      <td>9.005000</td>
-      <td>00:13</td>
+      <td>22.960000</td>
+      <td>00:11</td>
     </tr>
     <tr>
       <td>5</td>
-      <td>1.043012</td>
-      <td>9.000000</td>
+      <td>4.078122</td>
+      <td>29.590000</td>
       <td>None</td>
-      <td>9.000000</td>
+      <td>29.590000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>4.788766</td>
+      <td>36.490000</td>
+      <td>None</td>
+      <td>36.490000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>5.607178</td>
+      <td>42.250000</td>
+      <td>None</td>
+      <td>42.250000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>6.765010</td>
+      <td>48.620000</td>
+      <td>None</td>
+      <td>48.620000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>7.242938</td>
+      <td>55.250000</td>
+      <td>None</td>
+      <td>55.250000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>7.043504</td>
+      <td>59.340000</td>
+      <td>None</td>
+      <td>59.340000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>7.720435</td>
+      <td>61.480000</td>
+      <td>None</td>
+      <td>61.480000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>8.746610</td>
+      <td>65.080000</td>
+      <td>None</td>
+      <td>65.080000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>8.391714</td>
+      <td>69.300000</td>
+      <td>None</td>
+      <td>69.300000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>9.041094</td>
+      <td>75.190000</td>
+      <td>None</td>
+      <td>75.190000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>9.823945</td>
+      <td>78.190000</td>
+      <td>None</td>
+      <td>78.190000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>11.698126</td>
+      <td>80.490000</td>
+      <td>None</td>
+      <td>80.490000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>7.529488</td>
+      <td>85.590000</td>
+      <td>None</td>
+      <td>85.590000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>11.765534</td>
+      <td>92.210000</td>
+      <td>None</td>
+      <td>92.210000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>8.240356</td>
+      <td>98.060000</td>
+      <td>None</td>
+      <td>98.060000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>9.130121</td>
+      <td>102.710000</td>
+      <td>None</td>
+      <td>102.710000</td>
       <td>00:13</td>
     </tr>
+    <tr>
+      <td>21</td>
+      <td>11.912196</td>
+      <td>108.340000</td>
+      <td>None</td>
+      <td>108.340000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>10.200365</td>
+      <td>111.720000</td>
+      <td>None</td>
+      <td>111.720000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>9.296614</td>
+      <td>114.840000</td>
+      <td>None</td>
+      <td>114.840000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>15.092220</td>
+      <td>118.790000</td>
+      <td>None</td>
+      <td>118.790000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>13.696791</td>
+      <td>122.460000</td>
+      <td>None</td>
+      <td>122.460000</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>11.645658</td>
+      <td>127.760000</td>
+      <td>None</td>
+      <td>127.760000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>12.127503</td>
+      <td>131.840000</td>
+      <td>None</td>
+      <td>131.840000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>11.398379</td>
+      <td>136.290000</td>
+      <td>None</td>
+      <td>136.290000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>16.742840</td>
+      <td>139.690000</td>
+      <td>None</td>
+      <td>139.690000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>9.659301</td>
+      <td>142.270000</td>
+      <td>None</td>
+      <td>142.270000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>13.207952</td>
+      <td>146.780000</td>
+      <td>None</td>
+      <td>146.780000</td>
+      <td>00:12</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>11.387004</td>
+      <td>151.010000</td>
+      <td>None</td>
+      <td>151.010000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>15.949622</td>
+      <td>155.560000</td>
+      <td>None</td>
+      <td>155.560000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>13.981202</td>
+      <td>159.200000</td>
+      <td>None</td>
+      <td>159.200000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>14.922173</td>
+      <td>161.380000</td>
+      <td>None</td>
+      <td>161.380000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>13.191016</td>
+      <td>164.870000</td>
+      <td>None</td>
+      <td>164.870000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>10.863258</td>
+      <td>168.950000</td>
+      <td>None</td>
+      <td>168.950000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>7.342605</td>
+      <td>172.600000</td>
+      <td>None</td>
+      <td>172.600000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>11.902500</td>
+      <td>174.320000</td>
+      <td>None</td>
+      <td>174.320000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>14.033029</td>
+      <td>178.780000</td>
+      <td>None</td>
+      <td>178.780000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>11.416979</td>
+      <td>182.580000</td>
+      <td>None</td>
+      <td>182.580000</td>
+      <td>00:11</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>11.566825</td>
+      <td>185.850000</td>
+      <td>None</td>
+      <td>185.850000</td>
+      <td>00:11</td>
+    </tr>
   </tbody>
-</table>
+</table><p>
+
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+                background: #F44336;
+            }
+        </style>
+      <progress value='150' class='' max='1000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      15.00% [150/1000 00:01<00:09 10.7705]
+    </div>
+    
 </div>
 
 </div>
@@ -406,136 +752,369 @@ tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0168, device=&#39;cuda:0&#39;)
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0352, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0138, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0496, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0159, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0180, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0335, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0087, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0086, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0351, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0176, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0083, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0081, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0241, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0232, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0230, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0332, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0175, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0728, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0407, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0089, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0517, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0430, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0437, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0032, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0185, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0423, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0064, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0061, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0257, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0213, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0057, device=&#39;cuda:0&#39;)
-tensor(0.0169, device=&#39;cuda:0&#39;) tensor(-0.0347, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0005, device=&#39;cuda:0&#39;)
-tensor(0.0169, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0060, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0211, device=&#39;cuda:0&#39;)
-tensor(0.0169, device=&#39;cuda:0&#39;) tensor(0.0547, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0089, device=&#39;cuda:0&#39;)
-tensor(0.0169, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0066, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0091, device=&#39;cuda:0&#39;)
-tensor(0.0169, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0050, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0141, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0495, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0030, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0119, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0087, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0154, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(-0.0057, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;) tensor(0.0174, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0242, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;) tensor(0.0659, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0207, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;) tensor(0.0003, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0274, device=&#39;cuda:0&#39;)
-tensor(0.0168, device=&#39;cuda:0&#39;) tensor(0.0211, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0098, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(0.0329, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0071, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(-0.0063, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0460, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(0.0235, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0034, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(-0.0155, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0050, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(0.0076, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0004, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(-0.0334, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0034, device=&#39;cuda:0&#39;)
-tensor(0.0167, device=&#39;cuda:0&#39;) tensor(0.0278, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(-0.0238, device=&#39;cuda:0&#39;)
-tensor(0.0166, device=&#39;cuda:0&#39;) tensor(-0.0141, device=&#39;cuda:0&#39;)
-tensor(0.0170, device=&#39;cuda:0&#39;) tensor(0.0821, device=&#39;cuda:0&#39;)
-tensor(0.0166, device=&#39;cuda:0&#39;) tensor(-0.0334, device=&#39;cuda:0&#39;)
+<pre>[29.865381240844727, 2.627454996109009]
+[29.840190887451172, 2.6948049068450928]
+[29.742399215698242, 2.788353443145752]
+[29.85098648071289, 2.6734402179718018]
+[29.635746002197266, 2.915942430496216]
+[29.58207130432129, 3.039449453353882]
+[29.548063278198242, 3.236264228820801]
+[29.587791442871094, 3.0963642597198486]
 </pre>
 </div>
 </div>
 
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastprogress/fastprogress.py:74: UserWarning: Your generator is empty.
+  warn(&#34;Your generator is empty.&#34;)
+</pre>
 </div>
 </div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[(</span><span class="n">o</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">o</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">o</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[(tensor(-0.8769, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.8870, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0080, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(-0.8642, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.8924, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(-0.0181, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(0.0059, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.0307, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0170, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(0.0051, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.0342, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0169, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(-0.1084, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.1220, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0075, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(0.0870, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.1134, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.1002, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(0.0086, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.0234, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0166, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;)),
- (tensor(0.0148, device=&#39;cuda:0&#39;, grad_fn=&lt;MinBackward1&gt;),
-  tensor(0.0159, device=&#39;cuda:0&#39;, grad_fn=&lt;MaxBackward1&gt;),
-  tensor(0.0154, device=&#39;cuda:0&#39;, grad_fn=&lt;MeanBackward0&gt;))]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[29.447607040405273, 3.374826192855835]
+[29.425996780395508, 3.6045753955841064]
+[29.32489013671875, 3.7605161666870117]
+[29.4700870513916, 3.4133691787719727]
+[29.343021392822266, 4.005053520202637]
+[29.34414291381836, 4.2097578048706055]
+[29.310070037841797, 4.440942764282227]
+[29.346176147460938, 4.175262451171875]
+[29.323558807373047, 4.654772758483887]
+[29.298280715942383, 4.872434616088867]
+[29.329313278198242, 5.106306076049805]
+[29.32353401184082, 4.950348377227783]
+[29.34082794189453, 5.29400634765625]
+[29.30625343322754, 5.530720233917236]
+[29.27802276611328, 5.677347183227539]
+[29.32978057861328, 5.34311580657959]
+[29.254823684692383, 5.866114616394043]
+[29.311471939086914, 6.013018608093262]
+[29.351268768310547, 6.210524559020996]
+[29.317537307739258, 5.98555326461792]
+[29.364227294921875, 6.390686511993408]
+[29.39890480041504, 6.548931121826172]
+[29.372236251831055, 6.786866664886475]
+[29.38951873779297, 6.645132541656494]
+[29.448331832885742, 6.973613262176514]
+[29.505664825439453, 7.170876502990723]
+[29.5399112701416, 7.310221195220947]
+[29.48365592956543, 7.021450519561768]
+[29.56096076965332, 7.503502368927002]
+[29.567899703979492, 7.662143230438232]
+[29.53331756591797, 7.88014030456543]
+[29.5599308013916, 7.623018741607666]
+[29.50957489013672, 8.058955192565918]
+[29.551576614379883, 8.273170471191406]
+[29.60663604736328, 8.516768455505371]
+[29.574283599853516, 8.36208724975586]
+[29.600412368774414, 8.642070770263672]
+[29.680492401123047, 8.876641273498535]
+[29.698354721069336, 9.035130500793457]
+[29.629547119140625, 8.69605541229248]
+[29.74869728088379, 9.252361297607422]
+[29.80600929260254, 9.42403507232666]
+[29.834745407104492, 9.653853416442871]
+[29.817161560058594, 9.386046409606934]
+[29.8885498046875, 9.820303916931152]
+[29.873964309692383, 9.996237754821777]
+[29.87493324279785, 10.210467338562012]
+[29.890108108520508, 10.074249267578125]
+[29.959999084472656, 10.336360931396484]
+[29.96165657043457, 10.516339302062988]
+[29.93474578857422, 10.661099433898926]
+[29.959604263305664, 10.366752624511719]
+[29.988513946533203, 10.837984085083008]
+[30.04273796081543, 10.994195938110352]
+[30.09101104736328, 11.173079490661621]
+[30.049734115600586, 10.965616226196289]
+[30.038251876831055, 11.3450288772583]
+[30.038101196289062, 11.445261001586914]
+[30.07677459716797, 11.577192306518555]
+[30.077110290527344, 11.471475601196289]
+[30.0446720123291, 11.639450073242188]
+[30.00238037109375, 11.804838180541992]
+[30.065031051635742, 11.8500394821167]
+[29.988309860229492, 11.648499488830566]
+[30.0325927734375, 12.046517372131348]
+[30.145902633666992, 12.155674934387207]
+[30.222288131713867, 12.340046882629395]
+[30.158435821533203, 12.142173767089844]
+[30.16111946105957, 12.51504898071289]
+[30.162939071655273, 12.628119468688965]
+[30.204998016357422, 12.810358047485352]
+[30.174516677856445, 12.702183723449707]
+[30.236392974853516, 12.937088012695312]
+[30.18885612487793, 13.080704689025879]
+[30.274641036987305, 13.140006065368652]
+[30.212295532226562, 12.960810661315918]
+[30.271770477294922, 13.291927337646484]
+[30.293231964111328, 13.409188270568848]
+[30.362449645996094, 13.490983009338379]
+[30.292543411254883, 13.379925727844238]
+[30.393800735473633, 13.607429504394531]
+[30.381378173828125, 13.67056941986084]
+[30.305795669555664, 13.779123306274414]
+[30.334423065185547, 13.738274574279785]
+[30.27464485168457, 13.863139152526855]
+[30.31574249267578, 13.962242126464844]
+[30.2918758392334, 14.066043853759766]
+[30.302444458007812, 13.903302192687988]
+[30.304126739501953, 14.241522789001465]
+[30.32062339782715, 14.33503532409668]
+[30.288738250732422, 14.49628734588623]
+[30.310033798217773, 14.315657615661621]
+[30.29222297668457, 14.630061149597168]
+[30.319717407226562, 14.762106895446777]
+[30.339595794677734, 14.913230895996094]
+[30.330074310302734, 14.809708595275879]
+[30.375900268554688, 15.026164054870605]
+[30.33486557006836, 15.118277549743652]
+[30.34489631652832, 15.20206356048584]
+[30.37367820739746, 15.045432090759277]
+[30.345661163330078, 15.278451919555664]
+[30.2971248626709, 15.492568969726562]
+[30.29142951965332, 15.635457038879395]
+[30.31864356994629, 15.47502613067627]
+[30.31955909729004, 15.790929794311523]
+[30.3102970123291, 15.817731857299805]
+[30.269855499267578, 15.927996635437012]
+[30.300554275512695, 15.858780860900879]
+[30.240816116333008, 15.899101257324219]
+[30.250993728637695, 16.031322479248047]
+[30.28125762939453, 16.087797164916992]
+[30.248201370239258, 15.90981388092041]
+[30.30038833618164, 16.14454460144043]
+[30.261709213256836, 16.28738021850586]
+[30.287752151489258, 16.377466201782227]
+[30.264225006103516, 16.262056350708008]
+[30.2412166595459, 16.488937377929688]
+[30.23959732055664, 16.672042846679688]
+[30.27063751220703, 16.78284454345703]
+[30.266860961914062, 16.712055206298828]
+[30.31978416442871, 16.810895919799805]
+[30.33303451538086, 16.931278228759766]
+[30.35762596130371, 17.02056121826172]
+[30.33552360534668, 16.826583862304688]
+[30.4794864654541, 17.100418090820312]
+[30.48080825805664, 17.207372665405273]
+[30.480037689208984, 17.410951614379883]
+[30.486330032348633, 17.201147079467773]
+[30.500850677490234, 17.46592903137207]
+[30.52878761291504, 17.615842819213867]
+[30.56080436706543, 17.74369239807129]
+[30.536529541015625, 17.619640350341797]
+[30.557714462280273, 17.79836654663086]
+[30.60474967956543, 17.938772201538086]
+[30.650041580200195, 18.059223175048828]
+[30.600736618041992, 17.820505142211914]
+[30.676984786987305, 18.140077590942383]
+[30.674415588378906, 18.179401397705078]
+[30.691295623779297, 18.297224044799805]
+[30.67727279663086, 18.17361831665039]
+[30.677019119262695, 18.346214294433594]
+[30.707666397094727, 18.470130920410156]
+[30.71794891357422, 18.640966415405273]
+[30.693323135375977, 18.518447875976562]
+[30.742046356201172, 18.686439514160156]
+[30.78730010986328, 18.788177490234375]
+[30.74176025390625, 18.95365333557129]
+[30.77206039428711, 18.701725006103516]
+[30.80105209350586, 19.1397762298584]
+[30.84084129333496, 19.323421478271484]
+[30.871000289916992, 19.487890243530273]
+[30.83522605895996, 19.305418014526367]
+[30.941295623779297, 19.650745391845703]
+[30.987821578979492, 19.775487899780273]
+[30.94569969177246, 19.913000106811523]
+[30.99221420288086, 19.818334579467773]
+[31.003572463989258, 20.046703338623047]
+[31.035411834716797, 20.21187973022461]
+[31.04976463317871, 20.3143253326416]
+[31.008094787597656, 20.08526039123535]
+[31.053661346435547, 20.466808319091797]
+[31.017824172973633, 20.67552375793457]
+[31.013105392456055, 20.783367156982422]
+[31.025470733642578, 20.65155792236328]
+[30.998777389526367, 20.892473220825195]
+[31.02809715270996, 21.094371795654297]
+[31.035783767700195, 21.2268123626709]
+[31.05239486694336, 21.188907623291016]
+[31.143362045288086, 21.26990509033203]
+[31.180511474609375, 21.52116584777832]
+[31.16826057434082, 21.572534561157227]
+[31.174409866333008, 21.342458724975586]
+[31.152667999267578, 21.710426330566406]
+[31.24300765991211, 21.771825790405273]
+[31.27077293395996, 21.95061683654785]
+[31.251155853271484, 21.756492614746094]
+[31.323274612426758, 21.997180938720703]
+[31.3646297454834, 22.0731201171875]
+[31.353302001953125, 22.254804611206055]
+[31.346452713012695, 22.122482299804688]
+[31.465953826904297, 22.429838180541992]
+[31.475093841552734, 22.64372444152832]
+[31.50770378112793, 22.730716705322266]
+[31.452924728393555, 22.454179763793945]
+[31.449567794799805, 22.77191925048828]
+[31.52593994140625, 22.90169906616211]
+[31.497753143310547, 23.13292121887207]
+[31.52814483642578, 22.896875381469727]
+[31.549972534179688, 23.286718368530273]
+[31.623859405517578, 23.36380386352539]
+[31.66117286682129, 23.39537811279297]
+[31.658775329589844, 23.372549057006836]
+[31.709884643554688, 23.513160705566406]
+[31.7270565032959, 23.655000686645508]
+[31.74555778503418, 23.713537216186523]
+[31.756567001342773, 23.536325454711914]
+[31.797330856323242, 23.8889217376709]
+[31.868059158325195, 23.936962127685547]
+[31.82658576965332, 24.076919555664062]
+[31.872873306274414, 23.93246078491211]
+[31.85038948059082, 24.223724365234375]
+[31.882633209228516, 24.28565216064453]
+[31.92150115966797, 24.39374542236328]
+[31.90862274169922, 24.350786209106445]
+[31.887107849121094, 24.41277313232422]
+[31.92292594909668, 24.591466903686523]
+[31.927444458007812, 24.773578643798828]
+[31.885337829589844, 24.442489624023438]
+[31.998804092407227, 24.832799911499023]
+[32.095184326171875, 25.140405654907227]
+[32.1009521484375, 25.28264045715332]
+[32.092437744140625, 25.1341552734375]
+[32.155662536621094, 25.232423782348633]
+[32.19741439819336, 25.47170066833496]
+[32.21780014038086, 25.616703033447266]
+[32.19856262207031, 25.53121566772461]
+[32.26655197143555, 25.738937377929688]
+[32.27412796020508, 25.81267738342285]
+[32.28740310668945, 25.814250946044922]
+[32.2901611328125, 25.75459098815918]
+[32.37424087524414, 26.015775680541992]
+[32.34738540649414, 26.082048416137695]
+[32.42429733276367, 26.20062828063965]
+[32.35435485839844, 26.087621688842773]
+[32.562984466552734, 26.371137619018555]
+[32.57033920288086, 26.351686477661133]
+[32.593257904052734, 26.579771041870117]
+[32.59058380126953, 26.483400344848633]
+[32.60219955444336, 26.6877498626709]
+[32.68679428100586, 26.814315795898438]
+[32.69918441772461, 26.817455291748047]
+[32.614349365234375, 26.74374771118164]
+[32.73598861694336, 26.994626998901367]
+[32.79103088378906, 27.08562469482422]
+[32.83389663696289, 27.19175910949707]
+[32.79550552368164, 27.084354400634766]
+[32.74964904785156, 27.23203468322754]
+[32.83340072631836, 27.304332733154297]
+[32.875396728515625, 27.320293426513672]
+[32.88016891479492, 27.336673736572266]
+[32.983638763427734, 27.402666091918945]
+[33.045101165771484, 27.603778839111328]
+[33.07868957519531, 27.683292388916016]
+[32.97573471069336, 27.46398162841797]
+[33.09053421020508, 27.929363250732422]
+[33.132869720458984, 28.048751831054688]
+[33.13392639160156, 28.27351951599121]
+[33.13178634643555, 28.024450302124023]
+[33.167266845703125, 28.398658752441406]
+[33.281185150146484, 28.569887161254883]
+[33.31415939331055, 28.5756778717041]
+[33.28137969970703, 28.594995498657227]
+[33.40778350830078, 28.789583206176758]
+[33.58219528198242, 28.956151962280273]
+[33.67824935913086, 29.079265594482422]
+[33.4992561340332, 28.797565460205078]
+[33.68124771118164, 29.18604850769043]
+[33.70814895629883, 29.22675323486328]
+[33.760894775390625, 29.305051803588867]
+[33.70104217529297, 29.21407127380371]
+[33.80712127685547, 29.374677658081055]
+[33.78751754760742, 29.51856803894043]
+[33.830780029296875, 29.50650978088379]
+[33.813079833984375, 29.412736892700195]
+[33.7822265625, 29.411603927612305]
+[33.87578201293945, 29.34808921813965]
+[33.835208892822266, 29.282428741455078]
+[33.83916473388672, 29.37925910949707]
+[33.84630584716797, 29.48710823059082]
+[33.91206741333008, 29.618453979492188]
+[33.988704681396484, 29.75567626953125]
+[33.90896224975586, 29.607954025268555]
+[33.990211486816406, 29.834775924682617]
+[34.00804138183594, 29.832416534423828]
+[34.0203857421875, 29.930721282958984]
+[34.02659225463867, 29.94866180419922]
+[34.044368743896484, 29.888782501220703]
+[34.03974151611328, 29.753772735595703]
+[34.00041198730469, 29.95073699951172]
+[34.05475997924805, 29.88359832763672]
+[34.094215393066406, 30.00048065185547]
+[34.13496780395508, 30.05665397644043]
+[34.23070526123047, 30.200807571411133]
+[34.133487701416016, 30.050434112548828]
+[34.27573013305664, 30.34548568725586]
+[34.28065490722656, 30.424802780151367]
+[34.31602096557617, 30.334251403808594]
+[34.338226318359375, 30.453893661499023]
+[34.29313659667969, 30.46014404296875]
+[34.35383605957031, 30.623876571655273]
+[34.338008880615234, 30.62741470336914]
+[34.34341812133789, 30.452938079833984]
+[34.35506057739258, 30.720916748046875]
+[34.392127990722656, 30.90688133239746]
+[34.43018341064453, 30.881391525268555]
+[34.38487243652344, 30.89665985107422]
+[34.53550338745117, 30.94609832763672]
+[34.5230712890625, 31.136917114257812]
+[34.5726203918457, 31.336557388305664]
+[34.5299186706543, 31.268035888671875]
+[34.63778305053711, 31.340730667114258]
+[34.681697845458984, 31.494436264038086]
+[34.70537567138672, 31.637571334838867]
+[34.62871551513672, 31.41573143005371]
+[34.70110321044922, 31.932249069213867]
+[34.78044891357422, 32.084495544433594]
+[34.88231658935547, 32.31748962402344]
+[34.77790451049805, 32.079254150390625]
+[34.98698806762695, 32.365089416503906]
+[34.96684646606445, 32.49224853515625]
+[34.9781379699707, 32.525482177734375]
+[35.00358963012695, 32.470523834228516]
+[34.990997314453125, 32.60858917236328]
+[35.061214447021484, 32.85680389404297]
+[35.14051818847656, 33.06529998779297]
+[35.025936126708984, 32.650390625]
+[35.277225494384766, 33.058109283447266]
+[35.30303192138672, 33.21076583862305]
+[35.31827163696289, 33.29478073120117]
+[35.30827331542969, 33.21885681152344]
+[35.2997932434082, 33.31342315673828]
+[35.37391662597656, 33.40190887451172]
+[35.3934440612793, 33.46332550048828]
+[35.37483596801758, 33.47549819946289]
+[35.3998908996582, 33.59611892700195]
+[35.4785041809082, 33.58720016479492]
+[35.538639068603516, 33.720176696777344]
+[35.41942596435547, 33.66666030883789]
+[35.52962112426758, 33.807708740234375]
+[35.6019401550293, 33.975486755371094]
+[35.633052825927734, 33.99256896972656]
+[35.59429931640625, 33.97241973876953]
+[35.638824462890625, 34.13185501098633]
+[35.64756774902344, 34.212677001953125]
+[35.69113540649414, 34.293460845947266]
+[35.637855529785156, 34.26103210449219]
+[35.800315856933594, 34.259925842285156]
+</pre>
 </div>
-
 </div>
 
 </div>

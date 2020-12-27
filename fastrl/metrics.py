@@ -29,8 +29,9 @@ if IN_NOTEBOOK:
 
 # Cell
 class AvgEpisodeRewardMetric(Metric):
-    def __init__(self,experience_cls:ExperienceFirstLast):
+    def __init__(self,experience_cls:ExperienceFirstLast,always_extend=False):
         self.experience_cls=experience_cls
+        self.always_extend=always_extend
         self.rolling_rewards=deque([0],maxlen=100)
 
     def accumulate(self,learn):
@@ -50,10 +51,13 @@ class AvgEpisodeRewardMetric(Metric):
 #         print([float(o.episode_reward) for o in yb  if o.done])
         if len([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])==0:return
 #         print([o.episode_reward for o in yb if o.done])
-        r=np.average([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])
+        if not self.always_extend:
+            r=[np.average([float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0])]
+        else:
+            r=[float(o.episode_reward) for o in yb if o.done and int(o.episode_reward)!=0]
 #         print([y for y in yb if y.absolute_end])
 #         for r in rewards:
-        if r!=0:self.rolling_rewards.extend([r])
+        if len(r)!=0:self.rolling_rewards.extend(r)
 #         print(len(rewards))
 #         if len(rewards)!=0:self.r=sum(rewards)/len(rewards)
 

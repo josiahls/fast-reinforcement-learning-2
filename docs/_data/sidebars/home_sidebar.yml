@@ -37,17 +37,35 @@ entries:
       title: SAC
       url: actorcritic.sac.html
     - output: web,pdf
+      title: DIAYN
+      url: actorcritic.diayn.html
+    - output: web,pdf
       title: A3C Datawise
       url: actorcritic.a3c_data.html
     - output: web,pdf
       title: A2C
       url: actorcritic.a2c.html
     - output: web,pdf
-      title: Title
-      url: actorcritc.dads.html
+      title: DADS
+      url: actorcritc.v1.dads.html
     - output: web,pdf
       title: PPO
       url: policy_gradient.ppo.html
+    - output: web,pdf
+      title: TRPO
+      url: policy_gradient.trpo.html
+    - output: web,pdf
+      title: DQN
+      url: qlearning.dqn_n_step.html
+    - output: web,pdf
+      title: Target DQN
+      url: qlearning.dqn_target.html
+    - output: web,pdf
+      title: Double DQN
+      url: qlearning.dqn_double.html
+    - output: web,pdf
+      title: Noisy DQN
+      url: qlearning.dqn_noisy.html
     - output: web,pdf
       title: General Notes
       url: notes.html

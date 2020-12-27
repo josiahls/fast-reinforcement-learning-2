@@ -10,10 +10,16 @@
     "Experience Blocks": "data.html",
     "RL Metrics": "metrics.html",
     "SAC": "actorcritic.sac.html",
+    "DIAYN": "actorcritic.diayn.html",
     "A3C Datawise": "actorcritic.a3c_data.html",
     "A2C": "actorcritic.a2c.html",
-    "Title": "actorcritc.dads.html",
+    "DADS": "actorcritc.v1.dads.html",
     "PPO": "policy_gradient.ppo.html",
+    "TRPO": "policy_gradient.trpo.html",
+    "DQN": "qlearning.dqn_n_step.html",
+    "Target DQN": "qlearning.dqn_target.html",
+    "Double DQN": "qlearning.dqn_double.html",
+    "Noisy DQN": "qlearning.dqn_noisy.html",
     "General Notes": "notes.html"
   }
 }
