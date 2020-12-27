@@ -50,7 +50,6 @@ class NoisyLinear(nn.Linear):
             self.epsilon_bias.normal_()
             bias = bias + self.sigma_bias * self.epsilon_bias.data
         o=F.linear(input, self.weight + self.sigma_weight * self.epsilon_weight.data, bias)
-#         print(o)
         return o
 
 
@@ -92,9 +91,15 @@ class NoisyDQN(nn.Module):
             nn.ReLU(),
             self.noisy_layers[1]
         )
+        self.counter=0
 
     def forward(self, x):
         fx = x.float()
+
+        if self.counter%500==0:
+            print(self.noisy_layers_sigma_snr())
+        self.counter+=1
+
         return self.fc(fx)
 
     def noisy_layers_sigma_snr(self):

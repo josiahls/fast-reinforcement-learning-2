@@ -67,8 +67,8 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;MountainCarContinuous-v0&#39;</span>
-<span class="n">agent</span><span class="o">=</span><span class="n">SAC</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">tau</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;Pendulum-v0&#39;</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">SAC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">tau</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="n">block</span><span class="o">=</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">exclude_nones</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">})</span>
@@ -108,687 +108,248 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>-1.111178</td>
-      <td>0</td>
-      <td>00:08</td>
+      <td>68.240349</td>
+      <td>-1428.730126</td>
+      <td>None</td>
+      <td>-1428.730126</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>140.679016</td>
+      <td>-1573.647103</td>
+      <td>None</td>
+      <td>-1573.647103</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>230.889587</td>
+      <td>-1502.739255</td>
+      <td>None</td>
+      <td>-1502.739255</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>333.508118</td>
+      <td>-1456.170725</td>
+      <td>None</td>
+      <td>-1456.170725</td>
+      <td>00:18</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>343.003479</td>
+      <td>-1406.864173</td>
+      <td>None</td>
+      <td>-1406.864173</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>375.362946</td>
+      <td>-1375.714182</td>
+      <td>None</td>
+      <td>-1375.714182</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>407.716522</td>
+      <td>-1340.233665</td>
+      <td>None</td>
+      <td>-1340.233665</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>443.068268</td>
+      <td>-1291.501812</td>
+      <td>None</td>
+      <td>-1291.501812</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>473.301788</td>
+      <td>-1249.785071</td>
+      <td>None</td>
+      <td>-1249.785071</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>494.265442</td>
+      <td>-1215.713414</td>
+      <td>None</td>
+      <td>-1215.713414</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>511.766785</td>
+      <td>-1186.256749</td>
+      <td>None</td>
+      <td>-1186.256749</td>
+      <td>00:15</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>527.710327</td>
+      <td>-1159.142336</td>
+      <td>None</td>
+      <td>-1159.142336</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>540.827209</td>
+      <td>-1129.974928</td>
+      <td>None</td>
+      <td>-1129.974928</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>549.209229</td>
+      <td>-1100.512593</td>
+      <td>None</td>
+      <td>-1100.512593</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>556.626770</td>
+      <td>-1073.270354</td>
+      <td>None</td>
+      <td>-1073.270354</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>562.379822</td>
+      <td>-1044.470044</td>
+      <td>None</td>
+      <td>-1044.470044</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>565.655945</td>
+      <td>-1020.647816</td>
+      <td>None</td>
+      <td>-1020.647816</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>569.046692</td>
+      <td>-982.388361</td>
+      <td>None</td>
+      <td>-982.388361</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>566.258362</td>
+      <td>-946.494682</td>
+      <td>None</td>
+      <td>-946.494682</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>569.683594</td>
+      <td>-914.161615</td>
+      <td>None</td>
+      <td>-914.161615</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>567.219421</td>
+      <td>-884.919657</td>
+      <td>None</td>
+      <td>-884.919657</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>565.771423</td>
+      <td>-858.335929</td>
+      <td>None</td>
+      <td>-858.335929</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>557.913391</td>
+      <td>-833.975748</td>
+      <td>None</td>
+      <td>-833.975748</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>546.038208</td>
+      <td>-811.668171</td>
+      <td>None</td>
+      <td>-811.668171</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>536.706848</td>
+      <td>-799.062749</td>
+      <td>None</td>
+      <td>-799.062749</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>516.377258</td>
+      <td>-739.399314</td>
+      <td>None</td>
+      <td>-739.399314</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>504.254395</td>
+      <td>-681.000106</td>
+      <td>None</td>
+      <td>-681.000106</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>488.861206</td>
+      <td>-638.974667</td>
+      <td>None</td>
+      <td>-638.974667</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>473.457916</td>
+      <td>-598.481119</td>
+      <td>None</td>
+      <td>-598.481119</td>
+      <td>00:16</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>453.391968</td>
+      <td>-562.297491</td>
+      <td>None</td>
+      <td>-562.297491</td>
+      <td>00:16</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-[]
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-5-8b149a79ce88&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     12</span> learner=SACLearner(dls,agent=agent,cbs=[ExperienceReplay(sz=1000000,bs=64,starting_els=1000,max_steps=gym.make(env)._max_episode_steps),SACCriticTrainer],
-<span class="ansi-green-intense-fg ansi-bold">     13</span>                    metrics=[AvgEpisodeRewardMetric(experience_cls=ExperienceFirstLast)])
-<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg"> </span>learner<span class="ansi-blue-fg">.</span>fit<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">30</span><span class="ansi-blue-fg">,</span>lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.001</span><span class="ansi-blue-fg">,</span>wd<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">fit</span><span class="ansi-blue-fg">(self, n_epoch, lr, wd, cbs, reset_opt)</span>
-<span class="ansi-green-intense-fg ansi-bold">    203</span>             self<span class="ansi-blue-fg">.</span>opt<span class="ansi-blue-fg">.</span>set_hypers<span class="ansi-blue-fg">(</span>lr<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>lr <span class="ansi-green-fg">if</span> lr <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> lr<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    204</span>             self<span class="ansi-blue-fg">.</span>n_epoch <span class="ansi-blue-fg">=</span> n_epoch
-<span class="ansi-green-fg">--&gt; 205</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_fit<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;fit&#39;</span><span class="ansi-blue-fg">,</span> CancelFitException<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_end_cleanup<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    206</span> 
-<span class="ansi-green-intense-fg ansi-bold">    207</span>     <span class="ansi-green-fg">def</span> _end_cleanup<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>xb<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>yb<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>pred<span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>loss <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span><span class="ansi-green-fg">None</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
-<span class="ansi-green-intense-fg ansi-bold">    152</span> 
-<span class="ansi-green-intense-fg ansi-bold">    153</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 154</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    155</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_fit</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    194</span>         <span class="ansi-green-fg">for</span> epoch <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>n_epoch<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    195</span>             self<span class="ansi-blue-fg">.</span>epoch<span class="ansi-blue-fg">=</span>epoch
-<span class="ansi-green-fg">--&gt; 196</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_epoch<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;epoch&#39;</span><span class="ansi-blue-fg">,</span> CancelEpochException<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    197</span> 
-<span class="ansi-green-intense-fg ansi-bold">    198</span>     <span class="ansi-green-fg">def</span> fit<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> n_epoch<span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> wd<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> cbs<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> reset_opt<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
-<span class="ansi-green-intense-fg ansi-bold">    152</span> 
-<span class="ansi-green-intense-fg ansi-bold">    153</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 154</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    155</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_epoch</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    188</span> 
-<span class="ansi-green-intense-fg ansi-bold">    189</span>     <span class="ansi-green-fg">def</span> _do_epoch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 190</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_do_epoch_train<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    191</span>         self<span class="ansi-blue-fg">.</span>_do_epoch_validate<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    192</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_do_epoch_train</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    180</span>     <span class="ansi-green-fg">def</span> _do_epoch_train<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    181</span>         self<span class="ansi-blue-fg">.</span>dl <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>dls<span class="ansi-blue-fg">.</span>train
-<span class="ansi-green-fg">--&gt; 182</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>all_batches<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;train&#39;</span><span class="ansi-blue-fg">,</span> CancelTrainException<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    183</span> 
-<span class="ansi-green-intense-fg ansi-bold">    184</span>     <span class="ansi-green-fg">def</span> _do_epoch_validate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> ds_idx<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> dl<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">_with_events</span><span class="ansi-blue-fg">(self, f, event_type, ex, final)</span>
-<span class="ansi-green-intense-fg ansi-bold">    152</span> 
-<span class="ansi-green-intense-fg ansi-bold">    153</span>     <span class="ansi-green-fg">def</span> _with_events<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> event_type<span class="ansi-blue-fg">,</span> ex<span class="ansi-blue-fg">,</span> final<span class="ansi-blue-fg">=</span>noop<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 154</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>       self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;before_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>       <span class="ansi-blue-fg">;</span>f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    155</span>         <span class="ansi-green-fg">except</span> ex<span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_cancel_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    156</span>         <span class="ansi-green-fg">finally</span><span class="ansi-blue-fg">:</span>   self<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#39;after_{event_type}&#39;</span><span class="ansi-blue-fg">)</span>        <span class="ansi-blue-fg">;</span>final<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/learner.py</span> in <span class="ansi-cyan-fg">all_batches</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    158</span>     <span class="ansi-green-fg">def</span> all_batches<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    159</span>         self<span class="ansi-blue-fg">.</span>n_iter <span class="ansi-blue-fg">=</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 160</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> enumerate<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dl<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>one_batch<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>o<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    161</span> 
-<span class="ansi-green-intense-fg ansi-bold">    162</span>     <span class="ansi-green-fg">def</span> _do_one_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/load.py</span> in <span class="ansi-cyan-fg">__iter__</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">     99</span>         self<span class="ansi-blue-fg">.</span>before_iter<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    100</span>         self<span class="ansi-blue-fg">.</span>__idxs<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>get_idxs<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># called in context of main process (not workers/subprocesses)</span>
-<span class="ansi-green-fg">--&gt; 101</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> b <span class="ansi-green-fg">in</span> _loaders<span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>fake_l<span class="ansi-blue-fg">.</span>num_workers<span class="ansi-blue-fg">==</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>fake_l<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    102</span>             <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>device <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> b <span class="ansi-blue-fg">=</span> to_device<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    103</span>             <span class="ansi-green-fg">yield</span> self<span class="ansi-blue-fg">.</span>after_batch<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/utils/data/dataloader.py</span> in <span class="ansi-cyan-fg">__next__</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    433</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_sampler_iter <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    434</span>             self<span class="ansi-blue-fg">.</span>_reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 435</span><span class="ansi-red-fg">         </span>data <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_next_data<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    436</span>         self<span class="ansi-blue-fg">.</span>_num_yielded <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
-<span class="ansi-green-intense-fg ansi-bold">    437</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_dataset_kind <span class="ansi-blue-fg">==</span> _DatasetKind<span class="ansi-blue-fg">.</span>Iterable <span class="ansi-green-fg">and</span><span class="ansi-red-fg"> </span><span class="ansi-red-fg">\</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/utils/data/dataloader.py</span> in <span class="ansi-cyan-fg">_next_data</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    473</span>     <span class="ansi-green-fg">def</span> _next_data<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    474</span>         index <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_next_index<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># may raise StopIteration</span>
-<span class="ansi-green-fg">--&gt; 475</span><span class="ansi-red-fg">         </span>data <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_dataset_fetcher<span class="ansi-blue-fg">.</span>fetch<span class="ansi-blue-fg">(</span>index<span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># may raise StopIteration</span>
-<span class="ansi-green-intense-fg ansi-bold">    476</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_pin_memory<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    477</span>             data <span class="ansi-blue-fg">=</span> _utils<span class="ansi-blue-fg">.</span>pin_memory<span class="ansi-blue-fg">.</span>pin_memory<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py</span> in <span class="ansi-cyan-fg">fetch</span><span class="ansi-blue-fg">(self, possibly_batched_index)</span>
-<span class="ansi-green-intense-fg ansi-bold">     32</span>                 <span class="ansi-green-fg">raise</span> StopIteration
-<span class="ansi-green-intense-fg ansi-bold">     33</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 34</span><span class="ansi-red-fg">             </span>data <span class="ansi-blue-fg">=</span> next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dataset_iter<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     35</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>collate_fn<span class="ansi-blue-fg">(</span>data<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     36</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/load.py</span> in <span class="ansi-cyan-fg">create_batches</span><span class="ansi-blue-fg">(self, samps)</span>
-<span class="ansi-green-intense-fg ansi-bold">    108</span>         self<span class="ansi-blue-fg">.</span>it <span class="ansi-blue-fg">=</span> iter<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>dataset<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>dataset <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">    109</span>         res <span class="ansi-blue-fg">=</span> filter<span class="ansi-blue-fg">(</span><span class="ansi-green-fg">lambda</span> o<span class="ansi-blue-fg">:</span>o <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> map<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>do_item<span class="ansi-blue-fg">,</span> samps<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 110</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">yield</span> <span class="ansi-green-fg">from</span> map<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>do_batch<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>chunkify<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    111</span> 
-<span class="ansi-green-intense-fg ansi-bold">    112</span>     <span class="ansi-green-fg">def</span> new<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> cls<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/basics.py</span> in <span class="ansi-cyan-fg">chunked</span><span class="ansi-blue-fg">(it, chunk_sz, drop_last, n_chunks)</span>
-<span class="ansi-green-intense-fg ansi-bold">    211</span>     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">,</span> Iterator<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> it <span class="ansi-blue-fg">=</span> iter<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    212</span>     <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 213</span><span class="ansi-red-fg">         </span>res <span class="ansi-blue-fg">=</span> list<span class="ansi-blue-fg">(</span>itertools<span class="ansi-blue-fg">.</span>islice<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">,</span> chunk_sz<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    214</span>         <span class="ansi-green-fg">if</span> res <span class="ansi-green-fg">and</span> <span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">==</span>chunk_sz <span class="ansi-green-fg">or</span> <span class="ansi-green-fg">not</span> drop_last<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">yield</span> res
-<span class="ansi-green-intense-fg ansi-bold">    215</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">&lt;</span>chunk_sz<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/load.py</span> in <span class="ansi-cyan-fg">do_item</span><span class="ansi-blue-fg">(self, s)</span>
-<span class="ansi-green-intense-fg ansi-bold">    123</span>     <span class="ansi-green-fg">def</span> prebatched<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>bs <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">    124</span>     <span class="ansi-green-fg">def</span> do_item<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 125</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>after_item<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>create_item<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    126</span>         <span class="ansi-green-fg">except</span> SkipItemException<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">    127</span>     <span class="ansi-green-fg">def</span> chunkify<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> b <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>prebatched <span class="ansi-green-fg">else</span> chunked<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>bs<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>drop_last<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">create_item</span><span class="ansi-blue-fg">(self, b)</span>
-<span class="ansi-green-intense-fg ansi-bold">     34</span> 
-<span class="ansi-green-intense-fg ansi-bold">     35</span>     <span class="ansi-green-fg">def</span> create_item<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 36</span><span class="ansi-red-fg">         </span>b<span class="ansi-blue-fg">=</span>super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>create_item<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     37</span>         <span class="ansi-green-fg">return</span> b<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">if</span> is_single_nested_tuple<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> b
-<span class="ansi-green-intense-fg ansi-bold">     38</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/load.py</span> in <span class="ansi-cyan-fg">create_item</span><span class="ansi-blue-fg">(self, s)</span>
-<span class="ansi-green-intense-fg ansi-bold">    129</span>     <span class="ansi-green-fg">def</span> randomize<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>rng <span class="ansi-blue-fg">=</span> random<span class="ansi-blue-fg">.</span>Random<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>rng<span class="ansi-blue-fg">.</span>randint<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">**</span><span class="ansi-cyan-fg">32</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    130</span>     <span class="ansi-green-fg">def</span> retain<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> res<span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>  <span class="ansi-green-fg">return</span> retain_types<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">if</span> is_listy<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> b<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 131</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> create_item<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>  <span class="ansi-green-fg">return</span> next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>it<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> s <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> self<span class="ansi-blue-fg">.</span>dataset<span class="ansi-blue-fg">[</span>s<span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    132</span>     <span class="ansi-green-fg">def</span> create_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">(</span>fa_collate<span class="ansi-blue-fg">,</span>fa_convert<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>prebatched<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    133</span>     <span class="ansi-green-fg">def</span> do_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>retain<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>create_batch<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>before_batch<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> b<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, it)</span>
-<span class="ansi-green-intense-fg ansi-bold">    312</span> 
-<span class="ansi-green-intense-fg ansi-bold">    313</span>     <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> it<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 314</span><span class="ansi-red-fg">         </span>res <span class="ansi-blue-fg">=</span> tuple<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>tl<span class="ansi-blue-fg">[</span>it<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> tl <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>tls<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    315</span>         <span class="ansi-green-fg">return</span> res <span class="ansi-green-fg">if</span> is_indexer<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> list<span class="ansi-blue-fg">(</span>zip<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>res<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    316</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
-<span class="ansi-green-intense-fg ansi-bold">    312</span> 
-<span class="ansi-green-intense-fg ansi-bold">    313</span>     <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> it<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 314</span><span class="ansi-red-fg">         </span>res <span class="ansi-blue-fg">=</span> tuple<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>tl<span class="ansi-blue-fg">[</span>it<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> tl <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>tls<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    315</span>         <span class="ansi-green-fg">return</span> res <span class="ansi-green-fg">if</span> is_indexer<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> list<span class="ansi-blue-fg">(</span>zip<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>res<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    316</span> 
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, idx)</span>
-<span class="ansi-green-intense-fg ansi-bold">     76</span>     <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>idx<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     77</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">!=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">.</span>popleft<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 78</span><span class="ansi-red-fg">         </span>res<span class="ansi-blue-fg">=</span>super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>source_idx<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     79</span>         self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">.</span>extend<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span>tuple<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> o <span class="ansi-green-fg">in</span> res<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     80</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>res_buffer<span class="ansi-blue-fg">.</span>popleft<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, idx)</span>
-<span class="ansi-green-intense-fg ansi-bold">    278</span>         res <span class="ansi-blue-fg">=</span> super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__getitem__<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    279</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_after_item <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> res
-<span class="ansi-green-fg">--&gt; 280</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_after_item<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> is_indexer<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> res<span class="ansi-blue-fg">.</span>map<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_after_item<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    281</span> 
-<span class="ansi-green-intense-fg ansi-bold">    282</span> <span class="ansi-red-fg"># Cell</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastai/data/core.py</span> in <span class="ansi-cyan-fg">_after_item</span><span class="ansi-blue-fg">(self, o)</span>
-<span class="ansi-green-intense-fg ansi-bold">    240</span>         <span class="ansi-green-fg">return</span> super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>_new<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span> tfms<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>tfms<span class="ansi-blue-fg">,</span> do_setup<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> types<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>types<span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span>split_idx<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    241</span>     <span class="ansi-green-fg">def</span> subset<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_new<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>splits<span class="ansi-blue-fg">[</span>i<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span>i<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 242</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> _after_item<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> o<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>tfms<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    243</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#34;{self.__class__.__name__}: {self.items}\ntfms - {self.tfms.fs}&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">    244</span>     <span class="ansi-green-fg">def</span> __iter__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">[</span>i<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> i <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, o)</span>
-<span class="ansi-green-intense-fg ansi-bold">    196</span>         self<span class="ansi-blue-fg">.</span>fs<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>t<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    197</span> 
-<span class="ansi-green-fg">--&gt; 198</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> o<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> compose_tfms<span class="ansi-blue-fg">(</span>o<span class="ansi-blue-fg">,</span> tfms<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>fs<span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>split_idx<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    199</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#34;Pipeline: {&#39; -&gt; &#39;.join([f.name for f in self.fs if f.name != &#39;noop&#39;])}&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">    200</span>     <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>fs<span class="ansi-blue-fg">[</span>i<span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">compose_tfms</span><span class="ansi-blue-fg">(x, tfms, is_enc, reverse, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    148</span>     <span class="ansi-green-fg">for</span> f <span class="ansi-green-fg">in</span> tfms<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    149</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> is_enc<span class="ansi-blue-fg">:</span> f <span class="ansi-blue-fg">=</span> f<span class="ansi-blue-fg">.</span>decode
-<span class="ansi-green-fg">--&gt; 150</span><span class="ansi-red-fg">         </span>x <span class="ansi-blue-fg">=</span> f<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    151</span>     <span class="ansi-green-fg">return</span> x
-<span class="ansi-green-intense-fg ansi-bold">    152</span> 
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, x, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     71</span>     <span class="ansi-blue-fg">@</span>property
-<span class="ansi-green-intense-fg ansi-bold">     72</span>     <span class="ansi-green-fg">def</span> name<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;_name&#39;</span><span class="ansi-blue-fg">,</span> _get_name<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 73</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;encodes&#39;</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     74</span>     <span class="ansi-green-fg">def</span> decode  <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_call<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;decodes&#39;</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     75</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#39;{self.name}:\nencodes: {self.encodes}decodes: {self.decodes}&#39;</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">_call</span><span class="ansi-blue-fg">(self, fn, x, split_idx, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     81</span>     <span class="ansi-green-fg">def</span> _call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> split_idx<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     82</span>         <span class="ansi-green-fg">if</span> split_idx<span class="ansi-blue-fg">!=</span>self<span class="ansi-blue-fg">.</span>split_idx <span class="ansi-green-fg">and</span> self<span class="ansi-blue-fg">.</span>split_idx <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> x
-<span class="ansi-green-fg">---&gt; 83</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     84</span> 
-<span class="ansi-green-intense-fg ansi-bold">     85</span>     <span class="ansi-green-fg">def</span> _do_call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/transform.py</span> in <span class="ansi-cyan-fg">_do_call</span><span class="ansi-blue-fg">(self, f, x, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     87</span>             <span class="ansi-green-fg">if</span> f <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> x
-<span class="ansi-green-intense-fg ansi-bold">     88</span>             ret <span class="ansi-blue-fg">=</span> f<span class="ansi-blue-fg">.</span>returns_none<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> hasattr<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;returns_none&#39;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-fg">---&gt; 89</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> retain_type<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">,</span> ret<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     90</span>         res <span class="ansi-blue-fg">=</span> tuple<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> x_<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> x_ <span class="ansi-green-fg">in</span> x<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     91</span>         <span class="ansi-green-fg">return</span> retain_type<span class="ansi-blue-fg">(</span>res<span class="ansi-blue-fg">,</span> x<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastcore/dispatch.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    115</span>         <span class="ansi-green-fg">elif</span> self<span class="ansi-blue-fg">.</span>inst <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> f <span class="ansi-blue-fg">=</span> MethodType<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>inst<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    116</span>         <span class="ansi-green-fg">elif</span> self<span class="ansi-blue-fg">.</span>owner <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> f <span class="ansi-blue-fg">=</span> MethodType<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>owner<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 117</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> f<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    118</span> 
-<span class="ansi-green-intense-fg ansi-bold">    119</span>     <span class="ansi-green-fg">def</span> __get__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> inst<span class="ansi-blue-fg">,</span> owner<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/data.py</span> in <span class="ansi-cyan-fg">encodes</span><span class="ansi-blue-fg">(self, o)</span>
-<span class="ansi-green-intense-fg ansi-bold">    181</span> 
-<span class="ansi-green-intense-fg ansi-bold">    182</span>     <span class="ansi-green-fg">def</span> encodes<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>o<span class="ansi-blue-fg">:</span>gym<span class="ansi-blue-fg">.</span>Env<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 183</span><span class="ansi-red-fg">         </span>exps<span class="ansi-blue-fg">=</span>next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>exp_src_iter<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    184</span>         <span class="ansi-green-fg">if</span> exps<span class="ansi-blue-fg">.</span>last_state <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">or</span> <span class="ansi-blue-fg">(</span>exps<span class="ansi-blue-fg">.</span>done <span class="ansi-green-fg">and</span> self<span class="ansi-blue-fg">.</span>exclude_nones<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    185</span>             r<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>exp_src<span class="ansi-blue-fg">.</span>pop_total_rewards<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/ptan_extension.py</span> in <span class="ansi-cyan-fg">__iter__</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    136</span> 
-<span class="ansi-green-intense-fg ansi-bold">    137</span>     <span class="ansi-green-fg">def</span> __iter__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 138</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">for</span> exp <span class="ansi-green-fg">in</span> super<span class="ansi-blue-fg">(</span>ExperienceSourceFirstLast<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__iter__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    139</span>             <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>exclude_nones<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    140</span>                 <span class="ansi-green-fg">if</span> exp<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>done <span class="ansi-green-fg">and</span> len<span class="ansi-blue-fg">(</span>exp<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">&lt;=</span> self<span class="ansi-blue-fg">.</span>steps<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/ptan_extension.py</span> in <span class="ansi-cyan-fg">__iter__</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">     74</span>                     states_indices<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     75</span>             <span class="ansi-green-fg">if</span> states_input<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 76</span><span class="ansi-red-fg">                 </span>states_actions<span class="ansi-blue-fg">,</span> new_agent_states <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>agent<span class="ansi-blue-fg">(</span>states_input<span class="ansi-blue-fg">,</span> agent_states<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     77</span>                 <span class="ansi-green-fg">for</span> idx<span class="ansi-blue-fg">,</span> action <span class="ansi-green-fg">in</span> enumerate<span class="ansi-blue-fg">(</span>states_actions<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     78</span>                     g_idx <span class="ansi-blue-fg">=</span> states_indices<span class="ansi-blue-fg">[</span>idx<span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/actorcritic/sac.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, s, asl)</span>
-<span class="ansi-green-intense-fg ansi-bold">    272</span> 
-<span class="ansi-green-intense-fg ansi-bold">    273</span>     <span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>s<span class="ansi-blue-fg">,</span>asl<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 274</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>select_action<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>asl
-<span class="ansi-green-intense-fg ansi-bold">    275</span> 
-<span class="ansi-green-intense-fg ansi-bold">    276</span>     <span class="ansi-green-fg">def</span> update_parameters<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>yb<span class="ansi-blue-fg">,</span> learn<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/actorcritic/sac.py</span> in <span class="ansi-cyan-fg">select_action</span><span class="ansi-blue-fg">(self, state, evaluate)</span>
-<span class="ansi-green-intense-fg ansi-bold">    266</span>         state <span class="ansi-blue-fg">=</span> torch<span class="ansi-blue-fg">.</span>FloatTensor<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>unsqueeze<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    267</span>         <span class="ansi-green-fg">if</span> evaluate <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 268</span><span class="ansi-red-fg">             </span>action<span class="ansi-blue-fg">,</span> _<span class="ansi-blue-fg">,</span> _ <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>policy<span class="ansi-blue-fg">.</span>sample<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    269</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    270</span>             _<span class="ansi-blue-fg">,</span> _<span class="ansi-blue-fg">,</span> action <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>policy<span class="ansi-blue-fg">.</span>sample<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/actorcritic/sac.py</span> in <span class="ansi-cyan-fg">sample</span><span class="ansi-blue-fg">(self, state)</span>
-<span class="ansi-green-intense-fg ansi-bold">    128</span> 
-<span class="ansi-green-intense-fg ansi-bold">    129</span>     <span class="ansi-green-fg">def</span> sample<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> state<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 130</span><span class="ansi-red-fg">         </span>mean<span class="ansi-blue-fg">,</span> log_std <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>forward<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    131</span>         std <span class="ansi-blue-fg">=</span> log_std<span class="ansi-blue-fg">.</span>exp<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    132</span>         normal <span class="ansi-blue-fg">=</span> Normal<span class="ansi-blue-fg">(</span>mean<span class="ansi-blue-fg">,</span> std<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">/opt/project/fastrl/fastrl/actorcritic/sac.py</span> in <span class="ansi-cyan-fg">forward</span><span class="ansi-blue-fg">(self, state)</span>
-<span class="ansi-green-intense-fg ansi-bold">    120</span> 
-<span class="ansi-green-intense-fg ansi-bold">    121</span>     <span class="ansi-green-fg">def</span> forward<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> state<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 122</span><span class="ansi-red-fg">         </span>x <span class="ansi-blue-fg">=</span> F<span class="ansi-blue-fg">.</span>relu<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>linear1<span class="ansi-blue-fg">(</span>state<span class="ansi-blue-fg">.</span>float<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    123</span>         x <span class="ansi-blue-fg">=</span> F<span class="ansi-blue-fg">.</span>relu<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>linear2<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    124</span>         mean <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>mean_linear<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
-</div>
 </div>
 
 </div>

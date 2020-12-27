@@ -26,21 +26,6 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1603729047590/work/c10/cuda/CUDAFunctions.cpp:100.)
-  return torch._C._cuda_getDeviceCount() &gt; 0
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -80,7 +65,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="weights_init_" class="doc_header"><code>weights_init_</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>weights_init_</code>(<strong><code>m</code></strong>)</p>
+<h4 id="weights_init_" class="doc_header"><code>weights_init_</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>weights_init_</code>(<strong><code>m</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -104,62 +89,7 @@ nb_path: "nbs/14_actorcritic.sac.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ValueNetwork" class="doc_header"><code>class</code> <code>ValueNetwork</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L44" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ValueNetwork</code>(<strong><code>num_inputs</code></strong>, <strong><code>hidden_dim</code></strong>) :: <code>Module</code></p>
-</blockquote>
-<p>Base class for all neural network modules.</p>
-<p>Your models should also subclass this class.</p>
-<p>Modules can also contain other Modules, allowing to nest them in
-a tree structure. You can assign the submodules as regular attributes::</p>
-
-<pre><code>import torch.nn as nn
-import torch.nn.functional as F
-
-class Model(nn.Module):
-    def __init__(self):
-        super(Model, self).__init__()
-        self.conv1 = nn.Conv2d(1, 20, 5)
-        self.conv2 = nn.Conv2d(20, 20, 5)
-
-    def forward(self, x):
-        x = F.relu(self.conv1(x))
-        return F.relu(self.conv2(x))
-
-</code></pre>
-<p>Submodules assigned in this way will be registered, and will have their
-parameters converted too when you call :meth:<code>to</code>, etc.</p>
-<p>:ivar training: Boolean represents whether this module is in training or
-                evaluation mode.
-:vartype training: bool</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="QNetwork" class="doc_header"><code>class</code> <code>QNetwork</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L62" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QNetwork</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>) :: <code>Module</code></p>
+<h2 id="ValueNetwork" class="doc_header"><code>class</code> <code>ValueNetwork</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L49" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ValueNetwork</code>(<strong><code>num_inputs</code></strong>, <strong><code>hidden_dim</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -214,7 +144,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="GaussianPolicy" class="doc_header"><code>class</code> <code>GaussianPolicy</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L94" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GaussianPolicy</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>, <strong><code>action_space</code></strong>=<em><code>None</code></em>) :: <code>Module</code></p>
+<h2 id="QNetwork" class="doc_header"><code>class</code> <code>QNetwork</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QNetwork</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -269,7 +199,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DeterministicPolicy" class="doc_header"><code>class</code> <code>DeterministicPolicy</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L145" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DeterministicPolicy</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>, <strong><code>action_space</code></strong>=<em><code>None</code></em>) :: <code>Module</code></p>
+<h2 id="GaussianPolicy" class="doc_header"><code>class</code> <code>GaussianPolicy</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L99" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>GaussianPolicy</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>, <strong><code>action_space</code></strong>=<em><code>None</code></em>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -324,80 +254,32 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="create_log_gaussian" class="doc_header"><code>create_log_gaussian</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L188" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_log_gaussian</code>(<strong><code>mean</code></strong>, <strong><code>log_std</code></strong>, <strong><code>t</code></strong>)</p>
+<h2 id="DeterministicPolicy" class="doc_header"><code>class</code> <code>DeterministicPolicy</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L150" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DeterministicPolicy</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>hidden_dim</code></strong>, <strong><code>action_space</code></strong>=<em><code>None</code></em>) :: <code>Module</code></p>
 </blockquote>
+<p>Base class for all neural network modules.</p>
+<p>Your models should also subclass this class.</p>
+<p>Modules can also contain other Modules, allowing to nest them in
+a tree structure. You can assign the submodules as regular attributes::</p>
 
-</div>
+<pre><code>import torch.nn as nn
+import torch.nn.functional as F
 
-</div>
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        self.conv1 = nn.Conv2d(1, 20, 5)
+        self.conv2 = nn.Conv2d(20, 20, 5)
 
-</div>
-</div>
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        return F.relu(self.conv2(x))
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="logsumexp" class="doc_header"><code>logsumexp</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logsumexp</code>(<strong><code>inputs</code></strong>, <strong><code>dim</code></strong>=<em><code>None</code></em>, <strong><code>keepdim</code></strong>=<em><code>False</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="soft_update" class="doc_header"><code>soft_update</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L206" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>soft_update</code>(<strong><code>target</code></strong>, <strong><code>source</code></strong>, <strong><code>tau</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="hard_update" class="doc_header"><code>hard_update</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L210" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hard_update</code>(<strong><code>target</code></strong>, <strong><code>source</code></strong>)</p>
-</blockquote>
+</code></pre>
+<p>Submodules assigned in this way will be registered, and will have their
+parameters converted too when you call :meth:<code>to</code>, etc.</p>
+<p>:ivar training: Boolean represents whether this module is in training or
+                evaluation mode.
+:vartype training: bool</p>
 
 </div>
 
@@ -427,7 +309,110 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SAC" class="doc_header"><code>class</code> <code>SAC</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L218" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SAC</code>(<strong><code>num_inputs</code></strong>, <strong><code>action_space</code></strong>, <strong><code>gamma</code></strong>, <strong><code>tau</code></strong>, <strong><code>alpha</code></strong>, <strong><code>policy</code></strong>=<em><code>'gaussian'</code></em>, <strong><code>automatic_entropy_tuning</code></strong>=<em><code>True</code></em>, <strong><code>target_update_interval</code></strong>=<em><code>1</code></em>, <strong><code>hidden_size</code></strong>=<em><code>100</code></em>, <strong><code>lr</code></strong>=<em><code>0.0003</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
+<h4 id="create_log_gaussian" class="doc_header"><code>create_log_gaussian</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L193" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_log_gaussian</code>(<strong><code>mean</code></strong>, <strong><code>log_std</code></strong>, <strong><code>t</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="logsumexp" class="doc_header"><code>logsumexp</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L201" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logsumexp</code>(<strong><code>inputs</code></strong>, <strong><code>dim</code></strong>=<em><code>None</code></em>, <strong><code>keepdim</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="soft_update" class="doc_header"><code>soft_update</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L211" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>soft_update</code>(<strong><code>target</code></strong>, <strong><code>source</code></strong>, <strong><code>tau</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="hard_update" class="doc_header"><code>hard_update</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>hard_update</code>(<strong><code>target</code></strong>, <strong><code>source</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="SAC" class="doc_header"><code>class</code> <code>SAC</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L223" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SAC</code>(<strong><code>num_inputs</code></strong>, <strong><code>action_space</code></strong>, <strong><code>gamma</code></strong>, <strong><code>tau</code></strong>, <strong><code>alpha</code></strong>, <strong><code>policy</code></strong>=<em><code>'gaussian'</code></em>, <strong><code>automatic_entropy_tuning</code></strong>=<em><code>True</code></em>, <strong><code>target_update_interval</code></strong>=<em><code>1</code></em>, <strong><code>hidden_size</code></strong>=<em><code>100</code></em>, <strong><code>lr</code></strong>=<em><code>0.0003</code></em>) :: <a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a></p>
 </blockquote>
 <p>BaseAgent(model: torch.nn.modules.module.Module = None)</p>
 
@@ -459,7 +444,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceReplay" class="doc_header"><code>class</code> <code>ExperienceReplay</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L336" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceReplay</code>(<strong><code>sz</code></strong>=<em><code>100</code></em>, <strong><code>bs</code></strong>=<em><code>128</code></em>, <strong><code>starting_els</code></strong>=<em><code>1</code></em>, <strong><code>max_steps</code></strong>=<em><code>1</code></em>) :: <code>Callback</code></p>
+<h2 id="ExperienceReplay" class="doc_header"><code>class</code> <code>ExperienceReplay</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L341" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceReplay</code>(<strong><code>sz</code></strong>=<em><code>100</code></em>, <strong><code>bs</code></strong>=<em><code>128</code></em>, <strong><code>starting_els</code></strong>=<em><code>1</code></em>, <strong><code>max_steps</code></strong>=<em><code>1</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -491,7 +476,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACCriticTrainer" class="doc_header"><code>class</code> <code>SACCriticTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L368" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACCriticTrainer</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
+<h2 id="SACCriticTrainer" class="doc_header"><code>class</code> <code>SACCriticTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L373" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACCriticTrainer</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_backward</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Callback</code></p>
 </blockquote>
 <p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
 
@@ -523,7 +508,7 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L380" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
+<h2 id="SACLearner" class="doc_header"><code>class</code> <code>SACLearner</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/sac.py#L385" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SACLearner</code>(<strong><code>dls</code></strong>, <strong><code>agent</code></strong>:<a href="/fast-reinforcement-learning-2/basic_agents.html#BaseAgent"><code>BaseAgent</code></a>=<em><code>BaseAgent(model=None)</code></em>, <strong><code>model</code></strong>=<em><code>None</code></em>, <strong><code>use_train_mets</code></strong>=<em><code>True</code></em>, <strong><code>loss_func</code></strong>=<em><code>None</code></em>, <strong><code>opt_func</code></strong>=<em><code>Adam</code></em>, <strong><code>lr</code></strong>=<em><code>0.001</code></em>, <strong><code>splitter</code></strong>=<em><code>trainable_params</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>metrics</code></strong>=<em><code>None</code></em>, <strong><code>path</code></strong>=<em><code>None</code></em>, <strong><code>model_dir</code></strong>=<em><code>'models'</code></em>, <strong><code>wd</code></strong>=<em><code>None</code></em>, <strong><code>wd_bn_bias</code></strong>=<em><code>False</code></em>, <strong><code>train_bn</code></strong>=<em><code>True</code></em>, <strong><code>moms</code></strong>=<em><code>(0.95, 0.85, 0.95)</code></em>) :: <a href="/fast-reinforcement-learning-2/learner.html#AgentLearner"><code>AgentLearner</code></a></p>
 </blockquote>
 <p>Base Learner for all reinforcement learning agents</p>
 

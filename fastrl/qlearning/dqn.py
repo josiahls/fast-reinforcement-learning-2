@@ -85,12 +85,10 @@ class EpsilonTracker(Callback):
 
 # Cell
 def calc_target(net, local_reward,next_state,done,discount):
-    if done:
-        return local_reward
+    if done: return local_reward
     next_q_v = net(next_state.float().unsqueeze(0))
     best_q = next_q_v.max(dim=1)[0].item()
     return local_reward + discount * best_q
-
 
 class DQNTrainer(Callback):
     def after_pred(self):

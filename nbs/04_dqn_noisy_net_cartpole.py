@@ -4,11 +4,10 @@ import ptan
 import argparse
 import numpy as np
 
+import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
-
-# from tensorboardX import SummaryWriter
 
 import math
 import torch
@@ -240,6 +239,7 @@ class NoisyLinear(nn.Linear):
         if bias is not None:
             self.epsilon_bias.normal_()
             bias = bias + self.sigma_bias * self.epsilon_bias.data
+        # print(self.sigma_weight.mean(),self.epsilon_weight.data.mean())
         return F.linear(input, self.weight + self.sigma_weight * self.epsilon_weight.data, bias)
 
 
@@ -303,7 +303,6 @@ class DQN(nn.Module):
         return self.fc(conv_out)
 
 
-
 class NoisyDQN(nn.Module):
     def __init__(self, input_shape, n_actions):
         super(NoisyDQN, self).__init__()
@@ -327,13 +326,18 @@ class NoisyDQN(nn.Module):
             nn.ReLU(),
             self.noisy_layers[1]
         )
-
-    def _get_conv_out(self, shape):
-        o = self.conv(torch.zeros(1, *shape))
-        return int(np.prod(o.size()))
+        self.counter=0
+    # def _get_conv_out(self, shape):
+    #     o = self.conv(torch.zeros(1, *shape))
+    #     return int(np.prod(o.size()))
 
     def forward(self, x):
-        fx = x.float() #/ 256
+        fx = x.float() # / 256
+
+        if self.counter % 500 == 0:
+            print(self.noisy_layers_sigma_snr())
+        self.counter += 1
+
         # conv_out = self.conv(fx).view(fx.size()[0], -1)
         return self.fc(fx)
 
@@ -345,7 +349,6 @@ class NoisyDQN(nn.Module):
 
 
 if __name__ == "__main__":
-    # params = common.HYPERPARAMS['pong']
     params = HYPERPARAMS['cartpole']
     parser = argparse.ArgumentParser()
     parser.add_argument("--cuda", default=False, action="store_true", help="Enable cuda")
@@ -355,7 +358,7 @@ if __name__ == "__main__":
     env = gym.make(params['env_name'])
     # env = ptan.common.wrappers.wrap_dqn(env)
 
-#     writer = SummaryWriter(comment="-" + params['run_name'] + "-noisy-net")
+    # writer = SummaryWriter(comment="-" + params['run_name'] + "-noisy-net")
     net = NoisyDQN(env.observation_space.shape, env.action_space.n).to(device)
     tgt_net = ptan.agent.TargetNet(net)
     agent = ptan.agent.DQNAgent(net, ptan.actions.ArgmaxActionSelector(), device=device)
@@ -363,19 +366,20 @@ if __name__ == "__main__":
     exp_source = ptan.experience.ExperienceSourceFirstLast(env, agent, gamma=params['gamma'], steps_count=1)
     buffer = ptan.experience.ExperienceReplayBuffer(exp_source, buffer_size=params['replay_size'])
     optimizer = optim.Adam(net.parameters(), lr=params['learning_rate'])
+    # print([o.mean() for o in net.parameters()])
 
     frame_idx = 0
 
-#     with common.RewardTracker(writer, params['stop_reward']) as reward_tracker:
+    # with common.RewardTracker(writer, params['stop_reward']) as reward_tracker:
     while True:
         frame_idx += 1
         buffer.populate(1)
 
         new_rewards = exp_source.pop_total_rewards()
         if new_rewards:
-            print(new_rewards)
-#             if reward_tracker.reward(new_rewards[0], frame_idx):
-#                 break
+            print(new_rewards[0])
+            # if reward_tracker.reward(new_rewards[0], frame_idx):
+            #     break
 
         if len(buffer) < params['replay_initial']:
             continue
@@ -388,8 +392,3 @@ if __name__ == "__main__":
 
         if frame_idx % params['target_net_sync'] == 0:
             tgt_net.sync()
-
-#         if frame_idx % 500 == 0:
-#             for layer_idx, sigma_l2 in enumerate(net.noisy_layers_sigma_snr()):
-#                 writer.add_scalar("sigma_snr_layer_%d" % (layer_idx+1),
-#                                   sigma_l2, frame_idx)
