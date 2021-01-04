@@ -26,6 +26,21 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1603729047590/work/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -56,7 +71,148 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Modules">Modules<a class="anchor-link" href="#Modules"> </a></h2>
+<p><a href="/fast-reinforcement-learning-2/actorcritic.diayn.html#DIAYN"><code>DIAYN</code></a> extends SAC to create <em>Skills</em> that can be used for a single or multiple environments. 
+<a href="https://arxiv.org/pdf/1802.06070.pdf">(Eysenbach et al. 2018) [DIAYN] Diversity Is All You Need</a> covers this in detail.</p>
+
+<pre><code>The general idea is that Skills should each be as diverse as possible and should not be   tied to a reward function specific to an environment.
+
+</code></pre>
+<p>Their <a href="https://sites.google.com/view/diayn">project site</a> shows several <em>incredible</em> examples of <a href="/fast-reinforcement-learning-2/actorcritic.diayn.html#DIAYN"><code>DIAYN</code></a> finding <em>Skills</em> without any reward. The original implementation is in tensorflow and ca be found <a href="https://github.com/haarnoja/sac/blob/master/sac/algos/diayn.py">here</a></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Discriminator" class="doc_header"><code>class</code> <code>Discriminator</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/diayn.py#L35" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Discriminator</code>(<strong><code>num_inputs</code></strong>, <strong><code>num_actions</code></strong>, <strong><code>num_skills</code></strong>, <strong><code>hidden_dim</code></strong>) :: <code>Module</code></p>
+</blockquote>
+<p><code>Module</code> for storing skills. Receives input (<code>num_inputs</code>+<code>num_actions</code>) -&gt; <code>num_skills</code>.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="DIAYN" class="doc_header"><code>class</code> <code>DIAYN</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/diayn.py#L51" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DIAYN</code>(<strong><code>num_inputs</code></strong>, <strong><code>action_space</code></strong>, <strong><code>discriminator</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>num_skills</code></strong>:<code>int</code>=<em><code>20</code></em>, <strong><code>find_best_skill_interval</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>scale_entropy</code></strong>:<code>float</code>=<em><code>1</code></em>, <strong><code>best_skill_n_rollouts</code></strong>:<code>int</code>=<em><code>10</code></em>, <strong><code>include_actions</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>learn_p_z</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>add_p_z</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>hidden_size</code></strong>=<em><code>100</code></em>, <strong><code>gamma</code></strong>=<em><code>0.99</code></em>, <strong><code>tau</code></strong>=<em><code>0.005</code></em>, <strong><code>alpha</code></strong>=<em><code>0.2</code></em>, <strong><code>policy</code></strong>=<em><code>'gaussian'</code></em>, <strong><code>automatic_entropy_tuning</code></strong>=<em><code>True</code></em>, <strong><code>target_update_interval</code></strong>=<em><code>1</code></em>, <strong><code>lr</code></strong>=<em><code>0.0003</code></em>) :: <a href="/fast-reinforcement-learning-2/actorcritic.sac.html#SAC"><code>SAC</code></a></p>
+</blockquote>
+<p><code>discriminator</code> is an additional <code>Module</code> to calculate z.
+<code>num_skills</code> is the number of skills/options to learn.
+<code>find_best_skill_interval</code> is how often to recompute the best skill.
+When finding the best skill, <code>best_skill_n_rollouts</code> determines how many rollouts to
+do per skill.
+<code>include_actions</code> determines whether to pass actions to the discriminator.
+<code>add_p_z</code> determines whether to include $\log{p(z)}$ in the pseudo-reward.
+<code>scale_entropy</code> is the scaling factor for entropy.</p>
+<p>A few explainations of some of the internal fields:</p>
+<p>We now have <code>num_inputs</code> and <code>original_num_inputs</code>. <code>num_inputs</code> has the <code>num_skills</code> being
+added to it. This will then be used by the <a href="/fast-reinforcement-learning-2/actorcritic.sac.html#SAC"><code>SAC</code></a> parent in initializing the critic and actor.</p>
+<p><code>original_num_inputs</code> will only be used by the <code>discriminator</code> now.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="DiscriminatorTrainer" class="doc_header"><code>class</code> <code>DiscriminatorTrainer</code><a href="https://github.com/josiahls/fast-reinforcement-learning-2/tree/master/fastrl/actorcritic/diayn.py#L172" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DiscriminatorTrainer</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/fast-reinforcement-learning-2/qlearning.dqn.html#ExperienceReplay"><code>ExperienceReplay</code></a></p>
+</blockquote>
+<p>Subclasses ExperienceReplay for augmenting experience, and toggling the agent's skill thats,
+being used, and also does training of the discriminator.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some additional information about <code>DiscrimiatorTrainer</code>.</p>
+<p>As noted in <a href="https://arxiv.org/pdf/1802.06070.pdf">(Eysenbach et al. 2018)</a> Algorithm 1, we need $log p(z)$. We accomplish this by getting the output from the discriminator $q_{\phi}(z|s)$, taking the softmax which will scale $z$ to $[0,1]$ which is when is needed to prepresent probability $p$. Next, we scale the distribution by $log$ which is critical for calculating entropy.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Some important notes from <a href="https://arxiv.org/pdf/1802.06070.pdf">(Eysenbach et al. 2018)</a>:</p>
+<ul>
+<li>Hidden nn size is changed from 128 to 300 (pg 14)</li>
+<li>Alpha is changed to 0.1 (pg 4)</li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -67,20 +223,19 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;Pendulum-v0&#39;</span>
-<span class="n">agent</span><span class="o">=</span><span class="n">SAC</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">tau</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pybulletgym.envs</span> <span class="kn">import</span> <span class="o">*</span>
 
+<span class="n">env</span><span class="o">=</span><span class="s1">&#39;InvertedPendulumPyBulletEnv-v0&#39;</span>
+<span class="n">agent</span><span class="o">=</span><span class="n">DIAYN</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">action_space</span><span class="p">,</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span><span class="n">tau</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">hidden_size</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">block</span><span class="o">=</span><span class="n">FirstLastExperienceBlock</span><span class="p">(</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">exclude_nones</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">dls_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;num_workers&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;indexed&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;shuffle_train&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">})</span>
-<span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">block</span><span class="p">),</span>
-                      <span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">),</span>
-<span class="c1">#                       batch_tfms=lambda x:(x[&#39;s&#39;],x),</span>
-                     <span class="p">)</span>
-<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
+<span class="n">blk</span><span class="o">=</span><span class="n">IterableDataBlock</span><span class="p">(</span><span class="n">blocks</span><span class="o">=</span><span class="p">(</span><span class="n">block</span><span class="p">),</span><span class="n">splitter</span><span class="o">=</span><span class="n">FuncSplitter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">dls</span><span class="o">=</span><span class="n">blk</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">([</span><span class="n">env</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
 
-<span class="n">learner</span><span class="o">=</span><span class="n">SACLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">ExperienceReplay</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">starting_els</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">_max_episode_steps</span><span class="p">),</span><span class="n">SACCriticTrainer</span><span class="p">],</span>
+<span class="n">learner</span><span class="o">=</span><span class="n">SACLearner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span><span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span><span class="n">cbs</span><span class="o">=</span><span class="p">[</span><span class="n">DiscriminatorTrainer</span><span class="p">(</span><span class="n">sz</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span><span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">starting_els</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">max_steps</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">.</span><span class="n">_max_episode_steps</span><span class="p">),</span>
+                                        <span class="n">SACCriticTrainer</span><span class="p">],</span>
                    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">AvgEpisodeRewardMetric</span><span class="p">(</span><span class="n">experience_cls</span><span class="o">=</span><span class="n">ExperienceFirstLast</span><span class="p">)])</span>
-<span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">learner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">wd</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -89,6 +244,15 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
 
 <div class="output_wrapper">
 <div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/gym/logger.py:30: UserWarning: <span class="ansi-yellow-fg">WARN: Box bound precision lowered by casting to float32</span>
+  warnings.warn(colorize(&#39;%s: %s&#39;%(&#39;WARN&#39;, msg % args), &#39;yellow&#39;))
+</pre>
+</div>
+</div>
 
 <div class="output_area">
 
@@ -108,248 +272,41 @@ nb_path: "nbs/14b_actorcritic.diayn.ipynb"
   <tbody>
     <tr>
       <td>0</td>
-      <td>68.240349</td>
-      <td>-1428.730126</td>
+      <td>1.355922</td>
+      <td>10.666667</td>
       <td>None</td>
-      <td>-1428.730126</td>
-      <td>00:15</td>
+      <td>10.666667</td>
+      <td>00:00</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>140.679016</td>
-      <td>-1573.647103</td>
+      <td>-1.361305</td>
+      <td>13.600000</td>
       <td>None</td>
-      <td>-1573.647103</td>
-      <td>00:15</td>
+      <td>13.600000</td>
+      <td>00:00</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>230.889587</td>
-      <td>-1502.739255</td>
+      <td>-2.286275</td>
+      <td>13.600000</td>
       <td>None</td>
-      <td>-1502.739255</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>333.508118</td>
-      <td>-1456.170725</td>
-      <td>None</td>
-      <td>-1456.170725</td>
-      <td>00:18</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>343.003479</td>
-      <td>-1406.864173</td>
-      <td>None</td>
-      <td>-1406.864173</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>375.362946</td>
-      <td>-1375.714182</td>
-      <td>None</td>
-      <td>-1375.714182</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>407.716522</td>
-      <td>-1340.233665</td>
-      <td>None</td>
-      <td>-1340.233665</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>443.068268</td>
-      <td>-1291.501812</td>
-      <td>None</td>
-      <td>-1291.501812</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>473.301788</td>
-      <td>-1249.785071</td>
-      <td>None</td>
-      <td>-1249.785071</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>494.265442</td>
-      <td>-1215.713414</td>
-      <td>None</td>
-      <td>-1215.713414</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>511.766785</td>
-      <td>-1186.256749</td>
-      <td>None</td>
-      <td>-1186.256749</td>
-      <td>00:15</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>527.710327</td>
-      <td>-1159.142336</td>
-      <td>None</td>
-      <td>-1159.142336</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>540.827209</td>
-      <td>-1129.974928</td>
-      <td>None</td>
-      <td>-1129.974928</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>549.209229</td>
-      <td>-1100.512593</td>
-      <td>None</td>
-      <td>-1100.512593</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>556.626770</td>
-      <td>-1073.270354</td>
-      <td>None</td>
-      <td>-1073.270354</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>15</td>
-      <td>562.379822</td>
-      <td>-1044.470044</td>
-      <td>None</td>
-      <td>-1044.470044</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td>565.655945</td>
-      <td>-1020.647816</td>
-      <td>None</td>
-      <td>-1020.647816</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>569.046692</td>
-      <td>-982.388361</td>
-      <td>None</td>
-      <td>-982.388361</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>566.258362</td>
-      <td>-946.494682</td>
-      <td>None</td>
-      <td>-946.494682</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>19</td>
-      <td>569.683594</td>
-      <td>-914.161615</td>
-      <td>None</td>
-      <td>-914.161615</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>20</td>
-      <td>567.219421</td>
-      <td>-884.919657</td>
-      <td>None</td>
-      <td>-884.919657</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>21</td>
-      <td>565.771423</td>
-      <td>-858.335929</td>
-      <td>None</td>
-      <td>-858.335929</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>557.913391</td>
-      <td>-833.975748</td>
-      <td>None</td>
-      <td>-833.975748</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>23</td>
-      <td>546.038208</td>
-      <td>-811.668171</td>
-      <td>None</td>
-      <td>-811.668171</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>24</td>
-      <td>536.706848</td>
-      <td>-799.062749</td>
-      <td>None</td>
-      <td>-799.062749</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>25</td>
-      <td>516.377258</td>
-      <td>-739.399314</td>
-      <td>None</td>
-      <td>-739.399314</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>26</td>
-      <td>504.254395</td>
-      <td>-681.000106</td>
-      <td>None</td>
-      <td>-681.000106</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>27</td>
-      <td>488.861206</td>
-      <td>-638.974667</td>
-      <td>None</td>
-      <td>-638.974667</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>28</td>
-      <td>473.457916</td>
-      <td>-598.481119</td>
-      <td>None</td>
-      <td>-598.481119</td>
-      <td>00:16</td>
-    </tr>
-    <tr>
-      <td>29</td>
-      <td>453.391968</td>
-      <td>-562.297491</td>
-      <td>None</td>
-      <td>-562.297491</td>
-      <td>00:16</td>
+      <td>13.600000</td>
+      <td>00:00</td>
     </tr>
   </tbody>
 </table>
 </div>
 
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/envs/fastrl/lib/python3.7/site-packages/fastprogress/fastprogress.py:74: UserWarning: Your generator is empty.
+  warn(&#34;Your generator is empty.&#34;)
+</pre>
+</div>
 </div>
 
 </div>

@@ -221,7 +221,7 @@ def hard_update(target, source):
 from pprint import pprint
 
 class SAC(BaseAgent):
-    def __init__(self, num_inputs, action_space, gamma,tau,alpha,policy='gaussian',
+    def __init__(self, num_inputs, action_space,gamma=0.99,tau=0.005,alpha=0.2,policy='gaussian',
                 automatic_entropy_tuning=True,target_update_interval=1,hidden_size=100,lr=0.0003):
 
         self.action_space=action_space
@@ -237,6 +237,7 @@ class SAC(BaseAgent):
 
         self.device=default_device()
 
+        # qf
         self.critic = QNetwork(num_inputs, action_space.shape[0], hidden_size).to(device=self.device)
         self.critic_optim = Adam(self.critic.parameters(), lr=lr)
 
@@ -271,7 +272,9 @@ class SAC(BaseAgent):
         return action.detach().cpu().numpy()[0]
 
     def __call__(self,s,asl):
-        return self.select_action(s),asl
+        action,asl= self.select_action(s),asl
+        if len(action.shape)==1: action=action.reshape(1,-1)
+        return action,asl
 
     def update_parameters(self, *yb, learn):
         # Sample a batch from memory
@@ -386,7 +389,9 @@ class SACLearner(AgentLearner):
     def __init__(self,dls,agent=None,reward_scale=2,**kwargs):
         store_attr()
 #         print(type(self.agent))
-        super().__init__(dls,loss_func=partial(self.agent.update_parameters,learn=self),model=agent.policy,**kwargs)
+        super().__init__(dls,agent=agent,
+                         loss_func=partial(self.agent.update_parameters,learn=self),
+                         model=agent.policy,**kwargs)
 
 # Cell
 import torch.nn.utils as nn_utils

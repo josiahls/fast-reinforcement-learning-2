@@ -25,11 +25,11 @@ entries:
       title: Ptan Extension
       url: ptan_extend.html
     - output: web,pdf
-      title: Async Experience Blocks
-      url: async_data.html
-    - output: web,pdf
       title: Experience Blocks
       url: data.html
+    - output: web,pdf
+      title: Async Experience Blocks
+      url: async_data.html
     - output: web,pdf
       title: RL Metrics
       url: metrics.html
@@ -56,6 +56,9 @@ entries:
       url: policy_gradient.trpo.html
     - output: web,pdf
       title: DQN
+      url: qlearning.dqn.html
+    - output: web,pdf
+      title: DQN N-Steps
       url: qlearning.dqn_n_step.html
     - output: web,pdf
       title: Target DQN

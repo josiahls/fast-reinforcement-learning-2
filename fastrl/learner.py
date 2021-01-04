@@ -20,7 +20,7 @@ if IN_NOTEBOOK:
 # Cell
 @delegates(Learner)
 class AgentLearner(Learner):
-    def __init__(self,dls,agent:BaseAgent=BaseAgent(),model=None,use_train_mets=True,**kwargs):
+    def __init__(self,dls,agent=None,model=None,use_train_mets=True,**kwargs):
         self.agent=agent
         super().__init__(dls,model=ifnone(model,self.agent.model),**kwargs)
         if use_train_mets:
