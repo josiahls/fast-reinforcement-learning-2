@@ -60,16 +60,22 @@ RUN /bin/bash -c "source activate fastrl && jupyter labextension install @aquird
 
 RUN apt-get update && apt-get install -y python-opengl xvfb
 
-COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
-RUN ["chmod", "+x", "entrypoint.sh"]
-RUN echo 'source activate fastrl' >> ~/.bashrc
-RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies && python setup.py develop"
+
+RUN /bin/bash -c "source activate fastrl && pip install ptan --no-dependencies"
 WORKDIR /opt/project/
 RUN git clone https://github.com/benelot/pybullet-gym.git
 RUN /bin/bash -c "source activate fastrl && cd pybullet-gym && pip install -e ."
 RUN /bin/bash -c "source activate fastrl && pip install tensorflow tensorflow_probability"
-RUN /bin/bash -c "source activate fastrl && pip install pip3 install gym-minigrid"
+RUN /bin/bash -c "source activate fastrl && pip install gym-minigrid"
+RUN /bin/bash -c "source activate fastrl && pip install tensor-sensor[torch]"
+RUN apt-get update --fix-missing && apt install -y font-manager
+
 WORKDIR /opt/project/fastrl/
+COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP . .
+RUN ["chmod", "+x", "entrypoint.sh"]
+RUN echo 'source activate fastrl' >> ~/.bashrc
+#WORKDIR /opt/project/fastrl/
+RUN /bin/bash -c "source activate fastrl &&  python setup.py develop"
 
 USER $CONTAINER_USER
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP themes.jupyterlab-settings /home/fastrl/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/

@@ -40,14 +40,14 @@ entries:
       title: DIAYN
       url: actorcritic.diayn.html
     - output: web,pdf
+      title: DADS
+      url: actorcritc.v1.dads.html
+    - output: web,pdf
       title: A3C Datawise
       url: actorcritic.a3c_data.html
     - output: web,pdf
       title: A2C
       url: actorcritic.a2c.html
-    - output: web,pdf
-      title: DADS
-      url: actorcritc.v1.dads.html
     - output: web,pdf
       title: PPO
       url: policy_gradient.ppo.html

@@ -35,7 +35,7 @@ if IN_NOTEBOOK:
 class Discriminator(Module):
     "`Module` for storing skills. Receives input (`num_inputs`+`num_actions`) -> `num_skills`."
     def __init__(self, num_inputs,num_actions,num_skills,hidden_dim):
-        self.linear1 = nn.Linear(num_inputs+num_actions, hidden_dim)
+        self.linear1 = nn.Linear(num_inputs+num_skills, hidden_dim)
         self.linear2 = nn.Linear(hidden_dim, hidden_dim)
         self.linear3 = nn.Linear(hidden_dim,num_skills)
 
@@ -52,17 +52,25 @@ class DIAYN(SAC):
     def __init__(self,num_inputs,action_space,discriminator:Module=None,num_skills:int=20,
                  find_best_skill_interval:int=10,scale_entropy:float=1,
                  best_skill_n_rollouts:int=10,include_actions:bool=False,
-                 learn_p_z:bool=False,add_p_z:bool=True,hidden_size=100,**kwargs):
+                 learn_p_z:bool=False,add_p_z:bool=True,hidden_size=100,lr=0.003,**kwargs):
         store_attr()
         self.num_inputs=num_inputs+self.num_skills
         self.original_num_inputs=num_inputs
         self.p_z=np.full(self.num_skills,1.0/self.num_skills)
         self.discriminator=Discriminator(self.original_num_inputs,action_space.shape[0],
                                          num_skills,hidden_size)
+
+        self.discriminator_optim = Adam(self.discriminator.parameters(), lr=self.lr)
+
         self.log_p_z_episode=[]
         self.z=0
         self.reset_z()
-        super().__init__(self.num_inputs,action_space,hidden_size=hidden_size,**kwargs)
+
+
+#         self.clarifier=FastClarify(hush_errors=False)
+        self.clarifier=FastExplainer(once=True)
+
+        super().__init__(self.num_inputs,action_space,hidden_size=hidden_size,lr=lr,**kwargs)
 
     def sample_z(self):
         """Samples z from p(z), using probabilities in self._p_z."""
@@ -81,7 +89,25 @@ class DIAYN(SAC):
 
         z_one_hot=np.zeros(self.num_skills)
         z_one_hot[z]=1
+        if type(obs)==Tensor: obs=obs.cpu()
         return torch.FloatTensor(np.hstack([obs,z_one_hot])).reshape(1,-1)
+
+    def skill_p(self,skill,next_state):
+        unnorm_skill_dist=self.discriminator(next_state).unsqueeze(0)
+        skill_p=F.softmax(unnorm_skill_dist)[:,skill]
+        return skill_p,unnorm_skill_dist
+
+    def discriminator_learn(self,skill,out):
+        self.discriminator_optim.zero_grad()
+        loss=nn.CrossEntropyLoss()(out,torch.LongTensor([skill]))
+        loss.backward()
+        self.discriminator_optim.step()
+
+    def intrinsic_reward(self,next_state):
+        skill_p,disc_out=self.skill_p(self.z,next_state)
+        intrinsic_reward=np.log(skill_p.cpu().detach()+1e-8)-np.log(self.p_z[self.z])
+#         print(skill_p,self.p_z,intrinsic_reward)
+        return intrinsic_reward,disc_out
 
     def update_parameters(self, *yb, learn):
         # Sample a batch from memory
@@ -92,8 +118,9 @@ class DIAYN(SAC):
         state_batch=torch.stack([o.state.to(device=default_device()) for o in batch]).float()
         next_state_batch=torch.stack([o.last_state.to(device=default_device()) for o in batch]).float()
         action_batch=torch.stack([o.action.to(device=default_device()) for o in batch]).float()
-        reward_batch=torch.stack([o.reward.to(device=default_device()) for o in batch]).float().unsqueeze(1)
+        reward_batch=torch.stack([o.reward.to(device=default_device()) for o in batch]).float()
         mask_batch=torch.stack([o.done.to(device=default_device()) for o in batch]).float().unsqueeze(1)
+
 
 #         print(state_batch.shape,next_state_batch.shape,action_batch.shape,reward_batch.shape,mask_batch.shape)
 #         state_batch = torch.FloatTensor(state_batch).to(self.device)
@@ -101,7 +128,7 @@ class DIAYN(SAC):
 #         action_batch = torch.FloatTensor(action_batch).to(self.device)
 #         reward_batch = torch.FloatTensor(reward_batch).to(self.device).unsqueeze(1)
 #         mask_batch = torch.FloatTensor(mask_batch).to(self.device).unsqueeze(1)
-
+#         with self.clarifier:
         with torch.no_grad():
             next_state_action, next_state_log_pi, _ = self.policy.sample(next_state_batch)
             qf1_next_target, qf2_next_target = self.critic_target(next_state_batch, next_state_action)
@@ -188,6 +215,22 @@ class DiscriminatorTrainer(ExperienceReplay):
                                            episode_reward=o[5][i],steps=o[6][i])
                                     for i in range(len(o[0]))]
 #                 print(self.max_steps,max([o.steps for o in batch]))
+#                 print(batch[0])
+                for k in range(len(batch)):
+                    intrinsic_reward,disc_out=self.learn.agent.intrinsic_reward(Tensor(batch[k].last_state))
+                    self.learn.agent.discriminator_learn(self.agent.z,disc_out)
+                    batch[k]=ExperienceFirstLast(
+                        state=batch[k].state.to(device=default_device()),
+                        action=batch[k].action,
+                        reward=intrinsic_reward,
+                        last_state=batch[k].last_state.to(device=default_device()),
+                        done=batch[k].done,
+                        episode_reward=batch[k].episode_reward,
+                        steps=batch[k].steps
+                    )
+
+
+#                 print(batch[0])
                 for _b in batch:self.queue.append(_b)
                 if any([_b.done for _b in batch]): self.learn.agent.reset_z()
                 if len(self.queue)>self.starting_els:break
@@ -206,6 +249,19 @@ class DiscriminatorTrainer(ExperienceReplay):
                                    done=(b[4][i] and self.max_steps!=b[6][i]),
                                    episode_reward=b[5][i],steps=b[6][i])
               for i in range(len(b[0]))]
+
+        for k in range(len(batch)):
+            intrinsic_reward,disc_out=self.learn.agent.intrinsic_reward(Tensor(batch[k].last_state))
+            self.learn.agent.discriminator_learn(self.agent.z,disc_out)
+            batch[k]=ExperienceFirstLast(
+                state=batch[k].state.to(device=default_device()),
+                action=batch[k].action,
+                reward=intrinsic_reward,
+                last_state=batch[k].last_state.to(device=default_device()),
+                done=batch[k].done,
+                episode_reward=batch[k].episode_reward,
+                steps=batch[k].steps
+            )
 
 #         print(self.learn.xb)
         self.learn.xb=(torch.stack([e.state for e in batch]),)
