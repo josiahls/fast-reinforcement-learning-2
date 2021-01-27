@@ -11,7 +11,7 @@
     "RL Metrics": "metrics.html",
     "SAC": "actorcritic.sac.html",
     "DIAYN": "actorcritic.diayn.html",
-    "DADS": "actorcritic.dads.html",
+    "DADS": "actorcritc.v1.dads.html",
     "A3C Datawise": "actorcritic.a3c_data.html",
     "A2C": "actorcritic.a2c.html",
     "PPO": "policy_gradient.ppo.html",
