@@ -41,7 +41,7 @@ entries:
       url: actorcritic.diayn.html
     - output: web,pdf
       title: DADS
-      url: actorcritc.v1.dads.html
+      url: actorcritic.dads.html
     - output: web,pdf
       title: A3C Datawise
       url: actorcritic.a3c_data.html

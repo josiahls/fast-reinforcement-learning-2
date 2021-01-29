@@ -55,8 +55,9 @@ WORKDIR /opt/project/fastrl/
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP environment.yaml environment.yaml
 RUN conda env create -f environment.yaml
 RUN chown -R $CONTAINER_USER /opt/conda/envs/fastrl/ && chmod -R 777 /opt/conda/envs/fastrl/
-RUN /bin/bash -c "source activate fastrl && conda install -c conda-forge nodejs ptvsd"
-RUN /bin/bash -c "source activate fastrl && jupyter labextension install @aquirdturtle/collapsible_headings"
+RUN /bin/bash -c "source activate fastrl && conda install -c conda-forge nodejs ptvsd jupyterlab_code_formatter"
+#RUN /bin/bash -c "source activate fastrl && jupyter labextension install @aquirdturtle/collapsible_headings"
+RUN /bin/bash -c "source activate fastrl && pip install aquirdturtle_collapsible_headings black"
 
 RUN apt-get update && apt-get install -y python-opengl xvfb
 
