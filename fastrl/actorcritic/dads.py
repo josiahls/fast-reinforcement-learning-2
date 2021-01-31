@@ -184,7 +184,7 @@ class DADS(SAC):
         if alt_s.shape[0]<=gpu_limit:
             logp_altz=self.skill_dyn.log_prob(alt_s,alt_skill,alt_sp)
         else:
-            # Does this chunking code have to be so complex? Does fastcore have something
+            # TODO JL: Does this chunking code have to be so complex? Does fastcore have something
             logp_altz=[]
             for idx in range(alt_s.shape[0]//gpu_limit):
                 start_idx=idx*gpu_limit

@@ -1,0 +1,6 @@
+{
+    "codeCellConfig": {
+                        "rulers": [80],
+                        "wordWrapColumn": 80,
+                      },
+}
