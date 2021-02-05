@@ -70,6 +70,15 @@ entries:
       title: Noisy DQN
       url: qlearning.dqn_noisy.html
     - output: web,pdf
+      title: Dueling DQN
+      url: qlearning.dqn_dueling.html
+    - output: web,pdf
+      title: Double Dueling DQN
+      url: qlearning.dddqn.html
+    - output: web,pdf
+      title: Distributional DQN
+      url: qlearning.dist_dqn.html
+    - output: web,pdf
       title: General Notes
       url: notes.html
     output: web

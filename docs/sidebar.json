@@ -21,6 +21,9 @@
     "Target DQN": "qlearning.dqn_target.html",
     "Double DQN": "qlearning.dqn_double.html",
     "Noisy DQN": "qlearning.dqn_noisy.html",
+    "Dueling DQN": "qlearning.dqn_dueling.html",
+    "Double Dueling DQN": "qlearning.dddqn.html",
+    "Distributional DQN": "qlearning.dist_dqn.html",
     "General Notes": "notes.html"
   }
 }

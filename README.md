@@ -2,6 +2,8 @@
 > This is a temporary location for fastrl version 2.
 
 
+{% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models `DADS` and `DIAYN` will need ' %}re-balancing and some extra features that the respective authors used.
+
 # Overview
 
 Fastai for computer vision and tabular learning has been amazing. One would wish that this would be the same for RL. The purpose of this repo is to have a framework that is as easy as possible to start, but also designed for testing new agents.

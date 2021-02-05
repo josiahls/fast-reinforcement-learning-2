@@ -92,10 +92,13 @@ def calc_target(net, local_reward,next_state,done,discount):
     return local_reward + discount * best_q
 
 class DQNTrainer(Callback):
+    def __init__(self,target_fn=None):
+        self.target_fn=ifnone(target_fn,calc_target)
+
     def after_pred(self):
         s,a,r,sp,d,er,steps=(self.learn.xb+self.learn.yb)
         exps=[ExperienceFirstLast(*o) for o in zip(*(self.learn.xb+self.learn.yb))]
-        batch_targets=[calc_target(self.learn.model, exp.reward, exp.last_state,exp.done,self.learn.discount)
+        batch_targets=[self.target_fn(self.learn.model, exp.reward, exp.last_state,exp.done,self.learn.discount)
                          for exp in exps]
 
         s_v = s.float()
