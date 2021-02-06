@@ -22,7 +22,7 @@ jobs:
       env:
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
       run: |
-        conda install -c fastai fastrelease anaconda-client
+        conda install -c pytorch -c fastai fastrelease
         fastrelease_conda_package --upload_user josiahls  --build_args '-c pytorch -c fastai'
     - name: Test with pytest
       run: |
