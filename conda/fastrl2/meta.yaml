@@ -1,9 +1,9 @@
 package:
   name: fastrl2
-  version: 2.0.3
+  version: 2.0.4
 source:
-  sha256: 90b43baf09b7e3e7d4d9a900fcad8d83201277dd99b4a8cb2eab90d51a46f335
-  url: https://files.pythonhosted.org/packages/da/38/372eea7e0266c6eda5631660cc8f826503651b01019428e841df9595dc2c/fastrl2-2.0.3.tar.gz
+  sha256: df0846c2ed86b054cdacc8c307c3d1c438a4b6dbe3f3bce196377c0f9a898152
+  url: https://files.pythonhosted.org/packages/20/6e/24a16ace87c8e39ef1fe2d2e6ce492b9d9cc98d33b0f8a9de8a293186ce0/fastrl2-2.0.4.tar.gz
 about:
   dev_url: https://josiahls.github.io
   doc_url: https://josiahls.github.io
