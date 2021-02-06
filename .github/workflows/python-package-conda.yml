@@ -1,6 +1,10 @@
 name: Python Package using Conda
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: #allows you to trigger manually
 
 jobs:
   build-linux:
