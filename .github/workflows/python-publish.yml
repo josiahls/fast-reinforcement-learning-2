@@ -6,6 +6,14 @@ name: Upload Python Package
 on:
   release:
     types: [created]
+  schedule:
+    - cron: '1 6 * * *'
+  workflow_dispatch: #allows you to trigger manually
+  push:
+    branches:
+      - master
+    paths:
+      - '.*'
 
 jobs:
   deploy:
