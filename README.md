@@ -6,6 +6,8 @@
 
 # Overview
 
+** This branch is the refactor, please reference the master branch instead
+
 Fastai for computer vision and tabular learning has been amazing. One would wish that this would be the same for RL. The purpose of this repo is to have a framework that is as easy as possible to start, but also designed for testing new agents.
 
 Documentation is being served  at https://josiahls.github.io/fast-reinforcement-learning-2/ from documentation directly generated via `nbdev` in this repo.
