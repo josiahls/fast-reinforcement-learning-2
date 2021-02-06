@@ -27,7 +27,7 @@ jobs:
 
     - name: Copy settings.ini file
       run: |
-        wget https://raw.githubusercontent.com/josiahls/fast-reinforcement-learning/master/settings.ini
+        wget https://raw.githubusercontent.com/josiahls/fastrl/master/settings.ini
     - name: get version from settings.ini and create image name
       id: get_variables
       run: |
