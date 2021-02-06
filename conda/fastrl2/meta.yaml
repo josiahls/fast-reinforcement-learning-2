@@ -1,0 +1,35 @@
+package:
+  name: fastrl2
+  version: 2.0.5
+source:
+  sha256: c86568557c4cb48141a0431cebe4db6d914c556265b148366e23311545b63ce5
+  url: https://files.pythonhosted.org/packages/61/c6/5cdabf69a3d289b7cdb6e4c09ee31ced8fd10f827a895ebabbc714186baa/fastrl2-2.0.5.tar.gz
+about:
+  dev_url: https://josiahls.github.io
+  doc_url: https://josiahls.github.io
+  home: https://josiahls.github.io
+  license: Apache Software
+  license_family: APACHE
+  summary: fastrl is a reinforcement learning library that extends Fastai. This project
+    is not affiliated with fastai or Jeremy Howard.
+build:
+  noarch: python
+  number: '0'
+  script: '{{ PYTHON }} -m pip install . -vv'
+extra:
+  recipe-maintainers:
+  - josiahls
+requirements:
+  host:
+  - pip
+  - python
+  - packaging
+  - fastai>=2.0.0
+  run:
+  - pip
+  - python
+  - packaging
+  - fastai>=2.0.0
+test:
+  imports:
+  - fastrl2
