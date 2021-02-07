@@ -37,7 +37,7 @@ jobs:
         twine upload dist/*
   deploy_python_conda:
     name: "Deploy Python Conda"
-    needs: deploy_pytohn_pypi
+    needs: deploy_python_pypi
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
