@@ -32,7 +32,7 @@ jobs:
         fastrelease_conda_package --do_build false
         cd conda
         conda build --no-anaconda-upload --output-folder build fastrl2 -c pytorch -c fastai
-        anaconda upload build/noarch/fastrl2-*-*.tar.bz2 --upload_user josiahls
+        anaconda upload build/noarch/fastrl2-*-*.tar.bz2 -c josiahls
       env:
         ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
     - name: Test package import
