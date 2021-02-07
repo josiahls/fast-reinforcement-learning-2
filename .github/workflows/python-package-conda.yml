@@ -30,7 +30,7 @@ jobs:
         fastrelease_conda_package --upload_user josiahls  --build_args '-c pytorch -c fastai'
     - name: Test package import
       run: |
-        conda config --set allow_conda_downgrades true
-        conda install conda=4.6.14
+#        conda config --set allow_conda_downgrades true
+#        conda install conda=4.6.14
         conda install -c josiahls fastrl2
-        fastrl
+        fastrl2
