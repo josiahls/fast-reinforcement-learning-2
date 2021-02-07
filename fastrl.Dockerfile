@@ -4,20 +4,6 @@ ARG BUILD=dev
 
 RUN apt-get update && apt-get install -y software-properties-common rsync
 RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz && apt-get update
-RUN pip install "fastprogress>=0.1.22" \
-    graphviz \
-    jupyter \
-    matplotlib \
-    "nbconvert<6"\
-    nbdev \
-    opencv-python \
-    pandas \
-    pillow \
-    pyyaml \
-    scikit-learn \
-    scikit-image \
-    scipy \
-    spacy
 
 RUN git clone https://github.com/fastai/fastai.git --depth 1  && git clone https://github.com/fastai/fastcore.git --depth 1 \
         && git clone https://github.com/josiahls/fastrl.git --depth 1

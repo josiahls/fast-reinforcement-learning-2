@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
+    timeout-minutes: 500
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +27,7 @@ jobs:
       run: |
         conda install -c pytorch -c fastai conda-build anaconda-client fastrelease
     - name: Build Conda package
+      timeout-minutes: 360
       run: |
         fastrelease_conda_package --upload_user josiahls  --build_args '-c pytorch -c fastai'
       env:
