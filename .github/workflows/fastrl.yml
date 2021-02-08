@@ -4,10 +4,8 @@ on:
     - cron: '1 6 * * *'
   workflow_dispatch: #allows you to trigger manually
   push:
-    branch:
+    branches:
       - master
-    paths:
-      - 'fastai-build/**'
 
 jobs:
   build:
