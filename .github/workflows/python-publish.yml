@@ -64,3 +64,38 @@ jobs:
 #      run: |
 #        conda install -c josiahls fastrl2
 #        python -c "import fastrl2"
+  deploy_python_conda:
+    runs-on: ubuntu-latest
+    name: "Deploy Python Conda"
+    needs: deploy_python_pypi
+    strategy:
+      max-parallel: 5
+    timeout-minutes: 500
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        conda install -c pytorch -c fastai conda-build anaconda-client fastrelease
+    - name: Build Conda package
+      timeout-minutes: 360
+      run: |
+        fastrelease_conda_package --do_build false
+        cd conda
+        conda build --no-anaconda-upload --output-folder build fastrl2 -c pytorch -c fastai
+        anaconda upload build/noarch/fastrl2-*-*.tar.bz2 -c josiahls
+      env:
+        ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+    - name: Test package import
+      run: |
+        conda install -c josiahls fastrl2
+        conda update -c josiahls fastrl2
+        python -c "import fastrl2"
