@@ -38,4 +38,5 @@ jobs:
     - name: Test package import
       run: |
         conda install -c josiahls fastrl2
+        conda update -c josiahls fastrl2
         python -c "import fastrl2"

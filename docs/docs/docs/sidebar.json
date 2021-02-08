@@ -1,0 +1,29 @@
+{
+  "fastrl": {
+    "Overview": "/",
+    "Core": "core.html",
+    "Wrappers": "wrappers.html",
+    "Basic Action Selection": "basic_agents.html",
+    "AgentLearner": "learner.html",
+    "Ptan Extension": "ptan_extend.html",
+    "Experience Blocks": "data.html",
+    "Async Experience Blocks": "async_data.html",
+    "RL Metrics": "metrics.html",
+    "SAC": "actorcritic.sac.html",
+    "DIAYN": "actorcritic.diayn.html",
+    "DADS": "actorcritic.dads.html",
+    "A3C Datawise": "actorcritic.a3c_data.html",
+    "A2C": "actorcritic.a2c.html",
+    "PPO": "policy_gradient.ppo.html",
+    "TRPO": "policy_gradient.trpo.html",
+    "DQN": "qlearning.dqn.html",
+    "DQN N-Steps": "qlearning.dqn_n_step.html",
+    "Target DQN": "qlearning.dqn_target.html",
+    "Double DQN": "qlearning.dqn_double.html",
+    "Noisy DQN": "qlearning.dqn_noisy.html",
+    "Dueling DQN": "qlearning.dqn_dueling.html",
+    "Double Dueling DQN": "qlearning.dddqn.html",
+    "Distributional DQN": "qlearning.dist_dqn.html",
+    "General Notes": "notes.html"
+  }
+}

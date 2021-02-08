@@ -2,8 +2,14 @@ version: "3"
 services:
   fastrl: &fastrl
     restart: unless-stopped
-    working_dir: /data
-    image: fastrl/codespaces
+    working_dir: /home/fastrl/fastrl
+    image: fastrl:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
     logging:
       driver: json-file
       options:
@@ -11,11 +17,11 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/data/
+      - .:/home/fastrl/fastrl/
 
   notebook:
     <<: *fastrl
-    command: bash -c "pip install -e . && jupyter notebook --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
+    command: bash -c "pip install -e . && jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
     ports:
       - "8080:8080"
 
@@ -25,12 +31,20 @@ services:
     network_mode: host # for GitHub Codespaces https://github.com/features/codespaces/
 
   jekyll:
-    <<: *fastrl
+    restart: unless-stopped
+    working_dir: /home/fastrl/fastrl/
+    image: fastdotai/nbdev-docs:latest
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/home/fastrl/fastrl/
     ports:
      - "4000:4000"
     command: >
-     bash -c "cp -r docs_src docs
-     && pip install .
-     && nbdev_build_docs && cd docs
+     bash -c "cd docs
      && bundle i
      && chmod -R u+rwx . && bundle exec jekyll serve --host 0.0.0.0"

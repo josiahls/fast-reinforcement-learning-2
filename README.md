@@ -6,9 +6,11 @@
 
 # Overview
 
+Here is change
+
 Fastai for computer vision and tabular learning has been amazing. One would wish that this would be the same for RL. The purpose of this repo is to have a framework that is as easy as possible to start, but also designed for testing new agents.
 
-Documentation is being served  at https://josiahls.github.io/fast-reinforcement-learning-2/ from documentation directly generated via `nbdev` in this repo.
+Documentation is being served  at https://josiahls.github.io/fastrl/ from documentation directly generated via `nbdev` in this repo.
 
 # Current Issues of Interest
 
@@ -41,7 +43,8 @@ Placeholder here, there is no pypi package yet. It is recommended to do traditio
 For cpu execution
 ```bash
 docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl:latest /bin/bash
+docker run --rm -it -p 8888:8888 --user "$(id -u):$(id -g)" -v $(pwd):/home/fastrl/fastrl fastrl:latest /bin/bash
+#docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl:latest /bin/bash
 ```
 
 Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)

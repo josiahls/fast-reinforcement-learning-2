@@ -31,15 +31,16 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>{% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models <a href="/fast-reinforcement-learning-2/actorcritic.dads.html#DADS"><code>DADS</code></a> and <a href="/fast-reinforcement-learning-2/actorcritic.diayn.html#DIAYN"><code>DIAYN</code></a> will need ' %}re-balancing and some extra features that the respective authors used.</p>
+<p>{% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models <code>DADS</code> and <code>DIAYN</code> will need ' %}re-balancing and some extra features that the respective authors used.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h1><p>Fastai for computer vision and tabular learning has been amazing. One would wish that this would be the same for RL. The purpose of this repo is to have a framework that is as easy as possible to start, but also designed for testing new agents.</p>
-<p>Documentation is being served  at <a href="https://josiahls.github.io/fast-reinforcement-learning-2/">https://josiahls.github.io/fast-reinforcement-learning-2/</a> from documentation directly generated via <code>nbdev</code> in this repo.</p>
+<h1 id="Overview">Overview<a class="anchor-link" href="#Overview"> </a></h1><p>Here is change</p>
+<p>Fastai for computer vision and tabular learning has been amazing. One would wish that this would be the same for RL. The purpose of this repo is to have a framework that is as easy as possible to start, but also designed for testing new agents.</p>
+<p>Documentation is being served  at <a href="https://josiahls.github.io/fastrl/">https://josiahls.github.io/fastrl/</a> from documentation directly generated via <code>nbdev</code> in this repo.</p>
 
 </div>
 </div>
@@ -88,7 +89,8 @@ nb_path: "nbs/index.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>For cpu execution</p>
 <div class="highlight"><pre><span></span>docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl:latest /bin/bash
+docker run --rm -it -p <span class="m">8888</span>:8888 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/fastrl/fastrl fastrl:latest /bin/bash
+<span class="c1">#docker run --rm -it -p 8888:8888 -p 4000:4000 --user &quot;$(id -u):$(id -g)&quot; -v $(pwd):/opt/project/fastrl fastrl:latest /bin/bash</span>
 </pre></div>
 <p>Install: <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">Nvidia-Docker</a></p>
 <div class="highlight"><pre><span></span>docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
