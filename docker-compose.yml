@@ -3,7 +3,7 @@ services:
   fastrl: &fastrl
     restart: unless-stopped
     working_dir: /home/fastrl/fastrl
-    image: fastrl:latest
+    image: josiahls/fastrl:latest
     deploy:
       resources:
         reservations:
