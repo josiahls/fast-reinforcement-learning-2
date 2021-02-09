@@ -11,7 +11,7 @@ RUN addgroup --gid $CONTAINER_UID $CONTAINER_GROUP && \
     mkdir -p /opt/conda && chown $CONTAINER_USER /opt/conda
 
 RUN apt-get update && apt-get install -y software-properties-common rsync
-RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz libxext6 libsm6 libxrender1 python-opengl xvfb && apt-get update
+RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz libxext6 libsm6 libxrender1 python-opengl xvfb nano && apt-get update
 RUN pip install albumentations \
     catalyst \
     captum \
@@ -59,7 +59,7 @@ RUN /bin/bash -c "if [[ $BUILD == 'prod' ]] ; then echo \"Production Build\" && 
 RUN /bin/bash -c "if [[ $BUILD == 'dev' ]] ; then echo \"Development Build\" && cd fastai && pip install -e . && cd ../fastcore && pip install -e . cd ../fastrl && pip install -e \".[dev]\"; fi"
 
 RUN /bin/bash -c "pip install jupyterlab"
-RUN echo '#!/bin/bash\njupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser' >> run_jupyter.sh
+RUN echo '#!/bin/bash\ncd fastrl\nxvfb-run -s "-screen 0 1400x900x24" jupyter lab --ip=0.0.0.0 --port=8080 --allow-root --no-browser  --NotebookApp.token='' --NotebookApp.password=''' >> run_jupyter.sh
 
 USER $CONTAINER_USER
 RUN /bin/bash -c "cd fastrl && pip install -e ."
