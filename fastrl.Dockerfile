@@ -11,7 +11,7 @@ RUN addgroup --gid $CONTAINER_UID $CONTAINER_GROUP && \
     mkdir -p /opt/conda && chown $CONTAINER_USER /opt/conda
 
 RUN apt-get update && apt-get install -y software-properties-common rsync
-RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz && apt-get update
+RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz xvfp && apt-get update
 RUN pip install albumentations \
     catalyst \
     captum \
@@ -37,8 +37,7 @@ RUN pip install albumentations \
     tensorboard \
     wandb \
     jupyterlab \
-    watchdog[watchmedo] \
-    xvfp
+    watchdog[watchmedo]
 
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/lib/python3.7/site-packages
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /home/fastrl

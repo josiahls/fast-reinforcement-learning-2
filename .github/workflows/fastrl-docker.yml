@@ -1,4 +1,4 @@
-name: Build fastrl images
+name: Build Docker Images
 on:
   schedule:
     - cron: '1 6 * * *'
