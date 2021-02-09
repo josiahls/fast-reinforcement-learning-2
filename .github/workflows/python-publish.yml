@@ -35,35 +35,6 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
-#  deploy_python_conda:
-#    name: "Deploy Python Conda"
-#    needs: deploy_python_pypi
-#    runs-on: ubuntu-latest
-#    strategy:
-#      max-parallel: 5
-#
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Set up Python 3.6
-#      uses: actions/setup-python@v2
-#      with:
-#        python-version: 3.6
-#    - name: Add conda to system path
-#      run: |
-#        # $CONDA is an environment variable pointing to the root of the miniconda directory
-#        echo $CONDA/bin >> $GITHUB_PATH
-#    - name: Install dependencies
-#      run: |
-#        conda install -c pytorch -c fastai conda-build anaconda-client fastrelease
-#    - name: Build Conda package
-#      run: |
-#        fastrelease_conda_package --upload_user josiahls  --build_args '-c pytorch -c fastai'
-#      env:
-#        ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-#    - name: Test package import
-#      run: |
-#        conda install -c josiahls fastrl2
-#        python -c "import fastrl2"
   deploy_python_conda:
     runs-on: ubuntu-latest
     name: "Deploy Python Conda"
