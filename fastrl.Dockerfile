@@ -1,4 +1,4 @@
-    FROM pytorch/pytorch
+FROM pytorch/pytorch
 
 ARG BUILD=dev
 
@@ -39,6 +39,7 @@ RUN pip install albumentations \
     jupyterlab \
     watchdog[watchmedo]
 
+RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/bin
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/lib/python3.7/site-packages
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /home/fastrl
 

@@ -1,9 +1,11 @@
 version: "3"
 services:
   fastrl: &fastrl
+    environment:
+      - IMAGE_TAG=''
     restart: unless-stopped
     working_dir: /home/fastrl/fastrl
-    image: josiahls/fastrl:latest
+    image: josiahls/fastrl${IMAGE_TAG}:latest
     deploy:
       resources:
         reservations:
