@@ -11,7 +11,7 @@ RUN addgroup --gid $CONTAINER_UID $CONTAINER_GROUP && \
     mkdir -p /opt/conda && chown $CONTAINER_USER /opt/conda
 
 RUN apt-get update && apt-get install -y software-properties-common rsync
-RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz xvfb && apt-get update
+RUN add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git libglib2.0-dev graphviz libxext6 libsm6 libxrender1 python-opengl xvfb && apt-get update
 RUN pip install albumentations \
     catalyst \
     captum \

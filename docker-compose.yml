@@ -3,7 +3,7 @@ services:
   fastrl: &fastrl
     restart: unless-stopped
     working_dir: /home/fastrl/fastrl
-    image: josiahls/fastrl${IMAGE_TAG}:latest
+    image: josiahls/fastrl:latest
     deploy:
       resources:
         reservations:
@@ -21,30 +21,30 @@ services:
 
   notebook:
     <<: *fastrl
-    command: bash -c "pip install -e . && xvfb-run -s "-screen 0 1400x900x24" jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
+    command: xvfb-run -s \"-screen 0 1400x900x24\" bash -c "pip install -e . &&  jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
     ports:
       - "8080:8080"
 
-  watcher:
-    <<: *fastrl
-    command: watchmedo shell-command --command nbdev_build_docs --pattern *.ipynb --recursive --drop
-    network_mode: host # for GitHub Codespaces https://github.com/features/codespaces/
-
-  jekyll:
-    restart: unless-stopped
-    working_dir: /home/fastrl/fastrl/
-    image: fastdotai/nbdev-docs:latest
-    logging:
-      driver: json-file
-      options:
-        max-size: 50m
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/home/fastrl/fastrl/
-    ports:
-     - "4000:4000"
-    command: >
-     bash -c "cd docs
-     && bundle i
-     && chmod -R u+rwx . && bundle exec jekyll serve --host 0.0.0.0"
+#  watcher:
+#    <<: *fastrl
+#    command: watchmedo shell-command --command nbdev_build_docs --pattern *.ipynb --recursive --drop
+#    network_mode: host # for GitHub Codespaces https://github.com/features/codespaces/
+#
+#  jekyll:
+#    restart: unless-stopped
+#    working_dir: /home/fastrl/fastrl/
+#    image: fastdotai/nbdev-docs:latest
+#    logging:
+#      driver: json-file
+#      options:
+#        max-size: 50m
+#    stdin_open: true
+#    tty: true
+#    volumes:
+#      - .:/home/fastrl/fastrl/
+#    ports:
+#     - "4000:4000"
+#    command: >
+#     bash -c "cd docs
+#     && bundle i
+#     && chmod -R u+rwx . && bundle exec jekyll serve --host 0.0.0.0"
