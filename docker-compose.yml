@@ -21,7 +21,7 @@ services:
 
   notebook:
     <<: *fastrl
-    command: bash -c "pip install -e . && jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
+    command: bash -c "pip install -e . && xvfb-run -s "-screen 0 1400x900x24" jupyter lab --allow-root --no-browser --ip=0.0.0.0 --port=8080 --NotebookApp.token='' --NotebookApp.password=''"
     ports:
       - "8080:8080"
 

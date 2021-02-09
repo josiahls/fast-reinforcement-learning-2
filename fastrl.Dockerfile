@@ -37,7 +37,8 @@ RUN pip install albumentations \
     tensorboard \
     wandb \
     jupyterlab \
-    watchdog[watchmedo]
+    watchdog[watchmedo] \
+    xvfp
 
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/lib/python3.7/site-packages
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /home/fastrl
