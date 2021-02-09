@@ -60,7 +60,7 @@ jobs:
           -f fastrl.Dockerfile .
       env:
         VERSION: ${{ steps.get_variables.outputs.version }}
-        IMAGE_NAME: ${{ steps.get_variables.outputs.image_name matrix.build_type }}
+        IMAGE_NAME: ${{ steps.get_variables.outputs.image_name }} ${{ matrix.build_type }}
         BUILD_TYPE: ${{ matrix.build_type }}
 
     - name: push images
@@ -70,4 +70,4 @@ jobs:
       env:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        IMAGE_NAME: ${{ steps.get_variables.outputs.image_name matrix.build_type }}
+        IMAGE_NAME: ${{ steps.get_variables.outputs.image_name }} ${{ matrix.build_type }}
