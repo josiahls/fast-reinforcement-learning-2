@@ -2,8 +2,12 @@ version: "3"
 services:
   fastrl: &fastrl
     restart: unless-stopped
-    working_dir: /home/fastrl/fastrl
-    image: josiahls/fastrl:latest
+    working_dir: /home/fastrl_user/fastrl
+    build:
+      dockerfile: fastrl.Dockerfile
+      context: .
+#    image: josiahls/fastrl:latest
+    image: fastrl:latest
     deploy:
       resources:
         reservations:
@@ -17,7 +21,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/home/fastrl/fastrl/
+      - .:/home/fastrl_user/fastrl/
 
   notebook:
     <<: *fastrl
@@ -32,7 +36,7 @@ services:
 
   jekyll:
     restart: unless-stopped
-    working_dir: /home/fastrl/fastrl/
+    working_dir: /home/fastrl_user/fastrl/
     image: fastdotai/nbdev-docs:latest
     logging:
       driver: json-file
@@ -41,7 +45,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/home/fastrl/fastrl/
+      - .:/home/fastrl_user/fastrl/
     ports:
      - "4000:4000"
     command: >

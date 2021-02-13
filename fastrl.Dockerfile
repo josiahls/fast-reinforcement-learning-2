@@ -2,7 +2,7 @@ FROM pytorch/pytorch
 
 ARG BUILD=dev
 
-ENV CONTAINER_USER fastrl
+ENV CONTAINER_USER fastrl_user
 ENV CONTAINER_GROUP fastrl_group
 ENV CONTAINER_UID 1000
 # Add user to conda
@@ -38,11 +38,10 @@ RUN pip install albumentations \
     wandb \
     jupyterlab \
     watchdog[watchmedo]
-RUN /bin/bash -c "jupyter labextension install @jupyterlab/debugger @aquirdturtle/collapsible_headings"
 
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/bin
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/lib/python3.7/site-packages
-RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /home/fastrl
+RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /home/$CONTAINER_USER
 
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP extra/themes.jupyterlab-settings /home/$CONTAINER_USER/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
 COPY --chown=$CONTAINER_USER:$CONTAINER_GROUP extra/shortcuts.jupyterlab-settings /home/$CONTAINER_USER/.jupyter/lab/user-settings/@jupyterlab/shortcuts-extension/
@@ -59,10 +58,8 @@ RUN /bin/bash -c "if [[ $BUILD == 'prod' ]] ; then echo \"Production Build\" && 
 # Note that we are not installing the .dev dependencies for fastai or fastcore
 RUN /bin/bash -c "if [[ $BUILD == 'dev' ]] ; then echo \"Development Build\" && cd fastai && pip install -e . && cd ../fastcore && pip install -e . cd ../fastrl && pip install -e \".[dev]\"; fi"
 
-RUN /bin/bash -c "pip install jupyterlab"
-RUN echo '#!/bin/bash\ncd fastrl\nxvfb-run -s "-screen 0 1400x900x24" jupyter lab --ip=0.0.0.0 --port=8080 --allow-root --no-browser  --NotebookApp.token='' --NotebookApp.password=''' >> run_jupyter.sh
+RUN echo '#!/bin/bash\nxvfb-run -s "-screen 0 1400x900x24" jupyter lab --ip=0.0.0.0 --port=8080 --allow-root --no-browser  --NotebookApp.token='' --NotebookApp.password=''' >> run_jupyter.sh
 
 USER $CONTAINER_USER
 RUN /bin/bash -c "cd fastrl && pip install -e ."
-
 RUN chmod u+x run_jupyter.sh
