@@ -38,6 +38,7 @@ RUN pip install albumentations \
     wandb \
     jupyterlab \
     watchdog[watchmedo]
+RUN /bin/bash -c "jupyter labextension install @jupyterlab/debugger @aquirdturtle/collapsible_headings"
 
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/bin
 RUN chown $CONTAINER_USER:$CONTAINER_GROUP -R /opt/conda/lib/python3.7/site-packages

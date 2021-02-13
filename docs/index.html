@@ -6,8 +6,8 @@ title: Fastrl2
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "This is a temporary location for fastrl version 2."
-description: "This is a temporary location for fastrl version 2."
+summary: "This is a temporary location for fastrl version 2. Currently in a giant refactor. The previous source code can be found <a href='https://github.com/josiahls/fastrl/tree/pre_refactor'>here</a>."
+description: "This is a temporary location for fastrl version 2. Currently in a giant refactor. The previous source code can be found <a href='https://github.com/josiahls/fastrl/tree/pre_refactor'>here</a>."
 nb_path: "nbs/index.ipynb"
 ---
 <!--
@@ -79,22 +79,17 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Conda">Conda<a class="anchor-link" href="#Conda"> </a></h2><p><code>conda env create -f environment.yaml</code></p>
-<p><code>source activate fastrl &amp;&amp; pip install ptan --no-dependencies &amp;&amp; python setup.py develop</code></p>
+<h2 id="Conda-(Not-implimented-yet)">Conda (Not implimented yet)<a class="anchor-link" href="#Conda-(Not-implimented-yet)"> </a></h2><p><code>conda install -c josiahls fastrl</code></p>
+<p><code>source activate fastrl &amp;&amp; python setup.py develop</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>For cpu execution</p>
-<div class="highlight"><pre><span></span>docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p <span class="m">8888</span>:8888 --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/fastrl/fastrl fastrl:latest /bin/bash
-<span class="c1">#docker run --rm -it -p 8888:8888 -p 4000:4000 --user &quot;$(id -u):$(id -g)&quot; -v $(pwd):/opt/project/fastrl fastrl:latest /bin/bash</span>
-</pre></div>
-<p>Install: <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">Nvidia-Docker</a></p>
-<div class="highlight"><pre><span></span>docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
-docker run --rm -it -p <span class="m">8888</span>:8888 -p <span class="m">4000</span>:4000  --gpus all --user <span class="s2">&quot;</span><span class="k">$(</span>id -u<span class="k">)</span><span class="s2">:</span><span class="k">$(</span>id -g<span class="k">)</span><span class="s2">&quot;</span> -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/opt/project/fastrl fastrl_cuda:latest /bin/bash
+<h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>Install: <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">Nvidia-Docker</a>\
+Install: <a href="https://docs.docker.com/compose/install/">docker-compose</a></p>
+<div class="highlight"><pre><span></span>docker-compose up
 </pre></div>
 
 </div>

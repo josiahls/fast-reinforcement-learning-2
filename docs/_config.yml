@@ -28,6 +28,9 @@ kramdown:
  hard_wrap: false
  syntax_highlighter: rouge
 
+default_badges:
+  colab: true
+
 collections:
   tooltips:
     output: false
@@ -61,5 +64,5 @@ description: "Documentation for the deploy2 library"
 # theme: jekyll-theme-cayman
 
 
-baseurl: /fastrl2/
+baseurl: /fastrl/
 

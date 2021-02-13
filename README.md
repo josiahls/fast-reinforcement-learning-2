@@ -1,5 +1,5 @@
 # Fastrl2
-> This is a temporary location for fastrl version 2.
+> This is a temporary location for fastrl version 2. Currently in a giant refactor. The previous source code can be found <a href='https://github.com/josiahls/fastrl/tree/pre_refactor'>here</a>.
 
 
 {% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models `DADS` and `DIAYN` will need ' %}re-balancing and some extra features that the respective authors used.
@@ -32,26 +32,19 @@ Placeholder here, there is no pypi package yet. It is recommended to do traditio
 
 (For future, currently there is no pypi persion)`pip install fastrl==2.0.0 --pre`
 
-## Conda
+## Conda (Not implimented yet)
 
-`conda env create -f environment.yaml`
+`conda install -c josiahls fastrl`
 
-`source activate fastrl && pip install ptan --no-dependencies && python setup.py develop`
+`source activate fastrl && python setup.py develop`
 
 ## Docker (highly recommend)
 
-For cpu execution
-```bash
-docker build -f fastrl.Dockerfile -t fastrl:latest .
-docker run --rm -it -p 8888:8888 --user "$(id -u):$(id -g)" -v $(pwd):/home/fastrl/fastrl fastrl:latest /bin/bash
-#docker run --rm -it -p 8888:8888 -p 4000:4000 --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl:latest /bin/bash
-```
-
-Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)\
+Install: [docker-compose](https://docs.docker.com/compose/install/)
 
 ```bash
-docker build -f fastrl_cuda.Dockerfile -t fastrl_cuda:latest .
-docker run --rm -it -p 8888:8888 -p 4000:4000  --gpus all --user "$(id -u):$(id -g)" -v $(pwd):/opt/project/fastrl fastrl_cuda:latest /bin/bash
+docker-compose up
 ```
 
 ## Contributing

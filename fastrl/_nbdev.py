@@ -4,10 +4,10 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {}
 
-modules = []
+modules = ["nbdev_extensions.py"]
 
-doc_url = "https://josiahls.github.io/fastrl2/"
+doc_url = "https://josiahls.github.io/fastrl/"
 
-git_url = "https://github.com/josiahls/fastrl2/tree/master/"
+git_url = "https://github.com/josiahls/fastrl/tree/master/"
 
 def custom_doc_links(name): return None
