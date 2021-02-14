@@ -1,13 +1,13 @@
 ---
 
-title: Data Transforms
+title: Async Testing
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Fastrl transforms for iterating through environments"
-description: "Fastrl transforms for iterating through environments"
+summary: "Testing async environment execution in a separate notebook."
+description: "Testing async environment execution in a separate notebook."
 nb_path: "nbs/05_data.test_async.ipynb"
 ---
 <!--
@@ -29,6 +29,241 @@ nb_path: "nbs/05_data.test_async.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One of the most important things to have working with the datablock is to answer:</p>
+
+<pre><code>Can we run multiple envs, in multiple workers, using a torch Module, all loaded on cuda?
+
+</code></pre>
+<p>You can however there are some important things to use in your notebook.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include important.html content='This is only important if you are training with <code>num_workers&gt;0</code> and <code>str(default_device())==&amp;#8217;cuda&amp;#8217;</code>. If one of these is not true, then feel free' %}to train your model the <em>normal</em> way.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Relevant links:</p>
+<p><a href="https://github.com/pytorch/pytorch/issues/37377">setting the <code>MKL_THREADING_LAYER</code> variable</a></p>
+<p><a href="https://stackoverflow.com/questions/48822463/how-to-use-pytorch-multiprocessing">handling <code>set_start_method('spawn')</code></a></p>
+<p><a href="https://github.com/pytorch/pytorch/issues/3492">using <code>if __name__ == '__main__'</code></a></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.data.load</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span><span class="n">_FakeLoader</span><span class="p">,</span><span class="n">multiprocessing</span><span class="p">,</span><span class="n">_MultiProcessingDataLoaderIter</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data._utils.worker</span> <span class="kn">import</span> <span class="n">_worker_loop</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>_worker_loop<span class="o">??</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span>
+_worker_loop<span class="ansi-blue-fg">(</span>
+    dataset_kind<span class="ansi-blue-fg">,</span>
+    dataset<span class="ansi-blue-fg">,</span>
+    index_queue<span class="ansi-blue-fg">,</span>
+    data_queue<span class="ansi-blue-fg">,</span>
+    done_event<span class="ansi-blue-fg">,</span>
+    auto_collation<span class="ansi-blue-fg">,</span>
+    collate_fn<span class="ansi-blue-fg">,</span>
+    drop_last<span class="ansi-blue-fg">,</span>
+    seed<span class="ansi-blue-fg">,</span>
+    init_fn<span class="ansi-blue-fg">,</span>
+    worker_id<span class="ansi-blue-fg">,</span>
+    num_workers<span class="ansi-blue-fg">,</span>
+    persistent_workers<span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
+<span class="ansi-red-fg">Source:</span>   
+<span class="ansi-green-fg">def</span> _worker_loop<span class="ansi-blue-fg">(</span>dataset_kind<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">,</span> index_queue<span class="ansi-blue-fg">,</span> data_queue<span class="ansi-blue-fg">,</span> done_event<span class="ansi-blue-fg">,</span>
+                 auto_collation<span class="ansi-blue-fg">,</span> collate_fn<span class="ansi-blue-fg">,</span> drop_last<span class="ansi-blue-fg">,</span> seed<span class="ansi-blue-fg">,</span> init_fn<span class="ansi-blue-fg">,</span> worker_id<span class="ansi-blue-fg">,</span>
+                 num_workers<span class="ansi-blue-fg">,</span> persistent_workers<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-red-fg"># See NOTE [ Data Loader Multiprocessing Shutdown Logic ] for details on the</span>
+    <span class="ansi-red-fg"># logic of this function.</span>
+
+    <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-red-fg"># Initialize C side signal handlers for SIGBUS and SIGSEGV. Python signal</span>
+        <span class="ansi-red-fg"># module&#39;s handlers are executed after Python returns from C low-level</span>
+        <span class="ansi-red-fg"># handlers, likely when the same fatal signal had already happened</span>
+        <span class="ansi-red-fg"># again.</span>
+        <span class="ansi-red-fg"># https://docs.python.org/3/library/signal.html#execution-of-python-signal-handlers</span>
+        signal_handling<span class="ansi-blue-fg">.</span>_set_worker_signal_handlers<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+        torch<span class="ansi-blue-fg">.</span>set_num_threads<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+        random<span class="ansi-blue-fg">.</span>seed<span class="ansi-blue-fg">(</span>seed<span class="ansi-blue-fg">)</span>
+        torch<span class="ansi-blue-fg">.</span>manual_seed<span class="ansi-blue-fg">(</span>seed<span class="ansi-blue-fg">)</span>
+
+        <span class="ansi-green-fg">global</span> _worker_info
+        _worker_info <span class="ansi-blue-fg">=</span> WorkerInfo<span class="ansi-blue-fg">(</span>id<span class="ansi-blue-fg">=</span>worker_id<span class="ansi-blue-fg">,</span> num_workers<span class="ansi-blue-fg">=</span>num_workers<span class="ansi-blue-fg">,</span>
+                                  seed<span class="ansi-blue-fg">=</span>seed<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">=</span>dataset<span class="ansi-blue-fg">)</span>
+
+        <span class="ansi-green-fg">from</span> torch<span class="ansi-blue-fg">.</span>utils<span class="ansi-blue-fg">.</span>data <span class="ansi-green-fg">import</span> _DatasetKind
+
+        init_exception <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+
+        <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> init_fn <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+                init_fn<span class="ansi-blue-fg">(</span>worker_id<span class="ansi-blue-fg">)</span>
+
+            fetcher <span class="ansi-blue-fg">=</span> _DatasetKind<span class="ansi-blue-fg">.</span>create_fetcher<span class="ansi-blue-fg">(</span>dataset_kind<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">,</span> auto_collation<span class="ansi-blue-fg">,</span> collate_fn<span class="ansi-blue-fg">,</span> drop_last<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">except</span> Exception<span class="ansi-blue-fg">:</span>
+            init_exception <span class="ansi-blue-fg">=</span> ExceptionWrapper<span class="ansi-blue-fg">(</span>
+                where<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;in DataLoader worker process {}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>worker_id<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+        <span class="ansi-red-fg"># When using Iterable mode, some worker can exit earlier than others due</span>
+        <span class="ansi-red-fg"># to the IterableDataset behaving differently for different workers.</span>
+        <span class="ansi-red-fg"># When such things happen, an `_IterableDatasetStopIteration` object is</span>
+        <span class="ansi-red-fg"># sent over to the main process with the ID of this worker, so that the</span>
+        <span class="ansi-red-fg"># main process won&#39;t send more tasks to this worker, and will send</span>
+        <span class="ansi-red-fg"># `None` to this worker to properly exit it.</span>
+        <span class="ansi-red-fg">#</span>
+        <span class="ansi-red-fg"># Note that we cannot set `done_event` from a worker as it is shared</span>
+        <span class="ansi-red-fg"># among all processes. Instead, we set the `iteration_end` flag to</span>
+        <span class="ansi-red-fg"># signify that the iterator is exhausted. When either `done_event` or</span>
+        <span class="ansi-red-fg"># `iteration_end` is set, we skip all processing step and just wait for</span>
+        <span class="ansi-red-fg"># `None`.</span>
+        iteration_end <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+
+        watchdog <span class="ansi-blue-fg">=</span> ManagerWatchdog<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+        <span class="ansi-green-fg">while</span> watchdog<span class="ansi-blue-fg">.</span>is_alive<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+                r <span class="ansi-blue-fg">=</span> index_queue<span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span>timeout<span class="ansi-blue-fg">=</span>MP_STATUS_CHECK_INTERVAL<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">except</span> queue<span class="ansi-blue-fg">.</span>Empty<span class="ansi-blue-fg">:</span>
+                <span class="ansi-green-fg">continue</span>
+            <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>r<span class="ansi-blue-fg">,</span> _ResumeIteration<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+                <span class="ansi-red-fg"># Acknowledge the main process</span>
+                data_queue<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span>r<span class="ansi-blue-fg">)</span>
+                iteration_end <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+                <span class="ansi-red-fg"># Recreate the fetcher for worker-reuse policy</span>
+                fetcher <span class="ansi-blue-fg">=</span> _DatasetKind<span class="ansi-blue-fg">.</span>create_fetcher<span class="ansi-blue-fg">(</span>
+                    dataset_kind<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">,</span> auto_collation<span class="ansi-blue-fg">,</span> collate_fn<span class="ansi-blue-fg">,</span> drop_last<span class="ansi-blue-fg">)</span>
+                <span class="ansi-green-fg">continue</span>
+            <span class="ansi-green-fg">elif</span> r <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+                <span class="ansi-red-fg"># Received the final signal</span>
+                <span class="ansi-green-fg">assert</span> done_event<span class="ansi-blue-fg">.</span>is_set<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">or</span> iteration_end
+                <span class="ansi-green-fg">break</span>
+            <span class="ansi-green-fg">elif</span> done_event<span class="ansi-blue-fg">.</span>is_set<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">or</span> iteration_end<span class="ansi-blue-fg">:</span>
+                <span class="ansi-red-fg"># `done_event` is set. But I haven&#39;t received the final signal</span>
+                <span class="ansi-red-fg"># (None) yet. I will keep continuing until get it, and skip the</span>
+                <span class="ansi-red-fg"># processing steps.</span>
+                <span class="ansi-green-fg">continue</span>
+            idx<span class="ansi-blue-fg">,</span> index <span class="ansi-blue-fg">=</span> r
+            data<span class="ansi-blue-fg">:</span> Union<span class="ansi-blue-fg">[</span>_IterableDatasetStopIteration<span class="ansi-blue-fg">,</span> ExceptionWrapper<span class="ansi-blue-fg">]</span>
+            <span class="ansi-green-fg">if</span> init_exception <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+                data <span class="ansi-blue-fg">=</span> init_exception
+                init_exception <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+            <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+                <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+                    data <span class="ansi-blue-fg">=</span> fetcher<span class="ansi-blue-fg">.</span>fetch<span class="ansi-blue-fg">(</span>index<span class="ansi-blue-fg">)</span>
+                <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+                    <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">,</span> StopIteration<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">and</span> dataset_kind <span class="ansi-blue-fg">==</span> _DatasetKind<span class="ansi-blue-fg">.</span>Iterable<span class="ansi-blue-fg">:</span>
+                        data <span class="ansi-blue-fg">=</span> _IterableDatasetStopIteration<span class="ansi-blue-fg">(</span>worker_id<span class="ansi-blue-fg">)</span>
+                        <span class="ansi-red-fg"># Set `iteration_end`</span>
+                        <span class="ansi-red-fg">#   (1) to save future `next(...)` calls, and</span>
+                        <span class="ansi-red-fg">#   (2) to avoid sending multiple `_IterableDatasetStopIteration`s.</span>
+                        iteration_end <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
+                    <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+                        <span class="ansi-red-fg"># It is important that we don&#39;t store exc_info in a variable.</span>
+                        <span class="ansi-red-fg"># `ExceptionWrapper` does the correct thing.</span>
+                        <span class="ansi-red-fg"># See NOTE [ Python Traceback Reference Cycle Problem ]</span>
+                        data <span class="ansi-blue-fg">=</span> ExceptionWrapper<span class="ansi-blue-fg">(</span>
+                            where<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;in DataLoader worker process {}&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>worker_id<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+            data_queue<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">del</span> data<span class="ansi-blue-fg">,</span> idx<span class="ansi-blue-fg">,</span> index<span class="ansi-blue-fg">,</span> r  <span class="ansi-red-fg"># save memory</span>
+    <span class="ansi-green-fg">except</span> KeyboardInterrupt<span class="ansi-blue-fg">:</span>
+        <span class="ansi-red-fg"># Main process will raise KeyboardInterrupt anyways.</span>
+        <span class="ansi-green-fg">pass</span>
+    <span class="ansi-green-fg">if</span> done_event<span class="ansi-blue-fg">.</span>is_set<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        data_queue<span class="ansi-blue-fg">.</span>cancel_join_thread<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        data_queue<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -39,29 +274,19 @@ nb_path: "nbs/05_data.test_async.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MKL_THREADING_LAYER&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;GNU&quot;</span>
-<span class="c1">#     os.environ[&#39;MKL_SERVICE_FORCE_INTEL&#39;]=&quot;1&quot;</span>
-
     
     <span class="kn">import</span> <span class="nn">torch.multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
     <span class="k">try</span><span class="p">:</span><span class="n">mp</span><span class="o">.</span><span class="n">set_start_method</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span><span class="k">pass</span>
     
-    <span class="kn">import</span> <span class="nn">torch</span>
-        <span class="c1"># Python native modules</span>
-    <span class="kn">import</span> <span class="nn">os</span>
     <span class="c1"># Third party libs</span>
-    <span class="kn">from</span> <span class="nn">fastai.torch_basics</span> <span class="kn">import</span> <span class="n">default_device</span>
-<span class="c1">#     from fastai.data.all import DataLoader</span>
-    <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+    <span class="kn">from</span> <span class="nn">fastai.torch_basics</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">fastai.data.all</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="c1"># Local modules</span>
     <span class="kn">from</span> <span class="nn">fastrl.data.block</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="c1">#     import numpy as np</span>
-<span class="c1">#     import gym</span>
-
-    <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">DQN</span><span class="p">(),</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">()),</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">DQN</span><span class="p">(),</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">()),</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -74,106 +299,106 @@ nb_path: "nbs/05_data.test_async.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor([[ 0.0029,  0.2243, -0.0268, -0.2859],
-        [-0.0092,  0.2149,  0.0272, -0.3320],
-        [-0.0032,  0.1805,  0.0036, -0.2889],
-        [ 0.0207,  0.2242,  0.0251, -0.3285],
-        [-0.0018,  0.1739, -0.0041, -0.3238],
-        [-0.0148,  0.2259,  0.0138, -0.3320],
-        [-0.0209,  0.2315,  0.0425, -0.2785],
-        [ 0.0137,  0.2178, -0.0129, -0.2591],
-        [-0.0478,  0.1588,  0.0134, -0.2671],
-        [-0.0123,  0.1720,  0.0453, -0.3096],
-        [ 0.0170,  0.1961,  0.0188, -0.2525],
-        [-0.0008,  0.1811, -0.0423, -0.2739],
-        [-0.0218,  0.2282, -0.0361, -0.2851],
-        [ 0.0457,  0.2301, -0.0402, -0.2755],
-        [-0.0208,  0.1965, -0.0096, -0.2739],
-        [ 0.0109,  0.2173, -0.0476, -0.3193],
-        [ 0.0323,  0.2370, -0.0153, -0.2499],
-        [ 0.0178,  0.2359, -0.0393, -0.2687],
-        [ 0.0159,  0.1767,  0.0286, -0.2339],
-        [-0.0192,  0.1692, -0.0251, -0.2674],
-        [-0.0031,  0.2286, -0.0155, -0.2981],
-        [ 0.0347,  0.1735, -0.0456, -0.3214],
-        [ 0.0185,  0.2433,  0.0251, -0.3282],
-        [-0.0089,  0.1710,  0.0463, -0.2364],
-        [ 0.0052,  0.1845, -0.0241, -0.2957],
-        [-0.0028,  0.2168, -0.0360, -0.2636],
-        [ 0.0176,  0.2263, -0.0004, -0.2739],
-        [ 0.0024,  0.2003,  0.0253, -0.3260],
-        [-0.0230,  0.2368,  0.0205, -0.2966],
-        [-0.0445,  0.1556,  0.0080, -0.3242],
-        [-0.0211,  0.2180, -0.0113, -0.2494],
-        [-0.0084,  0.1757, -0.0023, -0.3143],
-        [ 0.0453,  0.1684,  0.0480, -0.2413],
-        [ 0.0406,  0.2326,  0.0095, -0.3210],
-        [-0.0123,  0.1817,  0.0407, -0.3033],
-        [-0.0509,  0.1479, -0.0037, -0.2874],
-        [ 0.0416,  0.2414, -0.0115, -0.3038],
-        [ 0.0215,  0.1802, -0.0127, -0.3308],
-        [-0.0507,  0.1577,  0.0015, -0.2707],
-        [ 0.0136,  0.2131, -0.0371, -0.3353],
-        [ 0.0015,  0.1484,  0.0330, -0.2645],
-        [-0.0220,  0.1805, -0.0382, -0.3275],
-        [-0.0454,  0.2036,  0.0300, -0.2466],
-        [ 0.0276,  0.1548, -0.0257, -0.2556],
-        [ 0.0308,  0.2446, -0.0173, -0.2585],
-        [ 0.0296,  0.2234,  0.0222, -0.3344],
-        [-0.0156,  0.1950,  0.0316, -0.2728],
-        [ 0.0235,  0.2100, -0.0428, -0.3323],
-        [ 0.0266,  0.2276, -0.0034, -0.2732],
-        [ 0.0286,  0.2400, -0.0051, -0.2821]], device=&#39;cuda:0&#39;)
-tensor([[-8.3691e-03,  2.0179e-01,  3.8112e-03, -2.9175e-01],
-        [ 5.1506e-03,  1.8751e-01, -2.6569e-02, -3.3057e-01],
-        [ 2.2314e-02,  2.0335e-01, -3.5689e-03, -3.0936e-01],
-        [-2.8781e-03,  2.0828e-01,  2.5476e-02, -2.9808e-01],
-        [-4.0183e-02,  1.8376e-01,  3.7913e-02, -3.1762e-01],
-        [ 4.5876e-02,  1.5224e-01,  7.8895e-03, -2.9146e-01],
-        [ 4.8383e-02,  1.9133e-01,  9.1852e-03, -3.3569e-01],
-        [-3.8062e-02,  1.7461e-01,  2.3713e-02, -2.7468e-01],
-        [ 1.0976e-02,  2.3605e-01,  1.5371e-02, -2.8039e-01],
-        [-2.6792e-02,  2.0525e-01, -4.1664e-02, -3.3935e-01],
-        [-3.9871e-02,  1.8716e-01,  3.1068e-02, -2.5313e-01],
-        [-4.1199e-03,  1.9856e-01, -1.3566e-03, -2.4573e-01],
-        [-1.5005e-02,  1.6323e-01,  4.1994e-02, -2.4890e-01],
-        [-2.9621e-02,  1.8917e-01, -4.0450e-02, -2.6065e-01],
-        [-2.8711e-02,  2.3691e-01,  2.7711e-02, -3.1707e-01],
-        [ 2.5281e-02,  1.8824e-01, -2.2418e-02, -3.3106e-01],
-        [-1.3550e-02,  1.9176e-01,  1.3949e-03, -3.2847e-01],
-        [ 2.0196e-02,  1.8428e-01,  3.7789e-02, -2.6403e-01],
-        [-2.3815e-02,  2.3396e-01,  1.1536e-02, -2.4843e-01],
-        [-4.5149e-02,  2.1698e-01, -4.6656e-03, -3.3617e-01],
-        [-4.0768e-03,  1.8751e-01, -5.9630e-04, -2.5924e-01],
-        [ 1.0813e-02,  1.8120e-01, -1.2237e-02, -2.9450e-01],
-        [ 2.9677e-02,  1.9443e-01, -3.2088e-02, -3.1432e-01],
-        [ 1.2545e-02,  1.5336e-01, -2.2137e-02, -3.1149e-01],
-        [ 3.3201e-02,  2.0852e-01,  2.9176e-02, -2.3487e-01],
-        [ 3.0130e-02,  1.4710e-01,  9.7984e-04, -2.6547e-01],
-        [ 4.6237e-03,  1.7177e-01, -1.8884e-02, -3.4595e-01],
-        [-1.9321e-02,  1.9178e-01, -1.6898e-02, -2.5092e-01],
-        [ 2.4451e-02,  1.8404e-01,  1.5687e-04, -3.0132e-01],
-        [-1.0250e-02,  1.8176e-01, -2.9362e-02, -3.3899e-01],
-        [ 2.5786e-02,  1.8460e-01, -2.7727e-02, -3.3918e-01],
-        [-3.6707e-02,  2.1038e-01,  4.8188e-02, -2.9456e-01],
-        [-3.9906e-02,  1.6935e-01, -2.9133e-03, -2.6095e-01],
-        [ 2.9344e-02,  2.3238e-01,  2.0604e-02, -2.9346e-01],
-        [ 4.9238e-02,  1.8641e-01, -6.8075e-03, -3.4132e-01],
-        [ 1.6508e-02,  1.7193e-01,  1.2243e-02, -3.3530e-01],
-        [ 4.0230e-02,  1.9666e-01, -3.5264e-02, -2.7026e-01],
-        [ 2.9217e-02,  2.2746e-01,  2.1643e-02, -2.6296e-01],
-        [-4.2447e-02,  1.6682e-01,  2.3985e-03, -2.4363e-01],
-        [-3.3341e-02,  1.6699e-01,  7.8623e-03, -2.9578e-01],
-        [-4.4401e-02,  1.9257e-01,  9.3763e-03, -2.8691e-01],
-        [ 1.8716e-02,  1.4667e-01,  5.4878e-03, -2.4575e-01],
-        [-1.9566e-02,  1.6187e-01,  6.2961e-03, -3.2844e-01],
-        [-7.7962e-03,  1.6258e-01,  3.8627e-02, -3.2527e-01],
-        [-3.0605e-02,  1.8889e-01, -3.7927e-02, -3.5330e-01],
-        [ 2.9742e-02,  2.0599e-01, -3.7405e-02, -2.6445e-01],
-        [ 5.2508e-03,  1.8063e-01, -1.4197e-02, -2.9927e-01],
-        [-1.3265e-02,  2.0179e-01,  9.2818e-03, -3.1558e-01],
-        [ 2.5906e-02,  1.5520e-01,  2.0920e-02, -2.6156e-01],
-        [ 3.4256e-02,  1.5273e-01, -1.8483e-02, -2.6947e-01]], device=&#39;cuda:0&#39;)
+<pre>tensor([[ 3.1982e-02, -1.9606e-01,  1.7988e-02,  3.3937e-01],
+        [-4.4548e-02, -1.8212e-01, -5.5402e-03,  2.7060e-01],
+        [-1.2085e-02, -2.1306e-01, -3.6754e-02,  2.3259e-01],
+        [ 3.0541e-02, -1.8240e-01,  2.4689e-04,  2.5140e-01],
+        [-3.7454e-02, -2.2009e-01,  7.3438e-03,  2.4971e-01],
+        [-3.1613e-02, -2.2044e-01, -2.9993e-03,  3.0758e-01],
+        [-3.7174e-02, -1.6761e-01,  1.0438e-02,  2.8658e-01],
+        [-3.5444e-02, -1.4556e-01,  3.8486e-03,  3.2915e-01],
+        [-4.1011e-02, -1.6898e-01, -4.4171e-02,  2.3730e-01],
+        [-3.7298e-02, -1.7739e-01,  2.3306e-02,  3.4065e-01],
+        [ 9.8450e-03, -1.9917e-01,  2.5299e-02,  3.4605e-01],
+        [ 3.2876e-02, -1.7071e-01, -8.2348e-03,  2.6357e-01],
+        [-4.0551e-02, -2.0944e-01,  4.5915e-02,  3.3694e-01],
+        [ 4.5196e-02, -2.1558e-01, -3.8922e-02,  2.4258e-01],
+        [ 3.1701e-02, -2.2668e-01,  2.0158e-02,  2.7301e-01],
+        [ 1.7571e-02, -1.7488e-01, -2.2368e-02,  2.9490e-01],
+        [ 1.3162e-02, -2.0824e-01, -1.7569e-02,  2.4609e-01],
+        [-2.5874e-02, -1.9702e-01,  4.6992e-02,  3.0182e-01],
+        [ 5.8794e-03, -1.9782e-01,  7.3330e-03,  2.7967e-01],
+        [ 1.6058e-02, -1.5818e-01, -4.4459e-02,  2.7090e-01],
+        [ 4.0467e-02, -2.1640e-01, -4.3846e-02,  3.2755e-01],
+        [-6.7249e-03, -1.7382e-01, -4.0132e-02,  3.1344e-01],
+        [-3.4221e-02, -1.5465e-01, -9.9124e-03,  3.1821e-01],
+        [-1.1407e-02, -2.3711e-01,  3.5382e-02,  2.8337e-01],
+        [ 3.5294e-02, -1.6914e-01, -1.0544e-02,  2.8922e-01],
+        [ 7.5888e-03, -2.2531e-01, -3.7116e-02,  2.6556e-01],
+        [-4.8667e-02, -2.2514e-01,  1.3042e-02,  3.1217e-01],
+        [ 5.0294e-02, -1.6118e-01, -4.7534e-02,  2.3822e-01],
+        [ 4.0876e-02, -2.1237e-01,  1.8762e-02,  2.5545e-01],
+        [-3.7945e-02, -1.6680e-01,  5.2428e-03,  3.1058e-01],
+        [ 4.8843e-02, -2.1649e-01,  4.4443e-03,  3.1594e-01],
+        [ 4.0607e-02, -2.2798e-01,  2.3496e-02,  2.8640e-01],
+        [ 4.3622e-02, -2.4003e-01, -6.0357e-03,  2.6220e-01],
+        [-2.5724e-02, -2.1597e-01,  4.8983e-02,  3.2791e-01],
+        [ 9.8121e-03, -2.3318e-01, -4.1266e-02,  2.3340e-01],
+        [ 1.2188e-03, -2.0825e-01, -1.8654e-02,  3.1643e-01],
+        [ 3.8956e-02, -2.0528e-01, -3.6510e-02,  2.9617e-01],
+        [-2.1703e-02, -1.9410e-01, -8.9807e-03,  3.0379e-01],
+        [ 4.1329e-02, -2.3934e-01, -4.6731e-02,  2.4279e-01],
+        [-4.0021e-03, -2.1464e-01, -1.8365e-02,  2.9510e-01],
+        [ 1.5995e-03, -2.2658e-01,  3.1101e-03,  3.0491e-01],
+        [-2.1966e-02, -1.4701e-01,  3.0097e-02,  2.6843e-01],
+        [-2.6830e-02, -2.3242e-01, -3.3764e-02,  2.7878e-01],
+        [ 3.5623e-03, -1.9236e-01,  2.3578e-02,  2.6466e-01],
+        [ 2.5730e-02, -1.9499e-01,  6.1328e-04,  2.4425e-01],
+        [-2.4885e-02, -1.7824e-01,  3.2297e-03,  3.2245e-01],
+        [-4.6690e-02, -2.0845e-01,  6.4807e-03,  3.2491e-01],
+        [ 7.8578e-03, -1.7784e-01,  4.4793e-02,  3.4828e-01],
+        [-2.3405e-02, -2.1903e-01, -3.3397e-02,  2.6387e-01],
+        [-3.1268e-03, -1.5385e-01,  6.3957e-03,  3.2861e-01]], device=&#39;cuda:0&#39;)
+tensor([[ 0.0442, -0.1622,  0.0008,  0.3179],
+        [ 0.0361, -0.1508, -0.0005,  0.3220],
+        [-0.0164, -0.1835, -0.0311,  0.3308],
+        [ 0.0479, -0.1479, -0.0403,  0.2837],
+        [ 0.0062, -0.1883, -0.0142,  0.2948],
+        [-0.0395, -0.1908, -0.0331,  0.2333],
+        [-0.0412, -0.2119,  0.0448,  0.3186],
+        [-0.0414, -0.2382, -0.0209,  0.2903],
+        [-0.0423, -0.2303,  0.0073,  0.2813],
+        [-0.0263, -0.1724, -0.0261,  0.3065],
+        [-0.0005, -0.2047, -0.0138,  0.3181],
+        [ 0.0457, -0.1654,  0.0138,  0.2601],
+        [-0.0311, -0.2145,  0.0285,  0.3203],
+        [ 0.0038, -0.1863,  0.0215,  0.3314],
+        [-0.0358, -0.2425, -0.0406,  0.2300],
+        [-0.0027, -0.1848, -0.0339,  0.3223],
+        [-0.0450, -0.2124,  0.0372,  0.3193],
+        [ 0.0146, -0.2315,  0.0094,  0.3030],
+        [ 0.0216, -0.1548, -0.0252,  0.3194],
+        [ 0.0145, -0.2159, -0.0044,  0.2704],
+        [-0.0290, -0.2426,  0.0020,  0.3163],
+        [ 0.0374, -0.1599, -0.0142,  0.3048],
+        [ 0.0267, -0.1740, -0.0281,  0.2444],
+        [ 0.0350, -0.1722, -0.0247,  0.3098],
+        [-0.0047, -0.2439, -0.0214,  0.3288],
+        [ 0.0454, -0.2171,  0.0116,  0.3047],
+        [ 0.0022, -0.1908, -0.0498,  0.2420],
+        [ 0.0018, -0.1742,  0.0167,  0.2653],
+        [ 0.0139, -0.1855,  0.0207,  0.3415],
+        [-0.0064, -0.1582,  0.0384,  0.3421],
+        [-0.0387, -0.2284,  0.0503,  0.3397],
+        [ 0.0041, -0.1627,  0.0026,  0.2801],
+        [ 0.0465, -0.2170, -0.0378,  0.2675],
+        [-0.0038, -0.1734, -0.0223,  0.2608],
+        [ 0.0207, -0.1456, -0.0140,  0.3270],
+        [ 0.0129, -0.2373, -0.0057,  0.3125],
+        [-0.0138, -0.2159,  0.0076,  0.2543],
+        [-0.0150, -0.1550,  0.0392,  0.3059],
+        [-0.0281, -0.2139,  0.0459,  0.3460],
+        [ 0.0325, -0.2065, -0.0155,  0.2829],
+        [ 0.0311, -0.1680,  0.0453,  0.3538],
+        [ 0.0466, -0.1992, -0.0428,  0.2797],
+        [-0.0395, -0.1808,  0.0412,  0.2558],
+        [ 0.0198, -0.1659, -0.0076,  0.3239],
+        [ 0.0083, -0.1827, -0.0498,  0.2688],
+        [ 0.0200, -0.2220, -0.0065,  0.3215],
+        [ 0.0342, -0.2386,  0.0395,  0.3054],
+        [ 0.0030, -0.2034, -0.0397,  0.2921],
+        [ 0.0116, -0.2025,  0.0203,  0.2650],
+        [-0.0296, -0.1545,  0.0036,  0.2577]], device=&#39;cuda:0&#39;)
 </pre>
 </div>
 </div>

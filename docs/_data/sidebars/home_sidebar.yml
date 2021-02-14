@@ -14,6 +14,9 @@ entries:
       url: nbdev_extension.html
     - output: web,pdf
       title: Data Transforms
+      url: data.block.html
+    - output: web,pdf
+      title: Async Testing
       url: data.test_async.html
     - output: web,pdf
       title: Synth Agent
