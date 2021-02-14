@@ -50,7 +50,8 @@ Placeholder here, there is no pypi package yet. It is recommended to do traditio
 
 ## Docker (highly recommend)
 
-Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)\
+Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
 Install: [docker-compose](https://docs.docker.com/compose/install/)
 
 ```bash
