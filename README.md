@@ -1,6 +1,16 @@
-# Fastrl2
+# fastrl
 > This is a temporary location for fastrl version 2. Currently in a giant refactor. The previous source code can be found <a href='https://github.com/josiahls/fastrl/tree/pre_refactor'>here</a>.
 
+
+[![CI Status](https://github.com/josiahls/fastrl/workflows/Fastrl%20Testing/badge.svg)](https://github.com/josiahls/fastrl/actions?query=workflow%3A%22Fastrl+Testing%22)
+[![pypi fastrl version](https://img.shields.io/pypi/v/fastrl.svg)](https://pypi.python.org/pypi/fastrl)
+[![Conda fastrl version](https://img.shields.io/conda/v/josiahls/fastrl.svg)](https://anaconda.org/josiahls/fastrl)
+[![Docker Image Latest](https://img.shields.io/docker/v/josiahls/fastrl?label=Docker&sort=date)](https://hub.docker.com/repository/docker/josiahls/fastrl)
+[![Docker Image-Dev Latest](https://img.shields.io/docker/v/josiahls/fastrl-dev?label=Docker%20Dev&sort=date)](https://hub.docker.com/repository/docker/josiahls/fastrl-dev)
+
+[![Anaconda-Server Badge](https://anaconda.org/josiahls/fastrl/badges/platforms.svg)](https://anaconda.org/josiahls/fastrl)
+[![fastrl python compatibility](https://img.shields.io/pypi/pyversions/fastrl.svg)](https://pypi.python.org/pypi/fastrl)
+[![fastrl license](https://img.shields.io/pypi/l/fastrl.svg)](https://pypi.python.org/pypi/fastrl)
 
 {% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models `DADS` and `DIAYN` will need ' %}re-balancing and some extra features that the respective authors used.
 
@@ -44,7 +54,7 @@ Install: [Nvidia-Docker](https://docs.nvidia.com/datacenter/cloud-native/contain
 Install: [docker-compose](https://docs.docker.com/compose/install/)
 
 ```bash
-docker-compose up
+docker-compose pull && docker-compose up
 ```
 
 ## Contributing

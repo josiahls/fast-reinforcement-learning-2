@@ -1,6 +1,6 @@
 ---
 
-title: Fastrl2
+title: fastrl
 
 
 keywords: fastai
@@ -29,6 +29,20 @@ nb_path: "nbs/index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://github.com/josiahls/fastrl/actions?query=workflow%3A%22Fastrl+Testing%22"><img src="https://github.com/josiahls/fastrl/workflows/Fastrl%20Testing/badge.svg" alt="CI Status"></a>
+<a href="https://pypi.python.org/pypi/fastrl"><img src="https://img.shields.io/pypi/v/fastrl.svg" alt="pypi fastrl version"></a>
+<a href="https://anaconda.org/josiahls/fastrl"><img src="https://img.shields.io/conda/v/josiahls/fastrl.svg" alt="Conda fastrl version"></a>
+<a href="https://hub.docker.com/repository/docker/josiahls/fastrl"><img src="https://img.shields.io/docker/v/josiahls/fastrl?label=Docker&amp;sort=date" alt="Docker Image Latest"></a>
+<a href="https://hub.docker.com/repository/docker/josiahls/fastrl-dev"><img src="https://img.shields.io/docker/v/josiahls/fastrl-dev?label=Docker%20Dev&amp;sort=date" alt="Docker Image-Dev Latest"></a></p>
+<p><a href="https://anaconda.org/josiahls/fastrl"><img src="https://anaconda.org/josiahls/fastrl/badges/platforms.svg" alt="Anaconda-Server Badge"></a>
+<a href="https://pypi.python.org/pypi/fastrl"><img src="https://img.shields.io/pypi/pyversions/fastrl.svg" alt="fastrl python compatibility"></a>
+<a href="https://pypi.python.org/pypi/fastrl"><img src="https://img.shields.io/pypi/l/fastrl.svg" alt="fastrl license"></a></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>{% include warning.html content='Even before fastrl==2.0.0, all Models should converge reasonably fast, however HRL models <code>DADS</code> and <code>DIAYN</code> will need ' %}re-balancing and some extra features that the respective authors used.</p>
@@ -89,7 +103,7 @@ nb_path: "nbs/index.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Docker-(highly-recommend)">Docker (highly recommend)<a class="anchor-link" href="#Docker-(highly-recommend)"> </a></h2><p>Install: <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">Nvidia-Docker</a>\
 Install: <a href="https://docs.docker.com/compose/install/">docker-compose</a></p>
-<div class="highlight"><pre><span></span>docker-compose up
+<div class="highlight"><pre><span></span>docker-compose pull <span class="o">&amp;&amp;</span> docker-compose up
 </pre></div>
 
 </div>

@@ -15,6 +15,9 @@ entries:
     - output: web,pdf
       title: Data Transforms
       url: data.transforms.html
+    - output: web,pdf
+      title: Notebook Template
+      url: nbdev_template.html
     output: web
     title: fastrl
   output: web
