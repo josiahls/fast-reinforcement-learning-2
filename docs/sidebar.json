@@ -1,6 +1,7 @@
 {
   "fastrl": {
     "Overview": "/",
-    "Nbdev Extensions": "nbdev_extension.html"
+    "Nbdev Extensions": "nbdev_extension.html",
+    "Data Transforms": "data.transforms.html"
   }
 }

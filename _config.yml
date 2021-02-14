@@ -1,12 +1,16 @@
-repository: josiahls/fastrl
+repository: josiahls/fast-reinforcement-learning-2
 output: web
 topnav_title: fastrl
 site_title: fastrl
 company_name:
-github_editme_path:
+github_editme_path: 
 use_math: true
 google_analytics:
 google_search:
+
+host: 127.0.0.1
+# the preview server used. Leave as is.
+port: 4000
 
 exclude:
   - .idea/
@@ -58,8 +62,7 @@ sidebars:
 
 description: "Documentation for the deploy2 library"
 # theme: jekyll-theme-cayman
+
+
 baseurl: /fastrl/
-host: 127.0.0.1
-# the preview server used. Leave as is.
-port: 4000
 
