@@ -26,17 +26,39 @@ nb_path: "nbs/00_nbdev_extension.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>test
-</pre>
 </div>
-</div>
+    {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+cat &gt; testing/test_settings.ini <span class="s">&lt;&lt; EndOfMessage</span>
+<span class="s">[DEFAULT]</span>
+<span class="s">lib_name = fastrl_test</span>
+<span class="s">user = josiahls</span>
+<span class="s">branch = master</span>
+<span class="s">version = 0.0.1</span>
+<span class="s">min_python = 3.6</span>
+<span class="s">requirements = fastai&gt;=2.0.0 moviepy</span>
+<span class="s">pip_requirements = pytest nvidia-ml-py3 dataclasses pandas pyyaml</span>
+<span class="s">conda_requirements = jupyter notebook setuptools</span>
+<span class="s">dev_requirements = jupyterlab nbdev ipywidgets moviepy pygifsicle aquirdturtle_collapsible_headings</span>
+<span class="s">EndOfMessage</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -52,12 +74,234 @@ nb_path: "nbs/00_nbdev_extension.ipynb"
 
 <div class="output_area">
 
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="dependencies" class="doc_header"><code>dependencies</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/nbdev_extensions.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dependencies</code>(<strong><code>dev</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>cfg_name</code></strong>=<em><code>'settings.ini'</code></em>)</p>
+</blockquote>
+<p>Gets a list of dependencies in a <code>cfg_name</code> for conda compatability.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">dependencies</span><span class="p">(</span><span class="n">cfg_name</span><span class="o">=</span><span class="s1">&#39;test_settings.ini&#39;</span><span class="p">),</span>
+        <span class="p">[</span><span class="s1">&#39;python=3.6&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&gt;=2.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> 
+         <span class="s1">&#39;jupyter&#39;</span><span class="p">,</span> <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> 
+         <span class="p">{</span><span class="s1">&#39;pip&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">,</span> <span class="s1">&#39;nvidia-ml-py3&#39;</span><span class="p">,</span> <span class="s1">&#39;dataclasses&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyyaml&#39;</span><span class="p">]}])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">dependencies</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cfg_name</span><span class="o">=</span><span class="s1">&#39;test_settings.ini&#39;</span><span class="p">),</span>
+        <span class="p">[</span><span class="s1">&#39;python=3.6&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&gt;=2.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> <span class="s1">&#39;jupyter&#39;</span><span class="p">,</span> 
+         <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;jupyterlab&#39;</span><span class="p">,</span> <span class="s1">&#39;nbdev&#39;</span><span class="p">,</span> <span class="s1">&#39;ipywidgets&#39;</span><span class="p">,</span> <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> 
+         <span class="s1">&#39;pygifsicle&#39;</span><span class="p">,</span> <span class="s1">&#39;aquirdturtle_collapsible_headings&#39;</span><span class="p">,</span> 
+         <span class="p">{</span><span class="s1">&#39;pip&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">,</span> <span class="s1">&#39;nvidia-ml-py3&#39;</span><span class="p">,</span> <span class="s1">&#39;dataclasses&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyyaml&#39;</span><span class="p">]}])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="create_conda_yaml" class="doc_header"><code>create_conda_yaml</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/nbdev_extensions.py#L27" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_conda_yaml</code>(<strong><code>channels</code></strong>:<code>str</code>=<em><code>'conda-forge,pytorch,fastai'</code></em>, <strong><code>cfg_name</code></strong>=<em><code>'settings.ini'</code></em>, <strong><code>dev</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Creates a conda dictionary of the format of an env file.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">create_conda_yaml</span><span class="p">(</span><span class="n">cfg_name</span><span class="o">=</span><span class="s1">&#39;test_settings.ini&#39;</span><span class="p">),</span>
+       <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;fastrl&#39;</span><span class="p">,</span> <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;conda-forge&#39;</span><span class="p">,</span> <span class="s1">&#39;pytorch&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&#39;</span><span class="p">],</span> 
+        <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;python=3.6&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&gt;=2.0.0&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> <span class="s1">&#39;jupyter&#39;</span><span class="p">,</span> <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> 
+                         <span class="p">{</span><span class="s1">&#39;pip&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">,</span> <span class="s1">&#39;nvidia-ml-py3&#39;</span><span class="p">,</span> <span class="s1">&#39;dataclasses&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyyaml&#39;</span><span class="p">]}]})</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">create_conda_yaml</span><span class="p">(</span><span class="n">cfg_name</span><span class="o">=</span><span class="s1">&#39;test_settings.ini&#39;</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+       <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;fastrl_dev&#39;</span><span class="p">,</span> <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;conda-forge&#39;</span><span class="p">,</span> <span class="s1">&#39;pytorch&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&#39;</span><span class="p">],</span> 
+        <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;python=3.6&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;fastai&gt;=2.0.0&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> <span class="s1">&#39;jupyter&#39;</span><span class="p">,</span> <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;setuptools&#39;</span><span class="p">,</span> <span class="s1">&#39;jupyterlab&#39;</span><span class="p">,</span> 
+                         <span class="s1">&#39;nbdev&#39;</span><span class="p">,</span> <span class="s1">&#39;ipywidgets&#39;</span><span class="p">,</span> <span class="s1">&#39;moviepy&#39;</span><span class="p">,</span> <span class="s1">&#39;pygifsicle&#39;</span><span class="p">,</span> <span class="s1">&#39;aquirdturtle_collapsible_headings&#39;</span><span class="p">,</span> 
+                         <span class="p">{</span><span class="s1">&#39;pip&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">,</span> <span class="s1">&#39;nvidia-ml-py3&#39;</span><span class="p">,</span> <span class="s1">&#39;dataclasses&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyyaml&#39;</span><span class="p">]}]})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="create_conda_yamls" class="doc_header"><code>create_conda_yamls</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/nbdev_extensions.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>create_conda_yamls</code>(<strong><code>also_dev</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>cfg_name</code></strong>=<em><code>'settings.ini'</code></em>, <strong><code>sub_dir</code></strong>=<em><code>''</code></em>)</p>
+</blockquote>
+<p>Creates conda env for normal and development environments.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">create_conda_yamls</span><span class="p">(</span><span class="n">cfg_name</span><span class="o">=</span><span class="s1">&#39;test_settings.ini&#39;</span><span class="p">,</span><span class="n">sub_dir</span><span class="o">=</span><span class="s1">&#39;testing&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pfile</span> testing/fastrl_test_env.yaml
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>test
+<pre>Object `testing/fastrl_test_env.yaml` not found.
 </pre>
 </div>
 </div>
 
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>channels<span class="ansi-blue-fg">:</span>
+<span class="ansi-blue-fg">-</span> conda<span class="ansi-blue-fg">-</span>forge
+<span class="ansi-blue-fg">-</span> pytorch
+<span class="ansi-blue-fg">-</span> fastai
+dependencies<span class="ansi-blue-fg">:</span>
+<span class="ansi-blue-fg">-</span> python<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">3.6</span>
+<span class="ansi-blue-fg">-</span> pip
+<span class="ansi-blue-fg">-</span> setuptools
+<span class="ansi-blue-fg">-</span> fastai<span class="ansi-blue-fg">&gt;=</span><span class="ansi-cyan-fg">2.0</span><span class="ansi-cyan-fg">.0</span>
+<span class="ansi-blue-fg">-</span> moviepy
+<span class="ansi-blue-fg">-</span> jupyter
+<span class="ansi-blue-fg">-</span> notebook
+<span class="ansi-blue-fg">-</span> setuptools
+<span class="ansi-blue-fg">-</span> pip<span class="ansi-blue-fg">:</span>
+  <span class="ansi-blue-fg">-</span> pytest
+  <span class="ansi-blue-fg">-</span> nvidia<span class="ansi-blue-fg">-</span>ml<span class="ansi-blue-fg">-</span>py3
+  <span class="ansi-blue-fg">-</span> dataclasses
+  <span class="ansi-blue-fg">-</span> pandas
+  <span class="ansi-blue-fg">-</span> pyyaml
+name<span class="ansi-blue-fg">:</span> fastrl
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">create_conda_yamls</span><span class="p">(</span><span class="n">sub_dir</span><span class="o">=</span><span class="s1">&#39;extra&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

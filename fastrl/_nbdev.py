@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"dependencies": "00_nbdev_extension.ipynb",
+         "create_conda_yaml": "00_nbdev_extension.ipynb",
+         "create_conda_yamls": "00_nbdev_extension.ipynb"}
 
 modules = ["nbdev_extensions.py"]
 

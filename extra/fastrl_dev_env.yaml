@@ -1,0 +1,16 @@
+channels:
+- conda-forge
+- pytorch
+- fastai
+dependencies:
+- python=3.6
+- pip
+- setuptools
+- fastai>=2.0.0
+- jupyterlab
+- nbdev
+- ipywidgets
+- moviepy
+- pygifsicle
+- aquirdturtle_collapsible_headings
+name: fastrl_dev
