@@ -19,6 +19,8 @@ if __name__ == '__main__':
     try:
         mp.set_start_method('spawn')
     except Exception: pass
-    dl=DataLoader(TestDataset(DQN().share_memory(),device=default_device()),num_workers=1)
+    ds=TestDataset(DQN(),device=default_device())
+    dl=DataLoader(ds,num_workers=1)
     for x in dl:
         print(x)
+    print(ds.pids)

@@ -1,6 +1,6 @@
 ---
 
-title: Data Transforms
+title: Data Block
 
 
 keywords: fastai
@@ -26,6 +26,21 @@ nb_path: "nbs/05_data.block.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1607370156314/work/c10/cuda/CUDAFunctions.cpp:100.)
+  return torch._C._cuda_getDeviceCount() &gt; 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -47,7 +62,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L24" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
+<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
 </blockquote>
 <p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
 
@@ -71,54 +86,11 @@ nb_path: "nbs/05_data.block.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestDatasetNoModule" class="doc_header"><code>class</code> <code>TestDatasetNoModule</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L36" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestDatasetNoModule</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
-</blockquote>
-<p>An abstract class representing a :class:<code>Dataset</code>.</p>
-<p>All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite :meth:<code>__getitem__</code>, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-:meth:<code>__len__</code>, which is expected to return the size of the dataset by many
-:class:<code>~torch.utils.data.Sampler</code> implementations and the default options
-of :class:<code>~torch.utils.data.DataLoader</code>.</p>
-<p>.. note::
-  :class:<code>~torch.utils.data.DataLoader</code> by default constructs a index
-  sampler that yields integral indices.  To make it work with a map-style
-  dataset with non-integral indices/keys, a custom sampler must be provided.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">TestDatasetNoModule</span><span class="p">(),</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span>store_attr<span class="o">??</span>
 </pre></div>
 
     </div>
@@ -130,39 +102,101 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>starting
-making env
-tensor([[0.6898, 0.5690, 0.1330, 0.5667]])
-starting
-making env
-tensor([[0.6602, 0.6063, 0.0303, 0.0557]])
-starting
-making env
-tensor([[0.4614, 0.2993, 0.9056, 0.0197]])
-starting
-making env
-tensor([[0.2339, 0.1553, 0.9100, 0.9060]])
-starting
-making env
-tensor([[0.8206, 0.4922, 0.3069, 0.4053]])
-starting
-making env
-tensor([[0.9035, 0.8759, 0.9231, 0.6580]])
-starting
-making env
-tensor([[0.0231, 0.6843, 0.2327, 0.0793]])
-starting
-making env
-tensor([[0.4821, 0.7613, 0.0940, 0.1260]])
-starting
-making env
-tensor([[0.4183, 0.2653, 0.5770, 0.2688]])
-starting
-making env
-tensor([[0.4273, 0.4283, 0.6365, 0.6518]])
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span>
+store_attr<span class="ansi-blue-fg">(</span>
+    names<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    self<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    but<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;&#39;</span><span class="ansi-blue-fg">,</span>
+    cast<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
+    store_args<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
+    <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">,</span>
+<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Source:</span>   
+<span class="ansi-green-fg">def</span> store_attr<span class="ansi-blue-fg">(</span>names<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> but<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;&#39;</span><span class="ansi-blue-fg">,</span> cast<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> store_args<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-blue-fg">&#34;Store params named in comma-separated `names` from calling context into attrs in `self`&#34;</span>
+    fr <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>_getframe<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+    args <span class="ansi-blue-fg">=</span> argnames<span class="ansi-blue-fg">(</span>fr<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+    <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">:</span> args <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;self&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
+    <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> self <span class="ansi-blue-fg">=</span> fr<span class="ansi-blue-fg">.</span>f_locals<span class="ansi-blue-fg">[</span>args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span>
+    <span class="ansi-green-fg">if</span> store_args <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> store_args <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;__slots__&#39;</span><span class="ansi-blue-fg">)</span>
+    <span class="ansi-green-fg">if</span> store_args <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__stored_args__&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>__stored_args__ <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
+    anno <span class="ansi-blue-fg">=</span> annotations<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> cast <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
+    <span class="ansi-green-fg">if</span> names <span class="ansi-green-fg">and</span> isinstance<span class="ansi-blue-fg">(</span>names<span class="ansi-blue-fg">,</span>str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> names <span class="ansi-blue-fg">=</span> re<span class="ansi-blue-fg">.</span>split<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;, *&#39;</span><span class="ansi-blue-fg">,</span> names<span class="ansi-blue-fg">)</span>
+    ns <span class="ansi-blue-fg">=</span> names <span class="ansi-green-fg">if</span> names <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__slots__&#39;</span><span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+    added <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>n<span class="ansi-blue-fg">:</span>fr<span class="ansi-blue-fg">.</span>f_locals<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> n <span class="ansi-green-fg">in</span> ns<span class="ansi-blue-fg">}</span>
+    attrs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>added<span class="ansi-blue-fg">}</span>
+    <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>but<span class="ansi-blue-fg">,</span>str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> but <span class="ansi-blue-fg">=</span> re<span class="ansi-blue-fg">.</span>split<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;, *&#39;</span><span class="ansi-blue-fg">,</span> but<span class="ansi-blue-fg">)</span>
+    attrs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>k<span class="ansi-blue-fg">:</span>v <span class="ansi-green-fg">for</span> k<span class="ansi-blue-fg">,</span>v <span class="ansi-green-fg">in</span> attrs<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> k <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> but<span class="ansi-blue-fg">}</span>
+    <span class="ansi-green-fg">return</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/fastcore/basics.py
+<span class="ansi-red-fg">Type:</span>      function
 </pre>
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.basics</span> <span class="kn">import</span> <span class="n">_store_attr</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>_store_attr<span class="o">??</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Signature:</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
+<span class="ansi-red-fg">Source:</span>   
+<span class="ansi-green-fg">def</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    stored <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__stored_args__&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+    <span class="ansi-green-fg">for</span> n<span class="ansi-blue-fg">,</span>v <span class="ansi-green-fg">in</span> attrs<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-green-fg">if</span> n <span class="ansi-green-fg">in</span> anno<span class="ansi-blue-fg">:</span> v <span class="ansi-blue-fg">=</span> anno<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">(</span>v<span class="ansi-blue-fg">)</span>
+        setattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">,</span> v<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">if</span> stored <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> stored<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> v
+<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/fastcore/basics.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
 </div>
 
 </div>
@@ -182,19 +216,105 @@ tensor([[0.4273, 0.4283, 0.6365, 0.6518]])
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestDataset" class="doc_header"><code>class</code> <code>TestDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L54" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>Dataset</code></p>
+<h2 id="TestDataset" class="doc_header"><code>class</code> <code>TestDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L60" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
 </blockquote>
-<p>An abstract class representing a :class:<code>Dataset</code>.</p>
-<p>All datasets that represent a map from keys to data samples should subclass
-it. All subclasses should overwrite :meth:<code>__getitem__</code>, supporting fetching a
-data sample for a given key. Subclasses could also optionally overwrite
-:meth:<code>__len__</code>, which is expected to return the size of the dataset by many
-:class:<code>~torch.utils.data.Sampler</code> implementations and the default options
-of :class:<code>~torch.utils.data.DataLoader</code>.</p>
-<p>.. note::
-  :class:<code>~torch.utils.data.DataLoader</code> by default constructs a index
-  sampler that yields integral indices.  To make it work with a map-style
-  dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+<p>An iterable Dataset.</p>
+<p>All datasets that represent an iterable of data samples should subclass it.
+Such form of datasets is particularly useful when data come from a stream.</p>
+<p>All subclasses should overwrite :meth:<code>__iter__</code>, which would return an
+iterator of samples in this dataset.</p>
+<p>When a subclass is used with :class:<code>~torch.utils.data.DataLoader</code>, each
+item in the dataset will be yielded from the :class:<code>~torch.utils.data.DataLoader</code>
+iterator. When :attr:<code>num_workers &gt; 0</code>, each worker process will have a
+different copy of the dataset object, so it is often desired to configure
+each copy independently to avoid having duplicate data returned from the
+workers. :func:<code>~torch.utils.data.get_worker_info</code>, when called in a worker
+process, returns information about the worker. It can be used in either the
+dataset's :meth:<code>__iter__</code> method or the :class:<code>~torch.utils.data.DataLoader</code> 's
+:attr:<code>worker_init_fn</code> option to modify each copy's behavior.</p>
+<p>Example 1: splitting workload across all workers in :meth:<code>__iter__</code>::</p>
+
+<pre><code>&gt;&gt;&gt; class MyIterableDataset(torch.utils.data.IterableDataset):
+...     def __init__(self, start, end):
+...         super(MyIterableDataset).__init__()
+...         assert end &gt; start, "this example code only works with end &gt;= start"
+...         self.start = start
+...         self.end = end
+...
+...     def __iter__(self):
+...         worker_info = torch.utils.data.get_worker_info()
+...         if worker_info is None:  # single-process data loading, return the full iterator
+...             iter_start = self.start
+...             iter_end = self.end
+...         else:  # in a worker process
+...             # split workload
+...             per_worker = int(math.ceil((self.end - self.start) / float(worker_info.num_workers)))
+...             worker_id = worker_info.id
+...             iter_start = self.start + worker_id * per_worker
+...             iter_end = min(iter_start + per_worker, self.end)
+...         return iter(range(iter_start, iter_end))
+...
+&gt;&gt;&gt; # should give same set of data as range(3, 7), i.e., [3, 4, 5, 6].
+&gt;&gt;&gt; ds = MyIterableDataset(start=3, end=7)
+
+&gt;&gt;&gt; # Single-process loading
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=0)))
+[3, 4, 5, 6]
+
+&gt;&gt;&gt; # Mult-process loading with two worker processes
+&gt;&gt;&gt; # Worker 0 fetched [3, 4].  Worker 1 fetched [5, 6].
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=2)))
+[3, 5, 4, 6]
+
+&gt;&gt;&gt; # With even more workers
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=20)))
+[3, 4, 5, 6]
+
+</code></pre>
+<p>Example 2: splitting workload across all workers using :attr:<code>worker_init_fn</code>::</p>
+
+<pre><code>&gt;&gt;&gt; class MyIterableDataset(torch.utils.data.IterableDataset):
+...     def __init__(self, start, end):
+...         super(MyIterableDataset).__init__()
+...         assert end &gt; start, "this example code only works with end &gt;= start"
+...         self.start = start
+...         self.end = end
+...
+...     def __iter__(self):
+...         return iter(range(self.start, self.end))
+...
+&gt;&gt;&gt; # should give same set of data as range(3, 7), i.e., [3, 4, 5, 6].
+&gt;&gt;&gt; ds = MyIterableDataset(start=3, end=7)
+
+&gt;&gt;&gt; # Single-process loading
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=0)))
+[3, 4, 5, 6]
+&gt;&gt;&gt;
+&gt;&gt;&gt; # Directly doing multi-process loading yields duplicate data
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=2)))
+[3, 3, 4, 4, 5, 5, 6, 6]
+
+&gt;&gt;&gt; # Define a `worker_init_fn` that configures each dataset copy differently
+&gt;&gt;&gt; def worker_init_fn(worker_id):
+...     worker_info = torch.utils.data.get_worker_info()
+...     dataset = worker_info.dataset  # the dataset copy in this worker process
+...     overall_start = dataset.start
+...     overall_end = dataset.end
+...     # configure the dataset to only process the split workload
+...     per_worker = int(math.ceil((overall_end - overall_start) / float(worker_info.num_workers)))
+...     worker_id = worker_info.id
+...     dataset.start = overall_start + worker_id * per_worker
+...     dataset.end = min(dataset.start + per_worker, overall_end)
+...
+
+&gt;&gt;&gt; # Mult-process loading with the custom `worker_init_fn`
+&gt;&gt;&gt; # Worker 0 fetched [3, 4].  Worker 1 fetched [5, 6].
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=2, worker_init_fn=worker_init_fn)))
+[3, 5, 4, 6]
+
+&gt;&gt;&gt; # With even more workers
+&gt;&gt;&gt; print(list(torch.utils.data.DataLoader(ds, num_workers=20, worker_init_fn=worker_init_fn)))
+[3, 4, 5, 6]</code></pre>
 
 </div>
 
@@ -220,8 +340,8 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">DQN</span><span class="p">()),</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">TestDataset</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -234,206 +354,15 @@ of :class:<code>~torch.utils.data.DataLoader</code>.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>139977293054288  
-tensor([ 0.0254,  0.1748,  0.0327, -0.3102])
-139977293054544  
-tensor([-0.0058,  0.2294, -0.0013, -0.2506])
-139977293054544  
-tensor([ 0.0202,  0.1461,  0.0452, -0.3103])
-139977293057424  
-tensor([ 0.0473,  0.2161, -0.0238, -0.3068])
-139977294950864  
-tensor([-0.0400,  0.1890,  0.0343, -0.2807])
-139977293031248  
-tensor([-0.0155,  0.2256, -0.0389, -0.2680])
-139977294950864  
-tensor([-0.0394,  0.2203,  0.0388, -0.2861])
-139977294950864  
-tensor([-0.0017,  0.2053, -0.0472, -0.3537])
-139977294950864  
-tensor([-0.0465,  0.1818, -0.0181, -0.2942])
-139977294950864  
-tensor([-0.0293,  0.2093,  0.0041, -0.2827])
-139977294950864  
-tensor([ 0.0074,  0.2075,  0.0071, -0.2739])
-139977294950864  
-tensor([ 0.0177,  0.2052,  0.0296, -0.2949])
-139977294950864  
-tensor([-0.0118,  0.2329,  0.0234, -0.2557])
-139977294950864  
-tensor([ 0.0498,  0.1947, -0.0036, -0.3013])
-139977294950864  
-tensor([ 0.0251,  0.1750,  0.0231, -0.3283])
-139977293033424  
-tensor([-0.0235,  0.2304,  0.0027, -0.3109])
-139977293031824  
-tensor([-0.0099,  0.1497, -0.0248, -0.2838])
-139977293159056  
-tensor([-0.0311,  0.1992,  0.0323, -0.3054])
-139977293031824  
-tensor([ 0.0334,  0.2434,  0.0332, -0.2410])
-139977293032848  
-tensor([-0.0377,  0.2144,  0.0343, -0.2326])
-139977293158992  
-tensor([-0.0191,  0.1493, -0.0018, -0.2675])
-139977293033424  
-tensor([ 0.0147,  0.1875,  0.0294, -0.3116])
-139977293033424  
-tensor([-0.0344,  0.1727,  0.0345, -0.2452])
-139977293159568  
-tensor([-0.0098,  0.1467, -0.0370, -0.2863])
-139977293033424  
-tensor([ 0.0493,  0.1869, -0.0274, -0.3253])
-139977293033424  
-tensor([-0.0432,  0.1566,  0.0299, -0.2937])
-139977293158992  
-tensor([ 0.0296,  0.2186,  0.0390, -0.2652])
-139977293033424  
-tensor([-0.0497,  0.2014,  0.0495, -0.2623])
-139977293157072  
-tensor([ 0.0249,  0.2171, -0.0487, -0.2693])
-139977293159568  
-tensor([ 0.0240,  0.1904,  0.0057, -0.3350])
-139977294931792  
-tensor([ 0.0185,  0.1902,  0.0165, -0.2991])
-139977294933456  
-tensor([-0.0277,  0.2126, -0.0096, -0.2680])
-139977294930320  
-tensor([-0.0127,  0.2086, -0.0240, -0.2539])
-139977294930320  
-tensor([ 0.0089,  0.2287,  0.0377, -0.2794])
-139977293157840  
-tensor([ 0.0326,  0.2302, -0.0085, -0.3063])
-139977292984208  
-tensor([ 0.0102,  0.1807,  0.0115, -0.3032])
-139977293159056  
-tensor([ 0.0384,  0.1789,  0.0227, -0.2407])
-139977293157840  
-tensor([ 0.0175,  0.1985, -0.0131, -0.2567])
-139977292983632  
-tensor([ 0.0436,  0.2186,  0.0059, -0.2601])
-139977293158608  
-tensor([ 0.0483,  0.1657,  0.0010, -0.2683])
-139977293158608  
-tensor([-0.0057,  0.2005, -0.0346, -0.3174])
-139977293158608  
-tensor([ 0.0435,  0.2003,  0.0256, -0.2911])
-139977293158608  
-tensor([ 0.0011,  0.2025,  0.0193, -0.2380])
-139977293158608  
-tensor([ 0.0162,  0.1885, -0.0476, -0.3400])
-139977293158608  
-tensor([-0.0426,  0.1741,  0.0236, -0.3331])
-139977293158608  
-tensor([-0.0259,  0.1465, -0.0072, -0.2913])
-139977293158608  
-tensor([-0.0163,  0.1524,  0.0093, -0.3040])
-139977292984080  
-tensor([-0.0416,  0.1907, -0.0198, -0.2558])
-139977292981136  
-tensor([ 0.0043,  0.1876, -0.0116, -0.2890])
-139977292981712  
-tensor([-0.0298,  0.2317, -0.0285, -0.2965])
-139977292981712  
-tensor([-0.0463,  0.1696,  0.0048, -0.2693])
-139977292981712  
-tensor([-0.0416,  0.1899, -0.0047, -0.2927])
-139977292981712  
-tensor([-0.0397,  0.2181, -0.0342, -0.2695])
-139977292981712  
-tensor([ 0.0238,  0.1515,  0.0441, -0.2292])
-139977292981712  
-tensor([-0.0412,  0.2256, -0.0469, -0.3307])
-139977292981712  
-tensor([-0.0504,  0.1514,  0.0418, -0.3150])
-139977292981712  
-tensor([ 0.0361,  0.1930,  0.0481, -0.2898])
-139977294111184  
-tensor([ 0.0418,  0.1918, -0.0433, -0.3382])
-139977293509072  
-tensor([-0.0356,  0.2029, -0.0452, -0.3018])
-139977287232784  
-tensor([-0.0407,  0.1787,  0.0216, -0.3141])
-139977287232784  
-tensor([ 0.0314,  0.1540, -0.0104, -0.2717])
-139980920798608  
-tensor([-0.0309,  0.1658, -0.0422, -0.2816])
-139980920799184  
-tensor([ 0.0281,  0.2161,  0.0407, -0.2498])
-139980920797328  
-tensor([-0.0308,  0.1567, -0.0290, -0.3168])
-139980920797328  
-tensor([ 0.0233,  0.1927, -0.0477, -0.2610])
-139977293316816  
-tensor([-0.0366,  0.2436, -0.0021, -0.3092])
-139980920797328  
-tensor([-0.0144,  0.2279,  0.0154, -0.2681])
-139977293316304  
-tensor([-0.0238,  0.1645,  0.0471, -0.2713])
-139977293295184  
-tensor([-0.0485,  0.1993,  0.0043, -0.2822])
-139977293295376  
-tensor([-0.0326,  0.1959,  0.0467, -0.2386])
-139977293316240  
-tensor([ 0.0113,  0.1481, -0.0218, -0.2649])
-139977293293264  
-tensor([ 0.0453,  0.2109, -0.0328, -0.3203])
-139977293318160  
-tensor([ 0.0423,  0.2169, -0.0369, -0.2734])
-139977293316304  
-tensor([ 0.0323,  0.1947, -0.0207, -0.3346])
-139977293316304  
-tensor([-0.0266,  0.1664, -0.0505, -0.3367])
-139977293316304  
-tensor([ 0.0237,  0.1790, -0.0407, -0.2705])
-139977293467984  
-tensor([ 0.0165,  0.2361,  0.0128, -0.2641])
-139977292690448  
-tensor([-0.0030,  0.1876, -0.0353, -0.3006])
-139977293114768  
-tensor([ 0.0065,  0.1549,  0.0074, -0.2824])
-139977293293840  
-tensor([-0.0146,  0.1992, -0.0468, -0.2719])
-139977293293648  
-tensor([ 0.0034,  0.1790, -0.0247, -0.2598])
-139977293293840  
-tensor([ 0.0181,  0.2352,  0.0080, -0.2726])
-139977295516240  
-tensor([-0.0263,  0.1727, -0.0097, -0.3004])
-139980920816912  
-tensor([ 0.0204,  0.1994,  0.0160, -0.3241])
-139980920816912  
-tensor([-0.0327,  0.2144, -0.0477, -0.3555])
-139977296119632  
-tensor([-0.0209,  0.1983, -0.0089, -0.3397])
-139977294434832  
-tensor([-0.0248,  0.1827,  0.0094, -0.3128])
-139977294536528  
-tensor([-0.0440,  0.2032, -0.0295, -0.3242])
-139977294535120  
-tensor([ 0.0117,  0.1998,  0.0497, -0.2493])
-139977294535120  
-tensor([ 0.0229,  0.2291,  0.0409, -0.2378])
-139977294244880  
-tensor([ 0.0287,  0.2255, -0.0422, -0.3356])
-139977294434832  
-tensor([ 0.0485,  0.2117,  0.0159, -0.2715])
-139977293292624  
-tensor([-0.0158,  0.1587, -0.0048, -0.2885])
-139977293292624  
-tensor([-0.0486,  0.1721,  0.0207, -0.3306])
-139977293293584  
-tensor([ 0.0214,  0.1927, -0.0299, -0.3098])
-139977293293584  
-tensor([-0.0475,  0.2112, -0.0378, -0.2822])
-139977293293584  
-tensor([-0.0373,  0.2386,  0.0286, -0.3160])
-139980921530320  
-tensor([ 0.0140,  0.2245,  0.0494, -0.2884])
-139980921530320  
-tensor([-0.0050,  0.1847, -0.0239, -0.2524])
-139980921530320  
-tensor([ 0.0215,  0.2172, -0.0257, -0.2915])
+<pre>1
+2
+3
+4
+5
+6
+7
+8
+9
 </pre>
 </div>
 </div>

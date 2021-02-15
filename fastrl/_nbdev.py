@@ -2,16 +2,16 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"dependencies": "00_nbdev_extension.ipynb",
+index = {"DQN": "05_data.block.ipynb",
+         "TestDatasetNoModule": ".data.block_old.ipynb",
+         "TestDataset": "05_data.block.ipynb",
+         "dependencies": "00_nbdev_extension.ipynb",
          "create_conda_yaml": "00_nbdev_extension.ipynb",
          "create_conda_yamls": "00_nbdev_extension.ipynb",
-         "DQN": "05_data.block.ipynb",
-         "TestDatasetNoModule": "05_data.block.ipynb",
-         "TestDataset": "05_data.block.ipynb",
          "show_install": "20_test_utils.ipynb"}
 
-modules = ["nbdev_extensions.py",
-           "data/block.py",
+modules = ["data/block.py",
+           "nbdev_extensions.py",
            "test_utils.py"]
 
 doc_url = "https://josiahls.github.io/fastrl/"

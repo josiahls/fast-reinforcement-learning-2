@@ -99,7 +99,7 @@ nb_path: "nbs/05_data.test_async.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data._utils.worker</span> <span class="kn">import</span> <span class="n">_worker_loop</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data._utils</span> <span class="kn">import</span> <span class="n">worker</span> <span class="k">as</span> <span class="n">z</span>
 </pre></div>
 
     </div>
@@ -116,7 +116,7 @@ nb_path: "nbs/05_data.test_async.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>_worker_loop<span class="o">??</span>
+<div class=" highlight hl-ipython3"><pre><span></span>z<span class="o">??</span>
 </pre></div>
 
     </div>
@@ -131,24 +131,127 @@ nb_path: "nbs/05_data.test_async.ipynb"
 
 
 <div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span>
-_worker_loop<span class="ansi-blue-fg">(</span>
-    dataset_kind<span class="ansi-blue-fg">,</span>
-    dataset<span class="ansi-blue-fg">,</span>
-    index_queue<span class="ansi-blue-fg">,</span>
-    data_queue<span class="ansi-blue-fg">,</span>
-    done_event<span class="ansi-blue-fg">,</span>
-    auto_collation<span class="ansi-blue-fg">,</span>
-    collate_fn<span class="ansi-blue-fg">,</span>
-    drop_last<span class="ansi-blue-fg">,</span>
-    seed<span class="ansi-blue-fg">,</span>
-    init_fn<span class="ansi-blue-fg">,</span>
-    worker_id<span class="ansi-blue-fg">,</span>
-    num_workers<span class="ansi-blue-fg">,</span>
-    persistent_workers<span class="ansi-blue-fg">,</span>
-<span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
-<span class="ansi-red-fg">Source:</span>   
+<pre><span class="ansi-red-fg">Type:</span>        module
+<span class="ansi-red-fg">String form:</span> &lt;module &#39;torch.utils.data._utils.worker&#39; from &#39;/opt/conda/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py&#39;&gt;
+<span class="ansi-red-fg">File:</span>        /opt/conda/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py
+<span class="ansi-red-fg">Source:</span>     
+<span class="ansi-blue-fg">r&#34;&#34;&#34;&#34;Contains definitions of the methods used by the _BaseDataLoaderIter workers.</span>
+
+<span class="ansi-blue-fg">These **needs** to be in global scope since Py2 doesn&#39;t support serializing</span>
+<span class="ansi-blue-fg">static methods.</span>
+<span class="ansi-blue-fg">&#34;&#34;&#34;</span>
+
+<span class="ansi-green-fg">import</span> torch
+<span class="ansi-green-fg">import</span> random
+<span class="ansi-green-fg">import</span> os
+<span class="ansi-green-fg">from</span> collections <span class="ansi-green-fg">import</span> namedtuple
+<span class="ansi-green-fg">from</span> torch<span class="ansi-blue-fg">.</span>_six <span class="ansi-green-fg">import</span> queue
+<span class="ansi-green-fg">from</span> torch<span class="ansi-blue-fg">.</span>_utils <span class="ansi-green-fg">import</span> ExceptionWrapper
+<span class="ansi-green-fg">from</span> typing <span class="ansi-green-fg">import</span> Union
+<span class="ansi-green-fg">from</span> <span class="ansi-blue-fg">.</span> <span class="ansi-green-fg">import</span> signal_handling<span class="ansi-blue-fg">,</span> MP_STATUS_CHECK_INTERVAL<span class="ansi-blue-fg">,</span> IS_WINDOWS
+
+<span class="ansi-green-fg">if</span> IS_WINDOWS<span class="ansi-blue-fg">:</span>
+    <span class="ansi-green-fg">import</span> ctypes
+    <span class="ansi-green-fg">from</span> ctypes<span class="ansi-blue-fg">.</span>wintypes <span class="ansi-green-fg">import</span> DWORD<span class="ansi-blue-fg">,</span> BOOL<span class="ansi-blue-fg">,</span> HANDLE
+
+    <span class="ansi-red-fg"># On Windows, the parent ID of the worker process remains unchanged when the manager process</span>
+    <span class="ansi-red-fg"># is gone, and the only way to check it through OS is to let the worker have a process handle</span>
+    <span class="ansi-red-fg"># of the manager and ask if the process status has changed.</span>
+    <span class="ansi-green-fg">class</span> ManagerWatchdog<span class="ansi-blue-fg">(</span>object<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            self<span class="ansi-blue-fg">.</span>manager_pid <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>getppid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+            <span class="ansi-red-fg"># mypy cannot detect this code is windows only</span>
+            self<span class="ansi-blue-fg">.</span>kernel32 <span class="ansi-blue-fg">=</span> ctypes<span class="ansi-blue-fg">.</span>WinDLL<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;kernel32&#39;</span><span class="ansi-blue-fg">,</span> use_last_error<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># type: ignore</span>
+            self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>OpenProcess<span class="ansi-blue-fg">.</span>argtypes <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>DWORD<span class="ansi-blue-fg">,</span> BOOL<span class="ansi-blue-fg">,</span> DWORD<span class="ansi-blue-fg">)</span>
+            self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>OpenProcess<span class="ansi-blue-fg">.</span>restype <span class="ansi-blue-fg">=</span> HANDLE
+            self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>WaitForSingleObject<span class="ansi-blue-fg">.</span>argtypes <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>HANDLE<span class="ansi-blue-fg">,</span> DWORD<span class="ansi-blue-fg">)</span>
+            self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>WaitForSingleObject<span class="ansi-blue-fg">.</span>restype <span class="ansi-blue-fg">=</span> DWORD
+
+            <span class="ansi-red-fg"># Value obtained from https://msdn.microsoft.com/en-us/library/ms684880.aspx</span>
+            SYNCHRONIZE <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0x00100000</span>
+            self<span class="ansi-blue-fg">.</span>manager_handle <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>OpenProcess<span class="ansi-blue-fg">(</span>SYNCHRONIZE<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>manager_pid<span class="ansi-blue-fg">)</span>
+
+            <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>manager_handle<span class="ansi-blue-fg">:</span>
+                <span class="ansi-green-fg">raise</span> ctypes<span class="ansi-blue-fg">.</span>WinError<span class="ansi-blue-fg">(</span>ctypes<span class="ansi-blue-fg">.</span>get_last_error<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># type: ignore</span>
+
+            self<span class="ansi-blue-fg">.</span>manager_dead <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+
+        <span class="ansi-green-fg">def</span> is_alive<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>manager_dead<span class="ansi-blue-fg">:</span>
+                <span class="ansi-red-fg"># Value obtained from https://msdn.microsoft.com/en-us/library/windows/desktop/ms687032.aspx</span>
+                self<span class="ansi-blue-fg">.</span>manager_dead <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>kernel32<span class="ansi-blue-fg">.</span>WaitForSingleObject<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>manager_handle<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span>
+            <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>manager_dead
+<span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-green-fg">class</span> ManagerWatchdog<span class="ansi-blue-fg">(</span>object<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># type: ignore[no-redef]</span>
+        <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            self<span class="ansi-blue-fg">.</span>manager_pid <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>getppid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+            self<span class="ansi-blue-fg">.</span>manager_dead <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+
+        <span class="ansi-green-fg">def</span> is_alive<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>manager_dead<span class="ansi-blue-fg">:</span>
+                self<span class="ansi-blue-fg">.</span>manager_dead <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>getppid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">!=</span> self<span class="ansi-blue-fg">.</span>manager_pid
+            <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>manager_dead
+
+_worker_info <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">None</span>
+
+
+<span class="ansi-green-fg">class</span> WorkerInfo<span class="ansi-blue-fg">(</span>object<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    __initialized <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">False</span>
+
+    <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-green-fg">for</span> k<span class="ansi-blue-fg">,</span> v <span class="ansi-green-fg">in</span> kwargs<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+            setattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">,</span> v<span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>__keys <span class="ansi-blue-fg">=</span> tuple<span class="ansi-blue-fg">(</span>kwargs<span class="ansi-blue-fg">.</span>keys<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>__initialized <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
+
+    <span class="ansi-green-fg">def</span> __setattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">,</span> val<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>__initialized<span class="ansi-blue-fg">:</span>
+            <span class="ansi-green-fg">raise</span> RuntimeError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Cannot assign attributes to {} objects&#34;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">.</span>__name__<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> super<span class="ansi-blue-fg">(</span>WorkerInfo<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__setattr__<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> val<span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        items <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+        <span class="ansi-green-fg">for</span> k <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>__keys<span class="ansi-blue-fg">:</span>
+            items<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;{}={}&#39;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>k<span class="ansi-blue-fg">,</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">&#39;{}({})&#39;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">.</span>__name__<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;, &#39;</span><span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+
+<span class="ansi-green-fg">def</span> get_worker_info<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-blue-fg">r&#34;&#34;&#34;Returns the information about the current</span>
+<span class="ansi-blue-fg">    :class:`~torch.utils.data.DataLoader` iterator worker process.</span>
+
+<span class="ansi-blue-fg">    When called in a worker, this returns an object guaranteed to have the</span>
+<span class="ansi-blue-fg">    following attributes:</span>
+
+<span class="ansi-blue-fg">    * :attr:`id`: the current worker id.</span>
+<span class="ansi-blue-fg">    * :attr:`num_workers`: the total number of workers.</span>
+<span class="ansi-blue-fg">    * :attr:`seed`: the random seed set for the current worker. This value is</span>
+<span class="ansi-blue-fg">      determined by main process RNG and the worker id. See</span>
+<span class="ansi-blue-fg">      :class:`~torch.utils.data.DataLoader`&#39;s documentation for more details.</span>
+<span class="ansi-blue-fg">    * :attr:`dataset`: the copy of the dataset object in **this** process. Note</span>
+<span class="ansi-blue-fg">      that this will be a different object in a different process than the one</span>
+<span class="ansi-blue-fg">      in the main process.</span>
+
+<span class="ansi-blue-fg">    When called in the main process, this returns ``None``.</span>
+
+<span class="ansi-blue-fg">    .. note::</span>
+<span class="ansi-blue-fg">       When used in a :attr:`worker_init_fn` passed over to</span>
+<span class="ansi-blue-fg">       :class:`~torch.utils.data.DataLoader`, this method can be useful to</span>
+<span class="ansi-blue-fg">       set up each worker process differently, for instance, using ``worker_id``</span>
+<span class="ansi-blue-fg">       to configure the ``dataset`` object to only read a specific fraction of a</span>
+<span class="ansi-blue-fg">       sharded dataset, or use ``seed`` to seed other libraries used in dataset</span>
+<span class="ansi-blue-fg">       code (e.g., NumPy).</span>
+<span class="ansi-blue-fg">    &#34;&#34;&#34;</span>
+    <span class="ansi-green-fg">return</span> _worker_info
+
+
+<span class="ansi-blue-fg">r&#34;&#34;&#34;Dummy class used to signal the end of an IterableDataset&#34;&#34;&#34;</span>
+_IterableDatasetStopIteration <span class="ansi-blue-fg">=</span> namedtuple<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;_IterableDatasetStopIteration&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;worker_id&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-blue-fg">r&#34;&#34;&#34;Dummy class used to resume the fetching when worker reuse is enabled&#34;&#34;&#34;</span>
+_ResumeIteration <span class="ansi-blue-fg">=</span> namedtuple<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;_ResumeIteration&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+
 <span class="ansi-green-fg">def</span> _worker_loop<span class="ansi-blue-fg">(</span>dataset_kind<span class="ansi-blue-fg">,</span> dataset<span class="ansi-blue-fg">,</span> index_queue<span class="ansi-blue-fg">,</span> data_queue<span class="ansi-blue-fg">,</span> done_event<span class="ansi-blue-fg">,</span>
                  auto_collation<span class="ansi-blue-fg">,</span> collate_fn<span class="ansi-blue-fg">,</span> drop_last<span class="ansi-blue-fg">,</span> seed<span class="ansi-blue-fg">,</span> init_fn<span class="ansi-blue-fg">,</span> worker_id<span class="ansi-blue-fg">,</span>
                  num_workers<span class="ansi-blue-fg">,</span> persistent_workers<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
@@ -251,8 +354,183 @@ _worker_loop<span class="ansi-blue-fg">(</span>
     <span class="ansi-green-fg">if</span> done_event<span class="ansi-blue-fg">.</span>is_set<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
         data_queue<span class="ansi-blue-fg">.</span>cancel_join_thread<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
         data_queue<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py
-<span class="ansi-red-fg">Type:</span>      function
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.learner</span> <span class="kn">import</span> <span class="n">Learner</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.test_utils</span> <span class="kn">import</span> <span class="n">synth_learner</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">synth_learner</span><span class="p">()</span><span class="o">.</span><span class="n">show_training_loop</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Start Fit
+   - before_fit     : [TrainEvalCallback, Recorder]
+  Start Epoch Loop
+     - before_epoch   : [Recorder]
+    Start Train
+       - before_train   : [TrainEvalCallback, Recorder]
+      Start Batch Loop
+         - before_batch   : []
+         - after_pred     : []
+         - after_loss     : []
+         - before_backward: []
+         - before_step    : []
+         - after_step     : []
+         - after_cancel_batch: []
+         - after_batch    : [TrainEvalCallback, Recorder]
+      End Batch Loop
+    End Train
+     - after_cancel_train: [Recorder]
+     - after_train    : [Recorder]
+    Start Valid
+       - before_validate: [TrainEvalCallback, Recorder]
+      Start Batch Loop
+         - **CBs same as train batch**: []
+      End Batch Loop
+    End Valid
+     - after_cancel_validate: [Recorder]
+     - after_validate : [Recorder]
+  End Epoch Loop
+   - after_cancel_epoch: []
+   - after_epoch    : [Recorder]
+End Fit
+ - after_cancel_fit: []
+ - after_fit      : []
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>TestDataset<span class="o">??</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre><span class="ansi-red-fg">Init signature:</span> TestDataset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwds<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span>     
+An abstract class representing a :class:`Dataset`.
+
+All datasets that represent a map from keys to data samples should subclass
+it. All subclasses should overwrite :meth:`__getitem__`, supporting fetching a
+data sample for a given key. Subclasses could also optionally overwrite
+:meth:`__len__`, which is expected to return the size of the dataset by many
+:class:`~torch.utils.data.Sampler` implementations and the default options
+of :class:`~torch.utils.data.DataLoader`.
+
+.. note::
+  :class:`~torch.utils.data.DataLoader` by default constructs a index
+  sampler that yields integral indices.  To make it work with a map-style
+  dataset with non-integral indices/keys, a custom sampler must be provided.
+<span class="ansi-red-fg">Source:</span>        
+<span class="ansi-green-fg">class</span> TestDataset<span class="ansi-blue-fg">(</span>Dataset<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+    <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>policy<span class="ansi-blue-fg">,</span>device<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;cpu&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        self<span class="ansi-blue-fg">.</span>policy<span class="ansi-blue-fg">=</span>policy
+        self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">=</span>device
+        self<span class="ansi-blue-fg">.</span>policy<span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+
+        self<span class="ansi-blue-fg">.</span>pids<span class="ansi-blue-fg">=</span>mp<span class="ansi-blue-fg">.</span>Queue<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>pids<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span>os<span class="ansi-blue-fg">.</span>getpid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>envs<span class="ansi-blue-fg">=</span>mp<span class="ansi-blue-fg">.</span>Queue<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>envs<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span>os<span class="ansi-blue-fg">.</span>getpid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+        self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">=</span>gym<span class="ansi-blue-fg">.</span>make<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;CartPole-v1&#39;</span><span class="ansi-blue-fg">)</span>
+
+    <span class="ansi-green-fg">def</span> __len__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-cyan-fg">100</span>
+    <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span>idx<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+        self<span class="ansi-blue-fg">.</span>pids<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span>os<span class="ansi-blue-fg">.</span>getpid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        self<span class="ansi-blue-fg">.</span>envs<span class="ansi-blue-fg">.</span>put<span class="ansi-blue-fg">(</span>id<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-red-fg">#             env=gym.make(&#39;CartPole-v1&#39;)</span>
+            next_state<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">.</span>reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+            print<span class="ansi-blue-fg">(</span>id<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39; &#39;</span><span class="ansi-blue-fg">)</span>
+            print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;pid is: &#39;</span><span class="ansi-blue-fg">,</span>os<span class="ansi-blue-fg">.</span>getpid<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>flush<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+            next_state<span class="ansi-blue-fg">,</span> r<span class="ansi-blue-fg">,</span> is_done<span class="ansi-blue-fg">,</span> _<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>policy<span class="ansi-blue-fg">(</span>Tensor<span class="ansi-blue-fg">(</span>next_state<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>cpu<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>numpy<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">if</span> is_done<span class="ansi-blue-fg">:</span>next_state<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>env<span class="ansi-blue-fg">.</span>reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">return</span> Tensor<span class="ansi-blue-fg">(</span>next_state<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+        <span class="ansi-green-fg">except</span> Exception <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+            print<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">)</span>
+            <span class="ansi-green-fg">return</span> Tensor<span class="ansi-blue-fg">(</span>np<span class="ansi-blue-fg">.</span>random<span class="ansi-blue-fg">.</span>rand<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>device<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">File:</span>           ~/fastrl/fastrl/data/block.py
+<span class="ansi-red-fg">Type:</span>           type
+<span class="ansi-red-fg">Subclasses:</span>     
 </pre>
 </div>
 
@@ -284,9 +562,27 @@ _worker_loop<span class="ansi-blue-fg">(</span>
     <span class="kn">from</span> <span class="nn">fastai.data.all</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="c1"># Local modules</span>
     <span class="kn">from</span> <span class="nn">fastrl.data.block</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">Adam</span>
 
-    <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">DQN</span><span class="p">(),</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">()),</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="n">dqn</span><span class="o">=</span><span class="n">DQN</span><span class="p">()</span><span class="o">.</span><span class="n">share_memory</span><span class="p">()</span>
+    <span class="n">opt</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">dqn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">=</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">dqn</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">default_device</span><span class="p">())</span>
+    
+    <span class="n">dl</span><span class="o">=</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">persistent_workers</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dl</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">dqn</span><span class="o">.</span><span class="n">policy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">target</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">loss</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()(</span><span class="n">out</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+            <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">ds</span><span class="o">.</span><span class="n">pids</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">pids</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">ds</span><span class="o">.</span><span class="n">envs</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">envs</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -299,107 +595,79 @@ _worker_loop<span class="ansi-blue-fg">(</span>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>tensor([[ 3.1982e-02, -1.9606e-01,  1.7988e-02,  3.3937e-01],
-        [-4.4548e-02, -1.8212e-01, -5.5402e-03,  2.7060e-01],
-        [-1.2085e-02, -2.1306e-01, -3.6754e-02,  2.3259e-01],
-        [ 3.0541e-02, -1.8240e-01,  2.4689e-04,  2.5140e-01],
-        [-3.7454e-02, -2.2009e-01,  7.3438e-03,  2.4971e-01],
-        [-3.1613e-02, -2.2044e-01, -2.9993e-03,  3.0758e-01],
-        [-3.7174e-02, -1.6761e-01,  1.0438e-02,  2.8658e-01],
-        [-3.5444e-02, -1.4556e-01,  3.8486e-03,  3.2915e-01],
-        [-4.1011e-02, -1.6898e-01, -4.4171e-02,  2.3730e-01],
-        [-3.7298e-02, -1.7739e-01,  2.3306e-02,  3.4065e-01],
-        [ 9.8450e-03, -1.9917e-01,  2.5299e-02,  3.4605e-01],
-        [ 3.2876e-02, -1.7071e-01, -8.2348e-03,  2.6357e-01],
-        [-4.0551e-02, -2.0944e-01,  4.5915e-02,  3.3694e-01],
-        [ 4.5196e-02, -2.1558e-01, -3.8922e-02,  2.4258e-01],
-        [ 3.1701e-02, -2.2668e-01,  2.0158e-02,  2.7301e-01],
-        [ 1.7571e-02, -1.7488e-01, -2.2368e-02,  2.9490e-01],
-        [ 1.3162e-02, -2.0824e-01, -1.7569e-02,  2.4609e-01],
-        [-2.5874e-02, -1.9702e-01,  4.6992e-02,  3.0182e-01],
-        [ 5.8794e-03, -1.9782e-01,  7.3330e-03,  2.7967e-01],
-        [ 1.6058e-02, -1.5818e-01, -4.4459e-02,  2.7090e-01],
-        [ 4.0467e-02, -2.1640e-01, -4.3846e-02,  3.2755e-01],
-        [-6.7249e-03, -1.7382e-01, -4.0132e-02,  3.1344e-01],
-        [-3.4221e-02, -1.5465e-01, -9.9124e-03,  3.1821e-01],
-        [-1.1407e-02, -2.3711e-01,  3.5382e-02,  2.8337e-01],
-        [ 3.5294e-02, -1.6914e-01, -1.0544e-02,  2.8922e-01],
-        [ 7.5888e-03, -2.2531e-01, -3.7116e-02,  2.6556e-01],
-        [-4.8667e-02, -2.2514e-01,  1.3042e-02,  3.1217e-01],
-        [ 5.0294e-02, -1.6118e-01, -4.7534e-02,  2.3822e-01],
-        [ 4.0876e-02, -2.1237e-01,  1.8762e-02,  2.5545e-01],
-        [-3.7945e-02, -1.6680e-01,  5.2428e-03,  3.1058e-01],
-        [ 4.8843e-02, -2.1649e-01,  4.4443e-03,  3.1594e-01],
-        [ 4.0607e-02, -2.2798e-01,  2.3496e-02,  2.8640e-01],
-        [ 4.3622e-02, -2.4003e-01, -6.0357e-03,  2.6220e-01],
-        [-2.5724e-02, -2.1597e-01,  4.8983e-02,  3.2791e-01],
-        [ 9.8121e-03, -2.3318e-01, -4.1266e-02,  2.3340e-01],
-        [ 1.2188e-03, -2.0825e-01, -1.8654e-02,  3.1643e-01],
-        [ 3.8956e-02, -2.0528e-01, -3.6510e-02,  2.9617e-01],
-        [-2.1703e-02, -1.9410e-01, -8.9807e-03,  3.0379e-01],
-        [ 4.1329e-02, -2.3934e-01, -4.6731e-02,  2.4279e-01],
-        [-4.0021e-03, -2.1464e-01, -1.8365e-02,  2.9510e-01],
-        [ 1.5995e-03, -2.2658e-01,  3.1101e-03,  3.0491e-01],
-        [-2.1966e-02, -1.4701e-01,  3.0097e-02,  2.6843e-01],
-        [-2.6830e-02, -2.3242e-01, -3.3764e-02,  2.7878e-01],
-        [ 3.5623e-03, -1.9236e-01,  2.3578e-02,  2.6466e-01],
-        [ 2.5730e-02, -1.9499e-01,  6.1328e-04,  2.4425e-01],
-        [-2.4885e-02, -1.7824e-01,  3.2297e-03,  3.2245e-01],
-        [-4.6690e-02, -2.0845e-01,  6.4807e-03,  3.2491e-01],
-        [ 7.8578e-03, -1.7784e-01,  4.4793e-02,  3.4828e-01],
-        [-2.3405e-02, -2.1903e-01, -3.3397e-02,  2.6387e-01],
-        [-3.1268e-03, -1.5385e-01,  6.3957e-03,  3.2861e-01]], device=&#39;cuda:0&#39;)
-tensor([[ 0.0442, -0.1622,  0.0008,  0.3179],
-        [ 0.0361, -0.1508, -0.0005,  0.3220],
-        [-0.0164, -0.1835, -0.0311,  0.3308],
-        [ 0.0479, -0.1479, -0.0403,  0.2837],
-        [ 0.0062, -0.1883, -0.0142,  0.2948],
-        [-0.0395, -0.1908, -0.0331,  0.2333],
-        [-0.0412, -0.2119,  0.0448,  0.3186],
-        [-0.0414, -0.2382, -0.0209,  0.2903],
-        [-0.0423, -0.2303,  0.0073,  0.2813],
-        [-0.0263, -0.1724, -0.0261,  0.3065],
-        [-0.0005, -0.2047, -0.0138,  0.3181],
-        [ 0.0457, -0.1654,  0.0138,  0.2601],
-        [-0.0311, -0.2145,  0.0285,  0.3203],
-        [ 0.0038, -0.1863,  0.0215,  0.3314],
-        [-0.0358, -0.2425, -0.0406,  0.2300],
-        [-0.0027, -0.1848, -0.0339,  0.3223],
-        [-0.0450, -0.2124,  0.0372,  0.3193],
-        [ 0.0146, -0.2315,  0.0094,  0.3030],
-        [ 0.0216, -0.1548, -0.0252,  0.3194],
-        [ 0.0145, -0.2159, -0.0044,  0.2704],
-        [-0.0290, -0.2426,  0.0020,  0.3163],
-        [ 0.0374, -0.1599, -0.0142,  0.3048],
-        [ 0.0267, -0.1740, -0.0281,  0.2444],
-        [ 0.0350, -0.1722, -0.0247,  0.3098],
-        [-0.0047, -0.2439, -0.0214,  0.3288],
-        [ 0.0454, -0.2171,  0.0116,  0.3047],
-        [ 0.0022, -0.1908, -0.0498,  0.2420],
-        [ 0.0018, -0.1742,  0.0167,  0.2653],
-        [ 0.0139, -0.1855,  0.0207,  0.3415],
-        [-0.0064, -0.1582,  0.0384,  0.3421],
-        [-0.0387, -0.2284,  0.0503,  0.3397],
-        [ 0.0041, -0.1627,  0.0026,  0.2801],
-        [ 0.0465, -0.2170, -0.0378,  0.2675],
-        [-0.0038, -0.1734, -0.0223,  0.2608],
-        [ 0.0207, -0.1456, -0.0140,  0.3270],
-        [ 0.0129, -0.2373, -0.0057,  0.3125],
-        [-0.0138, -0.2159,  0.0076,  0.2543],
-        [-0.0150, -0.1550,  0.0392,  0.3059],
-        [-0.0281, -0.2139,  0.0459,  0.3460],
-        [ 0.0325, -0.2065, -0.0155,  0.2829],
-        [ 0.0311, -0.1680,  0.0453,  0.3538],
-        [ 0.0466, -0.1992, -0.0428,  0.2797],
-        [-0.0395, -0.1808,  0.0412,  0.2558],
-        [ 0.0198, -0.1659, -0.0076,  0.3239],
-        [ 0.0083, -0.1827, -0.0498,  0.2688],
-        [ 0.0200, -0.2220, -0.0065,  0.3215],
-        [ 0.0342, -0.2386,  0.0395,  0.3054],
-        [ 0.0030, -0.2034, -0.0397,  0.2921],
-        [ 0.0116, -0.2025,  0.0203,  0.2650],
-        [-0.0296, -0.1545,  0.0036,  0.2577]], device=&#39;cuda:0&#39;)
-</pre>
+<pre>tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.8844, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.8049, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[-0.0353,  0.1899,  0.0222, -0.3078],
+        [ 0.0056,  0.1533,  0.0337, -0.3161],
+        [ 0.0202,  0.1772, -0.0246, -0.3179],
+        [ 0.0058,  0.1980,  0.0412, -0.2539],
+        [-0.0148,  0.2275, -0.0444, -0.3056]])
+tensor(0.7305, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.6765, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.6269, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[-0.0353,  0.1899,  0.0222, -0.3078],
+        [ 0.0056,  0.1533,  0.0337, -0.3161],
+        [ 0.0202,  0.1772, -0.0246, -0.3179],
+        [ 0.0058,  0.1980,  0.0412, -0.2539],
+        [-0.0148,  0.2275, -0.0444, -0.3056]])
+tensor(0.5819, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.5534, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.5289, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[-0.0353,  0.1899,  0.0222, -0.3078],
+        [ 0.0056,  0.1533,  0.0337, -0.3161],
+        [ 0.0202,  0.1772, -0.0246, -0.3179],
+        [ 0.0058,  0.1980,  0.0412, -0.2539],
+        [-0.0148,  0.2275, -0.0444, -0.3056]])
+tensor(0.5105, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.5029, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[ 0.0441,  0.1664,  0.0482, -0.3158],
+        [ 0.0238,  0.2068, -0.0211, -0.2508],
+        [ 0.0053,  0.1724,  0.0384, -0.2331],
+        [-0.0118,  0.2236,  0.0053, -0.2778],
+        [ 0.0426,  0.1874, -0.0471, -0.2632]])
+tensor(0.5002, grad_fn=&lt;MseLossBackward&gt;)
+tensor([[-0.0353,  0.1899,  0.0222, -0.3078],
+        [ 0.0056,  0.1533,  0.0337, -0.3161],
+        [ 0.0202,  0.1772, -0.0246, -0.3179],
+        [ 0.0058,  0.1980,  0.0412, -0.2539],
+        [-0.0148,  0.2275, -0.0444, -0.3056]])
+tensor(0.5037, grad_fn=&lt;MseLossBackward&gt;)
+5104 5872 5872 5872 5872 5872 5872 5872 5872 5872 5872 5873 5873 5873 5873 5873 5911 5911 5911 5911 5911 5910 5910 5910 5910 5910 5910 5910 5910 5910 5910 5948 5948 5948 5949 5948 5948 5949 5949 5948 5949 5948 5949 5948 5948 5948 5986 5986 5986 5986 5986 5986 5986 5986 5986 5986 5987 5987 5987 5987 5987 5104 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140111114378448 140519902260496 140519902260496 140519902260496 140519902260496 140519902260496 140189215718672 140189215718672 140189215718672 140189215718672 140189215718672 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139732953607440 139722517531856 139722517531856 139722517531856 140237354114320 139722517531856 139722517531856 140237354114320 139722517531856 140237354114320 140237354114320 139722517531856 140237354114320 139722517531856 139722517531856 139722517531856 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139896745520144 139716882521296 139716882521296 139716882521296 139716882521296 139716882521296 </pre>
 </div>
 </div>
 
