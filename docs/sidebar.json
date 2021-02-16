@@ -2,9 +2,11 @@
   "fastrl": {
     "Overview": "/",
     "Data Block": "data.block.html",
+    "Core": "core.html",
     "Nbdev Extensions": "nbdev_extension.html",
     "Async Testing": "data.test_async.html",
     "Synth Agent": "test_utils.html",
+    "Title": "Untitled.html",
     "Notebook Template": "nbdev_template.html"
   }
 }

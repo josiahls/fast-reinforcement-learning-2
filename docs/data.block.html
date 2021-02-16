@@ -26,21 +26,6 @@ nb_path: "nbs/05_data.block.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/lib/python3.7/site-packages/torch/cuda/__init__.py:52: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  /opt/conda/conda-bld/pytorch_1607370156314/work/c10/cuda/CUDAFunctions.cpp:100.)
-  return torch._C._cuda_getDeviceCount() &gt; 0
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -83,19 +68,30 @@ nb_path: "nbs/05_data.block.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Development of this was helped by <a href="https://github.com/pytorch/pytorch/blob/4949eea0ffb60dc81a0a78402fa59fdf68206718/torch/utils/data/dataset.py#L64">IterableData documentation on multiple workers</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This code is heavily modifed from <a href="https://github.com/Shmuma/ptan">https://github.com/Shmuma/ptan</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reference for env <a href="https://github.com/openai/universe/blob/master/doc/env_semantics.rst">semantics related to vectorized environments</a></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>store_attr<span class="o">??</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -103,37 +99,10 @@ nb_path: "nbs/05_data.block.ipynb"
 <div class="output_area">
 
 
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ExperienceSource" class="doc_header"><code>class</code> <code>ExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L123" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>vectorized</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
 
-<div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span>
-store_attr<span class="ansi-blue-fg">(</span>
-    names<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-    self<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-    but<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;&#39;</span><span class="ansi-blue-fg">,</span>
-    cast<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>
-    store_args<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span>
-    <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">,</span>
-<span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Source:</span>   
-<span class="ansi-green-fg">def</span> store_attr<span class="ansi-blue-fg">(</span>names<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> but<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;&#39;</span><span class="ansi-blue-fg">,</span> cast<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> store_args<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-    <span class="ansi-blue-fg">&#34;Store params named in comma-separated `names` from calling context into attrs in `self`&#34;</span>
-    fr <span class="ansi-blue-fg">=</span> sys<span class="ansi-blue-fg">.</span>_getframe<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
-    args <span class="ansi-blue-fg">=</span> argnames<span class="ansi-blue-fg">(</span>fr<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">:</span> args <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;self&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span> self <span class="ansi-blue-fg">=</span> fr<span class="ansi-blue-fg">.</span>f_locals<span class="ansi-blue-fg">[</span>args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span>
-    <span class="ansi-green-fg">if</span> store_args <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> store_args <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;__slots__&#39;</span><span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">if</span> store_args <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> hasattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__stored_args__&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> self<span class="ansi-blue-fg">.</span>__stored_args__ <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
-    anno <span class="ansi-blue-fg">=</span> annotations<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> cast <span class="ansi-green-fg">else</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
-    <span class="ansi-green-fg">if</span> names <span class="ansi-green-fg">and</span> isinstance<span class="ansi-blue-fg">(</span>names<span class="ansi-blue-fg">,</span>str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> names <span class="ansi-blue-fg">=</span> re<span class="ansi-blue-fg">.</span>split<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;, *&#39;</span><span class="ansi-blue-fg">,</span> names<span class="ansi-blue-fg">)</span>
-    ns <span class="ansi-blue-fg">=</span> names <span class="ansi-green-fg">if</span> names <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">else</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__slots__&#39;</span><span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-    added <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>n<span class="ansi-blue-fg">:</span>fr<span class="ansi-blue-fg">.</span>f_locals<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span> <span class="ansi-green-fg">for</span> n <span class="ansi-green-fg">in</span> ns<span class="ansi-blue-fg">}</span>
-    attrs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>added<span class="ansi-blue-fg">}</span>
-    <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>but<span class="ansi-blue-fg">,</span>str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> but <span class="ansi-blue-fg">=</span> re<span class="ansi-blue-fg">.</span>split<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;, *&#39;</span><span class="ansi-blue-fg">,</span> but<span class="ansi-blue-fg">)</span>
-    attrs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span>k<span class="ansi-blue-fg">:</span>v <span class="ansi-green-fg">for</span> k<span class="ansi-blue-fg">,</span>v <span class="ansi-green-fg">in</span> attrs<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> k <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> but<span class="ansi-blue-fg">}</span>
-    <span class="ansi-green-fg">return</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/fastcore/basics.py
-<span class="ansi-red-fg">Type:</span>      function
-</pre>
 </div>
 
 </div>
@@ -147,11 +116,102 @@ store_attr<span class="ansi-blue-fg">(</span>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.basics</span> <span class="kn">import</span> <span class="n">_store_attr</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">ExperienceSource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">n_envs</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">steps_count</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">steps_delta</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">vectorized</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">store_attr</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_envs</span><span class="p">)]</span>
+    
+    <span class="k">def</span> <span class="nf">init_env</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">env</span><span class="p">,</span><span class="n">states</span><span class="p">,</span><span class="n">histories</span><span class="p">,</span><span class="n">cur_rewards</span><span class="p">,</span><span class="n">cur_steps</span><span class="p">,</span><span class="n">env_lens</span><span class="p">):</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">obs</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorized</span><span class="p">:</span>
+            <span class="n">obs_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+            <span class="n">states</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">obs_len</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+        <span class="n">env_lens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs_len</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">obs_len</span><span class="p">):</span>
+            <span class="n">histories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">steps_count</span><span class="p">))</span>
+            <span class="n">cur_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">cur_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">states</span><span class="p">,</span><span class="n">histories</span><span class="p">,</span><span class="n">cur_rewards</span><span class="p">,</span><span class="n">cur_steps</span><span class="p">,</span><span class="n">env_lens</span><span class="o">=</span><span class="p">[],[],[],[],[]</span>
+
+        <span class="k">for</span> <span class="n">env</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_env</span><span class="p">(</span><span class="n">env</span><span class="p">,</span><span class="n">states</span><span class="p">,</span><span class="n">histories</span><span class="p">,</span><span class="n">cur_rewards</span><span class="p">,</span><span class="n">cur_steps</span><span class="p">,</span><span class="n">env_lens</span><span class="p">)</span>
+
+        <span class="n">iter_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+            <span class="n">states_input</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">states_indices</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actions</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>  <span class="c1"># assume that all envs are from the same family</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">states_input</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+                    <span class="n">states_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">states_input</span><span class="p">:</span>
+                <span class="n">states_actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="p">(</span><span class="n">states_input</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states_actions</span><span class="p">):</span>
+                    <span class="n">g_idx</span> <span class="o">=</span> <span class="n">states_indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="n">actions</span><span class="p">[</span><span class="n">g_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span>
+<span class="c1">#             grouped_actions = _group_list(actions, env_lens)</span>
+            <span class="n">grouped_actions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span><span class="n">env_lens</span><span class="p">[:])</span>
+
+            <span class="n">global_ofs</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">env_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">action_n</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">,</span> <span class="n">grouped_actions</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorized</span><span class="p">:</span>
+                    <span class="n">next_state_n</span><span class="p">,</span> <span class="n">r_n</span><span class="p">,</span> <span class="n">is_done_n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action_n</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">next_state</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">is_done</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action_n</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">next_state_n</span><span class="p">,</span> <span class="n">r_n</span><span class="p">,</span> <span class="n">is_done_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">next_state</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="p">[</span><span class="n">is_done</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">ofs</span><span class="p">,</span> <span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">is_done</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">action_n</span><span class="p">,</span> <span class="n">next_state_n</span><span class="p">,</span> <span class="n">r_n</span><span class="p">,</span> <span class="n">is_done_n</span><span class="p">)):</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="n">global_ofs</span> <span class="o">+</span> <span class="n">ofs</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="n">history</span> <span class="o">=</span> <span class="n">histories</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+                    <span class="n">cur_rewards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span>
+                    <span class="n">cur_steps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span><span class="n">next_state</span><span class="o">=</span><span class="n">next_state</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">done</span><span class="o">=</span><span class="n">is_done</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="n">cur_steps</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">episode_reward</span><span class="o">=</span><span class="n">cur_rewards</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">env</span><span class="o">=</span><span class="n">env_idx</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps_count</span> <span class="ow">and</span> <span class="n">iter_idx</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps_delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+                    <span class="n">states</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span>
+                    <span class="k">if</span> <span class="n">is_done</span><span class="p">:</span>
+                        <span class="c1"># in case of very short episode (shorter than our steps count), send gathered history</span>
+                        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">steps_count</span><span class="p">:</span>
+                            <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+                        <span class="c1"># generate tail of history</span>
+                        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">history</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">history</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+                            <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+                        <span class="n">cur_rewards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+                        <span class="n">cur_steps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="c1"># vectorized envs are reset automatically</span>
+                        <span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+                        <span class="n">states</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorized</span> <span class="k">else</span> <span class="kc">None</span>
+                        <span class="n">history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">global_ofs</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">action_n</span><span class="p">)</span>
+            <span class="n">iter_idx</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -168,7 +228,14 @@ store_attr<span class="ansi-blue-fg">(</span>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>_store_attr<span class="o">??</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agent</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">data</span><span class="o">=</span><span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">e</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ExperienceSource</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">steps_count</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">70</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span>
 </pre></div>
 
     </div>
@@ -181,20 +248,161 @@ store_attr<span class="ansi-blue-fg">(</span>
 <div class="output_area">
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
-<span class="ansi-red-fg">Source:</span>   
-<span class="ansi-green-fg">def</span> _store_attr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> anno<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>attrs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-    stored <span class="ansi-blue-fg">=</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;__stored_args__&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
-    <span class="ansi-green-fg">for</span> n<span class="ansi-blue-fg">,</span>v <span class="ansi-green-fg">in</span> attrs<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-        <span class="ansi-green-fg">if</span> n <span class="ansi-green-fg">in</span> anno<span class="ansi-blue-fg">:</span> v <span class="ansi-blue-fg">=</span> anno<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">(</span>v<span class="ansi-blue-fg">)</span>
-        setattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> n<span class="ansi-blue-fg">,</span> v<span class="ansi-blue-fg">)</span>
-        <span class="ansi-green-fg">if</span> stored <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span> stored<span class="ansi-blue-fg">[</span>n<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> v
-<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/fastcore/basics.py
-<span class="ansi-red-fg">Type:</span>      function
-</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>next_state</th>
+      <th>action</th>
+      <th>reward</th>
+      <th>done</th>
+      <th>steps</th>
+      <th>episode_reward</th>
+      <th>env</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[-0.04456399437492168, 0.04653909372423204, 0.013269094558410327, -0.020998265615229175]</td>
+      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
+      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
+      <td>[-0.05349009483065021, -0.5394480966584043, 0.02981694322928008, 0.8709609494144344]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>3</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
+      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>2</td>
+      <td>2.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
+      <td>[-0.05349009483065021, -0.5394480966584043, 0.02981694322928008, 0.8709609494144344]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>3</td>
+      <td>3.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>[-0.09759162379326478, -1.1265756817485255, 0.10029304257894092, 1.7938742678977837]</td>
+      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>7</td>
+      <td>7.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
+      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>8</td>
+      <td>8.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>186</th>
+      <td>[-0.09759162379326478, -1.1265756817485255, 0.10029304257894092, 1.7938742678977837]</td>
+      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>7</td>
+      <td>7.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
+      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>8</td>
+      <td>8.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>188</th>
+      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
+      <td>[-0.17695372960940536, -1.7149992375160745, 0.22743891884970535, 2.7891783503303884]</td>
+      <td>0</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>9</td>
+      <td>9.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>189 rows × 8 columns</p>
+</div>
 </div>
 
 </div>
@@ -345,28 +553,6 @@ dataset's :meth:<code>__iter__</code> method or the :class:<code>~torch.utils.da
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 

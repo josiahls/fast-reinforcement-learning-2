@@ -13,6 +13,9 @@ entries:
       title: Data Block
       url: data.block.html
     - output: web,pdf
+      title: Core
+      url: core.html
+    - output: web,pdf
       title: Nbdev Extensions
       url: nbdev_extension.html
     - output: web,pdf
@@ -21,6 +24,9 @@ entries:
     - output: web,pdf
       title: Synth Agent
       url: test_utils.html
+    - output: web,pdf
+      title: Title
+      url: Untitled.html
     - output: web,pdf
       title: Notebook Template
       url: nbdev_template.html
