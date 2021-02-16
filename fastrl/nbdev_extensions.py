@@ -3,16 +3,6 @@
 __all__ = ['dependencies', 'create_conda_yaml', 'create_conda_yamls']
 
 # Cell
-from nbdev.showdoc import *
-from nbdev.imports import *
-if not os.environ.get("IN_TEST", None):
-    assert IN_NOTEBOOK
-    assert not IN_COLAB
-    assert IN_IPYTHON
-
-import yaml
-
-# Cell
 def dependencies(dev:bool=False,cfg_name='settings.ini'):
     "Gets a list of dependencies in a `cfg_name` for conda compatability."
     c=Config(cfg_name)

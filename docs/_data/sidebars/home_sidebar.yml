@@ -25,9 +25,6 @@ entries:
       title: Synth Agent
       url: test_utils.html
     - output: web,pdf
-      title: Title
-      url: Untitled.html
-    - output: web,pdf
       title: Notebook Template
       url: nbdev_template.html
     output: web
