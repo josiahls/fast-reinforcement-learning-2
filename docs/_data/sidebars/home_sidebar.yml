@@ -11,7 +11,7 @@ entries:
       url: /
     - output: web,pdf
       title: Data Block
-      url: data.block.html
+      url: fastai_usecase_1_wif.html
     - output: web,pdf
       title: Core
       url: core.html
