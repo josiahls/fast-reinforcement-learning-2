@@ -39,6 +39,27 @@ nb_path: "nbs/05_data.block.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">torch.multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -47,7 +68,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
+<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L26" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
 </blockquote>
 <p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
 
@@ -107,7 +128,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>funcs_kwargs<span class="o">?</span>
+<div class=" highlight hl-ipython3"><pre><span></span>D.mapv<span class="o">?</span>
 </pre></div>
 
     </div>
@@ -122,9 +143,9 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_text output_subarea ">
-<pre><span class="ansi-red-fg">Signature:</span> funcs_kwargs<span class="ansi-blue-fg">(</span>as_method<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-red-fg">Docstring:</span> Replace methods in `cls._methods` with those from `kwargs`
-<span class="ansi-red-fg">File:</span>      /opt/conda/lib/python3.7/site-packages/fastcore/meta.py
+<pre><span class="ansi-red-fg">Signature:</span> D<span class="ansi-blue-fg">.</span>mapv<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> gen<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span> wise<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;value&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span> &lt;no docstring&gt;
+<span class="ansi-red-fg">File:</span>      ~/fastrl/fastrl/core.py
 <span class="ansi-red-fg">Type:</span>      function
 </pre>
 </div>
@@ -148,7 +169,160 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSource" class="doc_header"><code>class</code> <code>ExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L123" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>vectorized</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="init_experience" class="doc_header"><code>init_experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_experience</code>(<strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+</blockquote>
+<p>Returns dictionary with default values that can be overridden.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">init_experience</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;state&#39;: 0,
+ &#39;action&#39;: 0,
+ &#39;next_state&#39;: 0,
+ &#39;reward&#39;: 0,
+ &#39;done&#39;: False,
+ &#39;step&#39;: 0,
+ &#39;steps&#39;: 0,
+ &#39;n_env&#39;: 0,
+ &#39;image&#39;: 0}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">init_experience</span><span class="p">(</span><span class="n">but</span><span class="o">=</span><span class="s1">&#39;image,step&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;state&#39;: 0,
+ &#39;action&#39;: 0,
+ &#39;next_state&#39;: 0,
+ &#39;reward&#39;: 0,
+ &#39;done&#39;: False,
+ &#39;steps&#39;: 0,
+ &#39;n_env&#39;: 0}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">([</span><span class="n">init_experience</span><span class="p">(),</span><span class="n">init_experience</span><span class="p">()],</span><span class="n">init_experience</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;state&#39;: (#3) [0,0,0],
+ &#39;action&#39;: (#3) [0,0,0],
+ &#39;next_state&#39;: (#3) [0,0,0],
+ &#39;reward&#39;: (#3) [0,0,0],
+ &#39;done&#39;: (#3) [False,False,False],
+ &#39;step&#39;: (#3) [0,0,0],
+ &#39;steps&#39;: (#3) [0,0,0],
+ &#39;n_env&#39;: (#3) [0,0,0],
+ &#39;image&#39;: (#3) [0,0,0]}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="FakeAgent" class="doc_header"><code>class</code> <code>FakeAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L138" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FakeAgent</code>(<strong><code>action_space</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -165,6 +339,66 @@ nb_path: "nbs/05_data.block.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ExperienceSource" class="doc_header"><code>class</code> <code>ExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L143" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Stateful</code></p>
+</blockquote>
+<p>Iterates through <code>n_envs</code> of <code>env</code> feeding experience or states into <code>agent</code>.
+If <code>agent</code> is None, then random actions will be taken instead.
+It will return <code>steps_count</code> experiences every <code>steps_delta</code>.
+At the end of an env, it will return <code>steps_count-1</code> experiences per next.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="SourceDataset" class="doc_header"><code>class</code> <code>SourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L211" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
+</blockquote>
+<p>Iterates through a <code>source</code> object. Allows for re-initing source connections when <code>num_workers&gt;0</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 </div>
     {% endraw %}
 
@@ -175,12 +409,8 @@ nb_path: "nbs/05_data.block.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TestDataset</span><span class="p">(</span><span class="n">IterableDataset</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> <span class="n">store_attr</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wif</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
-        <span class="n">dataset</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">_init_state</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span><span class="o">=</span><span class="n">ExperienceSource</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">=</span><span class="n">SourceDataset</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -197,8 +427,10 @@ nb_path: "nbs/05_data.block.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">source</span><span class="o">=</span><span class="n">ExperienceSource</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">dataset</span><span class="o">=</span><span class="n">TestDataset</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="kc">None</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">persistent_workers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">wif</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">wif</span><span class="p">):</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">D</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">data</span><span class="o">+</span><span class="n">D</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -210,10 +442,304 @@ nb_path: "nbs/05_data.block.ipynb"
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>reseting
-</pre>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state</th>
+      <th>action</th>
+      <th>next_state</th>
+      <th>reward</th>
+      <th>done</th>
+      <th>step</th>
+      <th>steps</th>
+      <th>n_env</th>
+      <th>state_mu</th>
+      <th>next_state_mu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.034632</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>-0.013647</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.014316</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.011686</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.042595</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>-0.011611</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.022921</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>-0.035306</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.003363</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>-0.011064</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.031966</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.012880</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.060836</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.036953</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.090404</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.012809</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.072685</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.037470</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.006892</td>
+      <td>-0.055736</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>torch.Size([20, 4])</td>
+      <td>0</td>
+      <td>torch.Size([20, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.009369</td>
+      <td>0.013918</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
 </div>
 
 </div>
@@ -222,6 +748,20 @@ nb_path: "nbs/05_data.block.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="/fastrl/data.block.html#ExperienceSource"><code>ExperienceSource</code></a> is designed for iterating through <code>n_envs</code> environments.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A single experience is a <code>dict</code>:</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -229,13 +769,8 @@ nb_path: "nbs/05_data.block.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">worker_init_fn</span><span class="p">():</span>
-    <span class="n">worker_info</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_worker_info</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">worker_info</span><span class="p">,</span><span class="n">worker_info</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
-    <span class="n">dataset</span> <span class="o">=</span> <span class="n">worker_info</span><span class="o">.</span><span class="n">dataset</span>  <span class="c1"># the dataset copy in this worker process</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="s1">&#39;source&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">source</span><span class="p">,</span><span class="n">Stateful</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reseting&#39;</span><span class="p">)</span>
-        <span class="n">dataset</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">_init_state</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">next_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">reward</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rewards</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -245,39 +780,30 @@ nb_path: "nbs/05_data.block.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>However, an agent has full power to add fields to this dict wile running</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">persistent_workers</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ExperienceSource._init_state" class="doc_header"><code>ExperienceSource._init_state</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ExperienceSource._init_state</code>()</p>
+</blockquote>
+<p>Inits the histories, experiences, and the environment pool when sent to a <code>Process</code></p>
+
 </div>
+
 </div>
 
 </div>
@@ -286,6 +812,38 @@ nb_path: "nbs/05_data.block.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ExperienceSource.__iter__" class="doc_header"><code>ExperienceSource.__iter__</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ExperienceSource.__iter__</code>()</p>
+</blockquote>
+<p>Iterates through a list of environments.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the <code>self.pool</code> field is empty, it will call <code>_init_state</code> to reinitialize everything.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -399,180 +957,11 @@ nb_path: "nbs/05_data.block.ipynb"
 <span class="n">data</span><span class="o">=</span><span class="kc">None</span>
 
 <span class="k">for</span> <span class="n">e</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ExperienceSource</span><span class="p">(</span><span class="s1">&#39;CartPole-v1&#39;</span><span class="p">,</span><span class="n">agent</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">steps_count</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">70</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">data</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">D</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">data</span><span class="o">+</span><span class="n">D</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>state</th>
-      <th>next_state</th>
-      <th>action</th>
-      <th>reward</th>
-      <th>done</th>
-      <th>steps</th>
-      <th>episode_reward</th>
-      <th>env</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>[-0.04456399437492168, 0.04653909372423204, 0.013269094558410327, -0.020998265615229175]</td>
-      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>1</td>
-      <td>1.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
-      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
-      <td>[-0.05349009483065021, -0.5394480966584043, 0.02981694322928008, 0.8709609494144344]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>[-0.04363321250043704, -0.14877061164085567, 0.012849129246105744, 0.27584150116514483]</td>
-      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>[-0.04660862473325415, -0.3440735048698027, 0.018365959269408642, 0.572549197993572]</td>
-      <td>[-0.05349009483065021, -0.5394480966584043, 0.02981694322928008, 0.8709609494144344]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>3</td>
-      <td>3.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>184</th>
-      <td>[-0.09759162379326478, -1.1265756817485255, 0.10029304257894092, 1.7938742678977837]</td>
-      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>7</td>
-      <td>7.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>185</th>
-      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
-      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>8</td>
-      <td>8.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>186</th>
-      <td>[-0.09759162379326478, -1.1265756817485255, 0.10029304257894092, 1.7938742678977837]</td>
-      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>7</td>
-      <td>7.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>187</th>
-      <td>[-0.12012313742823529, -1.3226681727103522, 0.1361705279368966, 2.1159716654401786]</td>
-      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>8</td>
-      <td>8.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>188</th>
-      <td>[-0.14657650088244234, -1.5188614363481507, 0.17848996124570016, 2.4474478802002593]</td>
-      <td>[-0.17695372960940536, -1.7149992375160745, 0.22743891884970535, 2.7891783503303884]</td>
-      <td>0</td>
-      <td>1.0</td>
-      <td>True</td>
-      <td>9</td>
-      <td>9.0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>189 rows × 8 columns</p>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -590,7 +979,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TestDataset" class="doc_header"><code>class</code> <code>TestDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L60" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
+<h2 id="TestDataset" class="doc_header"><code>class</code> <code>TestDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L61" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TestDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
 </blockquote>
 <p>An iterable Dataset.</p>
 <p>All datasets that represent an iterable of data samples should subclass it.
@@ -703,24 +1092,6 @@ dataset's :meth:<code>__iter__</code> method or the :class:<code>~torch.utils.da
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span><span class="o">=</span><span class="n">TestDataset</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
