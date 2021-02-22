@@ -59,8 +59,9 @@ class UnCollatable(Exception):
 _error_msg='Found idxs: %s have values more than %s e.g.: %s'
 
 def add_batch(a,indexes):
-    if hasattr(a,'expand_dims') and len(indexes)==1 and len(indexes)!=a.shape[0]:
-        return np.expand_dims(a,0)
+    if not isinstance(indexes,(list,L)):
+        if isinstance(a,(np.ndarray,)):
+            return np.expand_dims(a,0)
     return a
 
 class D(dict):
@@ -115,9 +116,14 @@ class D(dict):
         items=list(d.items())
         for k,v in items:
             bs=d.bs()
-            if hasattr(v,'mean'): d[f'{k}_mu']=v.reshape(bs,-1).mean(axis=1)
+            if hasattr(v,'mean'):
+                v=v.reshape(bs,-1)
+                v=v.astype(float) if hasattr(v,'astype') else v.double()
+                d[f'{k}_mu']=v.mean(axis=1)
             if isinstance(v,np.ndarray):
-                d[k]=[str(v.shape)]*bs
+                if len(v.shape)==2 and v.shape[1]==1:d[k]=v.tolist()
+                else:                                d[k]=[str(v.shape)]*bs
             if isinstance(v,Tensor):
-                d[k]=[str(v.size())]*bs
+                if len(v.shape)==2 and v.shape[1]==1:d[k]=v.numpy().tolist()
+                else:                                d[k]=[str(v.shape)]*bs
         return pd.DataFrame(d,**kwargs)
