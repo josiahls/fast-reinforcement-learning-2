@@ -38,7 +38,9 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Python-Extensions">Python Extensions<a class="anchor-link" href="#Python-Extensions"> </a></h1>
+<h2 id="D">D<a class="anchor-link" href="#D"> </a></h2><blockquote><p>A better dictionary</p>
+</blockquote>
+
 </div>
 </div>
 </div>
@@ -53,7 +55,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="isnone" class="doc_header"><code>isnone</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>isnone</code>(<strong><code>v</code></strong>)</p>
+<h4 id="isnone" class="doc_header"><code>isnone</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>isnone</code>(<strong><code>v</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -84,7 +86,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="map_dict_ex" class="doc_header"><code>map_dict_ex</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>map_dict_ex</code>(<strong><code>d</code></strong>, <strong><code>f</code></strong>, <strong>*<code>args</code></strong>, <strong><code>gen</code></strong>=<em><code>False</code></em>, <strong><code>wise</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="map_dict_ex" class="doc_header"><code>map_dict_ex</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>map_dict_ex</code>(<strong><code>d</code></strong>, <strong><code>f</code></strong>, <strong>*<code>args</code></strong>, <strong><code>gen</code></strong>=<em><code>False</code></em>, <strong><code>wise</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Like <code>map</code>, but for dicts and uses <code>bind</code>, and supports <code>str</code> and indexing</p>
 
@@ -166,62 +168,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="batch_sz" class="doc_header"><code>batch_sz</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>batch_sz</code>(<strong><code>arr</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="add_batch" class="doc_header"><code>add_batch</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>add_batch</code>(<strong><code>a</code></strong>, <strong><code>indexes</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="D" class="doc_header"><code>class</code> <code>D</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>D</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <code>dict</code></p>
+<h2 id="D" class="doc_header"><code>class</code> <code>D</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L33" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>D</code>(<strong>*<code>args</code></strong>, <strong><code>mapping</code></strong>=<em><code>False</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>dict</code></p>
 </blockquote>
 <p>Improved version of <code>dict</code> with array handling abilities</p>
 
@@ -238,549 +185,6 @@ nb_path: "nbs/00_core.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">toli</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">step_f</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span><span class="s1">&#39;next_state&#39;</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span>
-                <span class="s1">&#39;action&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;reward&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">ranf</span><span class="p">(),</span>
-                <span class="s1">&#39;steps&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="s1">&#39;episode_reward&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span>
-                <span class="s1">&#39;env&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span><span class="s1">&#39;done&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">}</span>
-
-<span class="n">test_d</span><span class="o">=</span><span class="n">D</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">step_f</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)))</span>
-<span class="n">test_d</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>state</th>
-      <th>next_state</th>
-      <th>action</th>
-      <th>reward</th>
-      <th>steps</th>
-      <th>episode_reward</th>
-      <th>env</th>
-      <th>done</th>
-      <th>state_mu</th>
-      <th>next_state_mu</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.426410</td>
-      <td>15</td>
-      <td>10</td>
-      <td>37</td>
-      <td>False</td>
-      <td>0.639533</td>
-      <td>0.505707</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.902763</td>
-      <td>17</td>
-      <td>30</td>
-      <td>30</td>
-      <td>True</td>
-      <td>0.443015</td>
-      <td>0.238158</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.081882</td>
-      <td>18</td>
-      <td>8</td>
-      <td>18</td>
-      <td>True</td>
-      <td>0.718468</td>
-      <td>0.434303</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.077846</td>
-      <td>14</td>
-      <td>30</td>
-      <td>14</td>
-      <td>False</td>
-      <td>0.295778</td>
-      <td>0.510396</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.051640</td>
-      <td>16</td>
-      <td>13</td>
-      <td>20</td>
-      <td>True</td>
-      <td>0.280153</td>
-      <td>0.689178</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.397671</td>
-      <td>9</td>
-      <td>19</td>
-      <td>15</td>
-      <td>True</td>
-      <td>0.766154</td>
-      <td>0.767387</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.883241</td>
-      <td>7</td>
-      <td>39</td>
-      <td>12</td>
-      <td>True</td>
-      <td>0.553469</td>
-      <td>0.810733</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.409288</td>
-      <td>17</td>
-      <td>9</td>
-      <td>22</td>
-      <td>True</td>
-      <td>0.457002</td>
-      <td>0.277659</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.670274</td>
-      <td>2</td>
-      <td>18</td>
-      <td>15</td>
-      <td>False</td>
-      <td>0.641892</td>
-      <td>0.500819</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.232627</td>
-      <td>14</td>
-      <td>29</td>
-      <td>22</td>
-      <td>False</td>
-      <td>0.469277</td>
-      <td>0.683368</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.442685</td>
-      <td>10</td>
-      <td>16</td>
-      <td>37</td>
-      <td>True</td>
-      <td>0.557664</td>
-      <td>0.569490</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.227039</td>
-      <td>5</td>
-      <td>10</td>
-      <td>36</td>
-      <td>False</td>
-      <td>0.231192</td>
-      <td>0.539724</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.806240</td>
-      <td>13</td>
-      <td>14</td>
-      <td>30</td>
-      <td>False</td>
-      <td>0.390953</td>
-      <td>0.454654</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.071394</td>
-      <td>8</td>
-      <td>32</td>
-      <td>39</td>
-      <td>False</td>
-      <td>0.460073</td>
-      <td>0.277004</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.193886</td>
-      <td>18</td>
-      <td>28</td>
-      <td>12</td>
-      <td>False</td>
-      <td>0.695370</td>
-      <td>0.408440</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.792202</td>
-      <td>16</td>
-      <td>28</td>
-      <td>26</td>
-      <td>True</td>
-      <td>0.550242</td>
-      <td>0.397983</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.035099</td>
-      <td>16</td>
-      <td>17</td>
-      <td>18</td>
-      <td>False</td>
-      <td>0.664886</td>
-      <td>0.482231</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.353388</td>
-      <td>1</td>
-      <td>31</td>
-      <td>17</td>
-      <td>True</td>
-      <td>0.581028</td>
-      <td>0.587571</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>1</td>
-      <td>0.730264</td>
-      <td>18</td>
-      <td>10</td>
-      <td>21</td>
-      <td>True</td>
-      <td>0.344668</td>
-      <td>0.456362</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>(20, 4)</td>
-      <td>torch.Size([20, 4])</td>
-      <td>0</td>
-      <td>0.407319</td>
-      <td>8</td>
-      <td>24</td>
-      <td>26</td>
-      <td>False</td>
-      <td>0.355318</td>
-      <td>0.382255</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_d</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">argwhere</span><span class="p">,</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">==</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>state</th>
-      <th>next_state</th>
-      <th>action</th>
-      <th>reward</th>
-      <th>steps</th>
-      <th>episode_reward</th>
-      <th>env</th>
-      <th>done</th>
-      <th>state_mu</th>
-      <th>next_state_mu</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.902763</td>
-      <td>17</td>
-      <td>30</td>
-      <td>30</td>
-      <td>True</td>
-      <td>0.443015</td>
-      <td>0.238158</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>0</td>
-      <td>0.081882</td>
-      <td>18</td>
-      <td>8</td>
-      <td>18</td>
-      <td>True</td>
-      <td>0.718468</td>
-      <td>0.434303</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.051640</td>
-      <td>16</td>
-      <td>13</td>
-      <td>20</td>
-      <td>True</td>
-      <td>0.280153</td>
-      <td>0.689178</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.397671</td>
-      <td>9</td>
-      <td>19</td>
-      <td>15</td>
-      <td>True</td>
-      <td>0.766154</td>
-      <td>0.767387</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>0</td>
-      <td>0.883241</td>
-      <td>7</td>
-      <td>39</td>
-      <td>12</td>
-      <td>True</td>
-      <td>0.553469</td>
-      <td>0.810733</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.409288</td>
-      <td>17</td>
-      <td>9</td>
-      <td>22</td>
-      <td>True</td>
-      <td>0.457002</td>
-      <td>0.277659</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.442685</td>
-      <td>10</td>
-      <td>16</td>
-      <td>37</td>
-      <td>True</td>
-      <td>0.557664</td>
-      <td>0.569490</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>0</td>
-      <td>0.792202</td>
-      <td>16</td>
-      <td>28</td>
-      <td>26</td>
-      <td>True</td>
-      <td>0.550242</td>
-      <td>0.397983</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.353388</td>
-      <td>1</td>
-      <td>31</td>
-      <td>17</td>
-      <td>True</td>
-      <td>0.581028</td>
-      <td>0.587571</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>(10, 4)</td>
-      <td>torch.Size([10, 4])</td>
-      <td>1</td>
-      <td>0.730264</td>
-      <td>18</td>
-      <td>10</td>
-      <td>21</td>
-      <td>True</td>
-      <td>0.344668</td>
-      <td>0.456362</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -811,6 +215,212 @@ nb_path: "nbs/00_core.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="/fastrl/core.html#BD"><code>BD</code></a> is the primary data structure that <code>fastrl</code> uses. It allows for easily iterating and doing operations on steps attained from environments.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="BD">BD<a class="anchor-link" href="#BD"> </a></h2><blockquote><p>A batch wise dictionary that requires all values to be numpy,tensor, or None.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Utilities">Utilities<a class="anchor-link" href="#Utilities"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Stacking-API">Stacking API<a class="anchor-link" href="#Stacking-API"> </a></h4><blockquote><p>We use the fastcore typedispatch decortors to select the currect method of stacking arrays.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exceptions">Exceptions<a class="anchor-link" href="#Exceptions"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="BDTypeError" class="doc_header"><code>class</code> <code>BDTypeError</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L59" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BDTypeError</code>(<strong><code>k</code></strong>, <strong><code>v</code></strong>) :: <code>Exception</code></p>
+</blockquote>
+<p>Common base class for all non-exit exceptions.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="BDBatchSizeError" class="doc_header"><code>class</code> <code>BDBatchSizeError</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L71" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BDBatchSizeError</code>(<strong><code>k</code></strong>, <strong><code>v</code></strong>, <strong><code>bs</code></strong>) :: <code>Exception</code></p>
+</blockquote>
+<p>Common base class for all non-exit exceptions.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="BDKeyMisMatchError" class="doc_header"><code>class</code> <code>BDKeyMisMatchError</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L80" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BDKeyMisMatchError</code>(<strong><code>different</code></strong>) :: <code>Exception</code></p>
+</blockquote>
+<p>Common base class for all non-exit exceptions.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Correction-Functions">Correction Functions<a class="anchor-link" href="#Correction-Functions"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="list2tensor" class="doc_header"><code>list2tensor</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>list2tensor</code>(<strong><code>l</code></strong>:<code>L'&gt;, &lt;class 'list'&gt;)</code>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="BD" class="doc_header"><code>class</code> <code>BD</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L97" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BD</code>(<strong>*<code>args</code></strong>, <strong><code>bd_batch_size</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/core.html#D"><code>D</code></a></p>
+</blockquote>
+<p>Improved version of <code>dict</code> with array handling abilities</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We need to change any indexer that is passed. We don't know if the indexer is going to
+be a numpy array, slice, tensor, or int.
+All we know is 2 things:</p>
+<ul>
+<li>If it is an int, the batch dim will disappear</li>
+<li>If it is an indexer, then the batch dim will stay, but be smaller</li>
+</ul>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -818,7 +428,7 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">done</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span><span class="n">reward</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">bs</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_d</span><span class="o">.</span><span class="n">bs</span>
 </pre></div>
 
     </div>
@@ -851,213 +461,41 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span><span class="n">done</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span><span class="n">reward</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">pandas</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">step_f</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span><span class="s1">&#39;next_state&#39;</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span>
+                <span class="s1">&#39;action&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;reward&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">ranf</span><span class="p">(),</span>
+                <span class="s1">&#39;steps&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="s1">&#39;episode_reward&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span>
+                <span class="s1">&#39;env&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">),</span><span class="s1">&#39;done&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">}</span>
+<span class="n">test_fail</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span><span class="n">BD</span><span class="p">(</span><span class="n">step_f</span><span class="p">()))</span>
+<span class="n">step_f</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span><span class="s1">&#39;next_state&#39;</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,),</span>
+                <span class="s1">&#39;action&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span><span class="s1">&#39;reward&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">ranf</span><span class="p">()],</span>
+                <span class="s1">&#39;steps&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)],</span><span class="s1">&#39;episode_reward&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">)],</span>
+                <span class="s1">&#39;env&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">)],</span><span class="s1">&#39;done&#39;</span><span class="p">:[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;image&#39;</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)}</span>
+
+<span class="n">test_d</span><span class="o">=</span><span class="nb">sum</span><span class="p">((</span><span class="n">BD</span><span class="p">(</span><span class="n">step_f</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">19</span><span class="p">)),</span><span class="n">BD</span><span class="p">(</span><span class="n">step_f</span><span class="p">()))</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">test_d</span><span class="o">.</span><span class="n">bd_batch_size</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>states</th>
-      <th>done</th>
-      <th>reward</th>
-      <th>states_mu</th>
-      <th>reward_mu</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.738011</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.543129</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.620501</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.594693</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.463313</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.354755</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.419281</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.642154</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.601828</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.500471</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.430017</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.326958</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.652000</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.548981</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.318399</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.736211</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.277642</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.422795</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.440924</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>torch.Size([20, 4])</td>
-      <td>False</td>
-      <td>[1.0]</td>
-      <td>0.564929</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
 </div>
-</div>
+    {% endraw %}
 
-</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">test_d</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">test_d</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span><span class="n">BD</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">test_d</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">bd_batch_size</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
