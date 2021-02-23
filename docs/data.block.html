@@ -405,7 +405,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SourceDataset" class="doc_header"><code>class</code> <code>SourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L249" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
+<h2 id="SourceDataset" class="doc_header"><code>class</code> <code>SourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L246" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
 </blockquote>
 <p>Iterates through a <code>source</code> object. Allows for re-initing source connections when <code>num_workers&gt;0</code></p>
 
@@ -491,7 +491,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>1.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -513,7 +513,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>2.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -535,7 +535,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>3.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
@@ -546,7 +546,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>3.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>6</th>
@@ -590,7 +590,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>5.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>10</th>
@@ -612,7 +612,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>6.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>12</th>
@@ -623,7 +623,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>7.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>13</th>
@@ -634,7 +634,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>7.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>14</th>
@@ -656,7 +656,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>8.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>16</th>
@@ -667,7 +667,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>9.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>17</th>
@@ -678,7 +678,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>9.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>18</th>
@@ -689,7 +689,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>10.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>19</th>
@@ -700,7 +700,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>10.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>20</th>
@@ -708,7 +708,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
       <td>11.0</td>
       <td>0</td>
       <td>1</td>
@@ -722,7 +722,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>11.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>22</th>
@@ -731,7 +731,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>12.0</td>
+      <td>1.0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -744,7 +744,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>12.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>24</th>
@@ -753,9 +753,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>13.0</td>
+      <td>2.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>25</th>
@@ -766,7 +766,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>13.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>26</th>
@@ -775,9 +775,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>14.0</td>
+      <td>3.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>27</th>
@@ -788,7 +788,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>14.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>28</th>
@@ -797,7 +797,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>15.0</td>
+      <td>4.0</td>
       <td>0</td>
       <td>2</td>
     </tr>
@@ -818,10 +818,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>16.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>31</th>
@@ -832,7 +832,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>16.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>32</th>
@@ -841,9 +841,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>6.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>33</th>
@@ -854,7 +854,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>17.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>34</th>
@@ -863,9 +863,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>2.0</td>
+      <td>7.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>35</th>
@@ -876,7 +876,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>18.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>36</th>
@@ -885,9 +885,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>3.0</td>
+      <td>8.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>37</th>
@@ -895,10 +895,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>19.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>38</th>
@@ -907,9 +907,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>4.0</td>
+      <td>9.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>39</th>
@@ -918,9 +918,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>1.0</td>
+      <td>20.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>40</th>
@@ -929,9 +929,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>5.0</td>
+      <td>10.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>41</th>
@@ -940,7 +940,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>2.0</td>
+      <td>21.0</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -951,9 +951,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>6.0</td>
+      <td>11.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>43</th>
@@ -962,7 +962,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>3.0</td>
+      <td>22.0</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -973,9 +973,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>7.0</td>
+      <td>12.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>45</th>
@@ -984,7 +984,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>4.0</td>
+      <td>23.0</td>
       <td>0</td>
       <td>2</td>
     </tr>
@@ -995,7 +995,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>8.0</td>
+      <td>13.0</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -1005,8 +1005,8 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0.0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>5.0</td>
+      <td>1.0</td>
+      <td>24.0</td>
       <td>0</td>
       <td>2</td>
     </tr>
@@ -1017,9 +1017,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>9.0</td>
+      <td>14.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>49</th>
@@ -1028,9 +1028,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>6.0</td>
+      <td>1.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -1047,7 +1047,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>{% include note.html content='I doner if <a href="/fastrl/core.html#BD"><code>BD</code></a> would benefit from using <code>default_collate</code>?' %}</p>
+<p>{% include note.html content='I wonder if <a href="/fastrl/core.html#BD"><code>BD</code></a> would benefit from using <code>default_collate</code>?' %}</p>
 
 </div>
 </div>
@@ -1200,7 +1200,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>1.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1212,7 +1212,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>1.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1224,7 +1224,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>2.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1248,7 +1248,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>3.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1260,7 +1260,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>3.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1272,7 +1272,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>4.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1284,7 +1284,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>4.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1308,7 +1308,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>5.0</td>
       <td>0</td>
       <td>torch.Size([10, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -1360,14 +1360,14 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;state&#39;: tensor([[-0.0223,  0.0020,  0.0345, -0.0393]]),
+<pre>{&#39;state&#39;: tensor([[-0.0213, -0.0315, -0.0271,  0.0376]]),
  &#39;action&#39;: tensor([[0.]]),
- &#39;next_state&#39;: tensor([[-0.0222,  0.1966,  0.0337, -0.3209]]),
+ &#39;next_state&#39;: tensor([[-0.0220,  0.1640, -0.0263, -0.2635]]),
  &#39;reward&#39;: tensor([[1.]]),
  &#39;done&#39;: tensor([[0.]]),
  &#39;step&#39;: tensor([[1.]]),
  &#39;env&#39;: tensor([[0]]),
- &#39;random_action&#39;: tensor([[0]])}</pre>
+ &#39;random_action&#39;: tensor([[2]])}</pre>
 </div>
 
 </div>

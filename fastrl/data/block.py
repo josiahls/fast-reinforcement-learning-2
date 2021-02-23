@@ -187,55 +187,52 @@ class ExperienceSource(Stateful):
         "Iterates through a list of environments."
         if not self.pool:self._init_state()
         while True:
-#             try:
-            # Only work on envs that are not done
-            not_done_idxs=(self.experiences['done']==False).nonzero()[:,0]
-            if len(not_done_idxs)==0:
-                self.reset_all()
+            try:
+                # Only work on envs that are not done
                 not_done_idxs=(self.experiences['done']==False).nonzero()[:,0]
-            not_done_experiences=self.experiences[not_done_idxs]
-            # Pass current experiences into agent
-            actions,experiences=self.agent(**not_done_experiences)
-            # Step through all envs.
-            step_res=self.pool[not_done_idxs].zipwith(actions).starmap(_env_step)
-            next_states,rewards,dones=step_res.zip()[:3].map(Tensor)
-            rewards,dones=(v.reshape(len(not_done_idxs),-1) for v in(rewards,dones))
-            # Add the image field if available
-            self.attempt_render(self.experiences,not_done_idxs)
-            new_exp=BD(next_state=next_states,reward=rewards,done=dones,
-                       env=not_done_idxs.reshape(len(not_done_idxs),-1),
-                       step=not_done_experiences['step']+1,
-                       bd_batch_size=len(not_done_idxs))
-#
-            experiences=BD(merge(not_done_experiences,experiences,new_exp),
+                if len(not_done_idxs)==0:
+                    self.reset_all()
+                    not_done_idxs=(self.experiences['done']==False).nonzero()[:,0]
+                not_done_experiences=self.experiences[not_done_idxs]
+                # Pass current experiences into agent
+                actions,experiences=self.agent(**not_done_experiences)
+                # Step through all envs.
+                step_res=self.pool[not_done_idxs].zipwith(actions).starmap(_env_step)
+                next_states,rewards,dones=step_res.zip()[:3].map(Tensor)
+                rewards,dones=(v.reshape(len(not_done_idxs),-1) for v in(rewards,dones))
+                # Add the image field if available
+                self.attempt_render(self.experiences,not_done_idxs)
+                new_exp=BD(next_state=next_states,reward=rewards,done=dones,
+                           env=not_done_idxs.reshape(len(not_done_idxs),-1),
+                           step=not_done_experiences['step']+1,
                            bd_batch_size=len(not_done_idxs))
 
-            for idx in not_done_idxs:
-                self.history[idx].append(experiences[idx])
-                if len(self.history[idx])==self.steps_count and \
-                       int(experiences[idx]['step'][0])%self.steps_delta==0:
-                    yield tuple(self.history[idx])
+                experiences=BD(merge(not_done_experiences,experiences,new_exp),
+                               bd_batch_size=len(not_done_idxs))
 
-                if bool(experiences[idx]['done'][0]):
-                    if 0<len(self.history[idx])<self.steps_count:
-                        yield tuple(self.history[idx])
-                    while len(self.history[idx])>1:
-                        self.history[idx].popleft()
+                for idx in not_done_idxs:
+                    self.history[idx].append(experiences[idx])
+                    if len(self.history[idx])==self.steps_count and \
+                           int(experiences[idx]['step'][0])%self.steps_delta==0:
                         yield tuple(self.history[idx])
 
+                    if bool(experiences[idx]['done'][0]):
+                        if 0<len(self.history[idx])<self.steps_count:
+                            yield tuple(self.history[idx])
+                        while len(self.history[idx])>1:
+                            self.history[idx].popleft()
+                            yield tuple(self.history[idx])
 
-
-            for k in experiences:
-                dtype=experiences[k][not_done_idxs].dtype
-                if k not in self.experiences:
-                    self.experiences[k]=torch.zeros(self.experiences.bs(),
-                                                    *experiences[k][not_done_idxs].shape[1:])
-                if self.experiences[k][not_done_idxs].dtype!=dtype:
-                    self.experiences[k]=cast_dtype(self.experiences[k],dtype)
-                self.experiences[k][not_done_idxs]=experiences[k][not_done_idxs]
-
-#             except ValueError:
-#                 self.reset_all()
+                for k in experiences:
+                    dtype=experiences[k][not_done_idxs].dtype
+                    if k not in self.experiences:
+                        self.experiences[k]=torch.zeros(self.experiences.bs(),
+                                                        *experiences[k][not_done_idxs].shape[1:])
+                    if self.experiences[k][not_done_idxs].dtype!=dtype:
+                        self.experiences[k]=cast_dtype(self.experiences[k],dtype)
+                    self.experiences[k][not_done_idxs]=experiences[k][not_done_idxs]
+            except ValueError:
+                self.reset_all()
 
 add_docs(ExperienceSource,
         """Iterates through `n_envs` of `env` feeding experience or states into `agent`.
