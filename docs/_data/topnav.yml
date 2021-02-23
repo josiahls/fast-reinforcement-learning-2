@@ -3,7 +3,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/fastai/fastcore
+      external_url: https://github.com/josiahls/fastrl
     - title: News
       external_url: http://www.fast.ai
 
