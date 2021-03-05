@@ -2,33 +2,30 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"DQN": "05_data.block.ipynb",
-         "TestDatasetNoModule": ".data.block_old.ipynb",
-         "TestDataset": ".data.block_old.ipynb",
-         "isnone": "00_core.ipynb",
-         "map_dict_ex": "00_core.ipynb",
+index = {"map_dict_ex": "00_core.ipynb",
          "D": "00_core.ipynb",
-         "BDTypeError": "00_core.ipynb",
-         "BDBatchSizeError": "00_core.ipynb",
-         "BDKeyMisMatchError": "00_core.ipynb",
-         "list2tensor": "00_core.ipynb",
          "tensor2shape": "00_core.ipynb",
          "tensor2mu": "00_core.ipynb",
-         "BD": "00_core.ipynb",
+         "tensor2mu.__docs__": "00_core.ipynb",
+         "obj2tensor": "05_data.block.ipynb",
+         "UnCollateble": "00_core.ipynb",
+         "collate": "00_core.ipynb",
+         "BD": "05_data.block.ipynb",
          "dependencies": "00_nbdev_extension.ipynb",
          "create_conda_yaml": "00_nbdev_extension.ipynb",
          "create_conda_yamls": "00_nbdev_extension.ipynb",
-         "o2tensor_batch": "05_data.block.ipynb",
+         "DQN": "05_data.block.ipynb",
          "init_experience": "05_data.block.ipynb",
+         "TensorBatch": "05_data.block.ipynb",
          "cast_dtype": "05_data.block.ipynb",
          "FakeAgent": "05_data.block.ipynb",
          "ExperienceSource": "05_data.block.ipynb",
          "SourceDataset": "05_data.block.ipynb",
          "show_install": "20_test_utils.ipynb"}
 
-modules = ["data/block.py",
-           "core.py",
+modules = ["core.py",
            "nbdev_extensions.py",
+           "data/block.py",
            "test_utils.py"]
 
 doc_url = "https://josiahls.github.io/fastrl/"

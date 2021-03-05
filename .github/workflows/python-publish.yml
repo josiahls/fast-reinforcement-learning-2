@@ -6,8 +6,8 @@ name: Upload Python PyPi and Conda
 on:
   release:
     types: [created]
-  schedule:
-    - cron: '1 6 * * *'
+#  schedule:
+#    - cron: '1 6 * * *'
   workflow_dispatch: #allows you to trigger manually
   push:
     branches:

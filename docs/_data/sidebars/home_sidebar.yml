@@ -10,14 +10,14 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Data Block
-      url: data.block.html
-    - output: web,pdf
       title: Core
       url: core.html
     - output: web,pdf
       title: Nbdev Extensions
       url: nbdev_extension.html
+    - output: web,pdf
+      title: Data Block
+      url: data.block.html
     - output: web,pdf
       title: Async Testing
       url: data.test_async.html
