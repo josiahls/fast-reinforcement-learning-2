@@ -186,7 +186,7 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="/fastrl/data.block.html#BD"><code>BD</code></a> is the primary data structure that <code>fastrl</code> uses. It allows for easily iterating and doing operations on steps attained from environments.</p>
+<p><a href="/fastrl/core.html#BD"><code>BD</code></a> is the primary data structure that <code>fastrl</code> uses. It allows for easily iterating and doing operations on steps attained from environments.</p>
 
 </div>
 </div>
@@ -223,7 +223,7 @@ All we know is 2 things:</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tensor2shape" class="doc_header"><code>tensor2shape</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tensor2shape</code>(<strong><code>k</code></strong>, <strong><code>t</code></strong>:<a href="/fastrl/data.block.html#TensorBatch"><code>TensorBatch</code></a>)</p>
+<h4 id="tensor2shape" class="doc_header"><code>tensor2shape</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tensor2shape</code>(<strong><code>k</code></strong>, <strong><code>t</code></strong>:<a href="/fastrl/core.html#TensorBatch"><code>TensorBatch</code></a>)</p>
 </blockquote>
 <p>Converts a tensor into a dict of shapes, or a 1d numpy array</p>
 
@@ -510,7 +510,7 @@ determining if they match the expected batch size I think....</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ok so the solution was that <a href="/fastrl/data.block.html#BD"><code>BD</code></a> itself does not validate or coerce batch sizes.
+<p>Ok so the solution was that <a href="/fastrl/core.html#BD"><code>BD</code></a> itself does not validate or coerce batch sizes.
 It does not check that they all match.
 It merely uses the TensorBatch object in all its operations.
 The TensorBatch object tracks and manages what the batch size is really supposed to be.</p>
