@@ -7,4 +7,6 @@ dependencies:
 - pip
 - setuptools
 - fastai>=2.0.0
+- pip:
+  - gym
 name: fastrl

@@ -13,4 +13,6 @@ dependencies:
 - moviepy
 - pygifsicle
 - aquirdturtle_collapsible_headings
+- pip:
+  - gym
 name: fastrl_dev

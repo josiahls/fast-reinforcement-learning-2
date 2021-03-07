@@ -37,7 +37,7 @@ nb_path: "nbs/00_nbdev_extension.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
-cat &gt; testing/test_settings.ini <span class="s">&lt;&lt; EndOfMessage</span>
+cat &gt; test_settings.ini <span class="s">&lt;&lt; EndOfMessage</span>
 <span class="s">[DEFAULT]</span>
 <span class="s">lib_name = fastrl_test</span>
 <span class="s">user = josiahls</span>
@@ -49,6 +49,8 @@ cat &gt; testing/test_settings.ini <span class="s">&lt;&lt; EndOfMessage</span>
 <span class="s">conda_requirements = jupyter notebook setuptools</span>
 <span class="s">dev_requirements = jupyterlab nbdev ipywidgets moviepy pygifsicle aquirdturtle_collapsible_headings</span>
 <span class="s">EndOfMessage</span>
+
+cp test_settings.ini testing/test_settings.ini
 </pre></div>
 
     </div>
@@ -292,6 +294,24 @@ name<span class="ansi-blue-fg">:</span> fastrl
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">create_conda_yamls</span><span class="p">(</span><span class="n">sub_dir</span><span class="o">=</span><span class="s1">&#39;extra&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+rm test_settings.ini
 </pre></div>
 
     </div>
