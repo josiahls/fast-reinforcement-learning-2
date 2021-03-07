@@ -124,6 +124,7 @@ class ExperienceSource(Stateful):
                 self.history[idx].append(experiences[i])
                 if len(self.history[idx])==self.steps_count and \
                        int(experiences[i]['step'][0])%self.steps_delta==0:
+#                     print(self.history[idx])
                     yield tuple(self.history[idx])
 
                 if bool(experiences[i]['done'][0]):
@@ -132,6 +133,7 @@ class ExperienceSource(Stateful):
                     while len(self.history[idx])>1:
                         self.history[idx].popleft()
                         yield tuple(self.history[idx])
+            experiences['state']=experiences['next_state']
 
             for k in experiences:
                 dtype=experiences[k].dtype
