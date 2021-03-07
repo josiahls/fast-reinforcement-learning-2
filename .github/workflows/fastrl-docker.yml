@@ -53,9 +53,9 @@ jobs:
       run: |
         export DOCKER_BUILDKIT=1
         # We need to clear the previous docker images
-#        docker system prune -fa
-#        docker pull ${IMAGE_NAME}:latest || true
-#        docker build --cache-from ${IMAGE_NAME}:latest --build-arg BUILD=${BUILD_TYPE} \
+        #        docker system prune -fa
+        #        docker pull ${IMAGE_NAME}:latest || true
+        #        docker build --cache-from ${IMAGE_NAME}:latest --build-arg BUILD=${BUILD_TYPE} \
         docker build --build-arg BUILD=${BUILD_TYPE} \
           -t ${IMAGE_NAME}:latest \
           -t ${IMAGE_NAME}:${VERSION} \
