@@ -11,10 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         build_type: [prod, dev]
     steps:
-
     - name: Copy This Repository Contents
       uses: actions/checkout@main
 
@@ -52,6 +52,8 @@ jobs:
     - name: build and tag container
       run: |
         export DOCKER_BUILDKIT=1
+        # We need to clear the previous docker images
+        docker system prune -a
         docker pull ${IMAGE_NAME}:latest || true
         docker build --cache-from ${IMAGE_NAME}:latest --build-arg BUILD=${BUILD_TYPE} \
           -t ${IMAGE_NAME}:latest \
