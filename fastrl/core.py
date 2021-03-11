@@ -47,11 +47,11 @@ class D(dict):
         return self.map(f,*args,gen=gen,wise=wise,**kwargs)
 
 # Cell
-def tensor2shape(k,t:'TensorBatch'):
+def tensor2shape(k,t:'TensorBatch',relative_shape=False):
     "Converts a tensor into a dict of shapes, or a 1d numpy array"
     return {
-        k:t.numpy().reshape(-1,) if len(t.shape)==2 and t.shape[1]==1 else
-        [str(t.shape)]*t.shape[0]
+        k:t.cpu().numpy().reshape(-1,) if len(t.shape)==2 and t.shape[1]==1 else
+        [str((1,*t.shape[1:]) if relative_shape else t.shape)]*t.shape[0]
     }
 
 # Cell
@@ -115,9 +115,9 @@ class BD(D):
     @classmethod
     def merge(cls,*ds,**kwargs): return cls(merge(*ds),**kwargs)
     @delegates(pd.DataFrame)
-    def pandas(self,mu=False,**kwargs):
+    def pandas(self,mu=False,relative_shape=False,**kwargs):
         "Turns a `BD` into a pandas Dataframe optionally showing `mu` of values."
         return pd.DataFrame(merge(
-            *tuple(tensor2shape(k,v) for k,v in self.items()),
+            *tuple(tensor2shape(k,v,relative_shape) for k,v in self.items()),
             *(tuple(tensor2mu(k,v) for k,v in self.items()) if mu else ())
         ),**kwargs)

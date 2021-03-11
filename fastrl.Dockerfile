@@ -58,7 +58,7 @@ RUN /bin/bash -c "if [[ $BUILD == 'prod' ]] ; then echo \"Production Build\" && 
 # Note that we are not installing the .dev dependencies for fastai or fastcore
 RUN /bin/bash -c "if [[ $BUILD == 'dev' ]] ; then echo \"Development Build\" && cd fastai && pip install -e . && cd ../fastcore && pip install -e . cd ../fastrl && pip install -e \".[dev]\"; fi"
 
-RUN echo '#!/bin/bash\nxvfb-run -s "-screen 0 1400x900x24" jupyter lab --ip=0.0.0.0 --port=8080 --allow-root --no-browser  --NotebookApp.token='' --NotebookApp.password=''' >> run_jupyter.sh
+RUN echo '#!/bin/bash\npip install fastrl -e \".[dev]\" && xvfb-run -s "-screen 0 1400x900x24" jupyter lab --ip=0.0.0.0 --port=8080 --allow-root --no-browser  --NotebookApp.token='' --NotebookApp.password=''' >> run_jupyter.sh
 
 USER $CONTAINER_USER
 RUN /bin/bash -c "cd fastrl && pip install -e ."

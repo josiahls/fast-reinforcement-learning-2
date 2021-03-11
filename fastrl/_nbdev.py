@@ -20,6 +20,11 @@ index = {"map_dict_ex": "00_core.ipynb",
          "ExperienceSource": "05_data.block.ipynb",
          "SourceDataset": "05_data.block.ipynb",
          "FirstLastExperienceSource": "05_data.block.ipynb",
+         "IterableTfmdLists": "05_data.block.ipynb",
+         "IterableDataBlock": "05_data.block.ipynb",
+         "Datasets.__iter__": "05_data.block.ipynb",
+         "Datasets.__init__": "05_data.block.ipynb",
+         "BatchRepair": "05_data.block.ipynb",
          "show_install": "20_test_utils.ipynb"}
 
 modules = ["core.py",

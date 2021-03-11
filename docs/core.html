@@ -223,7 +223,7 @@ All we know is 2 things:</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tensor2shape" class="doc_header"><code>tensor2shape</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tensor2shape</code>(<strong><code>k</code></strong>, <strong><code>t</code></strong>:<a href="/fastrl/core.html#TensorBatch"><code>TensorBatch</code></a>)</p>
+<h4 id="tensor2shape" class="doc_header"><code>tensor2shape</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/core.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tensor2shape</code>(<strong><code>k</code></strong>, <strong><code>t</code></strong>:<a href="/fastrl/core.html#TensorBatch"><code>TensorBatch</code></a>, <strong><code>relative_shape</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Converts a tensor into a dict of shapes, or a 1d numpy array</p>
 
@@ -441,6 +441,14 @@ determining if they match the expected batch size I think....</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include note.html content='I think that BD should do zero undirected shae correction. I think it would be better for it to validate the shapes have batch dims' %}    that match. But I think that the <strong>init</strong> should accept a shape_map for a key-&gt;single batch shape. I can have a default 
+    key map so it can still be convenient, however this would open up BD to be more flexible.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
