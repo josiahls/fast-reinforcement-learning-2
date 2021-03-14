@@ -4,6 +4,7 @@
     "Core": "core.html",
     "Nbdev Extensions": "nbdev_extension.html",
     "Callback Core": "callback.core.html",
+    "Agent": "agent.html",
     "Data Block": "data.block.html",
     "Async Testing": "data.test_async.html",
     "Synth Agent": "test_utils.html",

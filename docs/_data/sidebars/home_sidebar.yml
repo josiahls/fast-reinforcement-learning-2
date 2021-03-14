@@ -19,6 +19,9 @@ entries:
       title: Callback Core
       url: callback.core.html
     - output: web,pdf
+      title: Agent
+      url: agent.html
+    - output: web,pdf
       title: Data Block
       url: data.block.html
     - output: web,pdf

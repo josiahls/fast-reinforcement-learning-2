@@ -15,4 +15,5 @@ dependencies:
 - aquirdturtle_collapsible_headings
 - pip:
   - gym
+  - pyopengl
 name: fastrl_dev
