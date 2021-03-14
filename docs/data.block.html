@@ -39,24 +39,6 @@ nb_path: "nbs/05_data.block.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">gym</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -65,7 +47,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L24" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
+<h2 id="DQN" class="doc_header"><code>class</code> <code>DQN</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DQN</code>() :: <code>Module</code></p>
 </blockquote>
 <p>Same as <code>nn.Module</code>, but no need for subclasses to call <code>super().__init__</code></p>
 
@@ -129,7 +111,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="init_experience" class="doc_header"><code>init_experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_experience</code>(<strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="init_experience" class="doc_header"><code>init_experience</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init_experience</code>(<strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Returns dictionary with default values that can be overridden.</p>
 
@@ -248,6 +230,13 @@ nb_path: "nbs/05_data.block.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a outlinming if a better way to setup a source. This will largely pattern after an learner.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -259,7 +248,134 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cast_dtype" class="doc_header"><code>cast_dtype</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cast_dtype</code>(<strong><code>t</code></strong>, <strong><code>dtype</code></strong>)</p>
+<h2 id="SourceCallback" class="doc_header"><code>class</code> <code>SourceCallback</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceCallback</code>(<strong><code>after_create</code></strong>=<em><code>None</code></em>, <strong><code>before_fit</code></strong>=<em><code>None</code></em>, <strong><code>before_epoch</code></strong>=<em><code>None</code></em>, <strong><code>before_train</code></strong>=<em><code>None</code></em>, <strong><code>before_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_pred</code></strong>=<em><code>None</code></em>, <strong><code>after_loss</code></strong>=<em><code>None</code></em>, <strong><code>before_backward</code></strong>=<em><code>None</code></em>, <strong><code>before_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_step</code></strong>=<em><code>None</code></em>, <strong><code>after_step</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_batch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_train</code></strong>=<em><code>None</code></em>, <strong><code>after_train</code></strong>=<em><code>None</code></em>, <strong><code>before_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_validate</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_epoch</code></strong>=<em><code>None</code></em>, <strong><code>after_cancel_fit</code></strong>=<em><code>None</code></em>, <strong><code>after_fit</code></strong>=<em><code>None</code></em>) :: <code>Stateful</code></p>
+</blockquote>
+<p>Basic class handling tweaks of the training loop by changing a <code>Learner</code> in various events</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="SourcePrototype" class="doc_header"><code>class</code> <code>SourcePrototype</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L94" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourcePrototype</code>(<strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>cbs</code></strong>=<em><code>None</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Stateful</code></p>
+</blockquote>
+<p>A base class/mixin for objects that should not serialize all their state</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">SourcePrototype</span><span class="p">()</span><span class="o">.</span><span class="n">show_training_loop</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Start Fit
+   - before_fit     : []
+  Start Epoch Loop
+     - before_epoch   : []
+    Start Train
+       - before_train   : []
+      Start Batch Loop
+         - before_batch   : []
+         - after_pred     : []
+         - after_loss     : []
+         - before_backward: []
+         - before_step    : []
+         - after_step     : []
+         - after_cancel_batch: []
+         - after_batch    : []
+      End Batch Loop
+    End Train
+     - after_cancel_train: []
+     - after_train    : []
+    Start Valid
+       - before_validate: []
+      Start Batch Loop
+         - **CBs same as train batch**: []
+      End Batch Loop
+    End Valid
+     - after_cancel_validate: []
+     - after_validate : []
+  End Epoch Loop
+   - after_cancel_epoch: []
+   - after_epoch    : []
+End Fit
+ - after_cancel_fit: []
+ - after_fit      : []
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="cast_dtype" class="doc_header"><code>cast_dtype</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cast_dtype</code>(<strong><code>t</code></strong>, <strong><code>dtype</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -283,7 +399,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FakeAgent" class="doc_header"><code>class</code> <code>FakeAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L59" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FakeAgent</code>(<strong><code>action_space</code></strong>)</p>
+<h2 id="FakeAgent" class="doc_header"><code>class</code> <code>FakeAgent</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L123" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FakeAgent</code>(<strong><code>action_space</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -307,7 +423,7 @@ nb_path: "nbs/05_data.block.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ExperienceSource" class="doc_header"><code>class</code> <code>ExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L65" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Stateful</code></p>
+<h2 id="ExperienceSource" class="doc_header"><code>class</code> <code>ExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L129" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Stateful</code></p>
 </blockquote>
 <p>Iterates through <code>n_envs</code> of <code>env</code> feeding experience or states into <code>agent</code>.
 If <code>agent</code> is None, then random actions will be taken instead.
@@ -342,7 +458,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SourceDataset" class="doc_header"><code>class</code> <code>SourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L158" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
+<h2 id="SourceDataset" class="doc_header"><code>class</code> <code>SourceDataset</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L217" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SourceDataset</code>(<strong>*<code>args</code></strong>, <strong>**<code>kwds</code></strong>) :: <code>IterableDataset</code></p>
 </blockquote>
 <p>Iterates through a <code>source</code> object. Allows for re-initing source connections when <code>num_workers&gt;0</code></p>
 
@@ -468,7 +584,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
@@ -490,7 +606,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
@@ -501,7 +617,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>6</th>
@@ -512,7 +628,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
@@ -523,7 +639,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>8</th>
@@ -534,7 +650,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>5.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9</th>
@@ -545,7 +661,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -614,9 +730,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
   <tbody>
     <tr>
       <th>0</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>1.0</td>
@@ -625,86 +741,86 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
     </tr>
     <tr>
       <th>1</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>2.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>1.0</td>
       <td>1</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>3.0</td>
       <td>1</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>2.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>4.0</td>
@@ -713,14 +829,14 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
     </tr>
     <tr>
       <th>9</th>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>0</td>
-      <td>torch.Size([141, 4])</td>
+      <td>torch.Size([144, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -796,7 +912,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>1.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -807,7 +923,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>1.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -829,7 +945,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>1.0</td>
       <td>1</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -884,7 +1000,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9</th>
@@ -895,7 +1011,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -971,7 +1087,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1004,7 +1120,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>6.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1015,7 +1131,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>9.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>5</th>
@@ -1037,7 +1153,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>12.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1048,7 +1164,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>12.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1070,7 +1186,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>15.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1146,7 +1262,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>1.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1168,7 +1284,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>3.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1179,7 +1295,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1201,7 +1317,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>6.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1212,7 +1328,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>7.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
@@ -1223,7 +1339,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>8.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1245,7 +1361,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>10.0</td>
       <td>0</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1342,7 +1458,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>2.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1354,7 +1470,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>3.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1366,7 +1482,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>4.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1390,7 +1506,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>6.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>6</th>
@@ -1414,7 +1530,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>8.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
@@ -1426,7 +1542,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>9.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9</th>
@@ -1438,7 +1554,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>10.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>10</th>
@@ -1450,7 +1566,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>11.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>11</th>
@@ -1474,7 +1590,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>13.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>13</th>
@@ -1498,7 +1614,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>15.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>15</th>
@@ -1522,7 +1638,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>17.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>17</th>
@@ -1534,7 +1650,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>18.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>18</th>
@@ -1558,7 +1674,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>20.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>20</th>
@@ -1570,7 +1686,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>21.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>21</th>
@@ -1578,11 +1694,11 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>False</td>
+      <td>True</td>
       <td>22.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>22</th>
@@ -1591,7 +1707,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>23.0</td>
+      <td>1.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1603,7 +1719,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>24.0</td>
+      <td>2.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>2</td>
@@ -1615,7 +1731,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>25.0</td>
+      <td>3.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>1</td>
@@ -1627,10 +1743,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>26.0</td>
+      <td>4.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>26</th>
@@ -1639,10 +1755,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>27.0</td>
+      <td>5.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>27</th>
@@ -1651,10 +1767,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>28.0</td>
+      <td>6.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>28</th>
@@ -1663,10 +1779,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>29.0</td>
+      <td>7.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>29</th>
@@ -1674,11 +1790,11 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
-      <td>True</td>
-      <td>30.0</td>
+      <td>False</td>
+      <td>8.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>30</th>
@@ -1687,7 +1803,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>1.0</td>
+      <td>9.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1699,10 +1815,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>2.0</td>
+      <td>10.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>32</th>
@@ -1711,7 +1827,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>3.0</td>
+      <td>11.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1723,109 +1839,13 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>4.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>5.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>6.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>7.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>8.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>9.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>10.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
-      <td>11.0</td>
-      <td>0</td>
-      <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>torch.Size([50, 4])</td>
-      <td>0</td>
-      <td>torch.Size([50, 4])</td>
-      <td>1.0</td>
-      <td>False</td>
       <td>12.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>42</th>
+      <th>34</th>
       <td>torch.Size([50, 4])</td>
       <td>0</td>
       <td>torch.Size([50, 4])</td>
@@ -1837,13 +1857,109 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>1</td>
     </tr>
     <tr>
-      <th>43</th>
+      <th>35</th>
       <td>torch.Size([50, 4])</td>
       <td>0</td>
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
       <td>14.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>15.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>16.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>17.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>True</td>
+      <td>18.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>1.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>2.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>3.0</td>
+      <td>0</td>
+      <td>torch.Size([50, 1, 400, 600, 3])</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>torch.Size([50, 4])</td>
+      <td>0</td>
+      <td>torch.Size([50, 4])</td>
+      <td>1.0</td>
+      <td>False</td>
+      <td>4.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1855,7 +1971,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>15.0</td>
+      <td>5.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>1</td>
@@ -1867,7 +1983,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>16.0</td>
+      <td>6.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1879,10 +1995,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>17.0</td>
+      <td>7.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>47</th>
@@ -1891,10 +2007,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>18.0</td>
+      <td>8.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>48</th>
@@ -1903,7 +2019,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>19.0</td>
+      <td>9.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
       <td>0</td>
@@ -1915,10 +2031,10 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>torch.Size([50, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>20.0</td>
+      <td>10.0</td>
       <td>0</td>
       <td>torch.Size([50, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -1970,9 +2086,9 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;state&#39;: TensorBatch([[ 0.0388, -0.0347, -0.0052, -0.0078]]),
+<pre>{&#39;state&#39;: TensorBatch([[-0.0447, -0.0040, -0.0132,  0.0191]]),
  &#39;action&#39;: TensorBatch([[0]]),
- &#39;next_state&#39;: TensorBatch([[ 0.0381, -0.2297, -0.0054,  0.2832]]),
+ &#39;next_state&#39;: TensorBatch([[-0.0447, -0.1989, -0.0128,  0.3076]]),
  &#39;reward&#39;: TensorBatch([[1.]]),
  &#39;done&#39;: TensorBatch([[False]]),
  &#39;step&#39;: TensorBatch([[1.]]),
@@ -2083,7 +2199,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FirstLastExperienceSource" class="doc_header"><code>class</code> <code>FirstLastExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L165" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data.block.html#ExperienceSource"><code>ExperienceSource</code></a></p>
+<h2 id="FirstLastExperienceSource" class="doc_header"><code>class</code> <code>FirstLastExperienceSource</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L224" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FirstLastExperienceSource</code>(<strong><code>env</code></strong>:<code>str</code>, <strong><code>agent</code></strong>=<em><code>None</code></em>, <strong><code>n_envs</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_count</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>steps_delta</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>seed</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>render</code></strong>=<em><code>None</code></em>, <strong><code>num_workers</code></strong>=<em><code>0</code></em>, <strong><code>but</code></strong>=<em><code>''</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/fastrl/data.block.html#ExperienceSource"><code>ExperienceSource</code></a></p>
 </blockquote>
 <p>Iterates through <code>n_envs</code> of <code>env</code> feeding experience or states into <code>agent</code>.
 If <code>agent</code> is None, then random actions will be taken instead.
@@ -2168,7 +2284,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -2179,7 +2295,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>0</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2190,7 +2306,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2201,7 +2317,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>2.0</td>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -2212,7 +2328,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -2234,7 +2350,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
       <td>False</td>
       <td>4.0</td>
       <td>1</td>
-      <td>0</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
@@ -2299,7 +2415,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="IterableTfmdLists" class="doc_header"><code>class</code> <code>IterableTfmdLists</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L182" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableTfmdLists</code>(<strong><code>items</code></strong>=<em><code>None</code></em>, <strong>*<code>rest</code></strong>, <strong><code>use_list</code></strong>=<em><code>False</code></em>, <strong><code>match</code></strong>=<em><code>None</code></em>) :: <code>TfmdLists</code></p>
+<h2 id="IterableTfmdLists" class="doc_header"><code>class</code> <code>IterableTfmdLists</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L241" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableTfmdLists</code>(<strong><code>items</code></strong>=<em><code>None</code></em>, <strong>*<code>rest</code></strong>, <strong><code>use_list</code></strong>=<em><code>False</code></em>, <strong><code>match</code></strong>=<em><code>None</code></em>) :: <code>TfmdLists</code></p>
 </blockquote>
 <p>A <code>Pipeline</code> of <code>tfms</code> applied to a collection of <code>items</code></p>
 
@@ -2331,7 +2447,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="IterableDataBlock" class="doc_header"><code>class</code> <code>IterableDataBlock</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L186" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableDataBlock</code>(<strong><code>blocks</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>getters</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>get_items</code></strong>=<em><code>None</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>get_y</code></strong>=<em><code>None</code></em>, <strong><code>get_x</code></strong>=<em><code>None</code></em>) :: <code>DataBlock</code></p>
+<h2 id="IterableDataBlock" class="doc_header"><code>class</code> <code>IterableDataBlock</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L245" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>IterableDataBlock</code>(<strong><code>blocks</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>getters</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>item_tfms</code></strong>=<em><code>None</code></em>, <strong><code>batch_tfms</code></strong>=<em><code>None</code></em>, <strong><code>get_items</code></strong>=<em><code>None</code></em>, <strong><code>splitter</code></strong>=<em><code>None</code></em>, <strong><code>get_y</code></strong>=<em><code>None</code></em>, <strong><code>get_x</code></strong>=<em><code>None</code></em>) :: <code>DataBlock</code></p>
 </blockquote>
 <p>Generic container to quickly build <code>Datasets</code> and <code>DataLoaders</code></p>
 
@@ -2363,7 +2479,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Datasets.__iter__" class="doc_header"><code>Datasets.__iter__</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L201" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Datasets.__iter__</code>()</p>
+<h4 id="Datasets.__iter__" class="doc_header"><code>Datasets.__iter__</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L260" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Datasets.__iter__</code>()</p>
 </blockquote>
 
 </div>
@@ -2387,7 +2503,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Datasets.__init__" class="doc_header"><code>Datasets.__init__</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L205" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Datasets.__init__</code>(<strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>tfms</code></strong>=<em><code>None</code></em>, <strong><code>tls</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>tl_type</code></strong>=<em><code>TfmdLists</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="Datasets.__init__" class="doc_header"><code>Datasets.__init__</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L264" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Datasets.__init__</code>(<strong><code>items</code></strong>=<em><code>None</code></em>, <strong><code>tfms</code></strong>=<em><code>None</code></em>, <strong><code>tls</code></strong>=<em><code>None</code></em>, <strong><code>n_inp</code></strong>=<em><code>None</code></em>, <strong><code>dl_type</code></strong>=<em><code>None</code></em>, <strong><code>tl_type</code></strong>=<em><code>TfmdLists</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 
@@ -2439,7 +2555,7 @@ At the end of an env, it will return <code>steps_count-1</code> experiences per 
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Collecting items from [&lt;generator object ExperienceSource.__iter__ at 0x7f1d8bb9ead0&gt;]
+<pre>Collecting items from [&lt;generator object ExperienceSource.__iter__ at 0x7f1ceb4ec8d0&gt;]
 Found 1 items
 1 datasets of sizes 1
 Setting up Pipeline: 
@@ -2510,7 +2626,7 @@ Setting up after_batch: Pipeline:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BatchRepair" class="doc_header"><code>class</code> <code>BatchRepair</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L212" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BatchRepair</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
+<h2 id="BatchRepair" class="doc_header"><code>class</code> <code>BatchRepair</code><a href="https://github.com/josiahls/fastrl/tree/master/fastrl/data/block.py#L271" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BatchRepair</code>(<strong><code>enc</code></strong>=<em><code>None</code></em>, <strong><code>dec</code></strong>=<em><code>None</code></em>, <strong><code>split_idx</code></strong>=<em><code>None</code></em>, <strong><code>order</code></strong>=<em><code>None</code></em>) :: <code>Transform</code></p>
 </blockquote>
 <p>Delegates (<code>__call__</code>,<code>decode</code>,<code>setup</code>) to (<code>encodes</code>,<code>decodes</code>,<code>setups</code>) if <code>split_idx</code> matches</p>
 
@@ -2565,7 +2681,7 @@ Setting up after_batch: Pipeline:
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Collecting items from [&lt;generator object ExperienceSource.__iter__ at 0x7f1d8bb9e050&gt;]
+<pre>Collecting items from [&lt;generator object ExperienceSource.__iter__ at 0x7f1c46c978d0&gt;]
 Found 1 items
 1 datasets of sizes 1
 Setting up Pipeline: 
@@ -2632,7 +2748,7 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>2.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>2</th>
@@ -2668,7 +2784,7 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>5.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2689,10 +2805,10 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>torch.Size([90, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>30.0</td>
+      <td>10.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>86</th>
@@ -2701,10 +2817,10 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>torch.Size([90, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>31.0</td>
+      <td>11.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>87</th>
@@ -2713,7 +2829,7 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>torch.Size([90, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>32.0</td>
+      <td>12.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
       <td>2</td>
@@ -2725,10 +2841,10 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>torch.Size([90, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>33.0</td>
+      <td>13.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
-      <td>2</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>89</th>
@@ -2737,7 +2853,7 @@ Setting up after_batch: Pipeline: BatchRepair
       <td>torch.Size([90, 4])</td>
       <td>1.0</td>
       <td>False</td>
-      <td>34.0</td>
+      <td>14.0</td>
       <td>0</td>
       <td>torch.Size([90, 1, 400, 600, 3])</td>
       <td>1</td>
